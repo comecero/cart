@@ -1,0 +1,118 @@
+﻿/* USER DEFINED */
+
+/* Main Colors */
+$brand-primary: #3181aa;
+$brand-success: #36ab0c;
+$brand-info: #5bc0de;
+$brand-danger: #d9534f;
+
+/* Alert Colors */
+$state-success-text: #3c763d;
+$state-success-bg: #dff0d8;
+
+$state-info-text: #31708f;
+$state-info-bg: #d9edf7;
+
+$state-danger-text: #a94442;
+$state-danger-bg: #f2dede;
+
+/* Button Text Colors */
+$btn-primary-color: #ffffff;
+$btn-success-color: #ffffff;
+$btn-info-color: #ffffff;
+$btn-danger-color: #ffffff;
+
+/* Fonts */
+$font-family-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-company-name: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-footer: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+/* Main page */
+$body-bg: #f6f6f6;
+
+/* Defines the layout mode: full, boxed, hybrid */
+$layout: boxed;
+
+/* Defines if shadows on the main container and navbar */
+$main-shadows: true;
+
+/* Navbar */
+$navbar-size: medium;
+$navbar-brand-font-size: 22px;
+$navbar-fixed: false;
+$navbar-default-color: #ffffff;
+$navbar-brand-align: center;
+
+/* Main content area background color */
+$main-content-color: #686868;
+$main-content-bg: #ffffff;
+$h-color: #686868;
+$link-color: #3181aa;
+
+/* Divider */
+$divider-bar-color: #eeeeee;
+$divider-bar-width: 1px;
+$divider-bar-text-color: #3181aa;
+
+/* Default button */
+$btn-default-color: #686868;
+$btn-default-bg: #ffffff;
+
+/* Footer */
+$footer-size: small;
+$footer-color: #5f5f5f;
+$footer-bg: #dfdfdf;
+$footer-link-color: #3181aa;
+$footer-link-color: #3181aa;
+
+/* Table header */
+$header-color: #818181;
+$header-bg: #f9f9f9;
+$header-link-color: #3181aa;
+
+/* Form elements */
+$input-border-radius: 0;
+$input-bg: #ffffff;
+$input-color: #555555;
+$input-border: #cccccc;
+$placeholder-color: #999999;
+
+/* Product Image Borders */
+$product-icon-border-color: #ececec;
+
+/* Company Name Color */
+$company-name-color: #ffffff;
+
+/* NOT USER DEFINED */
+
+$navbar-default-brand-hover-color: $navbar-default-color;
+$navbar-default-bg:  $brand-primary;
+
+$navbar-default-link-color: $navbar-default-color;
+$navbar-default-link-hover-color: lighten($navbar-default-link-color, 6.5%);
+$navbar-default-link-active-color: darken($navbar-default-link-color, 6.5%);
+
+$btn-default-border: darken($btn-default-bg, 5%);
+
+$link-hover-color: darken($link-color, 10%);
+$link-hover-decoration: none;
+
+$footer-link-hover-color: darken($footer-link-color, 10%);
+$header-link-hover-color: darken($header-link-color, 10%);
+
+$navbar-border-radius: 0;
+$grid-gutter-width: 30px;
+
+/* Navbar vs. Boxed Layout */
+@if $layout == boxed or $layout == hybrid {
+    $container-tablet: (720px + $grid-gutter-width);
+    $container-desktop: (720px + $grid-gutter-width);
+    $container-large-desktop: (720px + $grid-gutter-width);
+}
+
+/* Otherwise, hide the boxed elements */
+@if $layout == full {
+    $container-tablet: (720px + $grid-gutter-width);
+    $container-desktop: (940px + $grid-gutter-width);
+    $container-large-desktop: (940px + $grid-gutter-width);
+}

@@ -1,0 +1,386 @@
+app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load in some helpers
+        $scope.geoService = GeoService;
+        $scope.settings = SettingsService.get();
+        $scope.helpers = HelperService;
+        
+        // Set the cart parameters
+        $scope.data.params = {};
+        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+        $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_small,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+        
+        // Set default values.
+        $scope.data.shipping_is_billing = true; // User can toggle.
+        $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
+        
+        // Build your payment method models
+        $scope.data.card = { "type": "credit_card" };
+        $scope.data.paypal = {
+            "type": "paypal",
+            data: {
+                // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
+                "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/payment/review/{{payment_id}}",
+                "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/cart"
+            }
+        }
+
+        // Get the current cart
+        CartService.get().then(function (cart) {
+        
+        // Build up any items from the query string, if provided. This loads in products, quantities and other data (such as customer name, email address) that may have been supplied through the query string. If nothing is provided in the query string, then no values are supplied to the cart.
+        cart = CartService.fromParams(cart, $location);
+
+        // Update the cart. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
+        CartService.update(cart, $scope.data.params).then(function (cart) {
+
+            // Set the scope on the cart.
+            $scope.data.cart = cart;
+            
+            // Only display images if all items in the cart have images
+            $scope.showImages = true;
+            _.each(cart.items, function (item) {
+                if (item.product.images.length == 0) {
+                    $scope.showImages = false;
+                }
+            });
+
+            // If there is a shipping address line 1, set shipping_is_billing to false so the user will see what's provided in the shipping address.
+            $scope.data.shipping_is_billing = !HelperService.hasShippingAddress(cart.customer);
+
+            // If there are payment methods, set the default onto the payment method object
+            var data = ((cart.customer || {}).payment_methods || {}).data;
+            if (data) {
+                if (data.length > 0) {
+                    $scope.data.card.payment_method_id = _.find(cart.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id;
+                }
+            }
+
+        }, function (error) {
+            // Error updating the cart
+            $scope.data.error = error;
+            });
+
+        }, function (error) {
+            // Error getting the cart
+            $scope.data.error = error;
+        });
+        
+        // Handle a successful payment
+        $scope.onPaymentSuccess = function (payment) {
+
+            // Handle the payment response, depending on the type.
+            switch (payment.payment_method.type) {
+
+                case "paypal":
+                    // Redirect to PayPal to make the payment.
+                    window.location = payment.response_data.redirect_url;
+                    break;
+
+                default:
+                    // Redirect to the receipt.
+                    $location.path("/receipt/" + payment.payment_id);
+            }
+
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
+app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, $document) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load in some helpers
+        $scope.geoService = GeoService;
+        $scope.helpers = HelperService;
+        
+        // Set the invoice parameters
+        $scope.data.params = {};
+        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+        $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_small,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+        
+        // Set default values.
+        $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
+        
+        // Build your payment method models
+        $scope.data.card = { "type": "credit_card" };
+        $scope.data.paypal = {
+            "type": "paypal",
+            data: {
+                // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
+                "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/payment/review/{{payment_id}}",
+                "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/invoice"
+            }
+        }
+        
+        // Get the invoice
+        InvoiceService.get($scope.data.params).then(function (invoice) {
+            
+            $scope.data.invoice = invoice;
+            
+            // Only display images if all items in the invoice have images
+            $scope.showImages = false;
+            var hasImageCount = 0;
+            _.each(invoice.items, function (item) {
+                if (item.product != null) {
+                    if (item.product.images.length == 0) {
+                        hasImageCount++;
+                    }
+                }
+            });
+            
+            if (hasImageCount == invoice.items.length) {
+                $scope.showImages = true;
+            }
+
+            // If there are payment methods, set the default onto the payment method object
+            var data = ((invoice.customer || {}).payment_methods || {}).data;
+            if (data) {
+                if (data.length > 0) {
+                    $scope.data.card.payment_method_id = _.find(invoice.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id;
+                }
+            }
+
+        }, function (error) {
+            $scope.data.error = error;
+        });
+        
+        // Handle a payment
+        $scope.onPaymentSuccess = function (payment) {
+
+            // Handle the payment response, depending on the type.
+            switch (payment.payment_method.type) {
+
+                case "paypal":
+                    // Redirect to PayPal to make the payment.
+                    window.location = payment.response_data.redirect_url;
+                    break;
+
+                default:
+                    // Redirect to the receipt.
+                    $location.path("/receipt/" + payment.payment_id);
+            }
+
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
+app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
+ 
+        $scope.settings = SettingsService.get();
+        $scope.currency = CurrencyService.getCurrencyName();
+
+    }]);
+app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load the geo service for countries, states, provinces (used for dropdowns).
+        $scope.geo = GeoService.getData();
+        $scope.settings = SettingsService.get();
+        
+        $scope.data.params = {};
+        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
+        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
+        $scope.data.params.currency = CurrencyService.getCurrency();
+        $scope.data.params.formatted = true;
+        $scope.data.params.limit = 50;
+        
+        // Load the products
+        ProductService.getList($scope.data.params).then(function (products) {
+            $scope.data.products = products;
+        }, function (error) {
+            $scope.data.error = error;
+        });
+        
+        $scope.onAddToCart = function (item) {
+            $location.path("/cart");
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
+app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'CartService', 'PaymentService', 'SettingsService', 'HelperService', 'GeoService', '$document', function ($scope, $location, $routeParams, CartService, PaymentService, SettingsService, HelperService, GeoService, $document) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        $scope.options = {};
+        
+        
+        // Parse the query parameters
+        var query = $location.search();
+        
+        // Define the payment_id
+        $scope.data.payment_id = $routeParams.id;
+        
+        // If no payment_id is supplied, redirect back to the cart.
+        if (!$scope.data.payment_id) {
+            // Redirect back to the cart
+            $location.path("/cart");
+        }
+        
+        // Load in some helpers
+        $scope.settings = SettingsService.get();
+        $scope.helpers = HelperService;
+        $scope.geoService = GeoService;
+        
+        // Set the cart parameters
+        $scope.data.params = {};
+        
+        // The payment will have a cart or an invoice, we don't know which. Expand both and we'll use whatever one comes back as not null.
+        $scope.data.params.expand = "cart.items.product,cart.items.subscription_terms,invoice.items.product,invoice.items.subscription_terms,cart.options,invoice.options";
+        $scope.data.params.hide = "cart.items.product.formatted,cart.items.product.prices,cart.items.product.url,cart.items.product.description,cart.items.product.images.link_small,cart.items.product.images.link_medium,cart.items.product.images.link_large,cart.items.product.images.link,cart.items.product.images.filename,cart.items.product.images.formatted,cart.items.product.images.url,cart.items.product.images.date_created,cart.items.product.images.date_modified,invoice.items.product.formatted,invoice.items.product.prices,invoice.items.product.url,invoice.items.product.description,invoice.items.product.images.link_small,invoice.items.product.images.link_medium,invoice.items.product.images.link_large,invoice.items.product.images.link,invoice.items.product.images.filename,invoice.items.product.images.formatted,invoice.items.product.images.url,invoice.items.product.images.date_created,invoice.items.product.images.date_modified";
+        
+        // Set the cart params for your shipping dropdown directive. They are the same as above, but you have to remove the "cart" and "invoice" prefixes. We'll also have a bunch of duplicates after stripping the prefix, so we'll remove them.
+        $scope.data.saleParams = { expand: utils.deDuplicateCsv($scope.data.params.expand.replaceAll("cart.", "").replaceAll("invoice.", "")), hide: utils.deDuplicateCsv($scope.data.params.hide.replaceAll("cart.", "").replaceAll("invoice.", "")) };
+        
+        PaymentService.get($scope.data.payment_id, $scope.data.params).then(function (payment) {
+            
+            if (payment.status == "completed") {
+                // The payment was previously completed, redirect to receipt.
+                $location.path("/receipt/" + payment.payment_id);
+            }
+            
+            // Get the cart or invoice that the payment is associated with
+            $scope.data.sale = payment.cart || payment.invoice;
+            if (payment.cart) {
+                $scope.options.isCartPayment = true;
+            }
+            
+            // Set flags to indicate if we need to request the company name and phone number fields, which happens when they're required and not already populated.
+            if (HelperService.isRequiredCustomerField('company_name', $scope.data.sale.options) && $scope.data.sale.customer.company_name == null) {
+                $scope.options.showCompanyName = true;
+            }
+            
+            if (HelperService.isRequiredCustomerField('phone', $scope.data.sale.options) && $scope.data.sale.customer.phone == null) {
+                $scope.options.showPhone = true;
+            }
+
+        }, function (error) {
+            $scope.data.error = error;
+        });
+        
+        // Handle a successful payment
+        $scope.onPaymentSuccess = function (payment) {
+            
+            // If the payment comes back as pending, it means significant changes to the cart have been done that has changed the payment amount significantly enough that the buyer must re-approve the total through PayPal. Redirect.
+            if (payment.status == "pending") {
+                
+                // Redirect to the supplied redirect URL.
+                window.location.replace(payment.response_data.redirect_url);
+
+            } else {
+                
+                // The payment is completed. Redirect to the receipt.
+                $location.path("/receipt/" + payment.payment_id);
+
+            }
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
+
+app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'SettingsService', 'HelperService', '$document', function ($scope, $routeParams, PaymentService, SettingsService, HelperService, $document) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load in some helpers
+        $scope.helpers = HelperService;
+
+        $scope.data.params = {};
+        $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options";
+        $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
+
+        if (SettingsService.get().app.show_digital_delivery == true) {
+            $scope.data.params.expand += ",order.items.download,order.items.license";
+            $scope.data.params.show += ",order.items.item_id,order.items.license.html,order.items.license.label,order.items.download.link";
+        }
+
+        $scope.data.params.options = true;
+        $scope.data.params.formatted = true;
+        
+        // A customer object if the user creates an account
+        $scope.customer = {};
+        
+        // Get the payment, if any.
+        PaymentService.get($routeParams.id, $scope.data.params).then(function (payment) {
+
+            // Only display images if all items in the invoice have images
+            $scope.showImages = false;
+            var hasImageCount = 0;
+            _.each(payment.order.items, function (item) {
+                if (item.product != null) {
+                    if (item.product.images.length == 0) {
+                        hasImageCount++;
+                    }
+                }
+            });
+            
+            if (hasImageCount == payment.order.items.length) {
+                $scope.showImages = true;
+            }
+
+            // If we have a completed order and show digital delivery is true, slip the digital delivery items from the order into the order.
+            if (SettingsService.get().app.show_digital_delivery == true && payment.order != null) {
+                _.each(payment.order.items, function (item) {
+                    if (item.license) {
+                        _.find(payment.order.items, function (orderItem) { return orderItem.item_id == item.item_id }).license = item.license;
+                    }
+                    if (item.download) {
+                        _.find(payment.order.items, function (orderItem) { return orderItem.item_id == item.item_id }).download = item.download;
+                    }
+                });
+            }
+            
+            // Set the options to determine if you ask for the customer to create an account
+            if (payment.cart) {
+                $scope.options = payment.cart.options;
+            } else {
+                $scope.options = payment.invoice.options;
+            }
+            
+            // Make the payment available to the view.
+            $scope.data.payment = payment;
+
+        }, function (error) {
+            $scope.exception = error;
+        });
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
+//# sourceMappingURL=pages.js.map

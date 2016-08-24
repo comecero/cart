@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="checkout">
+<head>
+    <title ng-controller="TitleController" ng-bind="title"></title>
+
+    <!-- Scale set to 1.0001 to address a bug in Safari on iOS 9.x -->
+    <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
+
+    <!-- CSS -->
+    <link href="sass/style.css" rel="stylesheet" />
+    <link href="dist/css/loading-bar.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS, if supplied -->
+    <link href="settings/style.css" rel="stylesheet" />
+
+    <!-- Pull in the app and account settings. Must come before any app bootstrapping. -->
+    <script src="settings/app.js"></script>
+    <script src="settings/account.js"></script>
+
+    <!-- Load any custom fonts. Must come after the app settings are loaded. -->
+    <script src="dist/js/fonts.min.js"></script>
+
+    <!-- Frameworks. AngularJS is loaded here to enable ng-cloak as needed. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="MainController">
+
+    <!-- Full Header -->
+    <nav class="navbar navbar-default">
+        <div class="navbar-brand">
+            <img ng-if="settings.app.logo" class="logo" ng-src="{{settings.app.logo}}">
+            <span ng-if="!settings.app.logo" class="company-name">{{settings.app.company_name}}</span>
+        </div>
+    </nav>
+
+    <!-- Custom Header, if supplied -->
+    <custom-html section="header"></custom-html>
+
+    <div class="container container-content">
+
+        <div class="panel panel-default panel-boxed panel-content">
+
+            <!-- Boxed Header -->
+            <div class="panel-heading" ng-cloak>
+                <img ng-src="{{settings.app.logo}}" ng-if="settings.app.logo">
+                <span ng-if="!settings.app.logo" class="company-name">{{settings.app.company_name}}</span>
+            </div>
+
+            <div class="panel-body">
+                <ng-view autoscroll="true"></ng-view>
+            </div>
+
+            <!-- Boxed Footer -->
+            <div class="panel-footer" ng-cloak>
+                <p ng-bind-html="settings.app.footer_text"></p>
+                <p>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Custom Footer, if supplied -->
+    <custom-html section="footer"></custom-html>
+
+    <!-- Full Footer -->
+    <div class="footer" ng-cloak>
+        <p class="security-badges" ng-if="settings.app.show_badges">
+        <img src="images/pci_seal.png" style="margin-right: 5px;" />
+        <img src="images/comodo_ssl.png" />
+        </p>
+        <p ng-bind-html="settings.app.footer_text"></p>
+        <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+    </div>
+
+    <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
+
+    <!-- Modules (CDN)  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-sanitize.min.js"></script>
+
+    <!-- Main Application File. Must come before kit.js. -->
+    <script src="app/app.js"></script>
+
+    <!-- App Kit -->
+    <script src="dist/js/kit.min.js"></script>
+
+    <!-- Pages -->
+    <script src="dist/js/pages.min.js"></script>
+
+    <!-- Analytics -->
+    <script id="app_pageview"></script>
+
+    <!-- Custom JavaScript, if supplied -->
+    <script src="settings/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,542 @@
+﻿[
+  {
+    "name": "layout",
+    "type": "string",
+    "label": "Layout Mode",
+    "description": "The general layout structure. Full provides a navigation bar that spans the entire width of the page with a content area that touches the navigation bar. Boxed provides a content section that includes the navigation bar (that therefore does not span the entire page). Hybrid provides a boxed area that is disconnected from the main navigation bar.",
+    "section": "Layout",
+    "required": true,
+    "default_value": "boxed",
+    "options": [
+      {
+        "display": "Hybrid",
+        "value": "hybrid"
+      },
+      {
+        "display": "Boxed",
+        "value": "boxed"
+      },
+      {
+        "display": "Full",
+        "value": "full"
+      }
+    ]
+  },
+  {
+    "name": "navbar-size",
+    "type": "string",
+    "label": "Navbar Size",
+    "description": "The size of the main page navbar / header.",
+    "section": "Layout",
+    "required": true,
+    "default_value": "medium",
+    "options": [
+      {
+        "display": "Small",
+        "value": "small"
+      },
+      {
+        "display": "Medium",
+        "value": "medium"
+      },
+      {
+        "display": "Large",
+        "value": "large"
+      },
+      {
+        "display": "Remove / Hide (don't display the default navbar)",
+        "value": "hide"
+      }
+    ]
+  },
+  {
+    "name": "navbar-fixed",
+    "type": "boolean",
+    "label": "Fixed main page navbar / header",
+    "description": "Indicates if the main navigation bar should stay in a fixed position as the page scrolls.",
+    "section": "Layout",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "navbar-brand-align",
+    "type": "string",
+    "label": "Navbar Logo / Company Name Alignment",
+    "description": "How the logo or company name should be aligned in the main page navbar / header.",
+    "section": "Layout",
+    "required": true,
+    "default_value": "center",
+    "options": [
+      {
+        "display": "Center",
+        "value": "center"
+      },
+      {
+        "display": "Left",
+        "value": "left"
+      }
+    ]
+  },
+  {
+    "name": "main-shadows",
+    "type": "boolean",
+    "label": "Use Shadows",
+    "description": "Indicates if the main navigation bar and the main content area should have a shadow applied. The shadows are subtle. Disable to maintain a flat look.",
+    "section": "Layout",
+    "required": true,
+    "default_value": true
+  },
+  {
+    "name": "brand-primary",
+    "type": "color",
+    "label": "Primary Brand Color",
+    "description": "The main color of your brand and website. Used for the main navigation bar background color.",
+    "section": "Brand",
+    "required": true,
+    "default_value": "#3181aa"
+  },
+  {
+    "name": "company-name-color",
+    "type": "color",
+    "label": "Company Name Text Color",
+    "description": "The color of the company name in the main page navigation / header. Note that if you upload a company logo, then the company name text is not displayed.",
+    "section": "Brand",
+    "required": true,
+    "default_value": "#ffffff",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "navbar-brand-font-size",
+    "type": "string",
+    "label": "Company Name Font Size",
+    "description": "The size of the company name. This does not apply if you have uploaded a logo under the app settings.",
+    "section": "Brand",
+    "required": true,
+    "default_value": "22px",
+    "options": [
+      {
+        "display": "Small",
+        "value": "16px"
+      },
+      {
+        "display": "Medium",
+        "value": "22px"
+      },
+      {
+        "display": "Large",
+        "value": "30px"
+      }
+    ]
+  },
+  {
+    "name": "body-bg",
+    "type": "color",
+    "label": "Main Page Background Color",
+    "description": "The background color of the page. Note that text is not placed directly on this color; all text is included within the main content area, which has its own color definition.",
+    "section": "Brand",
+    "required": true,
+    "default_value": "#f6f6f6"
+  },
+  {
+    "name": "font-family-company-name",
+    "type": "string",
+    "label": "Company Name Font",
+    "description": "The font or fonts used in the company name in the main page navigation / header. Note that if you upload a company logo, then the company name text is not displayed.",
+    "section": "Fonts",
+    "required": true,
+    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "font-family-base",
+    "type": "string",
+    "label": "Main Font",
+    "description": "The primary font or fonts used throughout the app.",
+    "section": "Fonts",
+    "required": true,
+    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "font-family-footer",
+    "type": "string",
+    "label": "Footer Font",
+    "description": "The font used in the page footer.",
+    "section": "Fonts",
+    "required": true,
+    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "main-content-bg",
+    "type": "color",
+    "label": "Main Content Background Color",
+    "description": "The background color of the main content area. Text will be placed in this section and therefore this color should have sharp contrast to the main text color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "main-content-color",
+    "type": "color",
+    "label": "Main Content Text Color",
+    "description": "The main text color of the main content area. Should have a sharp contrast to the Main Content Background Color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#686868"
+  },
+  {
+    "name": "link-color",
+    "type": "color",
+    "label": "Main Content Link Color",
+    "description": "The main link color of the main content area.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#3181aa"
+  },
+  {
+    "name": "h-color",
+    "type": "color",
+    "label": "Header Text Color",
+    "description": "The color for header text within the main content area. Will be placed directly on the main content background color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#3181aa"
+  },
+  {
+    "name": "brand-success",
+    "type": "color",
+    "label": "Success Color",
+    "description": "'Success' color, used for primary 'call to action' text and buttons. Generally a green color is used.",
+    "section": "Primary Colors",
+    "required": true,
+    "default_value": "#41a41e"
+  },
+  {
+    "name": "brand-info",
+    "type": "color",
+    "label": "Info Color",
+    "description": "'Info' color, used for secondary 'call to action' text and buttons. Generally a blue color is used, or another color that harmonizes well with your primary brand color.",
+    "section": "Primary Colors",
+    "required": true,
+    "default_value": "#5bc0de"
+  },
+  {
+    "name": "brand-danger",
+    "type": "color",
+    "label": "Danger Color",
+    "description": "'Danger' color, used for text that indicates an error or buttons that indicate a removal action. Generally a red color is used.",
+    "section": "Primary Colors",
+    "required": true,
+    "default_value": "#d9534f"
+  },
+  {
+    "name": "header-bg",
+    "type": "color",
+    "label": "Table / Section Header Background Color",
+    "description": "The background color for header blocks of tables and other main sections.",
+    "section": "Headers",
+    "required": true,
+    "default_value": "#dfdfdf"
+  },
+  {
+    "name": "header-color",
+    "type": "color",
+    "label": "Table / Section Header Text Color",
+    "description": "The text color for the page footer. Should have sharp contrast to the Table / Section Header Background Color.",
+    "section": "Headers",
+    "required": true,
+    "default_value": "#5f5f5f"
+  },
+  {
+    "name": "footer-bg",
+    "type": "color",
+    "label": "Footer Background Color",
+    "description": "The background color for the page footer.",
+    "section": "Footer",
+    "required": true,
+    "default_value": "#dfdfdf"
+  },
+  {
+    "name": "footer-color",
+    "type": "color",
+    "label": "Footer Text Color",
+    "description": "The text color for the page footer. Should have sharp contrast to the Footer Background Color.",
+    "section": "Footer",
+    "required": true,
+    "default_value": "#5f5f5f"
+  },
+  {
+    "name": "footer-link-color",
+    "type": "color",
+    "label": "Footer Link Color",
+    "description": "The link color for the page footer.",
+    "section": "Footer",
+    "required": true,
+    "default_value": "#8b8b8b"
+  },
+  {
+    "name": "footer-size",
+    "type": "string",
+    "label": "Footer Size",
+    "description": "The size of the page footer.",
+    "section": "Footer",
+    "required": true,
+    "default_value": "medium",
+    "options": [
+      {
+        "display": "Small",
+        "value": "small"
+      },
+      {
+        "display": "Medium",
+        "value": "medium"
+      },
+      {
+        "display": "Large",
+        "value": "large"
+      },
+      {
+        "display": "Remove / Hide (don't display the default footer)",
+        "value": "hide"
+      }
+    ]
+  },
+  {
+    "name": "divider-bar-color",
+    "type": "color",
+    "label": "Page Divider Bar Color",
+    "description": "The color of the divider bar the separates the main page sections.",
+    "section": "Dividers",
+    "required": true,
+    "default_value": "#3181aa"
+  },
+  {
+    "name": "divider-bar-width",
+    "type": "string",
+    "label": "Page Divider Width",
+    "description": "The width of the divider bar that separates page sections. Set to 0 if you don't want a divider bar.",
+    "section": "Dividers",
+    "required": true,
+    "default_value": "1px",
+    "options": [
+      {
+        "display": "No divider bar",
+        "value": "0"
+      },
+      {
+        "display": "1 pixel",
+        "value": "1px"
+      },
+      {
+        "display": "2 pixels",
+        "value": "2px"
+      },
+      {
+        "display": "3 pixels",
+        "value": "3px"
+      }
+    ]
+  },
+  {
+    "name": "divider-bar-text-color",
+    "type": "color",
+    "label": "Page Divider Text Color",
+    "description": "The color of the text embedded within the divider bar the separates the main page sections.",
+    "section": "Dividers",
+    "required": true,
+    "default_value": "#3181aa"
+  },
+  {
+    "name": "state-success-bg",
+    "type": "color",
+    "label": "Success Alert Background Color",
+    "description": "The background color for notifications and alerts that indicate success. Generally a light green is used.",
+    "section": "Alerts & Notifications",
+    "required": true,
+    "default_value": "#dff0d8"
+  },
+  {
+    "name": "state-success-text",
+    "type": "color",
+    "label": "Success Alert Text Color",
+    "description": "The text color for notifications and alerts that indicate success. Generally a dark green is used that is clearly legible on the Success Alert Background Color.",
+    "section": "Alerts & Notifications",
+    "required": true,
+    "default_value": "#3c763d"
+  },
+  {
+    "name": "state-info-bg",
+    "type": "color",
+    "label": "Info Alert Background Color",
+    "description": "The background color for notifications and alerts that indicate general information. Generally a light blue is used.",
+    "section": "Alerts & Notifications",
+    "required": true,
+    "default_value": "#d9edf7"
+  },
+  {
+    "name": "state-info-text",
+    "type": "color",
+    "label": "Info Alert Text Color",
+    "description": "The text color for notifications and alerts that indicate general information. Generally a dark blue is used that is clearly legible on the Info Alert Background Color.",
+    "section": "Alerts & Notifications",
+    "required": true,
+    "default_value": "#31708f"
+  },
+  {
+    "name": "state-danger-bg",
+    "type": "color",
+    "label": "Error Alert Background Color",
+    "description": "The background color for notifications and alerts that indicate an error. Generally a light red is used.",
+    "section": "Alerts & Notifications",
+    "required": true,
+    "default_value": "#dff0d8"
+  },
+  {
+    "name": "state-danger-text",
+    "type": "color",
+    "label": "Error Alert Text Color",
+    "description": "The text color for notifications and alerts that indicate an error. Generally a dark red is used that is clearly legible on the Error Alert Background Color.",
+    "section": "Alerts & Notifications",
+    "required": true,
+    "default_value": "#3c763d"
+  },
+  {
+    "name": "btn-default-bg",
+    "type": "color",
+    "label": "Default Button Background Color",
+    "description": "The background color for default buttons. Generally used for buttons that do not require strong attention.",
+    "section": "Buttons",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "btn-default-color",
+    "type": "color",
+    "label": "Default Button Text Color",
+    "description": "The text color for default buttons. Should have sharp contrast to the Default Button Background Color.",
+    "section": "Buttons",
+    "required": true,
+    "default_value": "#686868"
+  },
+  {
+    "name": "btn-primary-color",
+    "type": "color",
+    "label": "Primary Button Text Color",
+    "description": "'Primary' button text color. Should be a strong contrast to your Primary Brand Color.",
+    "section": "Buttons",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "btn-success-color",
+    "type": "color",
+    "label": "Success Button Text Color",
+    "description": "'Success' button text color. Should be a strong contrast to your Success Color.",
+    "section": "Buttons",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "btn-info-color",
+    "type": "color",
+    "label": "Info Button Text Color",
+    "description": "'Info' button text color. Should be a strong contrast to your Info Color.",
+    "section": "Buttons",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "btn-warning-color",
+    "type": "color",
+    "label": "Warning Button Text Color",
+    "description": "'Warning' button text color. Should be a strong contrast to your Warning Color.",
+    "section": "Buttons",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "product-icon-border-color",
+    "type": "color",
+    "label": "Product Icon Border Color",
+    "description": "The border color for product icons / images. Set to the Main Content Background Color if you don't want a product icon border.",
+    "section": "Images",
+    "required": true,
+    "default_value": "#5f5f5f"
+  },
+  {
+    "name": "input-border-radius",
+    "type": "string",
+    "label": "Input Border Radius",
+    "description": "Allows you to set a curve to the border of form input elements.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": 0,
+    "options":  [
+      {
+        "display": "Square corners",
+        "value": "0"
+      },
+      {
+        "display": "1 pixel",
+        "value": "1px"
+      },
+      {
+        "display": "2 pixels",
+        "value": "2px"
+      },
+      {
+        "display": "3 pixels",
+        "value": "3px"
+      },
+      {
+        "display": "4 pixels",
+        "value": "4px"
+      },
+      {
+        "display": "5 pixels",
+        "value": "5px"
+      }
+    ]
+  },
+  {
+    "name": "input-bg",
+    "type": "color",
+    "label": "Input Background Color",
+    "description": "The background color for form inputs.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "input-color",
+    "type": "color",
+    "label": "Input Text Color",
+    "description": "The text color for form inputs.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#555555"
+  },
+  {
+    "name": "placeholder-color",
+    "type": "color",
+    "label": "Input Placeholder Text Color",
+    "description": "The text color for 'placeholder' text form inputs (used for prompts and icons within inputs, generally is lighter than the input text color).",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#999999"
+  },
+  {
+    "name": "input-border-color",
+    "type": "color",
+    "label": "Input Border Color",
+    "description": "The border color for input elements.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#cccccc"
+  }
+]

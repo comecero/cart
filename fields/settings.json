@@ -1,0 +1,181 @@
+﻿[
+  {
+    "name": "company_name",
+    "type": "string",
+    "label": "Company Name",
+    "description": "The company name that will appear on your cart pages",
+    "section": "Design",
+    "required": true,
+    "default_value": "Your Company Name",
+    "min_length": 1,
+    "max_length": 25
+  },
+  {
+    "name": "logo",
+    "type": "image",
+    "label": "Company Logo",
+    "description": "The main company logo. We recommend an image with a transparent background or one that blends well with the main navigation bar color.",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "favicon",
+    "type": "image",
+    "label": "Favicon",
+    "description": "The page favicon image. Providing a square image is highly recommended; images that are not square will automatically be cropped square. For maximum compatibility, the image you provide should be no larger than 196 x 196 pixels.",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "page_title",
+    "type": "string",
+    "label": "Page Title",
+    "description": "The page title that will be displayed by the browser.",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "header_html",
+    "type": "text",
+    "label": "Custom Header HTML",
+    "description": "Supply a section of HTML to be used as your global header. If you supply custom HTML, you may want to remove / hide the default navbar under the app's style settings (choose 'Remove' under Navbar Size).",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "footer_html",
+    "type": "text",
+    "label": "Custom Footer HTML",
+    "description": "Supply a section of HTML to be used as your global header. If you supply custom HTML, you may want to remove / hide the default footer under the app's style settings (choose 'Remove' under Footer Size).",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "footer_text",
+    "type": "text",
+    "label": "Footer Text",
+    "description": "Text that you would like to include within the default footer. Allows basic HTML tags (formatting, links, etc.).",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "web_font_import",
+    "type": "string",
+    "label": "Web Font Import",
+    "description": "If you would like to use external web fonts (such as Google Web Fonts) in your application, provide the URL for the font or fonts here. If you are using Google Web Fonts, go to the Google Web Fonts site, select and customize the font or fonts you want to use, and paste the font URL here. The font URL can be found within the 'href' value of the font link HTML provided by Google Web Fonts. You can then use these fonts in your font definitions under the app Style settings.",
+    "section": "Fonts",
+    "required": false,
+    "min_length": 40,
+    "max_length": 200
+  },
+  {
+    "name": "error_notifications",
+    "type": "string",
+    "label": "Error Notifications Behavior",
+    "description": "The behavior of inline validation when a user tabs through form fields (before a form is submitted). Mild turns off error notifications when the user leaves a field, moderate highlights the field with the error color and aggressive highlights the field with the error color and shows the error block text. On form submission, all invalid fields are highlighted with the error color and the error block text is displayed.",
+    "section": "Features",
+    "required": true,
+    "default_value": "moderate",
+    "options": [
+      {
+        "display": "Mild",
+        "value": "mild"
+      },
+      {
+        "display": "Moderate",
+        "value": "moderate"
+      },
+      {
+        "display": "Aggressive",
+        "value": "aggressive"
+      }
+    ]
+  },
+  {
+    "name": "show_promo_code",
+    "type": "boolean",
+    "label": "Show Promo Code",
+    "description": "Do you want to provide an option for a user to supply a promotion / discount code? If you don't use promo codes, it is recommended to not display this field.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "promo_code_name",
+    "type": "string",
+    "label": "Promo Code Name",
+    "description": "The name you use to refer to promo codes, i.e. Discount Code, Coupon Code, etc.",
+    "section": "Features",
+    "required": true,
+    "default_value": "Promo Code"
+  },
+  {
+    "name": "hide_quantity",
+    "type": "boolean",
+    "label": "Hide Quantity Selection",
+    "description": "Enable if you don't want users to be able to manually change the quantity of items in their cart.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },  
+  {
+    "name": "exp_select",
+    "type": "boolean",
+    "label": "Expiration Date Dropdown",
+    "description": "Indicates if you want to display expiration dates as a dropdown. If false, expiration date fields will be supplied as free-form text entry.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "ask_save_cards",
+    "type": "boolean",
+    "label": "Ask to Save Cards",
+    "description": "Indicates if customers can select to save their credit card to their account for future purchases. If enabled, it is recommended that you turn on the optional field 'Credentials' (under Settings> Payment) so customers have the option to create a username and password after they complete an order. This settings only applies if your account is configured to allow saving cards. Orders that contain subscriptions will not display this field as those orders always save the card for future rebills.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "show_digital_delivery",
+    "type": "boolean",
+    "label": "Show Digital Delivery",
+    "description": "For items that are fulfilled digitally, this indicates if you want to present delivery items (such as file download links or license codes) on the receipt page. If not, they will be provided in the email confirmation only.",
+    "section": "Features",
+    "required": true,
+    "default_value": true
+  },
+  {
+    "name": "enable_languages",
+    "type": "boolean",
+    "label": "Enable Languages",
+    "description": "Allows users to select from different languages during the checkout process. <strong>Note:</strong> This is currently a beta feature and should <strong>not</strong> be enabled for live orders.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "main_shopping_url",
+    "type": "string",
+    "label": "Main Shopping URL",
+    "description": "The page you want to direct users to when they are invited to 'Continue Shopping'. Also used to direct users who arrive with invalid cart or session values (such as an expired shopping session or cart).",
+    "section": "Routing",
+    "required": false
+  },
+  {
+    "name": "not_found_url",
+    "type": "string",
+    "label": "Not Found (404) Redirect URL",
+    "description": "The page you want to direct users to when an invalid website address is supplied. If not provided, the Main Shopping URL will be used.",
+    "section": "Routing",
+    "required": false
+  },
+  {
+    "name": "fields",
+    "type": "text",
+    "label": "Custom Fields",
+    "description": "An array of custom field definitions (in JSON format) that allow you to place custom fields onto your order form.",
+    "section": "Features",
+    "required": false
+  }
+]
