@@ -163,6 +163,15 @@
     "required": false
   },
   {
+    "name": "show_continue_shopping",
+    "type": "boolean",
+    "label": "Show 'Continue Shopping' Button",
+    "description": "Indicates if you want to show a 'Continue Shopping' button below the cart summary.",
+    "section": "Features",
+    "required": false,
+    "default_value": false
+  },
+  {
     "name": "not_found_url",
     "type": "string",
     "label": "Not Found (404) Redirect URL",
