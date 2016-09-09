@@ -4,7 +4,9 @@ var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
 var rename = require("gulp-rename");
 var sass = require('gulp-sass');
+var zip = require('gulp-zip');
 var sequence = require("run-sequence");
+var fs = require("fs");
 
 gulp.task("concat-pages-js", function () {
     return gulp.src(["./app/pages/**/*.js"])
@@ -38,4 +40,14 @@ gulp.task('dist', function (done) {
     sequence('concat-pages-js', 'compress', 'sourcemap', 'sass', function () {
         done();
     });
+});
+
+gulp.task('zip', function (done) {
+
+    // Read the version number
+    var version = fs.readFileSync("./version.html", "utf8");
+
+    return gulp.src(["./**", "!./.git", "!./.vs", "!./.git/*", "!./settings/**", "!./settings/", "!./.gitattributes", "!./.gitignore", "!./*.sln", "!./Web.config", "!./Web.Debug.config"])
+    .pipe(zip("cart-" + version + ".zip"))
+    .pipe(gulp.dest("./"));
 });
