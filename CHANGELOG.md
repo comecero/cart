@@ -1,4 +1,10 @@
-﻿<a name="1.0.1"></a>
+﻿<a name="1.0.2"></a>
+# 1.0.2
+
+- Integrate Kit version 1.0.2. See Kit release notes for changes.
+- Bug fix: Shipping address name was being set as billing address name.
+
+<a name="1.0.1"></a>
 # 1.0.1
 
 - Integration of the latest kit release (1.0.1) which includes bug fixes
