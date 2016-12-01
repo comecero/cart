@@ -1,4 +1,9 @@
-﻿<a name="1.0.2"></a>
+﻿<a name="1.0.3"></a>
+# 1.0.3
+
+- Allow PayPal payments for invoices
+
+<a name="1.0.2"></a>
 # 1.0.2
 
 - Integrate Kit version 1.0.2. See Kit release notes for changes.
