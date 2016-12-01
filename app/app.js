@@ -1,4 +1,4 @@
-﻿var app = angular.module("checkout", ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'gettext', 'duScroll']);
+var app = angular.module("checkout", ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'gettext', 'duScroll']);
 
 app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 'cfpLoadingBarProvider', function ($httpProvider, $routeProvider, $locationProvider, $provide, cfpLoadingBarProvider) {
         
@@ -21,7 +21,7 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
             notFoundUrl = window.location.href.substring(0, window.location.href.indexOf("#")) + "#/";
         }
 
-        $routeProvider.otherwise({
+        $routeProvider.otherwise({ 
             redirectTo: function () {
                 window.location.replace(notFoundUrl);
             }

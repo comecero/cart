@@ -1,5 +1,5 @@
 /*
-Comecero Kit version: ﻿1.0.1
+Comecero Kit version: ﻿1.0.2
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -771,6 +771,7 @@ app.directive('updateCart', ['CartService', function (CartService) {
             require: '^form',
             scope: {
                 cart: '=updateCart',
+                shippingIsBilling: '=?',
                 params: '=?',
                 error: '=?',
                 onSubmit: '=?',
@@ -792,13 +793,37 @@ app.directive('updateCart', ['CartService', function (CartService) {
                     // Prep the params
                     var params = scope.params || attrs.params;
                     params = utils.mergeParams(params, null, null);
+
+                    // Make a copy of the cart so you can modify the data without modifying the view. This is used when the user has supplied values in shipping fields but then checks "shipping is billing". We don't want to clear the view but we don't want to send a shipping address to the API.
+                    var cartCopy = angular.copy(scope.cart);
+
+                    // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
+                    if (scope.shippingIsBilling) {
+                        if (cartCopy.customer.shipping_address) {
+                            cartCopy.customer.shipping_address.name = null;
+                            cartCopy.customer.shipping_address.address_1 = null;
+                            cartCopy.customer.shipping_address.address_2 = null;
+                            cartCopy.customer.shipping_address.city = null;
+                            cartCopy.customer.shipping_address.state_prov = null;
+                            cartCopy.customer.shipping_address.postal_code = null;
+                            cartCopy.customer.shipping_address.country = null;
+                        }
+                    }
                     
-                    CartService.update(scope.cart, scope.params).then(function (cart) {
+                    CartService.update(cartCopy, scope.params).then(function (cart) {
+
+                        // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                        if (scope.cart) {
+                            cart.customer = scope.cart.customer;
+                        }
+
                         scope.cart = cart;
+
                         // Fire the success event
                         if (scope.onSuccess) {
                             scope.onSuccess(cart);
                         }
+
                     }, function (error) {
                         scope.error = error;
                         // Fire the error event
@@ -2806,6 +2831,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
             restrict: 'A',
             scope: {
                 cart: '=customerBackgroundSave',
+                shippingIsBilling: '=?',
                 params: '=?',
                 error: '=?'
             },
@@ -2821,6 +2847,9 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                     if (input.nodeName == "SELECT") {
                         event = "change";
                     }
+                    if (input.type == "checkbox") {
+                        event = "click";
+                    }
                     
                     var inputNg = angular.element(input);
                     
@@ -2832,7 +2861,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                             $timeout.cancel(updateBuffer);
                         }
                         
-                        // Wrap in timeout and apply a buffer so that if a form fill agent is used you only perform one update at the end. The buffer is 100 ms, which seems to accomplish the job.
+                        // Wrap in timeout and apply a buffer so that if a form fill agent is used you only perform one update at the end. The buffer is 25 ms, which seems to accomplish the job.
                         updateBuffer = $timeout(function () {
                             
                             // Since this is a "background update", we need special handling. Angular converts required fields to undefined when they are zero-length, which means they are stripped from the api payload.
@@ -2849,10 +2878,23 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                                 // Use the ngModel attribute to get the property name
                                 var property = input.getAttribute("ng-model");
                                 
-                                // Strip everything before customer.mo
+                                // Strip everything before customer.
                                 property = property.split("customer.")[1];
                                 
                                 scope.cart.customer[property] = inputNg.val();
+
+                                // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
+                                if (scope.shippingIsBilling) {
+                                    if (cartCopy.customer.shipping_address) {
+                                        cartCopy.customer.shipping_address.name = null;
+                                        cartCopy.customer.shipping_address.address_1 = null;
+                                        cartCopy.customer.shipping_address.address_2 = null;
+                                        cartCopy.customer.shipping_address.city = null;
+                                        cartCopy.customer.shipping_address.state_prov = null;
+                                        cartCopy.customer.shipping_address.postal_code = null;
+                                        cartCopy.customer.shipping_address.country = null;
+                                    }
+                                }
                                 
                                 CartService.update(cartCopy, scope.params, true).then(function (cart) {
                                     

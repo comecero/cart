@@ -69,7 +69,7 @@
             </table>
 
             <div class="text-right spacer-t15">
-                <button type="button" class="btn btn-info right" update-cart="data.cart" error="data.error" params="data.params" translate>Update Cart</button>
+                <button type="button" class="btn btn-info right" update-cart="data.cart" error="data.error" params="data.params" shipping-is-billing="data.shipping_is_billing" translate>Update Cart</button>
             </div>
 
             <!--  Promo Code -->
@@ -252,7 +252,7 @@
 
                 <div class="col-xs-12">
                     <div class="form-group checkbox-group" show-errors="data.cart.options">
-                        <input type="checkbox" id="shipping-is-billing" class="checkbox" name="shipping-is-billing" ng-model="data.shipping_is_billing">
+                        <input type="checkbox" id="shipping-is-billing" class="checkbox customer-background-save" name="shipping-is-billing" ng-model="data.shipping_is_billing">
                         <label for="shipping-is-billing" class="checkbox-label" translate>Billing is same as shipping</label>
                     </div>
                 </div>
@@ -260,7 +260,7 @@
                 <div class="col-xs-12" ng-show="helpers.isCustomerField('shipping_address.name', data.cart.options, data.shipping_is_billing)">
                     <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
                         <label class="control-label" for="shipping_address[name]" translate>Full Name</label>
-                        <input class="form-control customer-background-save" name="shipping_address[name]" type="text" ng-model="ddata.cart.customer.shipping_address.name" ng-required="helpers.isRequiredCustomerField('shipping_address.name', data.cart.options, data.shipping_is_billing)">
+                        <input class="form-control customer-background-save" name="shipping_address[name]" type="text" ng-model="data.cart.customer.shipping_address.name" ng-required="helpers.isRequiredCustomerField('shipping_address.name', data.cart.options, data.shipping_is_billing)">
                         <p class="error-block hidden" translate>Please provide a name</p>
                     </div>
                 </div>
