@@ -165,6 +165,13 @@
                 <span translate>Payment Details</span>
             </div>
 
+            <!-- PayPal -->
+            <div class="form-group" ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
+                <div class="col-xs-12 text-right">
+                    <input type="image" submit-payment="data.paypal" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png" />
+                </div>
+            </div>
+
             <!-- If a logged in customer -->
             <div ng-show="data.invoice.customer.payment_methods.data.length > 0">
                 <h4 translate>Choose a Payment Method</h4>
