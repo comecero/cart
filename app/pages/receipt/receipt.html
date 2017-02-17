@@ -95,6 +95,11 @@
         <span translate>Order Details</span>
     </div>
 
+    <!-- Show a spinner if the order is awaiting licenses -->
+    <div ng-show="data.awaitingLicense" class="row text-center spacer-b20">
+        <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+    </div>
+
     <table class="cart">
         <thead>
             <tr>
