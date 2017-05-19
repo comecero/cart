@@ -8,7 +8,7 @@ window.__settings.app = {
     "show_promo_code": true,
     "promo_code_name": "Promo Code",
     "exp_select": false,
-    "ask_save_cards": false,
+    "ask_save_cards": true,
     "show_digital_delivery": true,
     "enable_languages": false,
     "header_html": null,

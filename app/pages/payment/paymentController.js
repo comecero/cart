@@ -61,8 +61,8 @@
         // Handle a successful payment
         $scope.onPaymentSuccess = function (payment) {
             
-            // If the payment comes back as pending, it means significant changes to the cart have been done that has changed the payment amount significantly enough that the buyer must re-approve the total through PayPal. Redirect.
-            if (payment.status == "pending") {
+            // If the payment comes back as initiated, it means significant changes to the cart have been done that has changed the payment amount significantly enough that the buyer must re-approve the total through PayPal. Redirect.
+            if (payment.status == "initiated") {
                 
                 // Redirect to the supplied redirect URL.
                 window.location.replace(payment.response_data.redirect_url);

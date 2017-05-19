@@ -1,5 +1,5 @@
 /*
-Comecero Kit version: ﻿1.0.2
+Comecero Kit version: ﻿1.0.3
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -509,8 +509,8 @@ app.run(['$rootScope', '$http', 'SettingsService', 'StorageService', 'LanguageSe
             $http.defaults.useXDomain = true;
         }
                
-        // Establish the app language
-        LanguageService.establishLanguage();
+    // Establish the app language
+        LanguageService.establishLanguage($rootScope.languagesPath);
         
         // Establish the pageview load code. This is used to send Analytics data to the platform.
         var loadPageview = function () {
@@ -535,13 +535,198 @@ app.run(['$rootScope', '$http', 'SettingsService', 'StorageService', 'LanguageSe
             }
         }
         
-        // Analytics. Watch for route changes and load analytics accordingly.
-        $rootScope.$on('$locationChangeSuccess', function () {
-            // Load the pageview on every page change
-            loadPageview();
-        });
-        
     }]);
+/* FileSaver.js
+ * A saveAs() FileSaver implementation.
+ * 1.3.0
+ *
+ * By Eli Grey, http://eligrey.com
+ * License: MIT
+ *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ */
+
+/*global self */
+/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+
+/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+
+var saveAs = saveAs || (function(view) {
+	"use strict";
+	// IE <10 is explicitly unsupported
+	if (typeof view === "undefined" || typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+		return;
+	}
+	var
+		  doc = view.document
+		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		, get_URL = function() {
+			return view.URL || view.webkitURL || view;
+		}
+		, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+		, can_use_save_link = "download" in save_link
+		, click = function(node) {
+			var event = new MouseEvent("click");
+			node.dispatchEvent(event);
+		}
+		, is_safari = /constructor/i.test(view.HTMLElement)
+		, throw_outside = function(ex) {
+			(view.setImmediate || view.setTimeout)(function() {
+				throw ex;
+			}, 0);
+		}
+		, force_saveable_type = "application/octet-stream"
+		// the Blob API is fundamentally broken as there is no "downloadfinished" event to subscribe to
+		, arbitrary_revoke_timeout = 1000 * 40 // in ms
+		, revoke = function(file) {
+			var revoker = function() {
+				if (typeof file === "string") { // file is an object URL
+					get_URL().revokeObjectURL(file);
+				} else { // file is a File
+					file.remove();
+				}
+			};
+			setTimeout(revoker, arbitrary_revoke_timeout);
+		}
+		, dispatch = function(filesaver, event_types, event) {
+			event_types = [].concat(event_types);
+			var i = event_types.length;
+			while (i--) {
+				var listener = filesaver["on" + event_types[i]];
+				if (typeof listener === "function") {
+					try {
+						listener.call(filesaver, event || filesaver);
+					} catch (ex) {
+						throw_outside(ex);
+					}
+				}
+			}
+		}
+		, auto_bom = function(blob) {
+			// prepend BOM for UTF-8 XML and text/* types (including HTML)
+			// note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+			if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+				return new Blob([String.fromCharCode(0xFEFF), blob], {type: blob.type});
+			}
+			return blob;
+		}
+		, FileSaver = function(blob, name, no_auto_bom) {
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			// First try a.download, then web filesystem, then object URLs
+			var
+				  filesaver = this
+				, type = blob.type
+				, force = type === force_saveable_type
+				, object_url
+				, dispatch_all = function() {
+					dispatch(filesaver, "writestart progress write writeend".split(" "));
+				}
+				// on any filesys errors revert to saving with object URLs
+				, fs_error = function() {
+					if (force && is_safari && view.FileReader) {
+						// Safari doesn't allow downloading of blob urls
+						var reader = new FileReader();
+						reader.onloadend = function() {
+							var base64Data = reader.result;
+							view.location.href = "data:attachment/file" + base64Data.slice(base64Data.search(/[,;]/));
+							filesaver.readyState = filesaver.DONE;
+							dispatch_all();
+						};
+						reader.readAsDataURL(blob);
+						filesaver.readyState = filesaver.INIT;
+						return;
+					}
+					// don't create more object URLs than needed
+					if (!object_url) {
+						object_url = get_URL().createObjectURL(blob);
+					}
+					if (force) {
+						view.location.href = object_url;
+					} else {
+						var opened = view.open(object_url, "_blank");
+						if (!opened) {
+							// Apple does not allow window.open, see https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
+							view.location.href = object_url;
+						}
+					}
+					filesaver.readyState = filesaver.DONE;
+					dispatch_all();
+					revoke(object_url);
+				}
+			;
+			filesaver.readyState = filesaver.INIT;
+
+			if (can_use_save_link) {
+				object_url = get_URL().createObjectURL(blob);
+				setTimeout(function() {
+					save_link.href = object_url;
+					save_link.download = name;
+					click(save_link);
+					dispatch_all();
+					revoke(object_url);
+					filesaver.readyState = filesaver.DONE;
+				});
+				return;
+			}
+
+			fs_error();
+		}
+		, FS_proto = FileSaver.prototype
+		, saveAs = function(blob, name, no_auto_bom) {
+			return new FileSaver(blob, name || blob.name || "download", no_auto_bom);
+		}
+	;
+	// IE 10+ (native saveAs)
+	if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+		return function(blob, name, no_auto_bom) {
+			name = name || blob.name || "download";
+
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			return navigator.msSaveOrOpenBlob(blob, name);
+		};
+	}
+
+	FS_proto.abort = function(){};
+	FS_proto.readyState = FS_proto.INIT = 0;
+	FS_proto.WRITING = 1;
+	FS_proto.DONE = 2;
+
+	FS_proto.error =
+	FS_proto.onwritestart =
+	FS_proto.onprogress =
+	FS_proto.onwrite =
+	FS_proto.onabort =
+	FS_proto.onerror =
+	FS_proto.onwriteend =
+		null;
+
+	return saveAs;
+}(
+	   typeof self !== "undefined" && self
+	|| typeof window !== "undefined" && window
+	|| this.content
+));
+// `self` is undefined in Firefox for Android content script context
+// while `this` is nsIContentFrameMessageManager
+// with an attribute `content` that corresponds to the window
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports.saveAs = saveAs;
+} else if ((typeof define !== "undefined" && define !== null) && (define.amd !== null)) {
+  define([], function() {
+    return saveAs;
+  });
+}
+
+//     Underscore.js 1.8.3
+//     http://underscorejs.org
+//     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
+(function () { function n(n) { function t(t, r, e, u, i, o) { for (; i >= 0 && o > i; i += n) { var a = u ? u[i] : i; e = r(e, t[a], a, t) } return e } return function (r, e, u, i) { e = b(e, i, 4); var o = !k(r) && m.keys(r), a = (o || r).length, c = n > 0 ? 0 : a - 1; return arguments.length < 3 && (u = r[o ? o[c] : c], c += n), t(r, e, u, o, c, a) } } function t(n) { return function (t, r, e) { r = x(r, e); for (var u = O(t), i = n > 0 ? 0 : u - 1; i >= 0 && u > i; i += n) if (r(t[i], i, t)) return i; return -1 } } function r(n, t, r) { return function (e, u, i) { var o = 0, a = O(e); if ("number" == typeof i) n > 0 ? o = i >= 0 ? i : Math.max(i + a, o) : a = i >= 0 ? Math.min(i + 1, a) : i + a + 1; else if (r && i && a) return i = r(e, u), e[i] === u ? i : -1; if (u !== u) return i = t(l.call(e, o, a), m.isNaN), i >= 0 ? i + o : -1; for (i = n > 0 ? o : a - 1; i >= 0 && a > i; i += n) if (e[i] === u) return i; return -1 } } function e(n, t) { var r = I.length, e = n.constructor, u = m.isFunction(e) && e.prototype || a, i = "constructor"; for (m.has(n, i) && !m.contains(t, i) && t.push(i) ; r--;) i = I[r], i in n && n[i] !== u[i] && !m.contains(t, i) && t.push(i) } var u = this, i = u._, o = Array.prototype, a = Object.prototype, c = Function.prototype, f = o.push, l = o.slice, s = a.toString, p = a.hasOwnProperty, h = Array.isArray, v = Object.keys, g = c.bind, y = Object.create, d = function () { }, m = function (n) { return n instanceof m ? n : this instanceof m ? void (this._wrapped = n) : new m(n) }; "undefined" != typeof exports ? ("undefined" != typeof module && module.exports && (exports = module.exports = m), exports._ = m) : u._ = m, m.VERSION = "1.8.3"; var b = function (n, t, r) { if (t === void 0) return n; switch (null == r ? 3 : r) { case 1: return function (r) { return n.call(t, r) }; case 2: return function (r, e) { return n.call(t, r, e) }; case 3: return function (r, e, u) { return n.call(t, r, e, u) }; case 4: return function (r, e, u, i) { return n.call(t, r, e, u, i) } } return function () { return n.apply(t, arguments) } }, x = function (n, t, r) { return null == n ? m.identity : m.isFunction(n) ? b(n, t, r) : m.isObject(n) ? m.matcher(n) : m.property(n) }; m.iteratee = function (n, t) { return x(n, t, 1 / 0) }; var _ = function (n, t) { return function (r) { var e = arguments.length; if (2 > e || null == r) return r; for (var u = 1; e > u; u++) for (var i = arguments[u], o = n(i), a = o.length, c = 0; a > c; c++) { var f = o[c]; t && r[f] !== void 0 || (r[f] = i[f]) } return r } }, j = function (n) { if (!m.isObject(n)) return {}; if (y) return y(n); d.prototype = n; var t = new d; return d.prototype = null, t }, w = function (n) { return function (t) { return null == t ? void 0 : t[n] } }, A = Math.pow(2, 53) - 1, O = w("length"), k = function (n) { var t = O(n); return "number" == typeof t && t >= 0 && A >= t }; m.each = m.forEach = function (n, t, r) { t = b(t, r); var e, u; if (k(n)) for (e = 0, u = n.length; u > e; e++) t(n[e], e, n); else { var i = m.keys(n); for (e = 0, u = i.length; u > e; e++) t(n[i[e]], i[e], n) } return n }, m.map = m.collect = function (n, t, r) { t = x(t, r); for (var e = !k(n) && m.keys(n), u = (e || n).length, i = Array(u), o = 0; u > o; o++) { var a = e ? e[o] : o; i[o] = t(n[a], a, n) } return i }, m.reduce = m.foldl = m.inject = n(1), m.reduceRight = m.foldr = n(-1), m.find = m.detect = function (n, t, r) { var e; return e = k(n) ? m.findIndex(n, t, r) : m.findKey(n, t, r), e !== void 0 && e !== -1 ? n[e] : void 0 }, m.filter = m.select = function (n, t, r) { var e = []; return t = x(t, r), m.each(n, function (n, r, u) { t(n, r, u) && e.push(n) }), e }, m.reject = function (n, t, r) { return m.filter(n, m.negate(x(t)), r) }, m.every = m.all = function (n, t, r) { t = x(t, r); for (var e = !k(n) && m.keys(n), u = (e || n).length, i = 0; u > i; i++) { var o = e ? e[i] : i; if (!t(n[o], o, n)) return !1 } return !0 }, m.some = m.any = function (n, t, r) { t = x(t, r); for (var e = !k(n) && m.keys(n), u = (e || n).length, i = 0; u > i; i++) { var o = e ? e[i] : i; if (t(n[o], o, n)) return !0 } return !1 }, m.contains = m.includes = m.include = function (n, t, r, e) { return k(n) || (n = m.values(n)), ("number" != typeof r || e) && (r = 0), m.indexOf(n, t, r) >= 0 }, m.invoke = function (n, t) { var r = l.call(arguments, 2), e = m.isFunction(t); return m.map(n, function (n) { var u = e ? t : n[t]; return null == u ? u : u.apply(n, r) }) }, m.pluck = function (n, t) { return m.map(n, m.property(t)) }, m.where = function (n, t) { return m.filter(n, m.matcher(t)) }, m.findWhere = function (n, t) { return m.find(n, m.matcher(t)) }, m.max = function (n, t, r) { var e, u, i = -1 / 0, o = -1 / 0; if (null == t && null != n) { n = k(n) ? n : m.values(n); for (var a = 0, c = n.length; c > a; a++) e = n[a], e > i && (i = e) } else t = x(t, r), m.each(n, function (n, r, e) { u = t(n, r, e), (u > o || u === -1 / 0 && i === -1 / 0) && (i = n, o = u) }); return i }, m.min = function (n, t, r) { var e, u, i = 1 / 0, o = 1 / 0; if (null == t && null != n) { n = k(n) ? n : m.values(n); for (var a = 0, c = n.length; c > a; a++) e = n[a], i > e && (i = e) } else t = x(t, r), m.each(n, function (n, r, e) { u = t(n, r, e), (o > u || 1 / 0 === u && 1 / 0 === i) && (i = n, o = u) }); return i }, m.shuffle = function (n) { for (var t, r = k(n) ? n : m.values(n), e = r.length, u = Array(e), i = 0; e > i; i++) t = m.random(0, i), t !== i && (u[i] = u[t]), u[t] = r[i]; return u }, m.sample = function (n, t, r) { return null == t || r ? (k(n) || (n = m.values(n)), n[m.random(n.length - 1)]) : m.shuffle(n).slice(0, Math.max(0, t)) }, m.sortBy = function (n, t, r) { return t = x(t, r), m.pluck(m.map(n, function (n, r, e) { return { value: n, index: r, criteria: t(n, r, e) } }).sort(function (n, t) { var r = n.criteria, e = t.criteria; if (r !== e) { if (r > e || r === void 0) return 1; if (e > r || e === void 0) return -1 } return n.index - t.index }), "value") }; var F = function (n) { return function (t, r, e) { var u = {}; return r = x(r, e), m.each(t, function (e, i) { var o = r(e, i, t); n(u, e, o) }), u } }; m.groupBy = F(function (n, t, r) { m.has(n, r) ? n[r].push(t) : n[r] = [t] }), m.indexBy = F(function (n, t, r) { n[r] = t }), m.countBy = F(function (n, t, r) { m.has(n, r) ? n[r]++ : n[r] = 1 }), m.toArray = function (n) { return n ? m.isArray(n) ? l.call(n) : k(n) ? m.map(n, m.identity) : m.values(n) : [] }, m.size = function (n) { return null == n ? 0 : k(n) ? n.length : m.keys(n).length }, m.partition = function (n, t, r) { t = x(t, r); var e = [], u = []; return m.each(n, function (n, r, i) { (t(n, r, i) ? e : u).push(n) }), [e, u] }, m.first = m.head = m.take = function (n, t, r) { return null == n ? void 0 : null == t || r ? n[0] : m.initial(n, n.length - t) }, m.initial = function (n, t, r) { return l.call(n, 0, Math.max(0, n.length - (null == t || r ? 1 : t))) }, m.last = function (n, t, r) { return null == n ? void 0 : null == t || r ? n[n.length - 1] : m.rest(n, Math.max(0, n.length - t)) }, m.rest = m.tail = m.drop = function (n, t, r) { return l.call(n, null == t || r ? 1 : t) }, m.compact = function (n) { return m.filter(n, m.identity) }; var S = function (n, t, r, e) { for (var u = [], i = 0, o = e || 0, a = O(n) ; a > o; o++) { var c = n[o]; if (k(c) && (m.isArray(c) || m.isArguments(c))) { t || (c = S(c, t, r)); var f = 0, l = c.length; for (u.length += l; l > f;) u[i++] = c[f++] } else r || (u[i++] = c) } return u }; m.flatten = function (n, t) { return S(n, t, !1) }, m.without = function (n) { return m.difference(n, l.call(arguments, 1)) }, m.uniq = m.unique = function (n, t, r, e) { m.isBoolean(t) || (e = r, r = t, t = !1), null != r && (r = x(r, e)); for (var u = [], i = [], o = 0, a = O(n) ; a > o; o++) { var c = n[o], f = r ? r(c, o, n) : c; t ? (o && i === f || u.push(c), i = f) : r ? m.contains(i, f) || (i.push(f), u.push(c)) : m.contains(u, c) || u.push(c) } return u }, m.union = function () { return m.uniq(S(arguments, !0, !0)) }, m.intersection = function (n) { for (var t = [], r = arguments.length, e = 0, u = O(n) ; u > e; e++) { var i = n[e]; if (!m.contains(t, i)) { for (var o = 1; r > o && m.contains(arguments[o], i) ; o++); o === r && t.push(i) } } return t }, m.difference = function (n) { var t = S(arguments, !0, !0, 1); return m.filter(n, function (n) { return !m.contains(t, n) }) }, m.zip = function () { return m.unzip(arguments) }, m.unzip = function (n) { for (var t = n && m.max(n, O).length || 0, r = Array(t), e = 0; t > e; e++) r[e] = m.pluck(n, e); return r }, m.object = function (n, t) { for (var r = {}, e = 0, u = O(n) ; u > e; e++) t ? r[n[e]] = t[e] : r[n[e][0]] = n[e][1]; return r }, m.findIndex = t(1), m.findLastIndex = t(-1), m.sortedIndex = function (n, t, r, e) { r = x(r, e, 1); for (var u = r(t), i = 0, o = O(n) ; o > i;) { var a = Math.floor((i + o) / 2); r(n[a]) < u ? i = a + 1 : o = a } return i }, m.indexOf = r(1, m.findIndex, m.sortedIndex), m.lastIndexOf = r(-1, m.findLastIndex), m.range = function (n, t, r) { null == t && (t = n || 0, n = 0), r = r || 1; for (var e = Math.max(Math.ceil((t - n) / r), 0), u = Array(e), i = 0; e > i; i++, n += r) u[i] = n; return u }; var E = function (n, t, r, e, u) { if (!(e instanceof t)) return n.apply(r, u); var i = j(n.prototype), o = n.apply(i, u); return m.isObject(o) ? o : i }; m.bind = function (n, t) { if (g && n.bind === g) return g.apply(n, l.call(arguments, 1)); if (!m.isFunction(n)) throw new TypeError("Bind must be called on a function"); var r = l.call(arguments, 2), e = function () { return E(n, e, t, this, r.concat(l.call(arguments))) }; return e }, m.partial = function (n) { var t = l.call(arguments, 1), r = function () { for (var e = 0, u = t.length, i = Array(u), o = 0; u > o; o++) i[o] = t[o] === m ? arguments[e++] : t[o]; for (; e < arguments.length;) i.push(arguments[e++]); return E(n, r, this, this, i) }; return r }, m.bindAll = function (n) { var t, r, e = arguments.length; if (1 >= e) throw new Error("bindAll must be passed function names"); for (t = 1; e > t; t++) r = arguments[t], n[r] = m.bind(n[r], n); return n }, m.memoize = function (n, t) { var r = function (e) { var u = r.cache, i = "" + (t ? t.apply(this, arguments) : e); return m.has(u, i) || (u[i] = n.apply(this, arguments)), u[i] }; return r.cache = {}, r }, m.delay = function (n, t) { var r = l.call(arguments, 2); return setTimeout(function () { return n.apply(null, r) }, t) }, m.defer = m.partial(m.delay, m, 1), m.throttle = function (n, t, r) { var e, u, i, o = null, a = 0; r || (r = {}); var c = function () { a = r.leading === !1 ? 0 : m.now(), o = null, i = n.apply(e, u), o || (e = u = null) }; return function () { var f = m.now(); a || r.leading !== !1 || (a = f); var l = t - (f - a); return e = this, u = arguments, 0 >= l || l > t ? (o && (clearTimeout(o), o = null), a = f, i = n.apply(e, u), o || (e = u = null)) : o || r.trailing === !1 || (o = setTimeout(c, l)), i } }, m.debounce = function (n, t, r) { var e, u, i, o, a, c = function () { var f = m.now() - o; t > f && f >= 0 ? e = setTimeout(c, t - f) : (e = null, r || (a = n.apply(i, u), e || (i = u = null))) }; return function () { i = this, u = arguments, o = m.now(); var f = r && !e; return e || (e = setTimeout(c, t)), f && (a = n.apply(i, u), i = u = null), a } }, m.wrap = function (n, t) { return m.partial(t, n) }, m.negate = function (n) { return function () { return !n.apply(this, arguments) } }, m.compose = function () { var n = arguments, t = n.length - 1; return function () { for (var r = t, e = n[t].apply(this, arguments) ; r--;) e = n[r].call(this, e); return e } }, m.after = function (n, t) { return function () { return --n < 1 ? t.apply(this, arguments) : void 0 } }, m.before = function (n, t) { var r; return function () { return --n > 0 && (r = t.apply(this, arguments)), 1 >= n && (t = null), r } }, m.once = m.partial(m.before, 2); var M = !{ toString: null }.propertyIsEnumerable("toString"), I = ["valueOf", "isPrototypeOf", "toString", "propertyIsEnumerable", "hasOwnProperty", "toLocaleString"]; m.keys = function (n) { if (!m.isObject(n)) return []; if (v) return v(n); var t = []; for (var r in n) m.has(n, r) && t.push(r); return M && e(n, t), t }, m.allKeys = function (n) { if (!m.isObject(n)) return []; var t = []; for (var r in n) t.push(r); return M && e(n, t), t }, m.values = function (n) { for (var t = m.keys(n), r = t.length, e = Array(r), u = 0; r > u; u++) e[u] = n[t[u]]; return e }, m.mapObject = function (n, t, r) { t = x(t, r); for (var e, u = m.keys(n), i = u.length, o = {}, a = 0; i > a; a++) e = u[a], o[e] = t(n[e], e, n); return o }, m.pairs = function (n) { for (var t = m.keys(n), r = t.length, e = Array(r), u = 0; r > u; u++) e[u] = [t[u], n[t[u]]]; return e }, m.invert = function (n) { for (var t = {}, r = m.keys(n), e = 0, u = r.length; u > e; e++) t[n[r[e]]] = r[e]; return t }, m.functions = m.methods = function (n) { var t = []; for (var r in n) m.isFunction(n[r]) && t.push(r); return t.sort() }, m.extend = _(m.allKeys), m.extendOwn = m.assign = _(m.keys), m.findKey = function (n, t, r) { t = x(t, r); for (var e, u = m.keys(n), i = 0, o = u.length; o > i; i++) if (e = u[i], t(n[e], e, n)) return e }, m.pick = function (n, t, r) { var e, u, i = {}, o = n; if (null == o) return i; m.isFunction(t) ? (u = m.allKeys(o), e = b(t, r)) : (u = S(arguments, !1, !1, 1), e = function (n, t, r) { return t in r }, o = Object(o)); for (var a = 0, c = u.length; c > a; a++) { var f = u[a], l = o[f]; e(l, f, o) && (i[f] = l) } return i }, m.omit = function (n, t, r) { if (m.isFunction(t)) t = m.negate(t); else { var e = m.map(S(arguments, !1, !1, 1), String); t = function (n, t) { return !m.contains(e, t) } } return m.pick(n, t, r) }, m.defaults = _(m.allKeys, !0), m.create = function (n, t) { var r = j(n); return t && m.extendOwn(r, t), r }, m.clone = function (n) { return m.isObject(n) ? m.isArray(n) ? n.slice() : m.extend({}, n) : n }, m.tap = function (n, t) { return t(n), n }, m.isMatch = function (n, t) { var r = m.keys(t), e = r.length; if (null == n) return !e; for (var u = Object(n), i = 0; e > i; i++) { var o = r[i]; if (t[o] !== u[o] || !(o in u)) return !1 } return !0 }; var N = function (n, t, r, e) { if (n === t) return 0 !== n || 1 / n === 1 / t; if (null == n || null == t) return n === t; n instanceof m && (n = n._wrapped), t instanceof m && (t = t._wrapped); var u = s.call(n); if (u !== s.call(t)) return !1; switch (u) { case "[object RegExp]": case "[object String]": return "" + n == "" + t; case "[object Number]": return +n !== +n ? +t !== +t : 0 === +n ? 1 / +n === 1 / t : +n === +t; case "[object Date]": case "[object Boolean]": return +n === +t } var i = "[object Array]" === u; if (!i) { if ("object" != typeof n || "object" != typeof t) return !1; var o = n.constructor, a = t.constructor; if (o !== a && !(m.isFunction(o) && o instanceof o && m.isFunction(a) && a instanceof a) && "constructor" in n && "constructor" in t) return !1 } r = r || [], e = e || []; for (var c = r.length; c--;) if (r[c] === n) return e[c] === t; if (r.push(n), e.push(t), i) { if (c = n.length, c !== t.length) return !1; for (; c--;) if (!N(n[c], t[c], r, e)) return !1 } else { var f, l = m.keys(n); if (c = l.length, m.keys(t).length !== c) return !1; for (; c--;) if (f = l[c], !m.has(t, f) || !N(n[f], t[f], r, e)) return !1 } return r.pop(), e.pop(), !0 }; m.isEqual = function (n, t) { return N(n, t) }, m.isEmpty = function (n) { return null == n ? !0 : k(n) && (m.isArray(n) || m.isString(n) || m.isArguments(n)) ? 0 === n.length : 0 === m.keys(n).length }, m.isElement = function (n) { return !(!n || 1 !== n.nodeType) }, m.isArray = h || function (n) { return "[object Array]" === s.call(n) }, m.isObject = function (n) { var t = typeof n; return "function" === t || "object" === t && !!n }, m.each(["Arguments", "Function", "String", "Number", "Date", "RegExp", "Error"], function (n) { m["is" + n] = function (t) { return s.call(t) === "[object " + n + "]" } }), m.isArguments(arguments) || (m.isArguments = function (n) { return m.has(n, "callee") }), "function" != typeof /./ && "object" != typeof Int8Array && (m.isFunction = function (n) { return "function" == typeof n || !1 }), m.isFinite = function (n) { return isFinite(n) && !isNaN(parseFloat(n)) }, m.isNaN = function (n) { return m.isNumber(n) && n !== +n }, m.isBoolean = function (n) { return n === !0 || n === !1 || "[object Boolean]" === s.call(n) }, m.isNull = function (n) { return null === n }, m.isUndefined = function (n) { return n === void 0 }, m.has = function (n, t) { return null != n && p.call(n, t) }, m.noConflict = function () { return u._ = i, this }, m.identity = function (n) { return n }, m.constant = function (n) { return function () { return n } }, m.noop = function () { }, m.property = w, m.propertyOf = function (n) { return null == n ? function () { } : function (t) { return n[t] } }, m.matcher = m.matches = function (n) { return n = m.extendOwn({}, n), function (t) { return m.isMatch(t, n) } }, m.times = function (n, t, r) { var e = Array(Math.max(0, n)); t = b(t, r, 1); for (var u = 0; n > u; u++) e[u] = t(u); return e }, m.random = function (n, t) { return null == t && (t = n, n = 0), n + Math.floor(Math.random() * (t - n + 1)) }, m.now = Date.now || function () { return (new Date).getTime() }; var B = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;", "`": "&#x60;" }, T = m.invert(B), R = function (n) { var t = function (t) { return n[t] }, r = "(?:" + m.keys(n).join("|") + ")", e = RegExp(r), u = RegExp(r, "g"); return function (n) { return n = null == n ? "" : "" + n, e.test(n) ? n.replace(u, t) : n } }; m.escape = R(B), m.unescape = R(T), m.result = function (n, t, r) { var e = null == n ? void 0 : n[t]; return e === void 0 && (e = r), m.isFunction(e) ? e.call(n) : e }; var q = 0; m.uniqueId = function (n) { var t = ++q + ""; return n ? n + t : t }, m.templateSettings = { evaluate: /<%([\s\S]+?)%>/g, interpolate: /<%=([\s\S]+?)%>/g, escape: /<%-([\s\S]+?)%>/g }; var K = /(.)^/, z = { "'": "'", "\\": "\\", "\r": "r", "\n": "n", "\u2028": "u2028", "\u2029": "u2029" }, D = /\\|'|\r|\n|\u2028|\u2029/g, L = function (n) { return "\\" + z[n] }; m.template = function (n, t, r) { !t && r && (t = r), t = m.defaults({}, t, m.templateSettings); var e = RegExp([(t.escape || K).source, (t.interpolate || K).source, (t.evaluate || K).source].join("|") + "|$", "g"), u = 0, i = "__p+='"; n.replace(e, function (t, r, e, o, a) { return i += n.slice(u, a).replace(D, L), u = a + t.length, r ? i += "'+\n((__t=(" + r + "))==null?'':_.escape(__t))+\n'" : e ? i += "'+\n((__t=(" + e + "))==null?'':__t)+\n'" : o && (i += "';\n" + o + "\n__p+='"), t }), i += "';\n", t.variable || (i = "with(obj||{}){\n" + i + "}\n"), i = "var __t,__p='',__j=Array.prototype.join," + "print=function(){__p+=__j.call(arguments,'');};\n" + i + "return __p;\n"; try { var o = new Function(t.variable || "obj", "_", i) } catch (a) { throw a.source = i, a } var c = function (n) { return o.call(this, n, m) }, f = t.variable || "obj"; return c.source = "function(" + f + "){\n" + i + "}", c }, m.chain = function (n) { var t = m(n); return t._chain = !0, t }; var P = function (n, t) { return n._chain ? m(t).chain() : t }; m.mixin = function (n) { m.each(m.functions(n), function (t) { var r = m[t] = n[t]; m.prototype[t] = function () { var n = [this._wrapped]; return f.apply(n, arguments), P(this, r.apply(m, n)) } }) }, m.mixin(m), m.each(["pop", "push", "reverse", "shift", "sort", "splice", "unshift"], function (n) { var t = o[n]; m.prototype[n] = function () { var r = this._wrapped; return t.apply(r, arguments), "shift" !== n && "splice" !== n || 0 !== r.length || delete r[0], P(this, r) } }), m.each(["concat", "join", "slice"], function (n) { var t = o[n]; m.prototype[n] = function () { return P(this, t.apply(this._wrapped, arguments)) } }), m.prototype.value = function () { return this._wrapped }, m.prototype.valueOf = m.prototype.toJSON = m.prototype.value, m.prototype.toString = function () { return "" + this._wrapped }, "function" == typeof define && define.amd && define("underscore", [], function () { return m }) }).call(this);
+//# sourceMappingURL=underscore-min.map
 // 2.2.1
 angular.module("gettext", []), angular.module("gettext").constant("gettext", function (a) { return a }), angular.module("gettext").factory("gettextCatalog", ["gettextPlurals", "gettextFallbackLanguage", "$http", "$cacheFactory", "$interpolate", "$rootScope", function (a, b, c, d, e, f) { function g() { f.$broadcast("gettextLanguageChanged") } var h, i = "$$noContext", j = '<span id="test" title="test" class="tested">test</span>', k = angular.element("<span>" + j + "</span>").html() !== j, l = function (a) { return h.debug && h.currentLanguage !== h.baseLanguage?h.debugPrefix + a:a }, m = function (a) { return h.showTranslatedMarkers?h.translatedMarkerPrefix + a + h.translatedMarkerSuffix:a }; return h = { debug: !1, debugPrefix: "[MISSING]: ", showTranslatedMarkers: !1, translatedMarkerPrefix: "[", translatedMarkerSuffix: "]", strings: {}, baseLanguage: "en", currentLanguage: "en", cache: d("strings"), setCurrentLanguage: function (a) { this.currentLanguage = a, g() }, getCurrentLanguage: function () { return this.currentLanguage }, setStrings: function (a, b) { this.strings[a] || (this.strings[a] = {}); for (var c in b) { var d = b[c]; if (k && (c = angular.element("<span>" + c + "</span>").html()), angular.isString(d) || angular.isArray(d)) { var e = {}; e[i] = d, d = e } for (var f in d) { var h = d[f]; d[f] = angular.isArray(h)?h:[h] } this.strings[a][c] = d } g() }, getStringFormFor: function (b, c, d, e) { if (!b) return null; var f = this.strings[b] || {}, g = f[c] || {}, h = g[e || i] || []; return h[a(b, d)] }, getString: function (a, c, d) { var f = b(this.currentLanguage); return a = this.getStringFormFor(this.currentLanguage, a, 1, d) || this.getStringFormFor(f, a, 1, d) || l(a), a = c?e(a)(c):a, m(a) }, getPlural: function (a, c, d, f, g) { var h = b(this.currentLanguage); return c = this.getStringFormFor(this.currentLanguage, c, a, g) || this.getStringFormFor(h, c, a, g) || l(1 === a?c:d), f && (f.$count = a, c = e(c)(f)), m(c) }, loadRemote: function (a) { return c({ method: "GET", url: a, cache: h.cache }).then(function (a) { var b = a.data; for (var c in b) h.setStrings(c, b[c]); return a }) } } }]), angular.module("gettext").directive("translate", ["gettextCatalog", "$parse", "$animate", "$compile", "$window", function (a, b, c, d, e) { function f(a, b, c) { if (!a) throw new Error("You should add a " + b + " attribute whenever you add a " + c + " attribute.") } var g = function () { return String.prototype.trim?function (a) { return "string" == typeof a?a.trim():a }:function (a) { return "string" == typeof a?a.replace(/^\s*/, "").replace(/\s*$/, ""):a } }(), h = parseInt((/msie (\d+)/.exec(angular.lowercase(e.navigator.userAgent)) || [])[1], 10); return { restrict: "AE", terminal: !0, compile: function (e, i) { f(!i.translatePlural || i.translateN, "translate-n", "translate-plural"), f(!i.translateN || i.translatePlural, "translate-plural", "translate-n"); var j = g(e.html()), k = i.translatePlural, l = i.translateContext; return 8 >= h && "<!--IE fix-->" === j.slice(-13) && (j = j.slice(0, -13)), { post: function (e, f, h) { function i() { var b; k?(e = n || (n = e.$new()), e.$count = m(e), b = a.getPlural(e.$count, j, k, null, l)):b = a.getString(j, null, l); var h = f.contents(); if (0 !== h.length) { if (b === g(h.html())) return void (o && d(h)(e)); var i = angular.element("<span>" + b + "</span>"); d(i.contents())(e); var p = i.contents(); c.enter(p, f), c.leave(h) } } var m = b(h.translateN), n = null, o = !0; h.translateN && e.$watch(h.translateN, i), e.$on("gettextLanguageChanged", i), i(), o = !1 } } } } }]), angular.module("gettext").factory("gettextFallbackLanguage", function () { var a = {}, b = /([^_]+)_[^_]+$/; return function (c) { if (a[c]) return a[c]; var d = b.exec(c); return d?(a[c] = d[1], d[1]):null } }), angular.module("gettext").filter("translate", ["gettextCatalog", function (a) { function b(b, c) { return a.getString(b, null, c) } return b.$stateful = !0, b }]), angular.module("gettext").factory("gettextPlurals", function () { return function (a, b) { switch (a) {case "ay":case "bo":case "cgg":case "dz":case "fa":case "id":case "ja":case "jbo":case "ka":case "kk":case "km":case "ko":case "ky":case "lo":case "ms":case "my":case "sah":case "su":case "th":case "tt":case "ug":case "vi":case "wo":case "zh": return 0;case "is": return b % 10 != 1 || b % 100 == 11?1:0;case "jv": return 0 != b?1:0;case "mk": return 1 == b || b % 10 == 1?0:1;case "ach":case "ak":case "am":case "arn":case "br":case "fil":case "fr":case "gun":case "ln":case "mfe":case "mg":case "mi":case "oc":case "pt_BR":case "tg":case "ti":case "tr":case "uz":case "wa":case "zh": return b > 1?1:0;case "lv": return b % 10 == 1 && b % 100 != 11?0:0 != b?1:2;case "lt": return b % 10 == 1 && b % 100 != 11?0:b % 10 >= 2 && (10 > b % 100 || b % 100 >= 20)?1:2;case "be":case "bs":case "hr":case "ru":case "sr":case "uk": return b % 10 == 1 && b % 100 != 11?0:b % 10 >= 2 && 4 >= b % 10 && (10 > b % 100 || b % 100 >= 20)?1:2;case "mnk": return 0 == b?0:1 == b?1:2;case "ro": return 1 == b?0:0 == b || b % 100 > 0 && 20 > b % 100?1:2;case "pl": return 1 == b?0:b % 10 >= 2 && 4 >= b % 10 && (10 > b % 100 || b % 100 >= 20)?1:2;case "cs":case "sk": return 1 == b?0:b >= 2 && 4 >= b?1:2;case "sl": return b % 100 == 1?1:b % 100 == 2?2:b % 100 == 3 || b % 100 == 4?3:0;case "mt": return 1 == b?0:0 == b || b % 100 > 1 && 11 > b % 100?1:b % 100 > 10 && 20 > b % 100?2:3;case "gd": return 1 == b || 11 == b?0:2 == b || 12 == b?1:b > 2 && 20 > b?2:3;case "cy": return 1 == b?0:2 == b?1:8 != b && 11 != b?2:3;case "kw": return 1 == b?0:2 == b?1:3 == b?2:3;case "ga": return 1 == b?0:2 == b?1:7 > b?2:11 > b?3:4;case "ar": return 0 == b?0:1 == b?1:2 == b?2:b % 100 >= 3 && 10 >= b % 100?3:b % 100 >= 11?4:5;default: return 1 != b?1:0} } });
 // https://github.com/oblador/angular-scroll
@@ -744,1178 +929,1165 @@ var duScrollDefaultEasing = function (e) { "use strict"; return .5 > e ? Math.po
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
- * Version: 1.1.0 - 2016-01-18
+ * Version: 2.5.0 - 2017-01-28
  * License: MIT
- */angular.module("ui.bootstrap",["ui.bootstrap.dropdown","ui.bootstrap.position","ui.bootstrap.modal","ui.bootstrap.stackedMap","ui.bootstrap.typeahead","ui.bootstrap.debounce","ui.bootstrap.alert","ui.bootstrap.collapse","ui.bootstrap.tooltip"]),angular.module("ui.bootstrap.dropdown",["ui.bootstrap.position"]).constant("uibDropdownConfig",{appendToOpenClass:"uib-dropdown-open",openClass:"open"}).service("uibDropdownService",["$document","$rootScope",function(e,t){var n=null;this.open=function(t){n||(e.on("click",o),e.on("keydown",a)),n&&n!==t&&(n.isOpen=!1),n=t},this.close=function(t){n===t&&(n=null,e.off("click",o),e.off("keydown",a))};var o=function(e){if(n&&!(e&&"disabled"===n.getAutoClose()||e&&3===e.which)){var o=n.getToggleElement();if(!(e&&o&&o[0].contains(e.target))){var a=n.getDropdownElement();e&&"outsideClick"===n.getAutoClose()&&a&&a[0].contains(e.target)||(n.isOpen=!1,t.$$phase||n.$apply())}}},a=function(e){27===e.which?(n.focusToggleElement(),o()):n.isKeynavEnabled()&&-1!==[38,40].indexOf(e.which)&&n.isOpen&&(e.preventDefault(),e.stopPropagation(),n.focusDropdownEntry(e.which))}}]).controller("UibDropdownController",["$scope","$element","$attrs","$parse","uibDropdownConfig","uibDropdownService","$animate","$uibPosition","$document","$compile","$templateRequest",function(e,t,n,o,a,i,r,l,s,u,d){var p,c,f=this,h=e.$new(),m=a.appendToOpenClass,g=a.openClass,v=angular.noop,b=n.onToggle?o(n.onToggle):angular.noop,$=!1,w=null,y=!1,C=s.find("body");t.addClass("dropdown"),this.init=function(){if(n.isOpen&&(c=o(n.isOpen),v=c.assign,e.$watch(c,function(e){h.isOpen=!!e})),angular.isDefined(n.dropdownAppendTo)){var a=o(n.dropdownAppendTo)(h);a&&(w=angular.element(a))}$=angular.isDefined(n.dropdownAppendToBody),y=angular.isDefined(n.keyboardNav),$&&!w&&(w=C),w&&f.dropdownMenu&&(w.append(f.dropdownMenu),t.on("$destroy",function(){f.dropdownMenu.remove()}))},this.toggle=function(e){return h.isOpen=arguments.length?!!e:!h.isOpen},this.isOpen=function(){return h.isOpen},h.getToggleElement=function(){return f.toggleElement},h.getAutoClose=function(){return n.autoClose||"always"},h.getElement=function(){return t},h.isKeynavEnabled=function(){return y},h.focusDropdownEntry=function(e){var n=f.dropdownMenu?angular.element(f.dropdownMenu).find("a"):t.find("ul").eq(0).find("a");switch(e){case 40:f.selectedOption=angular.isNumber(f.selectedOption)?f.selectedOption===n.length-1?f.selectedOption:f.selectedOption+1:0;break;case 38:f.selectedOption=angular.isNumber(f.selectedOption)?0===f.selectedOption?0:f.selectedOption-1:n.length-1}n[f.selectedOption].focus()},h.getDropdownElement=function(){return f.dropdownMenu},h.focusToggleElement=function(){f.toggleElement&&f.toggleElement[0].focus()},h.$watch("isOpen",function(n,o){if(w&&f.dropdownMenu){var a,s,c=l.positionElements(t,f.dropdownMenu,"bottom-left",!0);if(a={top:c.top+"px",display:n?"block":"none"},s=f.dropdownMenu.hasClass("dropdown-menu-right"),s?(a.left="auto",a.right=window.innerWidth-(c.left+t.prop("offsetWidth"))+"px"):(a.left=c.left+"px",a.right="auto"),!$){var y=l.offset(w);a.top=c.top-y.top+"px",s?a.right=window.innerWidth-(c.left-y.left+t.prop("offsetWidth"))+"px":a.left=c.left-y.left+"px"}f.dropdownMenu.css(a)}var C=w?w:t;if(r[n?"addClass":"removeClass"](C,w?m:g).then(function(){angular.isDefined(n)&&n!==o&&b(e,{open:!!n})}),n)f.dropdownMenuTemplateUrl&&d(f.dropdownMenuTemplateUrl).then(function(e){p=h.$new(),u(e.trim())(p,function(e){var t=e;f.dropdownMenu.replaceWith(t),f.dropdownMenu=t})}),h.focusToggleElement(),i.open(h);else{if(f.dropdownMenuTemplateUrl){p&&p.$destroy();var k=angular.element('<ul class="dropdown-menu"></ul>');f.dropdownMenu.replaceWith(k),f.dropdownMenu=k}i.close(h),f.selectedOption=null}angular.isFunction(v)&&v(e,n)}),e.$on("$locationChangeSuccess",function(){"disabled"!==h.getAutoClose()&&(h.isOpen=!1)})}]).directive("uibDropdown",function(){return{controller:"UibDropdownController",link:function(e,t,n,o){o.init()}}}).directive("uibDropdownMenu",function(){return{restrict:"A",require:"?^uibDropdown",link:function(e,t,n,o){if(o&&!angular.isDefined(n.dropdownNested)){t.addClass("dropdown-menu");var a=n.templateUrl;a&&(o.dropdownMenuTemplateUrl=a),o.dropdownMenu||(o.dropdownMenu=t)}}}}).directive("uibDropdownToggle",function(){return{require:"?^uibDropdown",link:function(e,t,n,o){if(o){t.addClass("dropdown-toggle"),o.toggleElement=t;var a=function(a){a.preventDefault(),t.hasClass("disabled")||n.disabled||e.$apply(function(){o.toggle()})};t.bind("click",a),t.attr({"aria-haspopup":!0,"aria-expanded":!1}),e.$watch(o.isOpen,function(e){t.attr("aria-expanded",!!e)}),e.$on("$destroy",function(){t.unbind("click",a)})}}}}),angular.module("ui.bootstrap.position",[]).factory("$uibPosition",["$document","$window",function(e,t){var n,o={normal:/(auto|scroll)/,hidden:/(auto|scroll|hidden)/},a={auto:/\s?auto?\s?/i,primary:/^(top|bottom|left|right)$/,secondary:/^(top|bottom|left|right|center)$/,vertical:/^(top|bottom)$/};return{getRawNode:function(e){return e[0]||e},parseStyle:function(e){return e=parseFloat(e),isFinite(e)?e:0},offsetParent:function(n){function o(e){return"static"===(t.getComputedStyle(e).position||"static")}n=this.getRawNode(n);for(var a=n.offsetParent||e[0].documentElement;a&&a!==e[0].documentElement&&o(a);)a=a.offsetParent;return a||e[0].documentElement},scrollbarWidth:function(){if(angular.isUndefined(n)){var t=angular.element('<div style="position: absolute; top: -9999px; width: 50px; height: 50px; overflow: scroll;"></div>');e.find("body").append(t),n=t[0].offsetWidth-t[0].clientWidth,n=isFinite(n)?n:0,t.remove()}return n},scrollParent:function(n,a){n=this.getRawNode(n);var i=a?o.hidden:o.normal,r=e[0].documentElement,l=t.getComputedStyle(n),s="absolute"===l.position,u=n.parentElement||r;if(u===r||"fixed"===l.position)return r;for(;u.parentElement&&u!==r;){var d=t.getComputedStyle(u);if(s&&"static"!==d.position&&(s=!1),!s&&i.test(d.overflow+d.overflowY+d.overflowX))break;u=u.parentElement}return u},position:function(n,o){n=this.getRawNode(n);var a=this.offset(n);if(o){var i=t.getComputedStyle(n);a.top-=this.parseStyle(i.marginTop),a.left-=this.parseStyle(i.marginLeft)}var r=this.offsetParent(n),l={top:0,left:0};return r!==e[0].documentElement&&(l=this.offset(r),l.top+=r.clientTop-r.scrollTop,l.left+=r.clientLeft-r.scrollLeft),{width:Math.round(angular.isNumber(a.width)?a.width:n.offsetWidth),height:Math.round(angular.isNumber(a.height)?a.height:n.offsetHeight),top:Math.round(a.top-l.top),left:Math.round(a.left-l.left)}},offset:function(n){n=this.getRawNode(n);var o=n.getBoundingClientRect();return{width:Math.round(angular.isNumber(o.width)?o.width:n.offsetWidth),height:Math.round(angular.isNumber(o.height)?o.height:n.offsetHeight),top:Math.round(o.top+(t.pageYOffset||e[0].documentElement.scrollTop)),left:Math.round(o.left+(t.pageXOffset||e[0].documentElement.scrollLeft))}},viewportOffset:function(n,o,a){n=this.getRawNode(n),a=a!==!1?!0:!1;var i=n.getBoundingClientRect(),r={top:0,left:0,bottom:0,right:0},l=o?e[0].documentElement:this.scrollParent(n),s=l.getBoundingClientRect();if(r.top=s.top+l.clientTop,r.left=s.left+l.clientLeft,l===e[0].documentElement&&(r.top+=t.pageYOffset,r.left+=t.pageXOffset),r.bottom=r.top+l.clientHeight,r.right=r.left+l.clientWidth,a){var u=t.getComputedStyle(l);r.top+=this.parseStyle(u.paddingTop),r.bottom-=this.parseStyle(u.paddingBottom),r.left+=this.parseStyle(u.paddingLeft),r.right-=this.parseStyle(u.paddingRight)}return{top:Math.round(i.top-r.top),bottom:Math.round(r.bottom-i.bottom),left:Math.round(i.left-r.left),right:Math.round(r.right-i.right)}},parsePlacement:function(e){var t=a.auto.test(e);return t&&(e=e.replace(a.auto,"")),e=e.split("-"),e[0]=e[0]||"top",a.primary.test(e[0])||(e[0]="top"),e[1]=e[1]||"center",a.secondary.test(e[1])||(e[1]="center"),e[2]=t?!0:!1,e},positionElements:function(e,n,o,i){e=this.getRawNode(e),n=this.getRawNode(n);var r=angular.isDefined(n.offsetWidth)?n.offsetWidth:n.prop("offsetWidth"),l=angular.isDefined(n.offsetHeight)?n.offsetHeight:n.prop("offsetHeight");o=this.parsePlacement(o);var s=i?this.offset(e):this.position(e),u={top:0,left:0,placement:""};if(o[2]){var d=this.viewportOffset(e),p=t.getComputedStyle(n),c={width:r+Math.round(Math.abs(this.parseStyle(p.marginLeft)+this.parseStyle(p.marginRight))),height:l+Math.round(Math.abs(this.parseStyle(p.marginTop)+this.parseStyle(p.marginBottom)))};if(o[0]="top"===o[0]&&c.height>d.top&&c.height<=d.bottom?"bottom":"bottom"===o[0]&&c.height>d.bottom&&c.height<=d.top?"top":"left"===o[0]&&c.width>d.left&&c.width<=d.right?"right":"right"===o[0]&&c.width>d.right&&c.width<=d.left?"left":o[0],o[1]="top"===o[1]&&c.height-s.height>d.bottom&&c.height-s.height<=d.top?"bottom":"bottom"===o[1]&&c.height-s.height>d.top&&c.height-s.height<=d.bottom?"top":"left"===o[1]&&c.width-s.width>d.right&&c.width-s.width<=d.left?"right":"right"===o[1]&&c.width-s.width>d.left&&c.width-s.width<=d.right?"left":o[1],"center"===o[1])if(a.vertical.test(o[0])){var f=s.width/2-r/2;d.left+f<0&&c.width-s.width<=d.right?o[1]="left":d.right+f<0&&c.width-s.width<=d.left&&(o[1]="right")}else{var h=s.height/2-c.height/2;d.top+h<0&&c.height-s.height<=d.bottom?o[1]="top":d.bottom+h<0&&c.height-s.height<=d.top&&(o[1]="bottom")}}switch(o[0]){case"top":u.top=s.top-l;break;case"bottom":u.top=s.top+s.height;break;case"left":u.left=s.left-r;break;case"right":u.left=s.left+s.width}switch(o[1]){case"top":u.top=s.top;break;case"bottom":u.top=s.top+s.height-l;break;case"left":u.left=s.left;break;case"right":u.left=s.left+s.width-r;break;case"center":a.vertical.test(o[0])?u.left=s.left+s.width/2-r/2:u.top=s.top+s.height/2-l/2}return u.top=Math.round(u.top),u.left=Math.round(u.left),u.placement="center"===o[1]?o[0]:o[0]+"-"+o[1],u},positionArrow:function(e,n){e=this.getRawNode(e);var o=e.querySelector(".tooltip-inner, .popover-inner");if(o){var i=angular.element(o).hasClass("tooltip-inner"),r=e.querySelector(i?".tooltip-arrow":".arrow");if(r){if(n=this.parsePlacement(n),"center"===n[1])return void angular.element(r).css({top:"",bottom:"",right:"",left:"",margin:""});var l="border-"+n[0]+"-width",s=t.getComputedStyle(r)[l],u="border-";u+=a.vertical.test(n[0])?n[0]+"-"+n[1]:n[1]+"-"+n[0],u+="-radius";var d=t.getComputedStyle(i?o:e)[u],p={top:"auto",bottom:"auto",left:"auto",right:"auto",margin:0};switch(n[0]){case"top":p.bottom=i?"0":"-"+s;break;case"bottom":p.top=i?"0":"-"+s;break;case"left":p.right=i?"0":"-"+s;break;case"right":p.left=i?"0":"-"+s}p[n[1]]=d,angular.element(r).css(p)}}}}}]),angular.module("ui.bootstrap.modal",["ui.bootstrap.stackedMap"]).factory("$$multiMap",function(){return{createNew:function(){var e={};return{entries:function(){return Object.keys(e).map(function(t){return{key:t,value:e[t]}})},get:function(t){return e[t]},hasKey:function(t){return!!e[t]},keys:function(){return Object.keys(e)},put:function(t,n){e[t]||(e[t]=[]),e[t].push(n)},remove:function(t,n){var o=e[t];if(o){var a=o.indexOf(n);-1!==a&&o.splice(a,1),o.length||delete e[t]}}}}}}).provider("$uibResolve",function(){var e=this;this.resolver=null,this.setResolver=function(e){this.resolver=e},this.$get=["$injector","$q",function(t,n){var o=e.resolver?t.get(e.resolver):null;return{resolve:function(e,a,i,r){if(o)return o.resolve(e,a,i,r);var l=[];return angular.forEach(e,function(e){l.push(angular.isFunction(e)||angular.isArray(e)?n.resolve(t.invoke(e)):angular.isString(e)?n.resolve(t.get(e)):n.resolve(e))}),n.all(l).then(function(t){var n={},o=0;return angular.forEach(e,function(e,a){n[a]=t[o++]}),n})}}}]}).directive("uibModalBackdrop",["$animateCss","$injector","$uibModalStack",function(e,t,n){function o(t,o,a){a.modalInClass&&(e(o,{addClass:a.modalInClass}).start(),t.$on(n.NOW_CLOSING_EVENT,function(n,i){var r=i();t.modalOptions.animation?e(o,{removeClass:a.modalInClass}).start().then(r):r()}))}return{replace:!0,templateUrl:"uib/template/modal/backdrop.html",compile:function(e,t){return e.addClass(t.backdropClass),o}}}]).directive("uibModalWindow",["$uibModalStack","$q","$animate","$animateCss","$document",function(e,t,n,o,a){return{scope:{index:"@"},replace:!0,transclude:!0,templateUrl:function(e,t){return t.templateUrl||"uib/template/modal/window.html"},link:function(i,r,l){r.addClass(l.windowClass||""),r.addClass(l.windowTopClass||""),i.size=l.size,i.close=function(t){var n=e.getTop();n&&n.value.backdrop&&"static"!==n.value.backdrop&&t.target===t.currentTarget&&(t.preventDefault(),t.stopPropagation(),e.dismiss(n.key,"backdrop click"))},r.on("click",i.close),i.$isRendered=!0;var s=t.defer();l.$observe("modalRender",function(e){"true"===e&&s.resolve()}),s.promise.then(function(){var s=null;l.modalInClass&&(s=o(r,{addClass:l.modalInClass}).start(),i.$on(e.NOW_CLOSING_EVENT,function(e,t){var a=t();o?o(r,{removeClass:l.modalInClass}).start().then(a):n.removeClass(r,l.modalInClass).then(a)})),t.when(s).then(function(){if(!a[0].activeElement||!r[0].contains(a[0].activeElement)){var e=r[0].querySelector("[autofocus]");e?e.focus():r[0].focus()}});var u=e.getTop();u&&e.modalRendered(u.key)})}}}]).directive("uibModalAnimationClass",function(){return{compile:function(e,t){t.modalAnimation&&e.addClass(t.uibModalAnimationClass)}}}).directive("uibModalTransclude",function(){return{link:function(e,t,n,o,a){a(e.$parent,function(e){t.empty(),t.append(e)})}}}).factory("$uibModalStack",["$animate","$animateCss","$document","$compile","$rootScope","$q","$$multiMap","$$stackedMap",function(e,t,n,o,a,i,r,l){function s(){for(var e=-1,t=$.keys(),n=0;n<t.length;n++)$.get(t[n]).value.backdrop&&(e=n);return e}function u(e,t){var n=$.get(e).value,o=n.appendTo;$.remove(e),c(n.modalDomEl,n.modalScope,function(){var t=n.openedClass||b;w.remove(t,e),o.toggleClass(t,w.hasKey(t)),d(!0)}),p(),t&&t.focus?t.focus():o.focus&&o.focus()}function d(e){var t;$.length()>0&&(t=$.top().value,t.modalDomEl.toggleClass(t.windowTopClass||"",e))}function p(){if(m&&-1===s()){var e=g;c(m,g,function(){e=null}),m=void 0,g=void 0}}function c(e,n,o,a){function r(){r.done||(r.done=!0,t(e,{event:"leave"}).start().then(function(){e.remove(),a&&a.resolve()}),n.$destroy(),o&&o())}var l,s=null,u=function(){return l||(l=i.defer(),s=l.promise),function(){l.resolve()}};return n.$broadcast(y.NOW_CLOSING_EVENT,u),i.when(s).then(r)}function f(e){if(e.isDefaultPrevented())return e;var t=$.top();if(t)switch(e.which){case 27:t.value.keyboard&&(e.preventDefault(),a.$apply(function(){y.dismiss(t.key,"escape key press")}));break;case 9:y.loadFocusElementList(t);var n=!1;e.shiftKey?y.isFocusInFirstItem(e)&&(n=y.focusLastFocusableElement()):y.isFocusInLastItem(e)&&(n=y.focusFirstFocusableElement()),n&&(e.preventDefault(),e.stopPropagation())}}function h(e,t,n){return!e.value.modalScope.$broadcast("modal.closing",t,n).defaultPrevented}var m,g,v,b="modal-open",$=l.createNew(),w=r.createNew(),y={NOW_CLOSING_EVENT:"modal.stack.now-closing"},C=0,k="a[href], area[href], input:not([disabled]), button:not([disabled]),select:not([disabled]), textarea:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable=true]";return a.$watch(s,function(e){g&&(g.index=e)}),n.on("keydown",f),a.$on("$destroy",function(){n.off("keydown",f)}),y.open=function(t,i){var r=n[0].activeElement,l=i.openedClass||b;d(!1),$.add(t,{deferred:i.deferred,renderDeferred:i.renderDeferred,closedDeferred:i.closedDeferred,modalScope:i.scope,backdrop:i.backdrop,keyboard:i.keyboard,openedClass:i.openedClass,windowTopClass:i.windowTopClass,animation:i.animation,appendTo:i.appendTo}),w.put(l,t);var u=i.appendTo,p=s();if(!u.length)throw new Error("appendTo element not found. Make sure that the element passed is in DOM.");p>=0&&!m&&(g=a.$new(!0),g.modalOptions=i,g.index=p,m=angular.element('<div uib-modal-backdrop="modal-backdrop"></div>'),m.attr("backdrop-class",i.backdropClass),i.animation&&m.attr("modal-animation","true"),o(m)(g),e.enter(m,u));var c=angular.element('<div uib-modal-window="modal-window"></div>');c.attr({"template-url":i.windowTemplateUrl,"window-class":i.windowClass,"window-top-class":i.windowTopClass,size:i.size,index:$.length()-1,animate:"animate"}).html(i.content),i.animation&&c.attr("modal-animation","true"),e.enter(o(c)(i.scope),u).then(function(){e.addClass(u,l)}),$.top().value.modalDomEl=c,$.top().value.modalOpener=r,y.clearFocusListCache()},y.close=function(e,t){var n=$.get(e);return n&&h(n,t,!0)?(n.value.modalScope.$$uibDestructionScheduled=!0,n.value.deferred.resolve(t),u(e,n.value.modalOpener),!0):!n},y.dismiss=function(e,t){var n=$.get(e);return n&&h(n,t,!1)?(n.value.modalScope.$$uibDestructionScheduled=!0,n.value.deferred.reject(t),u(e,n.value.modalOpener),!0):!n},y.dismissAll=function(e){for(var t=this.getTop();t&&this.dismiss(t.key,e);)t=this.getTop()},y.getTop=function(){return $.top()},y.modalRendered=function(e){var t=$.get(e);t&&t.value.renderDeferred.resolve()},y.focusFirstFocusableElement=function(){return v.length>0?(v[0].focus(),!0):!1},y.focusLastFocusableElement=function(){return v.length>0?(v[v.length-1].focus(),!0):!1},y.isFocusInFirstItem=function(e){return v.length>0?(e.target||e.srcElement)===v[0]:!1},y.isFocusInLastItem=function(e){return v.length>0?(e.target||e.srcElement)===v[v.length-1]:!1},y.clearFocusListCache=function(){v=[],C=0},y.loadFocusElementList=function(e){if((void 0===v||!v.length)&&e){var t=e.value.modalDomEl;t&&t.length&&(v=t[0].querySelectorAll(k))}},y}]).provider("$uibModal",function(){var e={options:{animation:!0,backdrop:!0,keyboard:!0},$get:["$rootScope","$q","$document","$templateRequest","$controller","$uibResolve","$uibModalStack",function(t,n,o,a,i,r,l){function s(e){return e.template?n.when(e.template):a(angular.isFunction(e.templateUrl)?e.templateUrl():e.templateUrl)}var u={},d=null;return u.getPromiseChain=function(){return d},u.open=function(a){function u(){return v}var p=n.defer(),c=n.defer(),f=n.defer(),h=n.defer(),m={result:p.promise,opened:c.promise,closed:f.promise,rendered:h.promise,close:function(e){return l.close(m,e)},dismiss:function(e){return l.dismiss(m,e)}};if(a=angular.extend({},e.options,a),a.resolve=a.resolve||{},a.appendTo=a.appendTo||o.find("body").eq(0),!a.template&&!a.templateUrl)throw new Error("One of template or templateUrl options is required.");var g,v=n.all([s(a),r.resolve(a.resolve,{},null,null)]);return g=d=n.all([d]).then(u,u).then(function(e){var n=a.scope||t,o=n.$new();o.$close=m.close,o.$dismiss=m.dismiss,o.$on("$destroy",function(){o.$$uibDestructionScheduled||o.$dismiss("$uibUnscheduledDestruction")});var r,s={};a.controller&&(s.$scope=o,s.$uibModalInstance=m,angular.forEach(e[1],function(e,t){s[t]=e}),r=i(a.controller,s),a.controllerAs&&(a.bindToController&&(r.$close=o.$close,r.$dismiss=o.$dismiss,angular.extend(r,n)),o[a.controllerAs]=r)),l.open(m,{scope:o,deferred:p,renderDeferred:h,closedDeferred:f,content:e[0],animation:a.animation,backdrop:a.backdrop,keyboard:a.keyboard,backdropClass:a.backdropClass,windowTopClass:a.windowTopClass,windowClass:a.windowClass,windowTemplateUrl:a.windowTemplateUrl,size:a.size,openedClass:a.openedClass,appendTo:a.appendTo}),c.resolve(!0)},function(e){c.reject(e),p.reject(e)})["finally"](function(){d===g&&(d=null)}),m},u}]};return e}),angular.module("ui.bootstrap.stackedMap",[]).factory("$$stackedMap",function(){return{createNew:function(){var e=[];return{add:function(t,n){e.push({key:t,value:n})},get:function(t){for(var n=0;n<e.length;n++)if(t===e[n].key)return e[n]},keys:function(){for(var t=[],n=0;n<e.length;n++)t.push(e[n].key);return t},top:function(){return e[e.length-1]},remove:function(t){for(var n=-1,o=0;o<e.length;o++)if(t===e[o].key){n=o;break}return e.splice(n,1)[0]},removeTop:function(){return e.splice(e.length-1,1)[0]},length:function(){return e.length}}}}}),angular.module("ui.bootstrap.typeahead",["ui.bootstrap.debounce","ui.bootstrap.position"]).factory("uibTypeaheadParser",["$parse",function(e){var t=/^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+([\s\S]+?)$/;return{parse:function(n){var o=n.match(t);if(!o)throw new Error('Expected typeahead specification in form of "_modelValue_ (as _label_)? for _item_ in _collection_" but got "'+n+'".');return{itemName:o[3],source:e(o[4]),viewMapper:e(o[2]||o[1]),modelMapper:e(o[1])}}}}]).controller("UibTypeaheadController",["$scope","$element","$attrs","$compile","$parse","$q","$timeout","$document","$window","$rootScope","$$debounce","$uibPosition","uibTypeaheadParser",function(e,t,n,o,a,i,r,l,s,u,d,p,c){function f(){W.moveInProgress||(W.moveInProgress=!0,W.$digest()),Y()}function h(){W.position=S?p.offset(t):p.position(t),W.position.top+=t.prop("offsetHeight")}var m,g,v=[9,13,27,38,40],b=200,$=e.$eval(n.typeaheadMinLength);$||0===$||($=1);var w=e.$eval(n.typeaheadWaitMs)||0,y=e.$eval(n.typeaheadEditable)!==!1;e.$watch(n.typeaheadEditable,function(e){y=e!==!1});var C,k,T=a(n.typeaheadLoading).assign||angular.noop,O=a(n.typeaheadOnSelect),M=angular.isDefined(n.typeaheadSelectOnBlur)?e.$eval(n.typeaheadSelectOnBlur):!1,x=a(n.typeaheadNoResults).assign||angular.noop,E=n.typeaheadInputFormatter?a(n.typeaheadInputFormatter):void 0,S=n.typeaheadAppendToBody?e.$eval(n.typeaheadAppendToBody):!1,I=n.typeaheadAppendTo?e.$eval(n.typeaheadAppendTo):null,U=e.$eval(n.typeaheadFocusFirst)!==!1,D=n.typeaheadSelectOnExact?e.$eval(n.typeaheadSelectOnExact):!1,N=a(n.typeaheadIsOpen).assign||angular.noop,P=e.$eval(n.typeaheadShowHint)||!1,A=a(n.ngModel),F=a(n.ngModel+"($$$p)"),q=function(t,n){return angular.isFunction(A(e))&&g&&g.$options&&g.$options.getterSetter?F(t,{$$$p:n}):A.assign(t,n)},R=c.parse(n.uibTypeahead),W=e.$new(),L=e.$on("$destroy",function(){W.$destroy()});W.$on("$destroy",L);var _="typeahead-"+W.$id+"-"+Math.floor(1e4*Math.random());t.attr({"aria-autocomplete":"list","aria-expanded":!1,"aria-owns":_});var V,j;P&&(V=angular.element("<div></div>"),V.css("position","relative"),t.after(V),j=t.clone(),j.attr("placeholder",""),j.val(""),j.css({position:"absolute",top:"0px",left:"0px","border-color":"transparent","box-shadow":"none",opacity:1,background:"none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255)",color:"#999"}),t.css({position:"relative","vertical-align":"top","background-color":"transparent"}),V.append(j),j.after(t));var z=angular.element("<div uib-typeahead-popup></div>");z.attr({id:_,matches:"matches",active:"activeIdx",select:"select(activeIdx, evt)","move-in-progress":"moveInProgress",query:"query",position:"position","assign-is-open":"assignIsOpen(isOpen)",debounce:"debounceUpdate"}),angular.isDefined(n.typeaheadTemplateUrl)&&z.attr("template-url",n.typeaheadTemplateUrl),angular.isDefined(n.typeaheadPopupTemplateUrl)&&z.attr("popup-template-url",n.typeaheadPopupTemplateUrl);var H=function(){P&&j.val("")},B=function(){W.matches=[],W.activeIdx=-1,t.attr("aria-expanded",!1),H()},K=function(e){return _+"-option-"+e};W.$watch("activeIdx",function(e){0>e?t.removeAttr("aria-activedescendant"):t.attr("aria-activedescendant",K(e))});var G=function(e,t){return W.matches.length>t&&e?e.toUpperCase()===W.matches[t].label.toUpperCase():!1},X=function(n,o){var a={$viewValue:n};T(e,!0),x(e,!1),i.when(R.source(e,a)).then(function(i){var r=n===m.$viewValue;if(r&&C)if(i&&i.length>0){W.activeIdx=U?0:-1,x(e,!1),W.matches.length=0;for(var l=0;l<i.length;l++)a[R.itemName]=i[l],W.matches.push({id:K(l),label:R.viewMapper(W,a),model:i[l]});if(W.query=n,h(),t.attr("aria-expanded",!0),D&&1===W.matches.length&&G(n,0)&&(angular.isNumber(W.debounceUpdate)||angular.isObject(W.debounceUpdate)?d(function(){W.select(0,o)},angular.isNumber(W.debounceUpdate)?W.debounceUpdate:W.debounceUpdate["default"]):W.select(0,o)),P){var s=W.matches[0].label;j.val(n.length>0&&s.slice(0,n.length).toUpperCase()===n.toUpperCase()?n+s.slice(n.length):"")}}else B(),x(e,!0);r&&T(e,!1)},function(){B(),T(e,!1),x(e,!0)})};S&&(angular.element(s).on("resize",f),l.find("body").on("scroll",f));var Y=d(function(){W.matches.length&&h(),W.moveInProgress=!1},b);W.moveInProgress=!1,W.query=void 0;var Z,J=function(e){Z=r(function(){X(e)},w)},Q=function(){Z&&r.cancel(Z)};B(),W.assignIsOpen=function(t){N(e,t)},W.select=function(o,a){var i,l,s={};k=!0,s[R.itemName]=l=W.matches[o].model,i=R.modelMapper(e,s),q(e,i),m.$setValidity("editable",!0),m.$setValidity("parse",!0),O(e,{$item:l,$model:i,$label:R.viewMapper(e,s),$event:a}),B(),W.$eval(n.typeaheadFocusOnSelect)!==!1&&r(function(){t[0].focus()},0,!1)},t.on("keydown",function(e){if(0!==W.matches.length&&-1!==v.indexOf(e.which)){if(-1===W.activeIdx&&(9===e.which||13===e.which))return B(),void W.$digest();e.preventDefault();var t;switch(e.which){case 9:case 13:W.$apply(function(){angular.isNumber(W.debounceUpdate)||angular.isObject(W.debounceUpdate)?d(function(){W.select(W.activeIdx,e)},angular.isNumber(W.debounceUpdate)?W.debounceUpdate:W.debounceUpdate["default"]):W.select(W.activeIdx,e)});break;case 27:e.stopPropagation(),B(),W.$digest();break;case 38:W.activeIdx=(W.activeIdx>0?W.activeIdx:W.matches.length)-1,W.$digest(),t=z.find("li")[W.activeIdx],t.parentNode.scrollTop=t.offsetTop;break;case 40:W.activeIdx=(W.activeIdx+1)%W.matches.length,W.$digest(),t=z.find("li")[W.activeIdx],t.parentNode.scrollTop=t.offsetTop}}}),t.bind("focus",function(e){C=!0,0!==$||m.$viewValue||r(function(){X(m.$viewValue,e)},0)}),t.bind("blur",function(e){M&&W.matches.length&&-1!==W.activeIdx&&!k&&(k=!0,W.$apply(function(){angular.isObject(W.debounceUpdate)&&angular.isNumber(W.debounceUpdate.blur)?d(function(){W.select(W.activeIdx,e)},W.debounceUpdate.blur):W.select(W.activeIdx,e)})),!y&&m.$error.editable&&(m.$viewValue="",t.val("")),C=!1,k=!1});var et=function(e){t[0]!==e.target&&3!==e.which&&0!==W.matches.length&&(B(),u.$$phase||W.$digest())};l.on("click",et),e.$on("$destroy",function(){l.off("click",et),(S||I)&&tt.remove(),S&&(angular.element(s).off("resize",f),l.find("body").off("scroll",f)),z.remove(),P&&V.remove()});var tt=o(z)(W);S?l.find("body").append(tt):I?angular.element(I).eq(0).append(tt):t.after(tt),this.init=function(t,n){m=t,g=n,W.debounceUpdate=m.$options&&a(m.$options.debounce)(e),m.$parsers.unshift(function(t){return C=!0,0===$||t&&t.length>=$?w>0?(Q(),J(t)):X(t):(T(e,!1),Q(),B()),y?t:t?void m.$setValidity("editable",!1):(m.$setValidity("editable",!0),null)}),m.$formatters.push(function(t){var n,o,a={};return y||m.$setValidity("editable",!0),E?(a.$model=t,E(e,a)):(a[R.itemName]=t,n=R.viewMapper(e,a),a[R.itemName]=void 0,o=R.viewMapper(e,a),n!==o?n:t)})}}]).directive("uibTypeahead",function(){return{controller:"UibTypeaheadController",require:["ngModel","^?ngModelOptions","uibTypeahead"],link:function(e,t,n,o){o[2].init(o[0],o[1])}}}).directive("uibTypeaheadPopup",["$$debounce",function(e){return{scope:{matches:"=",query:"=",active:"=",position:"&",moveInProgress:"=",select:"&",assignIsOpen:"&",debounce:"&"},replace:!0,templateUrl:function(e,t){return t.popupTemplateUrl||"uib/template/typeahead/typeahead-popup.html"},link:function(t,n,o){t.templateUrl=o.templateUrl,t.isOpen=function(){var e=t.matches.length>0;return t.assignIsOpen({isOpen:e}),e},t.isActive=function(e){return t.active===e},t.selectActive=function(e){t.active=e},t.selectMatch=function(n,o){var a=t.debounce();angular.isNumber(a)||angular.isObject(a)?e(function(){t.select({activeIdx:n,evt:o})},angular.isNumber(a)?a:a["default"]):t.select({activeIdx:n,evt:o})}}}}]).directive("uibTypeaheadMatch",["$templateRequest","$compile","$parse",function(e,t,n){return{scope:{index:"=",match:"=",query:"="},link:function(o,a,i){var r=n(i.templateUrl)(o.$parent)||"uib/template/typeahead/typeahead-match.html";e(r).then(function(e){var n=angular.element(e.trim());a.replaceWith(n),t(n)(o)})}}}]).filter("uibTypeaheadHighlight",["$sce","$injector","$log",function(e,t,n){function o(e){return e.replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1")}function a(e){return/<.*>/g.test(e)}var i;return i=t.has("$sanitize"),function(t,r){return!i&&a(t)&&n.warn("Unsafe use of typeahead please use ngSanitize"),t=r?(""+t).replace(new RegExp(o(r),"gi"),"<strong>$&</strong>"):t,i||(t=e.trustAsHtml(t)),t}}]),angular.module("ui.bootstrap.debounce",[]).factory("$$debounce",["$timeout",function(e){return function(t,n){var o;return function(){var a=this,i=Array.prototype.slice.call(arguments);o&&e.cancel(o),o=e(function(){t.apply(a,i)},n)}}}]),angular.module("ui.bootstrap.alert",[]).controller("UibAlertController",["$scope","$attrs","$interpolate","$timeout",function(e,t,n,o){e.closeable=!!t.close;var a=angular.isDefined(t.dismissOnTimeout)?n(t.dismissOnTimeout)(e.$parent):null;a&&o(function(){e.close()},parseInt(a,10))}]).directive("uibAlert",function(){return{controller:"UibAlertController",controllerAs:"alert",templateUrl:function(e,t){return t.templateUrl||"uib/template/alert/alert.html"},transclude:!0,replace:!0,scope:{type:"@",close:"&"}}}),angular.module("ui.bootstrap.collapse",[]).directive("uibCollapse",["$animate","$q","$parse","$injector",function(e,t,n,o){var a=o.has("$animateCss")?o.get("$animateCss"):null;return{link:function(o,i,r){function l(){i.hasClass("collapse")&&i.hasClass("in")||t.resolve(p(o)).then(function(){i.removeClass("collapse").addClass("collapsing").attr("aria-expanded",!0).attr("aria-hidden",!1),a?a(i,{addClass:"in",easing:"ease",to:{height:i[0].scrollHeight+"px"}}).start()["finally"](s):e.addClass(i,"in",{to:{height:i[0].scrollHeight+"px"}}).then(s)})}function s(){i.removeClass("collapsing").addClass("collapse").css({height:"auto"}),c(o)}function u(){return i.hasClass("collapse")||i.hasClass("in")?void t.resolve(f(o)).then(function(){i.css({height:i[0].scrollHeight+"px"}).removeClass("collapse").addClass("collapsing").attr("aria-expanded",!1).attr("aria-hidden",!0),a?a(i,{removeClass:"in",to:{height:"0"}}).start()["finally"](d):e.removeClass(i,"in",{to:{height:"0"}}).then(d)}):d()}function d(){i.css({height:"0"}),i.removeClass("collapsing").addClass("collapse"),h(o)}var p=n(r.expanding),c=n(r.expanded),f=n(r.collapsing),h=n(r.collapsed);o.$eval(r.uibCollapse)||i.addClass("in").addClass("collapse").attr("aria-expanded",!0).attr("aria-hidden",!1).css({height:"auto"}),o.$watch(r.uibCollapse,function(e){e?u():l()})}}}]),angular.module("ui.bootstrap.tooltip",["ui.bootstrap.position","ui.bootstrap.stackedMap"]).provider("$uibTooltip",function(){function e(e){var t=/[A-Z]/g,n="-";return e.replace(t,function(e,t){return(t?n:"")+e.toLowerCase()})}var t={placement:"top",placementClassPrefix:"",animation:!0,popupDelay:0,popupCloseDelay:0,useContentExp:!1},n={mouseenter:"mouseleave",click:"click",outsideClick:"outsideClick",focus:"blur",none:""},o={};this.options=function(e){angular.extend(o,e)},this.setTriggers=function(e){angular.extend(n,e)},this.$get=["$window","$compile","$timeout","$document","$uibPosition","$interpolate","$rootScope","$parse","$$stackedMap",function(a,i,r,l,s,u,d,p,c){function f(e){if(27===e.which){var t=h.top();t&&(t.value.close(),h.removeTop(),t=null)}}var h=c.createNew();return l.on("keypress",f),d.$on("$destroy",function(){l.off("keypress",f)}),function(a,d,c,f){function m(e){var t=(e||f.trigger||c).split(" "),o=t.map(function(e){return n[e]||e});return{show:t,hide:o}}f=angular.extend({},t,o,f);var g=e(a),v=u.startSymbol(),b=u.endSymbol(),$="<div "+g+'-popup title="'+v+"title"+b+'" '+(f.useContentExp?'content-exp="contentExp()" ':'content="'+v+"content"+b+'" ')+'placement="'+v+"placement"+b+'" popup-class="'+v+"popupClass"+b+'" animation="animation" is-open="isOpen"origin-scope="origScope" style="visibility: hidden; display: block; top: -9999px; left: -9999px;"></div>';return{compile:function(){var e=i($);return function(t,n,o){function i(){q.isOpen?c():u()}function u(){(!F||t.$eval(o[d+"Enable"]))&&($(),C(),q.popupDelay?U||(U=r(g,q.popupDelay,!1)):g())}function c(){v(),q.popupCloseDelay?D||(D=r(b,q.popupCloseDelay,!1)):b()}function g(){return v(),$(),q.content?(w(),void q.$evalAsync(function(){q.isOpen=!0,k(!0),V()})):angular.noop}function v(){U&&(r.cancel(U),U=null),N&&(r.cancel(N),N=null)}function b(){q&&q.$evalAsync(function(){q&&(q.isOpen=!1,k(!1),q.animation?I||(I=r(y,150,!1)):y())
-})}function $(){D&&(r.cancel(D),D=null),I&&(r.cancel(I),I=null)}function w(){E||(S=q.$new(),E=e(S,function(e){P?l.find("body").append(e):n.after(e)}),T())}function y(){v(),$(),O(),E&&(E.remove(),E=null),S&&(S.$destroy(),S=null)}function C(){q.title=o[d+"Title"],q.content=L?L(t):o[a],q.popupClass=o[d+"Class"],q.placement=angular.isDefined(o[d+"Placement"])?o[d+"Placement"]:f.placement;var e=parseInt(o[d+"PopupDelay"],10),n=parseInt(o[d+"PopupCloseDelay"],10);q.popupDelay=isNaN(e)?f.popupDelay:e,q.popupCloseDelay=isNaN(n)?f.popupCloseDelay:n}function k(e){W&&angular.isFunction(W.assign)&&W.assign(t,e)}function T(){_.length=0,L?(_.push(t.$watch(L,function(e){q.content=e,!e&&q.isOpen&&b()})),_.push(S.$watch(function(){R||(R=!0,S.$$postDigest(function(){R=!1,q&&q.isOpen&&V()}))}))):_.push(o.$observe(a,function(e){q.content=e,!e&&q.isOpen?b():V()})),_.push(o.$observe(d+"Title",function(e){q.title=e,q.isOpen&&V()})),_.push(o.$observe(d+"Placement",function(e){q.placement=e?e:f.placement,q.isOpen&&V()}))}function O(){_.length&&(angular.forEach(_,function(e){e()}),_.length=0)}function M(e){q&&q.isOpen&&E&&(n[0].contains(e.target)||E[0].contains(e.target)||c())}function x(){var e=o[d+"Trigger"];j(),A=m(e),"none"!==A.show&&A.show.forEach(function(e,t){"outsideClick"===e?(n.on("click",i),l.on("click",M)):e===A.hide[t]?n.on(e,i):e&&(n.on(e,u),n.on(A.hide[t],c)),n.on("keypress",function(e){27===e.which&&c()})})}var E,S,I,U,D,N,P=angular.isDefined(f.appendToBody)?f.appendToBody:!1,A=m(void 0),F=angular.isDefined(o[d+"Enable"]),q=t.$new(!0),R=!1,W=angular.isDefined(o[d+"IsOpen"])?p(o[d+"IsOpen"]):!1,L=f.useContentExp?p(o[a]):!1,_=[],V=function(){E&&E.html()&&(N||(N=r(function(){E.css({top:0,left:0});var e=s.positionElements(n,E,q.placement,P);E.css({top:e.top+"px",left:e.left+"px",visibility:"visible"}),f.placementClassPrefix&&E.removeClass("top bottom left right"),E.removeClass(f.placementClassPrefix+"top "+f.placementClassPrefix+"top-left "+f.placementClassPrefix+"top-right "+f.placementClassPrefix+"bottom "+f.placementClassPrefix+"bottom-left "+f.placementClassPrefix+"bottom-right "+f.placementClassPrefix+"left "+f.placementClassPrefix+"left-top "+f.placementClassPrefix+"left-bottom "+f.placementClassPrefix+"right "+f.placementClassPrefix+"right-top "+f.placementClassPrefix+"right-bottom");var t=e.placement.split("-");E.addClass(t[0]+" "+f.placementClassPrefix+e.placement),s.positionArrow(E,e.placement),N=null},0,!1)))};q.origScope=t,q.isOpen=!1,h.add(q,{close:b}),q.contentExp=function(){return q.content},o.$observe("disabled",function(e){e&&v(),e&&q.isOpen&&b()}),W&&t.$watch(W,function(e){q&&!e===q.isOpen&&i()});var j=function(){A.show.forEach(function(e){"outsideClick"===e?n.off("click",i):(n.off(e,u),n.off(e,i))}),A.hide.forEach(function(e){"outsideClick"===e?l.off("click",M):n.off(e,c)})};x();var z=t.$eval(o[d+"Animation"]);q.animation=angular.isDefined(z)?!!z:f.animation;var H,B=d+"AppendToBody";H=B in o&&void 0===o[B]?!0:t.$eval(o[B]),P=angular.isDefined(H)?H:P,P&&t.$on("$locationChangeSuccess",function(){q.isOpen&&b()}),t.$on("$destroy",function(){j(),y(),h.remove(q),q=null})}}}}}]}).directive("uibTooltipTemplateTransclude",["$animate","$sce","$compile","$templateRequest",function(e,t,n,o){return{link:function(a,i,r){var l,s,u,d=a.$eval(r.tooltipTemplateTranscludeScope),p=0,c=function(){s&&(s.remove(),s=null),l&&(l.$destroy(),l=null),u&&(e.leave(u).then(function(){s=null}),s=u,u=null)};a.$watch(t.parseAsResourceUrl(r.uibTooltipTemplateTransclude),function(t){var r=++p;t?(o(t,!0).then(function(o){if(r===p){var a=d.$new(),s=o,f=n(s)(a,function(t){c(),e.enter(t,i)});l=a,u=f,l.$emit("$includeContentLoaded",t)}},function(){r===p&&(c(),a.$emit("$includeContentError",t))}),a.$emit("$includeContentRequested",t)):c()}),a.$on("$destroy",c)}}}]).directive("uibTooltipClasses",["$uibPosition",function(e){return{restrict:"A",link:function(t,n,o){if(t.placement){var a=e.parsePlacement(t.placement);n.addClass(a[0])}else n.addClass("top");t.popupClass&&n.addClass(t.popupClass),t.animation()&&n.addClass(o.tooltipAnimationClass)}}}]).directive("uibTooltipPopup",function(){return{replace:!0,scope:{content:"@",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-popup.html"}}).directive("uibTooltip",["$uibTooltip",function(e){return e("uibTooltip","tooltip","mouseenter")}]).directive("uibTooltipTemplatePopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&",originScope:"&"},templateUrl:"uib/template/tooltip/tooltip-template-popup.html"}}).directive("uibTooltipTemplate",["$uibTooltip",function(e){return e("uibTooltipTemplate","tooltip","mouseenter",{useContentExp:!0})}]).directive("uibTooltipHtmlPopup",function(){return{replace:!0,scope:{contentExp:"&",placement:"@",popupClass:"@",animation:"&",isOpen:"&"},templateUrl:"uib/template/tooltip/tooltip-html-popup.html"}}).directive("uibTooltipHtml",["$uibTooltip",function(e){return e("uibTooltipHtml","tooltip","mouseenter",{useContentExp:!0})}]),angular.module("ui.bootstrap.typeahead").run(function(){!angular.$$csp().noInlineStyle&&angular.element(document).find("head").prepend('<style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style>')});
-//     Underscore.js 1.8.3
-//     http://underscorejs.org
-//     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
-(function () { function n(n) { function t(t, r, e, u, i, o) { for (; i >= 0 && o > i; i += n) { var a = u ? u[i] : i; e = r(e, t[a], a, t) } return e } return function (r, e, u, i) { e = b(e, i, 4); var o = !k(r) && m.keys(r), a = (o || r).length, c = n > 0 ? 0 : a - 1; return arguments.length < 3 && (u = r[o ? o[c] : c], c += n), t(r, e, u, o, c, a) } } function t(n) { return function (t, r, e) { r = x(r, e); for (var u = O(t), i = n > 0 ? 0 : u - 1; i >= 0 && u > i; i += n) if (r(t[i], i, t)) return i; return -1 } } function r(n, t, r) { return function (e, u, i) { var o = 0, a = O(e); if ("number" == typeof i) n > 0 ? o = i >= 0 ? i : Math.max(i + a, o) : a = i >= 0 ? Math.min(i + 1, a) : i + a + 1; else if (r && i && a) return i = r(e, u), e[i] === u ? i : -1; if (u !== u) return i = t(l.call(e, o, a), m.isNaN), i >= 0 ? i + o : -1; for (i = n > 0 ? o : a - 1; i >= 0 && a > i; i += n) if (e[i] === u) return i; return -1 } } function e(n, t) { var r = I.length, e = n.constructor, u = m.isFunction(e) && e.prototype || a, i = "constructor"; for (m.has(n, i) && !m.contains(t, i) && t.push(i) ; r--;) i = I[r], i in n && n[i] !== u[i] && !m.contains(t, i) && t.push(i) } var u = this, i = u._, o = Array.prototype, a = Object.prototype, c = Function.prototype, f = o.push, l = o.slice, s = a.toString, p = a.hasOwnProperty, h = Array.isArray, v = Object.keys, g = c.bind, y = Object.create, d = function () { }, m = function (n) { return n instanceof m ? n : this instanceof m ? void (this._wrapped = n) : new m(n) }; "undefined" != typeof exports ? ("undefined" != typeof module && module.exports && (exports = module.exports = m), exports._ = m) : u._ = m, m.VERSION = "1.8.3"; var b = function (n, t, r) { if (t === void 0) return n; switch (null == r ? 3 : r) { case 1: return function (r) { return n.call(t, r) }; case 2: return function (r, e) { return n.call(t, r, e) }; case 3: return function (r, e, u) { return n.call(t, r, e, u) }; case 4: return function (r, e, u, i) { return n.call(t, r, e, u, i) } } return function () { return n.apply(t, arguments) } }, x = function (n, t, r) { return null == n ? m.identity : m.isFunction(n) ? b(n, t, r) : m.isObject(n) ? m.matcher(n) : m.property(n) }; m.iteratee = function (n, t) { return x(n, t, 1 / 0) }; var _ = function (n, t) { return function (r) { var e = arguments.length; if (2 > e || null == r) return r; for (var u = 1; e > u; u++) for (var i = arguments[u], o = n(i), a = o.length, c = 0; a > c; c++) { var f = o[c]; t && r[f] !== void 0 || (r[f] = i[f]) } return r } }, j = function (n) { if (!m.isObject(n)) return {}; if (y) return y(n); d.prototype = n; var t = new d; return d.prototype = null, t }, w = function (n) { return function (t) { return null == t ? void 0 : t[n] } }, A = Math.pow(2, 53) - 1, O = w("length"), k = function (n) { var t = O(n); return "number" == typeof t && t >= 0 && A >= t }; m.each = m.forEach = function (n, t, r) { t = b(t, r); var e, u; if (k(n)) for (e = 0, u = n.length; u > e; e++) t(n[e], e, n); else { var i = m.keys(n); for (e = 0, u = i.length; u > e; e++) t(n[i[e]], i[e], n) } return n }, m.map = m.collect = function (n, t, r) { t = x(t, r); for (var e = !k(n) && m.keys(n), u = (e || n).length, i = Array(u), o = 0; u > o; o++) { var a = e ? e[o] : o; i[o] = t(n[a], a, n) } return i }, m.reduce = m.foldl = m.inject = n(1), m.reduceRight = m.foldr = n(-1), m.find = m.detect = function (n, t, r) { var e; return e = k(n) ? m.findIndex(n, t, r) : m.findKey(n, t, r), e !== void 0 && e !== -1 ? n[e] : void 0 }, m.filter = m.select = function (n, t, r) { var e = []; return t = x(t, r), m.each(n, function (n, r, u) { t(n, r, u) && e.push(n) }), e }, m.reject = function (n, t, r) { return m.filter(n, m.negate(x(t)), r) }, m.every = m.all = function (n, t, r) { t = x(t, r); for (var e = !k(n) && m.keys(n), u = (e || n).length, i = 0; u > i; i++) { var o = e ? e[i] : i; if (!t(n[o], o, n)) return !1 } return !0 }, m.some = m.any = function (n, t, r) { t = x(t, r); for (var e = !k(n) && m.keys(n), u = (e || n).length, i = 0; u > i; i++) { var o = e ? e[i] : i; if (t(n[o], o, n)) return !0 } return !1 }, m.contains = m.includes = m.include = function (n, t, r, e) { return k(n) || (n = m.values(n)), ("number" != typeof r || e) && (r = 0), m.indexOf(n, t, r) >= 0 }, m.invoke = function (n, t) { var r = l.call(arguments, 2), e = m.isFunction(t); return m.map(n, function (n) { var u = e ? t : n[t]; return null == u ? u : u.apply(n, r) }) }, m.pluck = function (n, t) { return m.map(n, m.property(t)) }, m.where = function (n, t) { return m.filter(n, m.matcher(t)) }, m.findWhere = function (n, t) { return m.find(n, m.matcher(t)) }, m.max = function (n, t, r) { var e, u, i = -1 / 0, o = -1 / 0; if (null == t && null != n) { n = k(n) ? n : m.values(n); for (var a = 0, c = n.length; c > a; a++) e = n[a], e > i && (i = e) } else t = x(t, r), m.each(n, function (n, r, e) { u = t(n, r, e), (u > o || u === -1 / 0 && i === -1 / 0) && (i = n, o = u) }); return i }, m.min = function (n, t, r) { var e, u, i = 1 / 0, o = 1 / 0; if (null == t && null != n) { n = k(n) ? n : m.values(n); for (var a = 0, c = n.length; c > a; a++) e = n[a], i > e && (i = e) } else t = x(t, r), m.each(n, function (n, r, e) { u = t(n, r, e), (o > u || 1 / 0 === u && 1 / 0 === i) && (i = n, o = u) }); return i }, m.shuffle = function (n) { for (var t, r = k(n) ? n : m.values(n), e = r.length, u = Array(e), i = 0; e > i; i++) t = m.random(0, i), t !== i && (u[i] = u[t]), u[t] = r[i]; return u }, m.sample = function (n, t, r) { return null == t || r ? (k(n) || (n = m.values(n)), n[m.random(n.length - 1)]) : m.shuffle(n).slice(0, Math.max(0, t)) }, m.sortBy = function (n, t, r) { return t = x(t, r), m.pluck(m.map(n, function (n, r, e) { return { value: n, index: r, criteria: t(n, r, e) } }).sort(function (n, t) { var r = n.criteria, e = t.criteria; if (r !== e) { if (r > e || r === void 0) return 1; if (e > r || e === void 0) return -1 } return n.index - t.index }), "value") }; var F = function (n) { return function (t, r, e) { var u = {}; return r = x(r, e), m.each(t, function (e, i) { var o = r(e, i, t); n(u, e, o) }), u } }; m.groupBy = F(function (n, t, r) { m.has(n, r) ? n[r].push(t) : n[r] = [t] }), m.indexBy = F(function (n, t, r) { n[r] = t }), m.countBy = F(function (n, t, r) { m.has(n, r) ? n[r]++ : n[r] = 1 }), m.toArray = function (n) { return n ? m.isArray(n) ? l.call(n) : k(n) ? m.map(n, m.identity) : m.values(n) : [] }, m.size = function (n) { return null == n ? 0 : k(n) ? n.length : m.keys(n).length }, m.partition = function (n, t, r) { t = x(t, r); var e = [], u = []; return m.each(n, function (n, r, i) { (t(n, r, i) ? e : u).push(n) }), [e, u] }, m.first = m.head = m.take = function (n, t, r) { return null == n ? void 0 : null == t || r ? n[0] : m.initial(n, n.length - t) }, m.initial = function (n, t, r) { return l.call(n, 0, Math.max(0, n.length - (null == t || r ? 1 : t))) }, m.last = function (n, t, r) { return null == n ? void 0 : null == t || r ? n[n.length - 1] : m.rest(n, Math.max(0, n.length - t)) }, m.rest = m.tail = m.drop = function (n, t, r) { return l.call(n, null == t || r ? 1 : t) }, m.compact = function (n) { return m.filter(n, m.identity) }; var S = function (n, t, r, e) { for (var u = [], i = 0, o = e || 0, a = O(n) ; a > o; o++) { var c = n[o]; if (k(c) && (m.isArray(c) || m.isArguments(c))) { t || (c = S(c, t, r)); var f = 0, l = c.length; for (u.length += l; l > f;) u[i++] = c[f++] } else r || (u[i++] = c) } return u }; m.flatten = function (n, t) { return S(n, t, !1) }, m.without = function (n) { return m.difference(n, l.call(arguments, 1)) }, m.uniq = m.unique = function (n, t, r, e) { m.isBoolean(t) || (e = r, r = t, t = !1), null != r && (r = x(r, e)); for (var u = [], i = [], o = 0, a = O(n) ; a > o; o++) { var c = n[o], f = r ? r(c, o, n) : c; t ? (o && i === f || u.push(c), i = f) : r ? m.contains(i, f) || (i.push(f), u.push(c)) : m.contains(u, c) || u.push(c) } return u }, m.union = function () { return m.uniq(S(arguments, !0, !0)) }, m.intersection = function (n) { for (var t = [], r = arguments.length, e = 0, u = O(n) ; u > e; e++) { var i = n[e]; if (!m.contains(t, i)) { for (var o = 1; r > o && m.contains(arguments[o], i) ; o++); o === r && t.push(i) } } return t }, m.difference = function (n) { var t = S(arguments, !0, !0, 1); return m.filter(n, function (n) { return !m.contains(t, n) }) }, m.zip = function () { return m.unzip(arguments) }, m.unzip = function (n) { for (var t = n && m.max(n, O).length || 0, r = Array(t), e = 0; t > e; e++) r[e] = m.pluck(n, e); return r }, m.object = function (n, t) { for (var r = {}, e = 0, u = O(n) ; u > e; e++) t ? r[n[e]] = t[e] : r[n[e][0]] = n[e][1]; return r }, m.findIndex = t(1), m.findLastIndex = t(-1), m.sortedIndex = function (n, t, r, e) { r = x(r, e, 1); for (var u = r(t), i = 0, o = O(n) ; o > i;) { var a = Math.floor((i + o) / 2); r(n[a]) < u ? i = a + 1 : o = a } return i }, m.indexOf = r(1, m.findIndex, m.sortedIndex), m.lastIndexOf = r(-1, m.findLastIndex), m.range = function (n, t, r) { null == t && (t = n || 0, n = 0), r = r || 1; for (var e = Math.max(Math.ceil((t - n) / r), 0), u = Array(e), i = 0; e > i; i++, n += r) u[i] = n; return u }; var E = function (n, t, r, e, u) { if (!(e instanceof t)) return n.apply(r, u); var i = j(n.prototype), o = n.apply(i, u); return m.isObject(o) ? o : i }; m.bind = function (n, t) { if (g && n.bind === g) return g.apply(n, l.call(arguments, 1)); if (!m.isFunction(n)) throw new TypeError("Bind must be called on a function"); var r = l.call(arguments, 2), e = function () { return E(n, e, t, this, r.concat(l.call(arguments))) }; return e }, m.partial = function (n) { var t = l.call(arguments, 1), r = function () { for (var e = 0, u = t.length, i = Array(u), o = 0; u > o; o++) i[o] = t[o] === m ? arguments[e++] : t[o]; for (; e < arguments.length;) i.push(arguments[e++]); return E(n, r, this, this, i) }; return r }, m.bindAll = function (n) { var t, r, e = arguments.length; if (1 >= e) throw new Error("bindAll must be passed function names"); for (t = 1; e > t; t++) r = arguments[t], n[r] = m.bind(n[r], n); return n }, m.memoize = function (n, t) { var r = function (e) { var u = r.cache, i = "" + (t ? t.apply(this, arguments) : e); return m.has(u, i) || (u[i] = n.apply(this, arguments)), u[i] }; return r.cache = {}, r }, m.delay = function (n, t) { var r = l.call(arguments, 2); return setTimeout(function () { return n.apply(null, r) }, t) }, m.defer = m.partial(m.delay, m, 1), m.throttle = function (n, t, r) { var e, u, i, o = null, a = 0; r || (r = {}); var c = function () { a = r.leading === !1 ? 0 : m.now(), o = null, i = n.apply(e, u), o || (e = u = null) }; return function () { var f = m.now(); a || r.leading !== !1 || (a = f); var l = t - (f - a); return e = this, u = arguments, 0 >= l || l > t ? (o && (clearTimeout(o), o = null), a = f, i = n.apply(e, u), o || (e = u = null)) : o || r.trailing === !1 || (o = setTimeout(c, l)), i } }, m.debounce = function (n, t, r) { var e, u, i, o, a, c = function () { var f = m.now() - o; t > f && f >= 0 ? e = setTimeout(c, t - f) : (e = null, r || (a = n.apply(i, u), e || (i = u = null))) }; return function () { i = this, u = arguments, o = m.now(); var f = r && !e; return e || (e = setTimeout(c, t)), f && (a = n.apply(i, u), i = u = null), a } }, m.wrap = function (n, t) { return m.partial(t, n) }, m.negate = function (n) { return function () { return !n.apply(this, arguments) } }, m.compose = function () { var n = arguments, t = n.length - 1; return function () { for (var r = t, e = n[t].apply(this, arguments) ; r--;) e = n[r].call(this, e); return e } }, m.after = function (n, t) { return function () { return --n < 1 ? t.apply(this, arguments) : void 0 } }, m.before = function (n, t) { var r; return function () { return --n > 0 && (r = t.apply(this, arguments)), 1 >= n && (t = null), r } }, m.once = m.partial(m.before, 2); var M = !{ toString: null }.propertyIsEnumerable("toString"), I = ["valueOf", "isPrototypeOf", "toString", "propertyIsEnumerable", "hasOwnProperty", "toLocaleString"]; m.keys = function (n) { if (!m.isObject(n)) return []; if (v) return v(n); var t = []; for (var r in n) m.has(n, r) && t.push(r); return M && e(n, t), t }, m.allKeys = function (n) { if (!m.isObject(n)) return []; var t = []; for (var r in n) t.push(r); return M && e(n, t), t }, m.values = function (n) { for (var t = m.keys(n), r = t.length, e = Array(r), u = 0; r > u; u++) e[u] = n[t[u]]; return e }, m.mapObject = function (n, t, r) { t = x(t, r); for (var e, u = m.keys(n), i = u.length, o = {}, a = 0; i > a; a++) e = u[a], o[e] = t(n[e], e, n); return o }, m.pairs = function (n) { for (var t = m.keys(n), r = t.length, e = Array(r), u = 0; r > u; u++) e[u] = [t[u], n[t[u]]]; return e }, m.invert = function (n) { for (var t = {}, r = m.keys(n), e = 0, u = r.length; u > e; e++) t[n[r[e]]] = r[e]; return t }, m.functions = m.methods = function (n) { var t = []; for (var r in n) m.isFunction(n[r]) && t.push(r); return t.sort() }, m.extend = _(m.allKeys), m.extendOwn = m.assign = _(m.keys), m.findKey = function (n, t, r) { t = x(t, r); for (var e, u = m.keys(n), i = 0, o = u.length; o > i; i++) if (e = u[i], t(n[e], e, n)) return e }, m.pick = function (n, t, r) { var e, u, i = {}, o = n; if (null == o) return i; m.isFunction(t) ? (u = m.allKeys(o), e = b(t, r)) : (u = S(arguments, !1, !1, 1), e = function (n, t, r) { return t in r }, o = Object(o)); for (var a = 0, c = u.length; c > a; a++) { var f = u[a], l = o[f]; e(l, f, o) && (i[f] = l) } return i }, m.omit = function (n, t, r) { if (m.isFunction(t)) t = m.negate(t); else { var e = m.map(S(arguments, !1, !1, 1), String); t = function (n, t) { return !m.contains(e, t) } } return m.pick(n, t, r) }, m.defaults = _(m.allKeys, !0), m.create = function (n, t) { var r = j(n); return t && m.extendOwn(r, t), r }, m.clone = function (n) { return m.isObject(n) ? m.isArray(n) ? n.slice() : m.extend({}, n) : n }, m.tap = function (n, t) { return t(n), n }, m.isMatch = function (n, t) { var r = m.keys(t), e = r.length; if (null == n) return !e; for (var u = Object(n), i = 0; e > i; i++) { var o = r[i]; if (t[o] !== u[o] || !(o in u)) return !1 } return !0 }; var N = function (n, t, r, e) { if (n === t) return 0 !== n || 1 / n === 1 / t; if (null == n || null == t) return n === t; n instanceof m && (n = n._wrapped), t instanceof m && (t = t._wrapped); var u = s.call(n); if (u !== s.call(t)) return !1; switch (u) { case "[object RegExp]": case "[object String]": return "" + n == "" + t; case "[object Number]": return +n !== +n ? +t !== +t : 0 === +n ? 1 / +n === 1 / t : +n === +t; case "[object Date]": case "[object Boolean]": return +n === +t } var i = "[object Array]" === u; if (!i) { if ("object" != typeof n || "object" != typeof t) return !1; var o = n.constructor, a = t.constructor; if (o !== a && !(m.isFunction(o) && o instanceof o && m.isFunction(a) && a instanceof a) && "constructor" in n && "constructor" in t) return !1 } r = r || [], e = e || []; for (var c = r.length; c--;) if (r[c] === n) return e[c] === t; if (r.push(n), e.push(t), i) { if (c = n.length, c !== t.length) return !1; for (; c--;) if (!N(n[c], t[c], r, e)) return !1 } else { var f, l = m.keys(n); if (c = l.length, m.keys(t).length !== c) return !1; for (; c--;) if (f = l[c], !m.has(t, f) || !N(n[f], t[f], r, e)) return !1 } return r.pop(), e.pop(), !0 }; m.isEqual = function (n, t) { return N(n, t) }, m.isEmpty = function (n) { return null == n ? !0 : k(n) && (m.isArray(n) || m.isString(n) || m.isArguments(n)) ? 0 === n.length : 0 === m.keys(n).length }, m.isElement = function (n) { return !(!n || 1 !== n.nodeType) }, m.isArray = h || function (n) { return "[object Array]" === s.call(n) }, m.isObject = function (n) { var t = typeof n; return "function" === t || "object" === t && !!n }, m.each(["Arguments", "Function", "String", "Number", "Date", "RegExp", "Error"], function (n) { m["is" + n] = function (t) { return s.call(t) === "[object " + n + "]" } }), m.isArguments(arguments) || (m.isArguments = function (n) { return m.has(n, "callee") }), "function" != typeof /./ && "object" != typeof Int8Array && (m.isFunction = function (n) { return "function" == typeof n || !1 }), m.isFinite = function (n) { return isFinite(n) && !isNaN(parseFloat(n)) }, m.isNaN = function (n) { return m.isNumber(n) && n !== +n }, m.isBoolean = function (n) { return n === !0 || n === !1 || "[object Boolean]" === s.call(n) }, m.isNull = function (n) { return null === n }, m.isUndefined = function (n) { return n === void 0 }, m.has = function (n, t) { return null != n && p.call(n, t) }, m.noConflict = function () { return u._ = i, this }, m.identity = function (n) { return n }, m.constant = function (n) { return function () { return n } }, m.noop = function () { }, m.property = w, m.propertyOf = function (n) { return null == n ? function () { } : function (t) { return n[t] } }, m.matcher = m.matches = function (n) { return n = m.extendOwn({}, n), function (t) { return m.isMatch(t, n) } }, m.times = function (n, t, r) { var e = Array(Math.max(0, n)); t = b(t, r, 1); for (var u = 0; n > u; u++) e[u] = t(u); return e }, m.random = function (n, t) { return null == t && (t = n, n = 0), n + Math.floor(Math.random() * (t - n + 1)) }, m.now = Date.now || function () { return (new Date).getTime() }; var B = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#x27;", "`": "&#x60;" }, T = m.invert(B), R = function (n) { var t = function (t) { return n[t] }, r = "(?:" + m.keys(n).join("|") + ")", e = RegExp(r), u = RegExp(r, "g"); return function (n) { return n = null == n ? "" : "" + n, e.test(n) ? n.replace(u, t) : n } }; m.escape = R(B), m.unescape = R(T), m.result = function (n, t, r) { var e = null == n ? void 0 : n[t]; return e === void 0 && (e = r), m.isFunction(e) ? e.call(n) : e }; var q = 0; m.uniqueId = function (n) { var t = ++q + ""; return n ? n + t : t }, m.templateSettings = { evaluate: /<%([\s\S]+?)%>/g, interpolate: /<%=([\s\S]+?)%>/g, escape: /<%-([\s\S]+?)%>/g }; var K = /(.)^/, z = { "'": "'", "\\": "\\", "\r": "r", "\n": "n", "\u2028": "u2028", "\u2029": "u2029" }, D = /\\|'|\r|\n|\u2028|\u2029/g, L = function (n) { return "\\" + z[n] }; m.template = function (n, t, r) { !t && r && (t = r), t = m.defaults({}, t, m.templateSettings); var e = RegExp([(t.escape || K).source, (t.interpolate || K).source, (t.evaluate || K).source].join("|") + "|$", "g"), u = 0, i = "__p+='"; n.replace(e, function (t, r, e, o, a) { return i += n.slice(u, a).replace(D, L), u = a + t.length, r ? i += "'+\n((__t=(" + r + "))==null?'':_.escape(__t))+\n'" : e ? i += "'+\n((__t=(" + e + "))==null?'':__t)+\n'" : o && (i += "';\n" + o + "\n__p+='"), t }), i += "';\n", t.variable || (i = "with(obj||{}){\n" + i + "}\n"), i = "var __t,__p='',__j=Array.prototype.join," + "print=function(){__p+=__j.call(arguments,'');};\n" + i + "return __p;\n"; try { var o = new Function(t.variable || "obj", "_", i) } catch (a) { throw a.source = i, a } var c = function (n) { return o.call(this, n, m) }, f = t.variable || "obj"; return c.source = "function(" + f + "){\n" + i + "}", c }, m.chain = function (n) { var t = m(n); return t._chain = !0, t }; var P = function (n, t) { return n._chain ? m(t).chain() : t }; m.mixin = function (n) { m.each(m.functions(n), function (t) { var r = m[t] = n[t]; m.prototype[t] = function () { var n = [this._wrapped]; return f.apply(n, arguments), P(this, r.apply(m, n)) } }) }, m.mixin(m), m.each(["pop", "push", "reverse", "shift", "sort", "splice", "unshift"], function (n) { var t = o[n]; m.prototype[n] = function () { var r = this._wrapped; return t.apply(r, arguments), "shift" !== n && "splice" !== n || 0 !== r.length || delete r[0], P(this, r) } }), m.each(["concat", "join", "slice"], function (n) { var t = o[n]; m.prototype[n] = function () { return P(this, t.apply(this._wrapped, arguments)) } }), m.prototype.value = function () { return this._wrapped }, m.prototype.valueOf = m.prototype.toJSON = m.prototype.value, m.prototype.toString = function () { return "" + this._wrapped }, "function" == typeof define && define.amd && define("underscore", [], function () { return m }) }).call(this);
-//# sourceMappingURL=underscore-min.map
+ */angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.alert","ui.bootstrap.dropdown","ui.bootstrap.multiMap","ui.bootstrap.position","ui.bootstrap.modal","ui.bootstrap.stackedMap"]),angular.module("ui.bootstrap.tpls",["uib/template/alert/alert.html","uib/template/modal/window.html"]),angular.module("ui.bootstrap.alert",[]).controller("UibAlertController",["$scope","$element","$attrs","$interpolate","$timeout",function(e,t,o,n,r){e.closeable=!!o.close,t.addClass("alert"),o.$set("role","alert"),e.closeable&&t.addClass("alert-dismissible");var i=angular.isDefined(o.dismissOnTimeout)?n(o.dismissOnTimeout)(e.$parent):null;i&&r(function(){e.close()},parseInt(i,10))}]).directive("uibAlert",function(){return{controller:"UibAlertController",controllerAs:"alert",restrict:"A",templateUrl:function(e,t){return t.templateUrl||"uib/template/alert/alert.html"},transclude:!0,scope:{close:"&"}}}),angular.module("ui.bootstrap.dropdown",["ui.bootstrap.multiMap","ui.bootstrap.position"]).constant("uibDropdownConfig",{appendToOpenClass:"uib-dropdown-open",openClass:"open"}).service("uibDropdownService",["$document","$rootScope","$$multiMap",function(e,t,o){var n=null,r=o.createNew();this.isOnlyOpen=function(e,t){var o=r.get(t);if(o){var n=o.reduce(function(t,o){return o.scope===e?o:t},{});if(n)return 1===o.length}return!1},this.open=function(t,o,a){if(n||e.on("click",i),n&&n!==t&&(n.isOpen=!1),n=t,a){var l=r.get(a);if(l){var s=l.map(function(e){return e.scope});-1===s.indexOf(t)&&r.put(a,{scope:t})}else r.put(a,{scope:t})}},this.close=function(t,o,a){if(n===t&&(e.off("click",i),e.off("keydown",this.keybindFilter),n=null),a){var l=r.get(a);if(l){var s=l.reduce(function(e,o){return o.scope===t?o:e},{});s&&r.remove(a,s)}}};var i=function(e){if(n&&n.isOpen&&!(e&&"disabled"===n.getAutoClose()||e&&3===e.which)){var o=n.getToggleElement();if(!(e&&o&&o[0].contains(e.target))){var r=n.getDropdownElement();e&&"outsideClick"===n.getAutoClose()&&r&&r[0].contains(e.target)||(n.focusToggleElement(),n.isOpen=!1,t.$$phase||n.$apply())}}};this.keybindFilter=function(e){if(n){var t=n.getDropdownElement(),o=n.getToggleElement(),r=t&&t[0].contains(e.target),a=o&&o[0].contains(e.target);27===e.which?(e.stopPropagation(),n.focusToggleElement(),i()):n.isKeynavEnabled()&&-1!==[38,40].indexOf(e.which)&&n.isOpen&&(r||a)&&(e.preventDefault(),e.stopPropagation(),n.focusDropdownEntry(e.which))}}}]).controller("UibDropdownController",["$scope","$element","$attrs","$parse","uibDropdownConfig","uibDropdownService","$animate","$uibPosition","$document","$compile","$templateRequest",function(e,t,o,n,r,i,a,l,s,d,u){function p(){t.append(m.dropdownMenu)}var c,f,m=this,h=e.$new(),g=r.appendToOpenClass,b=r.openClass,v=angular.noop,w=o.onToggle?n(o.onToggle):angular.noop,$=!1,y=s.find("body");t.addClass("dropdown"),this.init=function(){o.isOpen&&(f=n(o.isOpen),v=f.assign,e.$watch(f,function(e){h.isOpen=!!e})),$=angular.isDefined(o.keyboardNav)},this.toggle=function(e){return h.isOpen=arguments.length?!!e:!h.isOpen,angular.isFunction(v)&&v(h,h.isOpen),h.isOpen},this.isOpen=function(){return h.isOpen},h.getToggleElement=function(){return m.toggleElement},h.getAutoClose=function(){return o.autoClose||"always"},h.getElement=function(){return t},h.isKeynavEnabled=function(){return $},h.focusDropdownEntry=function(e){var o=m.dropdownMenu?angular.element(m.dropdownMenu).find("a"):t.find("ul").eq(0).find("a");switch(e){case 40:m.selectedOption=angular.isNumber(m.selectedOption)?m.selectedOption===o.length-1?m.selectedOption:m.selectedOption+1:0;break;case 38:m.selectedOption=angular.isNumber(m.selectedOption)?0===m.selectedOption?0:m.selectedOption-1:o.length-1}o[m.selectedOption].focus()},h.getDropdownElement=function(){return m.dropdownMenu},h.focusToggleElement=function(){m.toggleElement&&m.toggleElement[0].focus()},h.$watch("isOpen",function(r,f){var $=null,C=!1;if(angular.isDefined(o.dropdownAppendTo)){var k=n(o.dropdownAppendTo)(h);k&&($=angular.element(k))}if(angular.isDefined(o.dropdownAppendToBody)){var M=n(o.dropdownAppendToBody)(h);M!==!1&&(C=!0)}if(C&&!$&&($=y),$&&m.dropdownMenu&&(r?($.append(m.dropdownMenu),t.on("$destroy",p)):(t.off("$destroy",p),p())),$&&m.dropdownMenu){var E,O,T,D=l.positionElements(t,m.dropdownMenu,"bottom-left",!0),S=0;if(E={top:D.top+"px",display:r?"block":"none"},O=m.dropdownMenu.hasClass("dropdown-menu-right"),O?(E.left="auto",T=l.scrollbarPadding($),T.heightOverflow&&T.scrollbarWidth&&(S=T.scrollbarWidth),E.right=window.innerWidth-S-(D.left+t.prop("offsetWidth"))+"px"):(E.left=D.left+"px",E.right="auto"),!C){var x=l.offset($);E.top=D.top-x.top+"px",O?E.right=window.innerWidth-(D.left-x.left+t.prop("offsetWidth"))+"px":E.left=D.left-x.left+"px"}m.dropdownMenu.css(E)}var N=$?$:t,A=$?g:b,R=N.hasClass(A),I=i.isOnlyOpen(e,$);if(R===!r){var W;W=$?I?"removeClass":"addClass":r?"addClass":"removeClass",a[W](N,A).then(function(){angular.isDefined(r)&&r!==f&&w(e,{open:!!r})})}if(r)m.dropdownMenuTemplateUrl?u(m.dropdownMenuTemplateUrl).then(function(e){c=h.$new(),d(e.trim())(c,function(e){var t=e;m.dropdownMenu.replaceWith(t),m.dropdownMenu=t,s.on("keydown",i.keybindFilter)})}):s.on("keydown",i.keybindFilter),h.focusToggleElement(),i.open(h,t,$);else{if(i.close(h,t,$),m.dropdownMenuTemplateUrl){c&&c.$destroy();var F=angular.element('<ul class="dropdown-menu"></ul>');m.dropdownMenu.replaceWith(F),m.dropdownMenu=F}m.selectedOption=null}angular.isFunction(v)&&v(e,r)})}]).directive("uibDropdown",function(){return{controller:"UibDropdownController",link:function(e,t,o,n){n.init()}}}).directive("uibDropdownMenu",function(){return{restrict:"A",require:"?^uibDropdown",link:function(e,t,o,n){if(n&&!angular.isDefined(o.dropdownNested)){t.addClass("dropdown-menu");var r=o.templateUrl;r&&(n.dropdownMenuTemplateUrl=r),n.dropdownMenu||(n.dropdownMenu=t)}}}}).directive("uibDropdownToggle",function(){return{require:"?^uibDropdown",link:function(e,t,o,n){if(n){t.addClass("dropdown-toggle"),n.toggleElement=t;var r=function(r){r.preventDefault(),t.hasClass("disabled")||o.disabled||e.$apply(function(){n.toggle()})};t.on("click",r),t.attr({"aria-haspopup":!0,"aria-expanded":!1}),e.$watch(n.isOpen,function(e){t.attr("aria-expanded",!!e)}),e.$on("$destroy",function(){t.off("click",r)})}}}}),angular.module("ui.bootstrap.multiMap",[]).factory("$$multiMap",function(){return{createNew:function(){var e={};return{entries:function(){return Object.keys(e).map(function(t){return{key:t,value:e[t]}})},get:function(t){return e[t]},hasKey:function(t){return!!e[t]},keys:function(){return Object.keys(e)},put:function(t,o){e[t]||(e[t]=[]),e[t].push(o)},remove:function(t,o){var n=e[t];if(n){var r=n.indexOf(o);-1!==r&&n.splice(r,1),n.length||delete e[t]}}}}}}),angular.module("ui.bootstrap.position",[]).factory("$uibPosition",["$document","$window",function(e,t){var o,n,r={normal:/(auto|scroll)/,hidden:/(auto|scroll|hidden)/},i={auto:/\s?auto?\s?/i,primary:/^(top|bottom|left|right)$/,secondary:/^(top|bottom|left|right|center)$/,vertical:/^(top|bottom)$/},a=/(HTML|BODY)/;return{getRawNode:function(e){return e.nodeName?e:e[0]||e},parseStyle:function(e){return e=parseFloat(e),isFinite(e)?e:0},offsetParent:function(o){function n(e){return"static"===(t.getComputedStyle(e).position||"static")}o=this.getRawNode(o);for(var r=o.offsetParent||e[0].documentElement;r&&r!==e[0].documentElement&&n(r);)r=r.offsetParent;return r||e[0].documentElement},scrollbarWidth:function(r){if(r){if(angular.isUndefined(n)){var i=e.find("body");i.addClass("uib-position-body-scrollbar-measure"),n=t.innerWidth-i[0].clientWidth,n=isFinite(n)?n:0,i.removeClass("uib-position-body-scrollbar-measure")}return n}if(angular.isUndefined(o)){var a=angular.element('<div class="uib-position-scrollbar-measure"></div>');e.find("body").append(a),o=a[0].offsetWidth-a[0].clientWidth,o=isFinite(o)?o:0,a.remove()}return o},scrollbarPadding:function(e){e=this.getRawNode(e);var o=t.getComputedStyle(e),n=this.parseStyle(o.paddingRight),r=this.parseStyle(o.paddingBottom),i=this.scrollParent(e,!1,!0),l=this.scrollbarWidth(a.test(i.tagName));return{scrollbarWidth:l,widthOverflow:i.scrollWidth>i.clientWidth,right:n+l,originalRight:n,heightOverflow:i.scrollHeight>i.clientHeight,bottom:r+l,originalBottom:r}},isScrollable:function(e,o){e=this.getRawNode(e);var n=o?r.hidden:r.normal,i=t.getComputedStyle(e);return n.test(i.overflow+i.overflowY+i.overflowX)},scrollParent:function(o,n,i){o=this.getRawNode(o);var a=n?r.hidden:r.normal,l=e[0].documentElement,s=t.getComputedStyle(o);if(i&&a.test(s.overflow+s.overflowY+s.overflowX))return o;var d="absolute"===s.position,u=o.parentElement||l;if(u===l||"fixed"===s.position)return l;for(;u.parentElement&&u!==l;){var p=t.getComputedStyle(u);if(d&&"static"!==p.position&&(d=!1),!d&&a.test(p.overflow+p.overflowY+p.overflowX))break;u=u.parentElement}return u},position:function(o,n){o=this.getRawNode(o);var r=this.offset(o);if(n){var i=t.getComputedStyle(o);r.top-=this.parseStyle(i.marginTop),r.left-=this.parseStyle(i.marginLeft)}var a=this.offsetParent(o),l={top:0,left:0};return a!==e[0].documentElement&&(l=this.offset(a),l.top+=a.clientTop-a.scrollTop,l.left+=a.clientLeft-a.scrollLeft),{width:Math.round(angular.isNumber(r.width)?r.width:o.offsetWidth),height:Math.round(angular.isNumber(r.height)?r.height:o.offsetHeight),top:Math.round(r.top-l.top),left:Math.round(r.left-l.left)}},offset:function(o){o=this.getRawNode(o);var n=o.getBoundingClientRect();return{width:Math.round(angular.isNumber(n.width)?n.width:o.offsetWidth),height:Math.round(angular.isNumber(n.height)?n.height:o.offsetHeight),top:Math.round(n.top+(t.pageYOffset||e[0].documentElement.scrollTop)),left:Math.round(n.left+(t.pageXOffset||e[0].documentElement.scrollLeft))}},viewportOffset:function(o,n,r){o=this.getRawNode(o),r=r!==!1?!0:!1;var i=o.getBoundingClientRect(),a={top:0,left:0,bottom:0,right:0},l=n?e[0].documentElement:this.scrollParent(o),s=l.getBoundingClientRect();if(a.top=s.top+l.clientTop,a.left=s.left+l.clientLeft,l===e[0].documentElement&&(a.top+=t.pageYOffset,a.left+=t.pageXOffset),a.bottom=a.top+l.clientHeight,a.right=a.left+l.clientWidth,r){var d=t.getComputedStyle(l);a.top+=this.parseStyle(d.paddingTop),a.bottom-=this.parseStyle(d.paddingBottom),a.left+=this.parseStyle(d.paddingLeft),a.right-=this.parseStyle(d.paddingRight)}return{top:Math.round(i.top-a.top),bottom:Math.round(a.bottom-i.bottom),left:Math.round(i.left-a.left),right:Math.round(a.right-i.right)}},parsePlacement:function(e){var t=i.auto.test(e);return t&&(e=e.replace(i.auto,"")),e=e.split("-"),e[0]=e[0]||"top",i.primary.test(e[0])||(e[0]="top"),e[1]=e[1]||"center",i.secondary.test(e[1])||(e[1]="center"),e[2]=t?!0:!1,e},positionElements:function(e,o,n,r){e=this.getRawNode(e),o=this.getRawNode(o);var a=angular.isDefined(o.offsetWidth)?o.offsetWidth:o.prop("offsetWidth"),l=angular.isDefined(o.offsetHeight)?o.offsetHeight:o.prop("offsetHeight");n=this.parsePlacement(n);var s=r?this.offset(e):this.position(e),d={top:0,left:0,placement:""};if(n[2]){var u=this.viewportOffset(e,r),p=t.getComputedStyle(o),c={width:a+Math.round(Math.abs(this.parseStyle(p.marginLeft)+this.parseStyle(p.marginRight))),height:l+Math.round(Math.abs(this.parseStyle(p.marginTop)+this.parseStyle(p.marginBottom)))};if(n[0]="top"===n[0]&&c.height>u.top&&c.height<=u.bottom?"bottom":"bottom"===n[0]&&c.height>u.bottom&&c.height<=u.top?"top":"left"===n[0]&&c.width>u.left&&c.width<=u.right?"right":"right"===n[0]&&c.width>u.right&&c.width<=u.left?"left":n[0],n[1]="top"===n[1]&&c.height-s.height>u.bottom&&c.height-s.height<=u.top?"bottom":"bottom"===n[1]&&c.height-s.height>u.top&&c.height-s.height<=u.bottom?"top":"left"===n[1]&&c.width-s.width>u.right&&c.width-s.width<=u.left?"right":"right"===n[1]&&c.width-s.width>u.left&&c.width-s.width<=u.right?"left":n[1],"center"===n[1])if(i.vertical.test(n[0])){var f=s.width/2-a/2;u.left+f<0&&c.width-s.width<=u.right?n[1]="left":u.right+f<0&&c.width-s.width<=u.left&&(n[1]="right")}else{var m=s.height/2-c.height/2;u.top+m<0&&c.height-s.height<=u.bottom?n[1]="top":u.bottom+m<0&&c.height-s.height<=u.top&&(n[1]="bottom")}}switch(n[0]){case"top":d.top=s.top-l;break;case"bottom":d.top=s.top+s.height;break;case"left":d.left=s.left-a;break;case"right":d.left=s.left+s.width}switch(n[1]){case"top":d.top=s.top;break;case"bottom":d.top=s.top+s.height-l;break;case"left":d.left=s.left;break;case"right":d.left=s.left+s.width-a;break;case"center":i.vertical.test(n[0])?d.left=s.left+s.width/2-a/2:d.top=s.top+s.height/2-l/2}return d.top=Math.round(d.top),d.left=Math.round(d.left),d.placement="center"===n[1]?n[0]:n[0]+"-"+n[1],d},adjustTop:function(e,t,o,n){return-1!==e.indexOf("top")&&o!==n?{top:t.top-n+"px"}:void 0},positionArrow:function(e,o){e=this.getRawNode(e);var n=e.querySelector(".tooltip-inner, .popover-inner");if(n){var r=angular.element(n).hasClass("tooltip-inner"),a=e.querySelector(r?".tooltip-arrow":".arrow");if(a){var l={top:"",bottom:"",left:"",right:""};if(o=this.parsePlacement(o),"center"===o[1])return void angular.element(a).css(l);var s="border-"+o[0]+"-width",d=t.getComputedStyle(a)[s],u="border-";u+=i.vertical.test(o[0])?o[0]+"-"+o[1]:o[1]+"-"+o[0],u+="-radius";var p=t.getComputedStyle(r?n:e)[u];switch(o[0]){case"top":l.bottom=r?"0":"-"+d;break;case"bottom":l.top=r?"0":"-"+d;break;case"left":l.right=r?"0":"-"+d;break;case"right":l.left=r?"0":"-"+d}l[o[1]]=p,angular.element(a).css(l)}}}}}]),angular.module("ui.bootstrap.modal",["ui.bootstrap.multiMap","ui.bootstrap.stackedMap","ui.bootstrap.position"]).provider("$uibResolve",function(){var e=this;this.resolver=null,this.setResolver=function(e){this.resolver=e},this.$get=["$injector","$q",function(t,o){var n=e.resolver?t.get(e.resolver):null;return{resolve:function(e,r,i,a){if(n)return n.resolve(e,r,i,a);var l=[];return angular.forEach(e,function(e){l.push(angular.isFunction(e)||angular.isArray(e)?o.resolve(t.invoke(e)):angular.isString(e)?o.resolve(t.get(e)):o.resolve(e))}),o.all(l).then(function(t){var o={},n=0;return angular.forEach(e,function(e,r){o[r]=t[n++]}),o})}}}]}).directive("uibModalBackdrop",["$animate","$injector","$uibModalStack",function(e,t,o){function n(t,n,r){r.modalInClass&&(e.addClass(n,r.modalInClass),t.$on(o.NOW_CLOSING_EVENT,function(o,i){var a=i();t.modalOptions.animation?e.removeClass(n,r.modalInClass).then(a):a()}))}return{restrict:"A",compile:function(e,t){return e.addClass(t.backdropClass),n}}}]).directive("uibModalWindow",["$uibModalStack","$q","$animateCss","$document",function(e,t,o,n){return{scope:{index:"@"},restrict:"A",transclude:!0,templateUrl:function(e,t){return t.templateUrl||"uib/template/modal/window.html"},link:function(r,i,a){i.addClass(a.windowTopClass||""),r.size=a.size,r.close=function(t){var o=e.getTop();o&&o.value.backdrop&&"static"!==o.value.backdrop&&t.target===t.currentTarget&&(t.preventDefault(),t.stopPropagation(),e.dismiss(o.key,"backdrop click"))},i.on("click",r.close),r.$isRendered=!0;var l=t.defer();r.$$postDigest(function(){l.resolve()}),l.promise.then(function(){var l=null;a.modalInClass&&(l=o(i,{addClass:a.modalInClass}).start(),r.$on(e.NOW_CLOSING_EVENT,function(e,t){var n=t();o(i,{removeClass:a.modalInClass}).start().then(n)})),t.when(l).then(function(){var t=e.getTop();if(t&&e.modalRendered(t.key),!n[0].activeElement||!i[0].contains(n[0].activeElement)){var o=i[0].querySelector("[autofocus]");o?o.focus():i[0].focus()}})})}}}]).directive("uibModalAnimationClass",function(){return{compile:function(e,t){t.modalAnimation&&e.addClass(t.uibModalAnimationClass)}}}).directive("uibModalTransclude",["$animate",function(e){return{link:function(t,o,n,r,i){i(t.$parent,function(t){o.empty(),e.enter(t,o)})}}}]).factory("$uibModalStack",["$animate","$animateCss","$document","$compile","$rootScope","$q","$$multiMap","$$stackedMap","$uibPosition",function(e,t,o,n,r,i,a,l,s){function d(e){var t="-";return e.replace(x,function(e,o){return(o?t:"")+e.toLowerCase()})}function u(e){return!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length)}function p(){for(var e=-1,t=k.keys(),o=0;o<t.length;o++)k.get(t[o]).value.backdrop&&(e=o);return e>-1&&O>e&&(e=O),e}function c(e,t){var o=k.get(e).value,n=o.appendTo;k.remove(e),T=k.top(),T&&(O=parseInt(T.value.modalDomEl.attr("index"),10)),h(o.modalDomEl,o.modalScope,function(){var t=o.openedClass||C;M.remove(t,e);var r=M.hasKey(t);n.toggleClass(t,r),!r&&y&&y.heightOverflow&&y.scrollbarWidth&&(n.css(y.originalRight?{paddingRight:y.originalRight+"px"}:{paddingRight:""}),y=null),f(!0)},o.closedDeferred),m(),t&&t.focus?t.focus():n.focus&&n.focus()}function f(e){var t;k.length()>0&&(t=k.top().value,t.modalDomEl.toggleClass(t.windowTopClass||"",e))}function m(){if(w&&-1===p()){var e=$;h(w,$,function(){e=null}),w=void 0,$=void 0}}function h(t,o,n,r){function a(){a.done||(a.done=!0,e.leave(t).then(function(){n&&n(),t.remove(),r&&r.resolve()}),o.$destroy())}var l,s=null,d=function(){return l||(l=i.defer(),s=l.promise),function(){l.resolve()}};return o.$broadcast(E.NOW_CLOSING_EVENT,d),i.when(s).then(a)}function g(e){if(e.isDefaultPrevented())return e;var t=k.top();if(t)switch(e.which){case 27:t.value.keyboard&&(e.preventDefault(),r.$apply(function(){E.dismiss(t.key,"escape key press")}));break;case 9:var o=E.loadFocusElementList(t),n=!1;e.shiftKey?(E.isFocusInFirstItem(e,o)||E.isModalFocused(e,t))&&(n=E.focusLastFocusableElement(o)):E.isFocusInLastItem(e,o)&&(n=E.focusFirstFocusableElement(o)),n&&(e.preventDefault(),e.stopPropagation())}}function b(e,t,o){return!e.value.modalScope.$broadcast("modal.closing",t,o).defaultPrevented}function v(){Array.prototype.forEach.call(document.querySelectorAll("["+D+"]"),function(e){var t=parseInt(e.getAttribute(D),10),o=t-1;e.setAttribute(D,o),o||(e.removeAttribute(D),e.removeAttribute("aria-hidden"))})}var w,$,y,C="modal-open",k=l.createNew(),M=a.createNew(),E={NOW_CLOSING_EVENT:"modal.stack.now-closing"},O=0,T=null,D="data-bootstrap-modal-aria-hidden-count",S="a[href], area[href], input:not([disabled]):not([tabindex='-1']), button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']), textarea:not([disabled]):not([tabindex='-1']), iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true]",x=/[A-Z]/g;return r.$watch(p,function(e){$&&($.index=e)}),o.on("keydown",g),r.$on("$destroy",function(){o.off("keydown",g)}),E.open=function(t,i){function a(e){function t(e){var t=e.parent()?e.parent().children():[];return Array.prototype.filter.call(t,function(t){return t!==e[0]})}if(e&&"BODY"!==e[0].tagName)return t(e).forEach(function(e){var t="true"===e.getAttribute("aria-hidden"),o=parseInt(e.getAttribute(D),10);o||(o=t?1:0),e.setAttribute(D,o+1),e.setAttribute("aria-hidden","true")}),a(e.parent())}var l=o[0].activeElement,u=i.openedClass||C;f(!1),T=k.top(),k.add(t,{deferred:i.deferred,renderDeferred:i.renderDeferred,closedDeferred:i.closedDeferred,modalScope:i.scope,backdrop:i.backdrop,keyboard:i.keyboard,openedClass:i.openedClass,windowTopClass:i.windowTopClass,animation:i.animation,appendTo:i.appendTo}),M.put(u,t);var c=i.appendTo,m=p();m>=0&&!w&&($=r.$new(!0),$.modalOptions=i,$.index=m,w=angular.element('<div uib-modal-backdrop="modal-backdrop"></div>'),w.attr({"class":"modal-backdrop","ng-style":"{'z-index': 1040 + (index && 1 || 0) + index*10}","uib-modal-animation-class":"fade","modal-in-class":"in"}),i.backdropClass&&w.addClass(i.backdropClass),i.animation&&w.attr("modal-animation","true"),n(w)($),e.enter(w,c),s.isScrollable(c)&&(y=s.scrollbarPadding(c),y.heightOverflow&&y.scrollbarWidth&&c.css({paddingRight:y.right+"px"})));var h;i.component?(h=document.createElement(d(i.component.name)),h=angular.element(h),h.attr({resolve:"$resolve","modal-instance":"$uibModalInstance",close:"$close($value)",dismiss:"$dismiss($value)"})):h=i.content,O=T?parseInt(T.value.modalDomEl.attr("index"),10)+1:0;var g=angular.element('<div uib-modal-window="modal-window"></div>');g.attr({"class":"modal","template-url":i.windowTemplateUrl,"window-top-class":i.windowTopClass,role:"dialog","aria-labelledby":i.ariaLabelledBy,"aria-describedby":i.ariaDescribedBy,size:i.size,index:O,animate:"animate","ng-style":"{'z-index': 1050 + $$topModalIndex*10, display: 'block'}",tabindex:-1,"uib-modal-animation-class":"fade","modal-in-class":"in"}).append(h),i.windowClass&&g.addClass(i.windowClass),i.animation&&g.attr("modal-animation","true"),c.addClass(u),i.scope&&(i.scope.$$topModalIndex=O),e.enter(n(g)(i.scope),c),k.top().value.modalDomEl=g,k.top().value.modalOpener=l,a(g)},E.close=function(e,t){var o=k.get(e);return v(),o&&b(o,t,!0)?(o.value.modalScope.$$uibDestructionScheduled=!0,o.value.deferred.resolve(t),c(e,o.value.modalOpener),!0):!o},E.dismiss=function(e,t){var o=k.get(e);return v(),o&&b(o,t,!1)?(o.value.modalScope.$$uibDestructionScheduled=!0,o.value.deferred.reject(t),c(e,o.value.modalOpener),!0):!o},E.dismissAll=function(e){for(var t=this.getTop();t&&this.dismiss(t.key,e);)t=this.getTop()},E.getTop=function(){return k.top()},E.modalRendered=function(e){var t=k.get(e);t&&t.value.renderDeferred.resolve()},E.focusFirstFocusableElement=function(e){return e.length>0?(e[0].focus(),!0):!1},E.focusLastFocusableElement=function(e){return e.length>0?(e[e.length-1].focus(),!0):!1},E.isModalFocused=function(e,t){if(e&&t){var o=t.value.modalDomEl;if(o&&o.length)return(e.target||e.srcElement)===o[0]}return!1},E.isFocusInFirstItem=function(e,t){return t.length>0?(e.target||e.srcElement)===t[0]:!1},E.isFocusInLastItem=function(e,t){return t.length>0?(e.target||e.srcElement)===t[t.length-1]:!1},E.loadFocusElementList=function(e){if(e){var t=e.value.modalDomEl;if(t&&t.length){var o=t[0].querySelectorAll(S);return o?Array.prototype.filter.call(o,function(e){return u(e)}):o}}},E}]).provider("$uibModal",function(){var e={options:{animation:!0,backdrop:!0,keyboard:!0},$get:["$rootScope","$q","$document","$templateRequest","$controller","$uibResolve","$uibModalStack",function(t,o,n,r,i,a,l){function s(e){return e.template?o.when(e.template):r(angular.isFunction(e.templateUrl)?e.templateUrl():e.templateUrl)}var d={},u=null;return d.getPromiseChain=function(){return u},d.open=function(r){function d(){return g}var p=o.defer(),c=o.defer(),f=o.defer(),m=o.defer(),h={result:p.promise,opened:c.promise,closed:f.promise,rendered:m.promise,close:function(e){return l.close(h,e)},dismiss:function(e){return l.dismiss(h,e)}};if(r=angular.extend({},e.options,r),r.resolve=r.resolve||{},r.appendTo=r.appendTo||n.find("body").eq(0),!r.appendTo.length)throw new Error("appendTo element not found. Make sure that the element passed is in DOM.");if(!r.component&&!r.template&&!r.templateUrl)throw new Error("One of component or template or templateUrl options is required.");var g;g=r.component?o.when(a.resolve(r.resolve,{},null,null)):o.all([s(r),a.resolve(r.resolve,{},null,null)]);var b;return b=u=o.all([u]).then(d,d).then(function(e){function o(t,o,n,r){t.$scope=a,t.$scope.$resolve={},n?t.$scope.$uibModalInstance=h:t.$uibModalInstance=h;var i=o?e[1]:e;angular.forEach(i,function(e,o){r&&(t[o]=e),t.$scope.$resolve[o]=e})}var n=r.scope||t,a=n.$new();a.$close=h.close,a.$dismiss=h.dismiss,a.$on("$destroy",function(){a.$$uibDestructionScheduled||a.$dismiss("$uibUnscheduledDestruction")});var s,d,u={scope:a,deferred:p,renderDeferred:m,closedDeferred:f,animation:r.animation,backdrop:r.backdrop,keyboard:r.keyboard,backdropClass:r.backdropClass,windowTopClass:r.windowTopClass,windowClass:r.windowClass,windowTemplateUrl:r.windowTemplateUrl,ariaLabelledBy:r.ariaLabelledBy,ariaDescribedBy:r.ariaDescribedBy,size:r.size,openedClass:r.openedClass,appendTo:r.appendTo},g={},b={};r.component?(o(g,!1,!0,!1),g.name=r.component,u.component=g):r.controller&&(o(b,!0,!1,!0),d=i(r.controller,b,!0,r.controllerAs),r.controllerAs&&r.bindToController&&(s=d.instance,s.$close=a.$close,s.$dismiss=a.$dismiss,angular.extend(s,{$resolve:b.$scope.$resolve},n)),s=d(),angular.isFunction(s.$onInit)&&s.$onInit()),r.component||(u.content=e[0]),l.open(h,u),c.resolve(!0)},function(e){c.reject(e),p.reject(e)})["finally"](function(){u===b&&(u=null)}),h},d}]};return e}),angular.module("ui.bootstrap.stackedMap",[]).factory("$$stackedMap",function(){return{createNew:function(){var e=[];return{add:function(t,o){e.push({key:t,value:o})},get:function(t){for(var o=0;o<e.length;o++)if(t===e[o].key)return e[o]},keys:function(){for(var t=[],o=0;o<e.length;o++)t.push(e[o].key);return t},top:function(){return e[e.length-1]},remove:function(t){for(var o=-1,n=0;n<e.length;n++)if(t===e[n].key){o=n;break}return e.splice(o,1)[0]},removeTop:function(){return e.pop()},length:function(){return e.length}}}}}),angular.module("uib/template/alert/alert.html",[]).run(["$templateCache",function(e){e.put("uib/template/alert/alert.html",'<button ng-show="closeable" type="button" class="close" ng-click="close({$event: $event})">\n  <span aria-hidden="true">&times;</span>\n  <span class="sr-only">Close</span>\n</button>\n<div ng-transclude></div>\n')}]),angular.module("uib/template/modal/window.html",[]).run(["$templateCache",function(e){e.put("uib/template/modal/window.html","<div class=\"modal-dialog {{size ? 'modal-' + size : ''}}\"><div class=\"modal-content\" uib-modal-transclude></div></div>\n")}]),angular.module("ui.bootstrap.position").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibPositionCss&&angular.element(document).find("head").prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style>'),angular.$$uibPositionCss=!0});
 app.directive('updateCart', ['CartService', function (CartService) {
-        
-        // Shared scope:
-        // updateCart: The updated cart to save. If an existing cart does not exist, one will be created and returned.
-        // error: The error object to communicate errors.
-        // onSubmit: A function that will be called from scope when a cart update is submitted.
-        // onSuccess: A function that will be called from scope when the cart is successfully updated. Will include the response cart object as a parameter.
-        // onFailure: A function that will be called from scope when the update fails. Will include the error object as a parameter.
-        
-        // Attributes
-        // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
-        
-        return {
-            restrict: 'A',
-            require: '^form',
-            scope: {
-                cart: '=updateCart',
-                shippingIsBilling: '=?',
-                params: '=?',
-                error: '=?',
-                onSubmit: '=?',
-                onSuccess: '=?',
-                onError: '=?'
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                elem.bind("click", function () {
-                    
-                    // Fire the submit event
-                    if (scope.onSubmit) {
-                        scope.onSubmit();
+
+    // Shared scope:
+    // updateCart: The updated cart to save. If an existing cart does not exist, one will be created and returned.
+    // error: The error object to communicate errors.
+    // onSubmit: A function that will be called from scope when a cart update is submitted.
+    // onSuccess: A function that will be called from scope when the cart is successfully updated. Will include the response cart object as a parameter.
+    // onFailure: A function that will be called from scope when the update fails. Will include the error object as a parameter.
+
+    // Attributes
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+
+    return {
+        restrict: 'A',
+        require: '^form',
+        scope: {
+            cart: '=updateCart',
+            shippingIsBilling: '=?',
+            params: '=?',
+            error: '=?',
+            onSubmit: '=?',
+            onSuccess: '=?',
+            onError: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            elem.bind("click", function () {
+
+                // Fire the submit event
+                if (scope.onSubmit) {
+                    scope.onSubmit();
+                }
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                // Make a copy of the cart so you can modify the data without modifying the view. This is used when the user has supplied values in shipping fields but then checks "shipping is billing". We don't want to clear the view but we don't want to send a shipping address to the API.
+                var cartCopy = angular.copy(scope.cart);
+
+                // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
+                if (scope.shippingIsBilling) {
+                    if (cartCopy.customer.shipping_address) {
+                        cartCopy.customer.shipping_address.name = null;
+                        cartCopy.customer.shipping_address.address_1 = null;
+                        cartCopy.customer.shipping_address.address_2 = null;
+                        cartCopy.customer.shipping_address.city = null;
+                        cartCopy.customer.shipping_address.state_prov = null;
+                        cartCopy.customer.shipping_address.postal_code = null;
+                        cartCopy.customer.shipping_address.country = null;
                     }
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
+                }
 
-                    // Make a copy of the cart so you can modify the data without modifying the view. This is used when the user has supplied values in shipping fields but then checks "shipping is billing". We don't want to clear the view but we don't want to send a shipping address to the API.
-                    var cartCopy = angular.copy(scope.cart);
+                CartService.update(cartCopy, scope.params).then(function (cart) {
 
-                    // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
-                    if (scope.shippingIsBilling) {
-                        if (cartCopy.customer.shipping_address) {
-                            cartCopy.customer.shipping_address.name = null;
-                            cartCopy.customer.shipping_address.address_1 = null;
-                            cartCopy.customer.shipping_address.address_2 = null;
-                            cartCopy.customer.shipping_address.city = null;
-                            cartCopy.customer.shipping_address.state_prov = null;
-                            cartCopy.customer.shipping_address.postal_code = null;
-                            cartCopy.customer.shipping_address.country = null;
-                        }
+                    // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                    if (scope.cart) {
+                        cart.customer = scope.cart.customer;
                     }
-                    
-                    CartService.update(cartCopy, scope.params).then(function (cart) {
 
-                        // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
-                        if (scope.cart) {
-                            cart.customer = scope.cart.customer;
-                        }
+                    scope.cart = cart;
 
-                        scope.cart = cart;
+                    // Fire the success event
+                    if (scope.onSuccess) {
+                        scope.onSuccess(cart);
+                    }
 
-                        // Fire the success event
-                        if (scope.onSuccess) {
-                            scope.onSuccess(cart);
-                        }
-
-                    }, function (error) {
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-                    });
-
+                }, function (error) {
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
                 });
 
-            }
-        };
-    }]);
+            });
+
+        }
+    };
+}]);
 
 app.directive('updateInvoice', ['InvoiceService', function (InvoiceService) {
-        
-        // Shared scope:
-        // updateCart: The updated invoice to save. If an existing invoice does not exist, one will be created and returned.
-        // error: The error object to communicate errors.
-        // onSubmit: A function that will be called from scope when a invoice update is submitted.
-        // onSuccess: A function that will be called from scope when the invoice is successfully updated. Will include the response invoice object as a parameter.
-        // onFailure: A function that will be called from scope when the update fails. Will include the error object as a parameter.
-        
-        // Attributes
-        // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
-        
-        return {
-            restrict: 'A',
-            require: '^form',
-            scope: {
-                invoice: '=updateInvoice',
-                params: '=?',
-                error: '=?',
-                onSubmit: '=?',
-                onSuccess: '=?',
-                onError: '=?'
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                elem.bind("click", function () {
-                    
-                    // Fire the submit event
-                    if (scope.onSubmit) {
-                        scope.onSubmit();
-                    }
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    InvoiceService.update(scope.invoice, scope.params).then(function (invoice) {
-                        scope.invoice = invoice;
-                        // Fire the success event
-                        if (scope.onSuccess) {
-                            scope.onSuccess(invoice);
-                        }
-                    }, function (error) {
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-                    });
 
+    // Shared scope:
+    // updateCart: The updated invoice to save. If an existing invoice does not exist, one will be created and returned.
+    // error: The error object to communicate errors.
+    // onSubmit: A function that will be called from scope when a invoice update is submitted.
+    // onSuccess: A function that will be called from scope when the invoice is successfully updated. Will include the response invoice object as a parameter.
+    // onFailure: A function that will be called from scope when the update fails. Will include the error object as a parameter.
+
+    // Attributes
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+
+    return {
+        restrict: 'A',
+        require: '^form',
+        scope: {
+            invoice: '=updateInvoice',
+            params: '=?',
+            error: '=?',
+            onSubmit: '=?',
+            onSuccess: '=?',
+            onError: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            elem.bind("click", function () {
+
+                // Fire the submit event
+                if (scope.onSubmit) {
+                    scope.onSubmit();
+                }
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                InvoiceService.update(scope.invoice, scope.params).then(function (invoice) {
+                    scope.invoice = invoice;
+                    // Fire the success event
+                    if (scope.onSuccess) {
+                        scope.onSuccess(invoice);
+                    }
+                }, function (error) {
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
                 });
 
-            }
-        };
-    }]);
+            });
+
+        }
+    };
+}]);
 
 app.directive('addToCart', ['CartService', 'gettextCatalog', function (CartService, gettextCatalog) {
-        
-        // Shared scope:
-        // addToCart: The product to add to the cart. Must include the product_id.
-        // error: The error object to communicate errors.
-        // onSubmit: A function that will be called from scope when the function is triggered.
-        // onSuccess: A function that will be called from scope when the item is successfully added. Will include the response item object as a parameter.
-        // onError: A function that will be called from scope when the function fails. Will include the error object as a parameter.
-        
-        // Attributes
-        // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
-        
-        return {
-            restrict: 'A',
-            require: '^form',
-            scope: {
-                product: '=addToCart',
-                params: '=?',
-                quantity: '=?',
-                error: '=?',
-                onSubmit: '=?',
-                onSuccess: '=?',
-                onError: '=?'
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                elem.bind("click", function () {
-                    
-                    // Fire the submit event
-                    if (scope.onSubmit) {
-                        scope.onSubmit();
-                    }
-                    
-                    if (ctrl.$invalid == true) {
-                        scope.$apply(function () {
-                            scope.error = { type: "bad_request", reference: "AWu1twY", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
-                        })
-                        return;
-                    }
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Build the item
-                    var item = { product_id: scope.product.product_id };
-                    
-                    // Set the quantity
-                    if (scope.quantity) {
-                        item.quantity = scope.quantity;
-                    }
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    CartService.addItem(item, scope.params).then(function (item) {
-                        scope.item = item;
-                        // Fire the success event
-                        if (scope.onSuccess) {
-                            scope.onSuccess(item);
-                        }
-                    }, function (error) {
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-                    });
 
+    // Shared scope:
+    // addToCart: The product to add to the cart. Must include the product_id.
+    // error: The error object to communicate errors.
+    // onSubmit: A function that will be called from scope when the function is triggered.
+    // onSuccess: A function that will be called from scope when the item is successfully added. Will include the response item object as a parameter.
+    // onError: A function that will be called from scope when the function fails. Will include the error object as a parameter.
+
+    // Attributes
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+
+    return {
+        restrict: 'A',
+        require: '^form',
+        scope: {
+            product: '=addToCart',
+            params: '=?',
+            quantity: '=?',
+            error: '=?',
+            onSubmit: '=?',
+            onSuccess: '=?',
+            onError: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            elem.bind("click", function () {
+
+                // Fire the submit event
+                if (scope.onSubmit) {
+                    scope.onSubmit();
+                }
+
+                if (ctrl.$invalid == true) {
+                    scope.$apply(function () {
+                        scope.error = { type: "bad_request", reference: "AWu1twY", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
+                    })
+                    return;
+                }
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Build the item
+                var item = { product_id: scope.product.product_id };
+
+                // Set the quantity
+                if (scope.quantity) {
+                    item.quantity = scope.quantity;
+                }
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                CartService.addItem(item, scope.params).then(function (item) {
+                    scope.item = item;
+                    // Fire the success event
+                    if (scope.onSuccess) {
+                        scope.onSuccess(item);
+                    }
+                }, function (error) {
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
                 });
 
-            }
-        };
-    }]);
+            });
+
+        }
+    };
+}]);
 
 app.directive('submitPayment', ['CartService', 'InvoiceService', 'gettextCatalog', function (CartService, InvoiceService, gettextCatalog) {
-        
-        // Shared scope:
-        // submitPayment: Provide the payment_method to be used for payment. Should include, at a minimum, the following properties: payment_type, data (data includes payment method-specific fields such as credit card number).
-        // cart: Provide the cart that will be paid for. The cart will automatically be updated (or created if not yet created) through the API before the payment for the payment is submitted. Cart or invoice can be supplied, but not both.
-        // invoice: Provide the invoice that will be paid for. The invoice will automatically be updated through the API before the payment for the payment is submitted (i.e. a currency change). Cart or invoice can be supplied, but not both.
-        // error: The error object to communicate errors.
-        // onSubmit: A function that will be called from scope when a payment is submitted.
-        // onSuccess: A function that will be called from scope when the payment is successfully completed. Will include the response payment object as a parameter.
-        // onError: A function that will be called from scope when the payment fails. Will include the (failed) response payment object as a parameter.
-        // shippingIsBilling: A flag to indicate if the billing address and shipping address are the same. If so, the shipping address will be removed.
-        
-        // Attributes
-        // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
-        
-        return {
-            restrict: 'A',
-            require: '^form',
-            scope: {
-                paymentMethod: '=submitPayment',
-                cart: '=?',
-                invoice: '=?',
-                params: '=?',
-                error: '=?',
-                onSubmit: '=?',
-                onSuccess: '=?',
-                onError: '=?',
-                shippingIsBilling: '=?',
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                elem.bind("click", function () {
-                    
-                    // Fire the submit event
-                    if (scope.onSubmit) {
-                        scope.onSubmit();
+
+    // Shared scope:
+    // submitPayment: Provide the payment_method to be used for payment. Should include, at a minimum, the following properties: payment_type, data (data includes payment method-specific fields such as credit card number).
+    // cart: Provide the cart that will be paid for. The cart will automatically be updated (or created if not yet created) through the API before the payment for the payment is submitted. Cart or invoice can be supplied, but not both.
+    // invoice: Provide the invoice that will be paid for. The invoice will automatically be updated through the API before the payment for the payment is submitted (i.e. a currency change). Cart or invoice can be supplied, but not both.
+    // error: The error object to communicate errors.
+    // onSubmit: A function that will be called from scope when a payment is submitted.
+    // onSuccess: A function that will be called from scope when the payment is successfully completed. Will include the response payment object as a parameter.
+    // onError: A function that will be called from scope when the payment fails. Will include the (failed) response payment object as a parameter.
+    // shippingIsBilling: A flag to indicate if the billing address and shipping address are the same. If so, the shipping address will be removed.
+
+    // Attributes
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+
+    return {
+        restrict: 'A',
+        require: '^form',
+        scope: {
+            paymentMethod: '=submitPayment',
+            cart: '=?',
+            invoice: '=?',
+            params: '=?',
+            error: '=?',
+            onSubmit: '=?',
+            onSuccess: '=?',
+            onError: '=?',
+            shippingIsBilling: '=?',
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            elem.bind("click", function () {
+
+                // Fire the submit event
+                if (scope.onSubmit) {
+                    scope.onSubmit();
+                }
+
+                // Data is not validated with PayPal since the customer data will come from the response.
+                if (ctrl.$invalid == true && scope.paymentMethod.type != "paypal") {
+
+                    scope.$apply(function () {
+                        scope.error = { type: "bad_request", reference: "kI1ETNz", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
+                    });
+
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
                     }
-                    
-                    // Data is not validated with PayPal since the customer data will come from the response.
-                    if (ctrl.$invalid == true && scope.paymentMethod.type != "paypal") {
-                        
-                        scope.$apply(function () {
-                            scope.error = { type: "bad_request", reference: "kI1ETNz", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
-                        });
-                        
+
+                    return;
+                }
+
+                // Disable the clicked element
+                elem.prop("disabled", true);
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, "order");
+
+                if (scope.cart) {
+
+                    // If billing is shipping, remove the shipping address
+                    if (scope.shippingIsBilling) {
+                        delete scope.cart.customer.shipping_address;
+                    }
+
+                    CartService.pay(scope.cart, scope.paymentMethod, params).then(function (payment) {
+
+                        // Fire the success event
+                        if (scope.onSuccess) {
+                            scope.onSuccess(payment);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    }, function (error) {
+
+                        scope.error = error;
+
                         // Fire the error event
                         if (scope.onError) {
                             scope.onError(error);
                         }
-                        
-                        return;
-                    }
-                    
-                    // Disable the clicked element
-                    elem.prop("disabled", true);
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, "order");
-                    
-                    if (scope.cart) {
-                        
-                        // If billing is shipping, remove the shipping address
-                        if (scope.shippingIsBilling) {
-                            delete scope.cart.customer.shipping_address;
-                        }
-                        
-                        CartService.pay(scope.cart, scope.paymentMethod, params).then(function (payment) {
-                            
-                            // Fire the success event
-                            if (scope.onSuccess) {
-                                scope.onSuccess(payment);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
 
-                        }, function (error) {
-                            
-                            scope.error = error;
-                            
-                            // Fire the error event
-                            if (scope.onError) {
-                                scope.onError(error);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
-
-                        });
-                    }
-                    
-                    if (scope.invoice) {
-                        
-                        InvoiceService.pay(scope.invoice, scope.paymentMethod, params).then(function (payment) {
-                            
-                            // Fire the success event
-                            if (scope.onSuccess) {
-                                scope.onSuccess(payment);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
-
-                        }, function (error) {
-                            
-                            scope.error = error;
-                            
-                            // Fire the error event
-                            if (scope.onError) {
-                                scope.onError(error);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
-
-                        });
-                    }
-
-                });
-
-            }
-        };
-    }]);
-
-app.directive('capturePayment', ['CartService', 'InvoiceService', 'PaymentService', 'gettextCatalog', function (CartService, InvoiceService, PaymentService, gettextCatalog) {
-        
-        // This is used for payment methods such as PayPal that need to be tiggered for completion or "capture" after they have been reviewed by the customer. Payments made by credit card that are not captured (i.e. pending) cannot be captured by limited tokens.    
-        
-        // Shared scope:
-        // capturePayment: Provide the payment_id of the payment that will be captured.
-        // sale: If a the payment is associated with a cart or invoice, you can supply the it here. If you supply a cart, any changes to the cart (such as customer data changes) will be saved before the capture is attempted.
-        // error: The error object to communicate errors.
-        // onSubmit: A function that will be called from scope when a payment is submitted.
-        // onSuccess: A function that will be called from scope when the payment is successfully completed. Will include the response payment object as a parameter.
-        // onError: A function that will be called from scope when the payment fails. Will include the (failed) response payment object as a parameter.
-        
-        // Attributes
-        // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
-        // saleType: "cart" or "invoice" - a string that indicates what is being passed in through the sale shared scope.
-        
-        return {
-            restrict: 'A',
-            require: '^form',
-            scope: {
-                paymentId: '=capturePayment',
-                paymentMethod: '=?',
-                sale: '=?',
-                invoice: '=?',
-                params: '=?',
-                error: '=?',
-                onSubmit: '=?',
-                onSuccess: '=?',
-                onError: '=?',
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                elem.bind("click", function () {
-                    
-                    // Fire the submit event
-                    if (scope.onSubmit) {
-                        scope.onSubmit();
-                    }
-                    
-                    // Data is not validated with PayPal since the customer data will come from the response.
-                    if (ctrl.$invalid == true) {
-                        
-                        scope.$apply(function () {
-                            scope.error = { type: "bad_request", reference: "eS9G9MA", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
-                        });
-                        
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-                        
-                        return;
-                    }
-                    
-                    // Disable the clicked element
-                    elem.prop("disabled", true);
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, "order");
-                    
-                    // Define the capture function.
-                    var capture = function (payment_id, payment_method, params) {
-                        
-                        PaymentService.capture(payment_id, payment_method, params).then(function (payment) {
-                            
-                            // Fire the success event
-                            if (scope.onSuccess) {
-                                scope.onSuccess(payment);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
-
-                        }, function (error) {
-                            
-                            scope.error = error;
-                            
-                            // Fire the error event
-                            if (scope.onError) {
-                                scope.onError(error);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
-
-                        });
-                    }
-                    
-                    // Perform the capture. If a cart, update the cart before running the payment.
-                    if (attrs.saleType == "cart") {
-                        
-                        CartService.update(scope.sale).then(function (cart) {
-                            capture(scope.paymentId, scope.paymentMethod, params);
-                        }, function (error) {
-                            
-                            scope.error = error;
-                            
-                            // Fire the error event
-                            if (scope.onError) {
-                                scope.onError(error);
-                            }
-                            
-                            // Remove the disabled attribute
-                            elem.prop("disabled", null);
-
-                        });
-
-                    } else {
-                        // An invoice, which isn't updated by the customer. Just run the capture.
-                        capture(scope.paymentId, scope.paymentMethod, params);
-                    }
-
-                });
-
-            }
-        };
-    }]);
-
-app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceService', 'ProductService', 'SettingsService', '$timeout', '$rootScope', function (CurrencyService, CartService, InvoiceService, ProductService, SettingsService, $timeout, $rootScope) {
-        
-        return {
-            restrict: 'A',
-            scope: {
-                currency: '=selectCurrency',
-                cart: '=?',
-                invoice: '=?',
-                products: '=?',
-                params: '=?',
-                onSuccess: '=?',
-                onError: '=?',
-                error: '=?',
-            },
-            link: function (scope, elem, attrs) {
-                
-                // Shared scope:
-                // currency: The new currency
-                // cart: If running on a page with an cart, pass the cart object in and it will be updated with the pricing in the new currency
-                // invoice: If running on a page with an invoice, pass the invoice object in and it will be updated with the pricing in the new currency
-                // product: If running on a page with a single product, pass the product in and it will be updated with the pricing in the new currency
-                // products: If running on a page with a list of products, pass the products list in and it will be updated with the pricing in the new currency
-                // error: The error object to communicate errors.
-                // onSuccess: A function that will be called from scope when the currency is successfully changed. Will include the newly set currency as a parameter.
-                // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
-                
-                // Attributes
-                // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
-                // asDropdown: If specified, a Bootstrap dropdown will be output. Otherwise, a HTML select intput will be output.
-                
-                // Get the settings
-                var settings = SettingsService.get();
-                
-                if (utils.hasProperty(attrs, "asDropdown")) {
-                    
-                    var elemNg = angular.element(elem[0]);
-                    _.each(settings.account.currencies, function (item) {
-                        
-                        var option = '<li><a class="pointer">' + item.name + '</a></li>';
-                        optionNg = angular.element(option);
-                        
-                        elemNg.append(optionNg);
-                        
-                        optionNg.bind("click", function (event) {
-                            
-                            // Clear previous errors
-                            scope.error = null;
-                            
-                            // Placed within a timeout otherwise the update was happening before the change to the model occured.
-                            $timeout(function () {
-                                setCurrency(scope, item.code, attrs);
-                            });
-                        });
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
 
                     });
-                    
-                    // Set the current value for display
+                }
+
+                if (scope.invoice) {
+
+                    InvoiceService.pay(scope.invoice, scope.paymentMethod, params).then(function (payment) {
+
+                        // Fire the success event
+                        if (scope.onSuccess) {
+                            scope.onSuccess(payment);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    }, function (error) {
+
+                        scope.error = error;
+
+                        // Fire the error event
+                        if (scope.onError) {
+                            scope.onError(error);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    });
+                }
+
+            });
+
+        }
+    };
+}]);
+
+app.directive('commitPayment', ['CartService', 'InvoiceService', 'PaymentService', 'gettextCatalog', function (CartService, InvoiceService, PaymentService, gettextCatalog) {
+
+    // This is used for payment methods such as PayPal and Amazon Pay that need to be tiggered for completion after they have been reviewed by the customer. 
+
+    // Shared scope:
+    // commitPayment: Provide the payment_id of the payment that will be committed.
+    // sale: If a the payment is associated with a cart or invoice, you can supply the it here. If you supply a cart, any changes to the cart (such as customer data changes) will be saved before the commit is attempted.
+    // error: The error object to communicate errors.
+    // onSubmit: A function that will be called from scope when a payment is submitted.
+    // onSuccess: A function that will be called from scope when the payment is successfully completed. Will include the response payment object as a parameter.
+    // onError: A function that will be called from scope when the payment fails. Will include the (failed) response payment object as a parameter.
+
+    // Attributes
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+    // saleType: "cart" or "invoice" - a string that indicates what is being passed in through the sale shared scope.
+
+    return {
+        restrict: 'A',
+        require: '^form',
+        scope: {
+            paymentId: '=commitPayment',
+            paymentMethod: '=?',
+            sale: '=?',
+            invoice: '=?',
+            params: '=?',
+            error: '=?',
+            onSubmit: '=?',
+            onSuccess: '=?',
+            onError: '=?',
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            elem.bind("click", function () {
+
+                // Fire the submit event
+                if (scope.onSubmit) {
+                    scope.onSubmit();
+                }
+
+                // Data is not validated with PayPal since the customer data will come from the response.
+                if (ctrl.$invalid == true) {
+
+                    scope.$apply(function () {
+                        scope.error = { type: "bad_request", reference: "eS9G9MA", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
+                    });
+
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
+
+                    return;
+                }
+
+                // Disable the clicked element
+                elem.prop("disabled", true);
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, "order");
+
+                // Define the commit function.
+                var commit = function (payment_id, payment_method, params) {
+
+                    PaymentService.commit(payment_id, payment_method, params).then(function (payment) {
+
+                        // Fire the success event
+                        if (scope.onSuccess) {
+                            scope.onSuccess(payment);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    }, function (error) {
+
+                        scope.error = error;
+
+                        // Fire the error event
+                        if (scope.onError) {
+                            scope.onError(error);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    });
+                }
+
+                // Perform the commit. If a cart, update the cart before running the payment.
+                if (attrs.saleType == "cart") {
+
+                    CartService.update(scope.sale).then(function (cart) {
+                        commit(scope.paymentId, scope.paymentMethod, params);
+                    }, function (error) {
+
+                        scope.error = error;
+
+                        // Fire the error event
+                        if (scope.onError) {
+                            scope.onError(error);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    });
+
+                } else {
+                    // An invoice, which isn't updated by the customer. Just run the commit.
+                    commit(scope.paymentId, scope.paymentMethod, params);
+                }
+
+            });
+
+        }
+    };
+}]);
+
+app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceService', 'ProductService', 'SettingsService', '$timeout', '$rootScope', function (CurrencyService, CartService, InvoiceService, ProductService, SettingsService, $timeout, $rootScope) {
+
+    return {
+        restrict: 'A',
+        scope: {
+            currency: '=selectCurrency',
+            cart: '=?',
+            invoice: '=?',
+            products: '=?',
+            params: '=?',
+            onSuccess: '=?',
+            onError: '=?',
+            error: '=?',
+        },
+        link: function (scope, elem, attrs) {
+
+            // Shared scope:
+            // currency: The new currency
+            // cart: If running on a page with an cart, pass the cart object in and it will be updated with the pricing in the new currency
+            // invoice: If running on a page with an invoice, pass the invoice object in and it will be updated with the pricing in the new currency
+            // product: If running on a page with a single product, pass the product in and it will be updated with the pricing in the new currency
+            // products: If running on a page with a list of products, pass the products list in and it will be updated with the pricing in the new currency
+            // error: The error object to communicate errors.
+            // onSuccess: A function that will be called from scope when the currency is successfully changed. Will include the newly set currency as a parameter.
+            // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
+
+            // Attributes
+            // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
+            // asDropdown: If specified, a Bootstrap dropdown will be output. Otherwise, a HTML select intput will be output.
+
+            // Get the settings
+            var settings = SettingsService.get();
+
+            if (utils.hasProperty(attrs, "asDropdown")) {
+
+                var elemNg = angular.element(elem[0]);
+                _.each(settings.account.currencies, function (item) {
+
+                    var option = '<li><a class="pointer">' + item.name + '</a></li>';
+                    optionNg = angular.element(option);
+
+                    elemNg.append(optionNg);
+
+                    optionNg.bind("click", function (event) {
+
+                        // Clear previous errors
+                        scope.error = null;
+
+                        // Placed within a timeout otherwise the update was happening before the change to the model occured.
+                        $timeout(function () {
+                            setCurrency(scope, item.code, attrs);
+                        });
+                    });
+
+                });
+
+                // Set the current value for display
+                var elems = angular.element(elem.parent().children());
+                var label = elems.find("span");
+                if (label) {
+                    label.text(CurrencyService.getCurrencyName());
+                }
+
+                // Listen for a change
+                $rootScope.$on("currencyChanged", function (event, currency) {
                     var elems = angular.element(elem.parent().children());
                     var label = elems.find("span");
                     if (label) {
                         label.text(CurrencyService.getCurrencyName());
                     }
-                    
-                    // Listen for a change
-                    $rootScope.$on("currencyChanged", function (event, currency) {
-                        var elems = angular.element(elem.parent().children());
-                        var label = elems.find("span");
-                        if (label) {
-                            label.text(CurrencyService.getCurrencyName());
-                        }
+                });
+
+            } else {
+
+                var elemNg = angular.element(elem[0]);
+                _.each(settings.account.currencies, function (item) {
+
+                    var option = '<option value="' + item.code + '"';
+                    if (item.code == CurrencyService.getCurrency()) {
+                        option += " selected";
+                    }
+                    option += '>' + item.name + '</option>';
+                    elemNg.append(option);
+
+                });
+
+                elem.bind("change", function (event) {
+
+                    // Clear previous errors
+                    scope.error = null;
+
+                    var selectedCurrency = angular.element(elem[0]).val();
+
+                    // Placed within a timeout otherwise the update was happening before the change to the model occured.
+                    $timeout(function () {
+                        setCurrency(scope, selectedCurrency, attrs);
                     });
 
-                } else {
-                    
-                    var elemNg = angular.element(elem[0]);
-                    _.each(settings.account.currencies, function (item) {
-                        
-                        var option = '<option value="' + item.code + '"';
-                        if (item.code == CurrencyService.getCurrency()) {
-                            option += " selected";
-                        }
-                        option += '>' + item.name + '</option>';
-                        elemNg.append(option);
+                });
 
-                    });
-                    
-                    elem.bind("change", function (event) {
-                        
-                        // Clear previous errors
-                        scope.error = null;
-                        
-                        var selectedCurrency = angular.element(elem[0]).val();
-                        
-                        // Placed within a timeout otherwise the update was happening before the change to the model occured.
-                        $timeout(function () {
-                            setCurrency(scope, selectedCurrency, attrs);
-                        });
-
-                    });
-                    
-                    // Listen for a change
-                    $rootScope.$on("currencyChanged", function (event, currency) {
-                        elemNg[0].value = currency;
-                    });
-                }
-                
-                var setCurrency = function (scope, selectedCurrency, attrs) {
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    CurrencyService.setCurrency(selectedCurrency, scope.params).then(function (result) {
-                        
-                        // If a cart or invoice was updated as a result, it will be returned.
-                        if (result.cart) {
-                            
-                            // We don't want to remove unsaved customer values from the view.
-                            var customer = null;
-                            if (scope.cart) {
-                                customer = scope.cart.customer;
-                            }
-                            scope.cart = result.cart;
-                            
-                            if (customer) {
-                                // Restore the original customer data.
-                                scope.cart.customer = customer;
-                            }
-
-                        }
-                        
-                        if (result.invoice) {
-                            
-                            // We don't want to remove unsaved customer values from the view.
-                            var customer = null;
-                            if (scope.invoice) {
-                                customer = scope.invoice.customer;
-                            }
-                            scope.invoice = result.invoice;
-                            
-                            if (customer) {
-                                // Restore the original customer data.
-                                scope.invoice.customer = customer;
-                            }
-
-                        }
-                        
-                        // If products were supplied, refresh
-                        if (scope.products) {
-                            
-                            // Pass through the current parameters from products (such as pagination)
-                            var pageParams = utils.getQueryParameters(scope.products.current_page_url);
-                            
-                            // Set the new currency
-                            params.currency = selectedCurrency;
-                            
-                            ProductService.getList(scope.params).then(function (products) {
-                                scope.products = products;
-                            }, function (error) {
-                                scope.error = error;
-                                if (scope.onError) {
-                                    scope.onError(error);
-                                }
-                            });
-                        }
-                        
-                        if (scope.product) {
-                            
-                            // Pass through the current parameters from product (such as pagination)
-                            var pageParams = utils.getQueryParameters(scope.product.url);
-                            
-                            // Set the new currency
-                            scope.params.currency = selectedCurrency;
-                            
-                            ProductService.get(scope.product.product_id, scope.params).then(function (product) {
-                                scope.product = product;
-                            }, function (error) {
-                                scope.error = error;
-                                if (scope.onError) {
-                                    scope.onError(error);
-                                }
-                            });
-                        }
-                        
-                        if (scope.onSuccess) {
-                            scope.onSuccess(selectedCurrency);
-                        }
-
-                    }, function (error) {
-                        scope.error = error;
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-                    });
-                }
+                // Listen for a change
+                $rootScope.$on("currencyChanged", function (event, currency) {
+                    elemNg[0].value = currency;
+                });
             }
-        };
-    }]);
+
+            var setCurrency = function (scope, selectedCurrency, attrs) {
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                CurrencyService.setCurrency(selectedCurrency, scope.params).then(function (result) {
+
+                    // If a cart or invoice was updated as a result, it will be returned.
+                    if (result.cart) {
+
+                        // We don't want to remove unsaved customer values from the view.
+                        var customer = null;
+                        if (scope.cart) {
+                            customer = scope.cart.customer;
+                        }
+                        scope.cart = result.cart;
+
+                        if (customer) {
+                            // Restore the original customer data.
+                            scope.cart.customer = customer;
+                        }
+
+                    }
+
+                    if (result.invoice) {
+
+                        // We don't want to remove unsaved customer values from the view.
+                        var customer = null;
+                        if (scope.invoice) {
+                            customer = scope.invoice.customer;
+                        }
+                        scope.invoice = result.invoice;
+
+                        if (customer) {
+                            // Restore the original customer data.
+                            scope.invoice.customer = customer;
+                        }
+
+                    }
+
+                    // If products were supplied, refresh
+                    if (scope.products) {
+
+                        // Pass through the current parameters from products (such as pagination)
+                        var pageParams = utils.getQueryParameters(scope.products.current_page_url);
+
+                        // Set the new currency
+                        params.currency = selectedCurrency;
+
+                        ProductService.getList(scope.params).then(function (products) {
+                            scope.products = products;
+                        }, function (error) {
+                            scope.error = error;
+                            if (scope.onError) {
+                                scope.onError(error);
+                            }
+                        });
+                    }
+
+                    if (scope.product) {
+
+                        // Pass through the current parameters from product (such as pagination)
+                        var pageParams = utils.getQueryParameters(scope.product.url);
+
+                        // Set the new currency
+                        scope.params.currency = selectedCurrency;
+
+                        ProductService.get(scope.product.product_id, scope.params).then(function (product) {
+                            scope.product = product;
+                        }, function (error) {
+                            scope.error = error;
+                            if (scope.onError) {
+                                scope.onError(error);
+                            }
+                        });
+                    }
+
+                    if (scope.onSuccess) {
+                        scope.onSuccess(selectedCurrency);
+                    }
+
+                }, function (error) {
+                    scope.error = error;
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
+                });
+            }
+        }
+    };
+}]);
 
 app.directive('languageSelect', ['LanguageService', '$timeout', '$rootScope', function (LanguageService, $timeout, $rootScope) {
-        
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
-                
-                // Get the languages
-                var languages = LanguageService.getLanguages();
-                
-                if (utils.hasProperty(attrs, "asDropdown")) {
-                    
-                    var elemNg = angular.element(elem[0]);
 
-                    _.each(languages, function (language) {
-                        var option = '<li><a class="pointer">' + language.name + '</a></li>';
-                        optionNg = angular.element(option);
-                        elemNg.append(optionNg);
-                        
-                        optionNg.bind("click", function (event) {
-                            
-                            // Placed within a timeout otherwise the update was happening before the change to the model occured.
-                            $timeout(function () {
-                                LanguageService.setLanguage(language.code);
-                            });
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
 
+            // Get the languages
+            var languages = LanguageService.getLanguages();
+
+            if (utils.hasProperty(attrs, "asDropdown")) {
+
+                var elemNg = angular.element(elem[0]);
+
+                _.each(languages, function (language) {
+                    var option = '<li><a class="pointer">' + language.name + '</a></li>';
+                    optionNg = angular.element(option);
+                    elemNg.append(optionNg);
+
+                    optionNg.bind("click", function (event) {
+
+                        // Placed within a timeout otherwise the update was happening before the change to the model occured.
+                        $timeout(function () {
+                            LanguageService.setLanguage(language.code, attrs.languagesPath);
                         });
+
                     });
-                    
-                    // Set the current value for display
+                });
+
+                // Set the current value for display
+                var elems = angular.element(elem.parent().children());
+                var label = elems.find("span");
+                if (label) {
+                    label.text(LanguageService.getSelectedLanguage().name);
+                }
+
+                // Listen for a change
+                $rootScope.$on("languageChanged", function (event, currency) {
                     var elems = angular.element(elem.parent().children());
                     var label = elems.find("span");
                     if (label) {
                         label.text(LanguageService.getSelectedLanguage().name);
                     }
-                    
-                    // Listen for a change
-                    $rootScope.$on("languageChanged", function (event, currency) {
-                        var elems = angular.element(elem.parent().children());
-                        var label = elems.find("span");
-                        if (label) {
-                            label.text(LanguageService.getSelectedLanguage().name);
-                        }
+                });
+
+            } else {
+
+                var elemNg = angular.element(elem[0]);
+                _.each(languages, function (language) {
+
+                    var option = '<option value="' + language.code + '"';
+                    if (language.code == LanguageService.getSelectedLanguage().code) {
+                        option += " selected";
+                    }
+                    option += '>' + language.name + '</option>';
+                    elemNg.append(option);
+
+                });
+
+                elem.bind("change", function (event) {
+
+                    var selectedLanguage = angular.element(elem[0]).val();
+
+                    // Placed within a timeout otherwise the update was happening before the change to the model occured.
+                    $timeout(function () {
+                        LanguageService.setLanguage(selectedLanguage);
                     });
 
-                } else {
-                    
+                });
+
+                // Listen for a change
+                $rootScope.$on("languageChanged", function (event, language) {
+                    elemNg[0].value = language;
+                });
+            }
+        }
+    };
+}]);
+
+app.directive('shippingSelect', ['CartService', 'InvoiceService', '$timeout', function (CartService, InvoiceService, $timeout) {
+
+    return {
+        restrict: 'A',
+        scope: {
+            sale: '=?',
+            shippingQuotes: '=?',
+            params: '=?',
+            onSuccess: '=?',
+            onError: '=?',
+            error: '=?',
+        },
+        link: function (scope, elem, attrs) {
+
+            // Shared scope:
+            // sale: The cart or invoice that is on the current page.
+            // error: The error object to communicate errors.
+            // onSuccess: A function that will be called from scope when the currency is successfully changed. Will include the newly set currency as a parameter.
+            // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
+
+            // Attributes
+            // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
+            // saleType: "cart" or "invoice" - a string that indicates what is being passed in through the sale shared scope.
+
+            scope.$watch("shippingQuotes", function (newValue, oldValue) {
+
+                if (newValue) {
+
+                    var method_id = null;
+                    if (scope.sale.shipping_item) {
+                        method_id = scope.sale.shipping_item.item_id;
+                    }
+
                     var elemNg = angular.element(elem[0]);
-                    _.each(languages, function (language) {
-                        
-                        var option = '<option value="' + language.code + '"';
-                        if (language.code == LanguageService.getSelectedLanguage().code) {
+
+                    // Clear any previous options
+                    elemNg.html("");
+
+                    _.each(scope.shippingQuotes, function (item) {
+
+                        var option = '<option value="' + item.method_id + '"';
+                        if (item.method_id == method_id) {
                             option += " selected";
                         }
-                        option += '>' + language.name + '</option>';
+                        option += '>' + item.description + ' (' + item.formatted.price + ')</option>';
                         elemNg.append(option);
 
                     });
-                    
-                    elem.bind("change", function (event) {
-                        
-                        var selectedLanguage = angular.element(elem[0]).val();
-                        
-                        // Placed within a timeout otherwise the update was happening before the change to the model occured.
-                        $timeout(function () {
-                            LanguageService.setLanguage(selectedLanguage);
-                        });
 
-                    });
-                    
-                    // Listen for a change
-                    $rootScope.$on("languageChanged", function (event, language) {
-                        elemNg[0].value = language;
-                    });
                 }
-            }
-        };
-    }]);
+            });
 
-app.directive('shippingSelect', ['CartService', 'InvoiceService', '$timeout', function (CartService, InvoiceService, $timeout) {
-        
-        return {
-            restrict: 'A',
-            scope: {
-                sale: '=?',
-                shippingQuotes: '=?',
-                params: '=?',
-                onSuccess: '=?',
-                onError: '=?',
-                error: '=?',
-            },
-            link: function (scope, elem, attrs) {
-                
-                // Shared scope:
-                // sale: The cart or invoice that is on the current page.
-                // error: The error object to communicate errors.
-                // onSuccess: A function that will be called from scope when the currency is successfully changed. Will include the newly set currency as a parameter.
-                // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
-                
-                // Attributes
-                // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
-                // saleType: "cart" or "invoice" - a string that indicates what is being passed in through the sale shared scope.
-                
-                scope.$watch("shippingQuotes", function (newValue, oldValue) {
-                    
-                    if (newValue) {
-                        
-                        var method_id = null;
-                        if (scope.sale.shipping_item) {
-                            method_id = scope.sale.shipping_item.item_id;
-                        }
-                        
-                        var elemNg = angular.element(elem[0]);
-                        
-                        // Clear any previous options
-                        elemNg.html("");
-                        
-                        _.each(scope.shippingQuotes, function (item) {
-                            
-                            var option = '<option value="' + item.method_id + '"';
-                            if (item.method_id == method_id) {
-                                option += " selected";
+            elem.bind("change", function (event) {
+
+                // Clear previous errors
+                scope.error = null;
+
+                var selectedMethod = angular.element(elem[0]).val();
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                // Placed within a timeout otherwise the update was happening before the change to the model occured.
+                $timeout(function () {
+
+                    var data = { shipping_method_id: selectedMethod };
+
+                    if (attrs.saleType == "cart") {
+                        CartService.update(data, scope.params).then(function (cart) {
+
+                            // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                            cart.customer = scope.sale.customer;
+
+                            // Sync the scope to the response.
+                            scope.sale = cart;
+
+                            if (scope.onSuccess) {
+                                scope.onSuccess(selectedCurrency);
                             }
-                            option += '>' + item.description + ' (' + item.formatted.price + ')</option>';
-                            elemNg.append(option);
 
+                        }, function (error) {
+                            scope.error = error;
+                            if (scope.onError) {
+                                scope.onError(error);
+                            }
                         });
-                        
                     }
+
+                    if (attrs.saleType == "invoice") {
+                        InvoiceService.update(data, scope.params).then(function (invoice) {
+
+                            // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                            invoice.customer = scope.sale.customer;
+
+                            // Sync the scope to the response.
+                            scope.sale = invoice;
+
+                            if (scope.onSuccess) {
+                                scope.onSuccess(selectedCurrency);
+                            }
+
+                        }, function (error) {
+                            scope.error = error;
+                            if (scope.onError) {
+                                scope.onError(error);
+                            }
+                        });
+                    }
+
                 });
-                
-                elem.bind("change", function (event) {
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    var selectedMethod = angular.element(elem[0]).val();
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    // Placed within a timeout otherwise the update was happening before the change to the model occured.
-                    $timeout(function () {
-                        
-                        var data = { shipping_method_id: selectedMethod };
-                        
-                        if (attrs.saleType == "cart") {
-                            CartService.update(data, scope.params).then(function (cart) {
-                                
-                                // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
-                                cart.customer = scope.sale.customer;
-                                
-                                // Sync the scope to the response.
-                                scope.sale = cart;
-                                
-                                if (scope.onSuccess) {
-                                    scope.onSuccess(selectedCurrency);
-                                }
-
-                            }, function (error) {
-                                scope.error = error;
-                                if (scope.onError) {
-                                    scope.onError(error);
-                                }
-                            });
-                        }
-                        
-                        if (attrs.saleType == "invoice") {
-                            InvoiceService.update(data, scope.params).then(function (invoice) {
-                                
-                                // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
-                                invoice.customer = scope.sale.customer;
-                                
-                                // Sync the scope to the response.
-                                scope.sale = invoice;
-                                
-                                if (scope.onSuccess) {
-                                    scope.onSuccess(selectedCurrency);
-                                }
-
-                            }, function (error) {
-                                scope.error = error;
-                                if (scope.onError) {
-                                    scope.onError(error);
-                                }
-                            });
-                        }
-
-                    });
-                });
-            }
-        };
-    }]);
+            });
+        }
+    };
+}]);
 
 app.directive('shippingRadio', ['CartService', 'InvoiceService', '$timeout', function (CartService, InvoiceService, $timeout) {
-        
-        return {
-            restrict: 'A',
-            scope: {
-                sale: '=?',
-                shippingQuotes: '=?',
-                params: '=?',
-                onSuccess: '=?',
-                onError: '=?',
-                error: '=?',
-            },
-            link: function (scope, elem, attrs) {
-                
-                // Shared scope:
-                // sale: The cart or invoice that is on the current page.
-                // error: The error object to communicate errors.
-                // onSuccess: A function that will be called from scope when the currency is successfully changed. Will include the newly set currency as a parameter.
-                // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
-                
-                // Attributes
-                // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
-                // saleType: "cart" or "invoice" - a string that indicates what is being passed in through the sale shared scope.
-                
-                elem.bind("change", function (event) {
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    var selectedMethod = attrs.shippingRadio;
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    // Placed within a timeout otherwise the update was happening before the change to the model occured.
-                    $timeout(function () {
-                        var data = { shipping_method_id: selectedMethod };
-                        
-                        if (attrs.saleType == "cart") {
-                            CartService.update(data, scope.params).then(function (cart) {
-                                
-                                // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
-                                if (scope.sale) {
-                                    cart.customer = scope.sale.customer;
-                                }
-                                
-                                // Sync the scope to the response.
-                                scope.sale = cart;
-                                
-                                if (scope.onSuccess) {
-                                    scope.onSuccess(selectedCurrency);
-                                }
 
-                            }, function (error) {
-                                scope.error = error;
-                                if (scope.onError) {
-                                    scope.onError(error);
-                                }
-                            });
-                        }
-                        
-                        if (attrs.saleType == "invoice") {
-                            InvoiceService.update(data, scope.params).then(function (invoice) {
-                                
-                                // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
-                                if (scope.sale) {
-                                    invoice.customer = scope.sale.customer;
-                                }
-                                
-                                // Sync the scope to the response.
-                                scope.sale = invoice;
-                                
-                                if (scope.onSuccess) {
-                                    scope.onSuccess(selectedCurrency);
-                                }
+    return {
+        restrict: 'A',
+        scope: {
+            sale: '=?',
+            shippingQuotes: '=?',
+            params: '=?',
+            onSuccess: '=?',
+            onError: '=?',
+            error: '=?',
+        },
+        link: function (scope, elem, attrs) {
 
-                            }, function (error) {
-                                scope.error = error;
-                                if (scope.onError) {
-                                    scope.onError(error);
-                                }
-                            });
-                        }
+            // Shared scope:
+            // sale: The cart or invoice that is on the current page.
+            // error: The error object to communicate errors.
+            // onSuccess: A function that will be called from scope when the currency is successfully changed. Will include the newly set currency as a parameter.
+            // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
 
-                    });
+            // Attributes
+            // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
+            // saleType: "cart" or "invoice" - a string that indicates what is being passed in through the sale shared scope.
+
+            elem.bind("change", function (event) {
+
+                // Clear previous errors
+                scope.error = null;
+
+                var selectedMethod = attrs.shippingRadio;
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                // Placed within a timeout otherwise the update was happening before the change to the model occured.
+                $timeout(function () {
+                    var data = { shipping_method_id: selectedMethod };
+
+                    if (attrs.saleType == "cart") {
+                        CartService.update(data, scope.params).then(function (cart) {
+
+                            // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                            if (scope.sale) {
+                                cart.customer = scope.sale.customer;
+                            }
+
+                            // Sync the scope to the response.
+                            scope.sale = cart;
+
+                            if (scope.onSuccess) {
+                                scope.onSuccess(selectedCurrency);
+                            }
+
+                        }, function (error) {
+                            scope.error = error;
+                            if (scope.onError) {
+                                scope.onError(error);
+                            }
+                        });
+                    }
+
+                    if (attrs.saleType == "invoice") {
+                        InvoiceService.update(data, scope.params).then(function (invoice) {
+
+                            // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                            if (scope.sale) {
+                                invoice.customer = scope.sale.customer;
+                            }
+
+                            // Sync the scope to the response.
+                            scope.sale = invoice;
+
+                            if (scope.onSuccess) {
+                                scope.onSuccess(selectedCurrency);
+                            }
+
+                        }, function (error) {
+                            scope.error = error;
+                            if (scope.onError) {
+                                scope.onError(error);
+                            }
+                        });
+                    }
+
                 });
-            }
-        };
-    }]);
+            });
+        }
+    };
+}]);
 
 app.directive('customerCountries', ['GeoService', '$timeout', function (GeoService, $timeout) {
-        
-        return {
-            restrict: 'A',
-            require: "ngModel",
-            link: function (scope, elem, attrs, ctrl) {
-                
-                // Attributes
-                // customerCountries: A list of allowed customer countries
-                
-                scope.$watch(attrs.customerCountries, function (customerCountries, oldValue) {
-                    
-                    if (customerCountries) {
-                        
-                        var elemNg = angular.element(elem[0]);
-                        
-                        // Clear any previous options
-                        elemNg.html("");
-                        
-                        // Get the entire list of countries
-                        var countries = GeoService.getData().countries;
-                        
-                        countries = _.filter(countries, function (country) { return customerCountries.indexOf(country.code) > -1 });
-                        
-                        // Insert a blank at the top
-                        elemNg.append("<option></option>");
-                        
-                        // Get the value
-                        var value = ctrl.$viewValue || ctrl.$modelValue;
-                        
-                        // Set a flag to indicate if you found a match of current country
-                        var match = false;
-                        
-                        _.each(countries, function (item) {
-                            
-                            var option = '<option value="' + item.code + '"';
-                            if (item.code == value) {
-                                option += " selected";
-                                match = true;
-                            }
-                            option += '>' + item.name + '</option>';
-                            elemNg.append(option);
 
-                        });
-                        
-                        // If no match, remove the value of the current control
-                        if (match == false) {
-                            ctrl.$setViewValue(null);
+    return {
+        restrict: 'A',
+        require: "ngModel",
+        link: function (scope, elem, attrs, ctrl) {
+
+            // Attributes
+            // customerCountries: A list of allowed customer countries
+
+            scope.$watch(attrs.customerCountries, function (customerCountries, oldValue) {
+
+                if (customerCountries) {
+
+                    var elemNg = angular.element(elem[0]);
+
+                    // Clear any previous options
+                    elemNg.html("");
+
+                    // Get the entire list of countries
+                    var countries = GeoService.getData().countries;
+
+                    countries = _.filter(countries, function (country) { return customerCountries.indexOf(country.code) > -1 });
+
+                    // Insert a blank at the top
+                    elemNg.append("<option></option>");
+
+                    // Get the value
+                    var value = ctrl.$viewValue || ctrl.$modelValue;
+
+                    // Set a flag to indicate if you found a match of current country
+                    var match = false;
+
+                    _.each(countries, function (item) {
+
+                        var option = '<option value="' + item.code + '"';
+                        if (item.code == value) {
+                            option += " selected";
+                            match = true;
                         }
-                        
+                        option += '>' + item.name + '</option>';
+                        elemNg.append(option);
+
+                    });
+
+                    // If no match, remove the value of the current control
+                    if (match == false) {
+                        ctrl.$setViewValue(null);
                     }
-                });
-                
-            }
-        };
-    }]);
+
+                }
+            });
+
+        }
+    };
+}]);
 
 app.directive('showErrors', ['$timeout', 'SettingsService', function ($timeout, SettingsService) {
-        return {
-            restrict: 'A',
-            require: '^form',
-            link: function (scope, elem, attrs, ctrl) {
-                
-                // Find the input element and error block elements
-                var load = function () {
-                    $timeout(function () {
-                        
-                        var inputEl = elem[0].querySelector("[name]");
-                        var labelEl = elem[0].querySelector("label");
-                        var errorEl = angular.element(elem[0].querySelector(".error-block"));
-                        
-                        // Convert the native angular elements
-                        var inputNgEl = angular.element(inputEl);
-                        var labelNgEl = angular.element(labelEl);
-                        var errorNgEl = angular.element(errorEl);
-                        
-                        // Remove errors, by default
-                        elem.removeClass("has-error");
-                        errorNgEl.addClass("hidden");
-                        
-                        // Get the name of the text box
-                        var inputName = inputNgEl.attr("name");
-                        
-                        // If required, add a required class to the label, if supplied
-                        scope.$watch(attrs.showErrors, function (newValue, oldValue) {
-                            if (newValue && inputEl) {
-                                if (inputEl.required) {
-                                    if (labelNgEl) {
-                                        labelNgEl.addClass("required");
-                                    }
-                                } else {
-                                    labelNgEl.removeClass("required");
+    return {
+        restrict: 'A',
+        require: '^form',
+        link: function (scope, elem, attrs, ctrl) {
+
+            // Find the input element and error block elements
+            var load = function () {
+                $timeout(function () {
+
+                    var inputEl = elem[0].querySelector("[name]");
+                    var labelEl = elem[0].querySelector("label");
+                    var errorEl = angular.element(elem[0].querySelector(".error-block"));
+
+                    // Convert the native angular elements
+                    var inputNgEl = angular.element(inputEl);
+                    var labelNgEl = angular.element(labelEl);
+                    var errorNgEl = angular.element(errorEl);
+
+                    // Remove errors, by default
+                    elem.removeClass("has-error");
+                    errorNgEl.addClass("hidden");
+
+                    // Get the name of the text box
+                    var inputName = inputNgEl.attr("name");
+
+                    // If required, add a required class to the label, if supplied
+                    scope.$watch(attrs.showErrors, function (newValue, oldValue) {
+                        if (newValue && inputEl) {
+                            if (inputEl.required) {
+                                if (labelNgEl) {
+                                    labelNgEl.addClass("required");
                                 }
-                            }
-                        });
-                        
-                        // Define the action upon which we re-validate
-                        var action = "blur";
-                        
-                        // We don't do select elements on change because it can get cause a huge performance hit if a user navigates up and down a select list with a keyboard, causing many requests per second.
-                        if (inputEl) {
-                            if (inputEl.type == "checkbox" || inputEl.type == "radio") {
-                                action = "change";
+                            } else {
+                                labelNgEl.removeClass("required");
                             }
                         }
-                        
-                        // Apply and remove has-error and hidden on blur
-                        inputNgEl.bind(action, function () {
-                            
-                            var settings = SettingsService.get();
-                            var errorLevel = settings.app.error_notifications || "moderate";
-                            
-                            // Define how aggressive error messaging is on blur: mild, moderate, aggressive
-                            if (errorLevel == "moderate") {
-                                elem.toggleClass("has-error", ctrl[inputName].$invalid);
-                            }
-                            
-                            if (errorLevel == "aggressive") {
-                                elem.toggleClass("has-error", ctrl[inputName].$invalid);
-                                errorNgEl.toggleClass("hidden", !ctrl[inputName].$invalid);
-                            }
-                            
-                            // We only show on form submit, so on blur we only hide.
-                            if (ctrl[inputName].$invalid == false) {
-                                errorNgEl.toggleClass("hidden", true);
-                            }
+                    });
 
-                        });
-                        
-                        // Listen for the form submit and show any errors (plus error text)
-                        scope.$on("show-errors-check-validity", function () {
-                            if (ctrl[inputName]) {
-                                elem.toggleClass("has-error", ctrl[inputName].$invalid);
-                                errorNgEl.toggleClass("hidden", !ctrl[inputName].$invalid);
-                            }
-                        });
+                    // Define the action upon which we re-validate
+                    var action = "blur";
+
+                    // We don't do select elements on change because it can get cause a huge performance hit if a user navigates up and down a select list with a keyboard, causing many requests per second.
+                    if (inputEl) {
+                        if (inputEl.type == "checkbox" || inputEl.type == "radio") {
+                            action = "change";
+                        }
+                    }
+
+                    // Apply and remove has-error and hidden on blur
+                    inputNgEl.bind(action, function () {
+
+                        var settings = SettingsService.get();
+                        var errorLevel = settings.app.error_notifications || "moderate";
+
+                        // Define how aggressive error messaging is on blur: mild, moderate, aggressive
+                        if (errorLevel == "moderate") {
+                            elem.toggleClass("has-error", ctrl[inputName].$invalid);
+                        }
+
+                        if (errorLevel == "aggressive") {
+                            elem.toggleClass("has-error", ctrl[inputName].$invalid);
+                            errorNgEl.toggleClass("hidden", !ctrl[inputName].$invalid);
+                        }
+
+                        // We only show on form submit, so on blur we only hide.
+                        if (ctrl[inputName].$invalid == false) {
+                            errorNgEl.toggleClass("hidden", true);
+                        }
 
                     });
-                }
-                
-                // Set the initial listener
-                load();
-                
-                // Watch for a trigger to reload the listener
-                if (attrs.refreshOnChange) {
-                    scope.$watch(attrs.refreshOnChange, function (newValue, oldValue) {
-                        load();
+
+                    // Listen for the form submit and show any errors (plus error text)
+                    scope.$on("show-errors-check-validity", function () {
+                        if (ctrl[inputName]) {
+                            elem.toggleClass("has-error", ctrl[inputName].$invalid);
+                            errorNgEl.toggleClass("hidden", !ctrl[inputName].$invalid);
+                        }
                     });
-                }
+
+                });
+            }
+
+            // Set the initial listener
+            load();
+
+            // Watch for a trigger to reload the listener
+            if (attrs.refreshOnChange) {
+                scope.$watch(attrs.refreshOnChange, function (newValue, oldValue) {
+                    load();
+                });
             }
         }
-    }]);
+    }
+}]);
 
 app.directive('conversion', ['SettingsService', 'StorageService', function (SettingsService, StorageService) {
-        
-        // Attributes:
-        // orderId: The order_id from the order, if null we don't record the conversion, which helps prevent false positives.
-        
-        return {
-            restrict: 'A',
-            scope: {
-                conversion: '@',
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                // Define your observe function
-                var setTracking = function () {
-                    attrs.$observe("conversion", function (order_id) {
-                        if (utils.isNullOrEmpty(order_id) == false) {
-                            // Check if we've already recorded the conversion.
-                            var conv = StorageService.get("conv");
-                            if (conv != order_id) {
-                                
-                                var head = document.getElementsByTagName("head")[0];
-                                var js = document.createElement("script");
-                                js.id = "app_conversionload";
-                                js.type = "text/javascript";
-                                js.src = "analytics/conversion.js";
-                                js.setAttribute("data-order-id", order_id);
-                                
-                                // Remove any existing
-                                if (document.getElementById("app_conversionload") != null) {
-                                    head.removeChild(document.getElementById("app_conversionload"));
-                                }
-                                
-                                // Add again to force reload.
-                                head.appendChild(js);
-                                
-                                StorageService.set("conv", order_id, 60 * 60 * 24 * 10);
-                            }
+
+    // Attributes:
+    // orderId: The order_id from the order, if null we don't record the conversion, which helps prevent false positives.
+
+    return {
+        restrict: 'A',
+        scope: {
+            conversion: '@',
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            // Define your observe function
+            var setTracking = function () {
+                attrs.$observe("conversion", function (order_id) {
+                    if (utils.isNullOrEmpty(order_id) == false) {
+
+                        var head = document.getElementsByTagName("head")[0];
+                        var js = document.createElement("script");
+                        js.id = "__conversion";
+                        js.type = "text/javascript";
+                        js.src = "analytics/conversion.js";
+                        js.setAttribute("data-order_id", order_id);
+
+                        // Remove any existing
+                        if (document.getElementById("__conversion") != null) {
+                            head.removeChild(document.getElementById("__conversion"));
                         }
-                    });
-                }
-                
-                // Get the settings
-                var settings = SettingsService.get();
-                if (settings.config.development != true) {
-                    // Your are not in a development environment, so set the tracking. 
-                    setTracking();
-                }
+
+                        // Add again to force reload.
+                        head.appendChild(js);
+                    }
+                });
             }
-        };
-    }]);
+
+            // Get the settings
+            var settings = SettingsService.get();
+            if (settings.config.development != true) {
+                // Your are not in a development environment, so set the tracking. 
+                setTracking();
+            }
+        }
+    };
+}]);
 
 app.directive('validateOnSubmit', function () {
     return {
         restrict: 'A',
         require: '^form',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             elem.bind("click", function () {
                 scope.$broadcast('show-errors-check-validity');
             });
@@ -1929,24 +2101,24 @@ app.directive('validateExpMonth', function () {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             ctrl.$parsers.unshift(function (viewValue) {
-                
+
                 if (utils.isValidInteger(viewValue) == false) {
                     ctrl.$setValidity('month', false);
                     return undefined;
                 }
-                
+
                 if (viewValue > 12) {
                     ctrl.$setValidity('month', false);
                     return undefined;
                 }
-                
+
                 if (viewValue < 1) {
                     ctrl.$setValidity('month', false);
                     return undefined;
                 }
-                
+
                 ctrl.$setValidity('month', true);
                 return viewValue;
 
@@ -1963,24 +2135,24 @@ app.directive('validateExpYear', function () {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             ctrl.$parsers.unshift(function (viewValue) {
-                
+
                 if (utils.isValidInteger(viewValue) == false) {
                     ctrl.$setValidity('year', false);
                     return undefined;
                 }
-                
+
                 if (viewValue.length > 4) {
                     ctrl.$setValidity('year', false);
                     return undefined;
                 }
-                
+
                 if (viewValue.length < 2) {
                     ctrl.$setValidity('year', false);
                     return undefined;
                 }
-                
+
                 ctrl.$setValidity('year', true);
                 return viewValue;
 
@@ -1997,12 +2169,12 @@ app.directive('validateCvv', function () {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             ctrl.$parsers.unshift(function (viewValue) {
-                
+
                 var type = attrs.validateCvv;
                 var length;
-                
+
                 // If the supplied cart number is Amex, then the length must be 4. Otherwise, 3.
                 if (type) {
                     if (type.substring(0, 1).toString() == "3") {
@@ -2011,22 +2183,22 @@ app.directive('validateCvv', function () {
                         length = 3;
                     }
                 }
-                
+
                 if (utils.isValidInteger(viewValue) == false) {
                     ctrl.$setValidity('cvv', false);
                     return undefined;
                 }
-                
+
                 if (viewValue.length < 3) {
                     ctrl.$setValidity('cvv', false);
                     return undefined;
                 }
-                
+
                 if (viewValue.length > 4) {
                     ctrl.$setValidity('cvv', false);
                     return undefined;
                 }
-                
+
                 // If the length is defined, we have a card number which means we know the card type. If the length does not match the card type, error.
                 if (length) {
                     if (viewValue.length != length) {
@@ -2034,7 +2206,7 @@ app.directive('validateCvv', function () {
                         return undefined;
                     }
                 }
-                
+
                 ctrl.$setValidity('cvv', true);
                 return viewValue;
 
@@ -2051,37 +2223,37 @@ app.directive('validateCard', function () {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             ctrl.$parsers.unshift(function (viewValue) {
-                
+
                 // Strip any whitespace
                 viewValue = utils.removeWhitespace(viewValue);
-                
+
                 if (utils.isNullOrEmpty(viewValue)) {
                     ctrl.$setValidity('card', false);
                     return undefined;
                 }
-                
+
                 if (/^\d+$/.test(viewValue) == false) {
                     ctrl.$setValidity('card', false);
                     return undefined;
                 }
-                
+
                 if (viewValue.length < 14) {
                     ctrl.$setValidity('card', false);
                     return undefined;
                 }
-                
+
                 if (viewValue.length > 19) {
                     ctrl.$setValidity('card', false);
                     return undefined;
                 }
-                
+
                 if (utils.luhnCheck(viewValue) == false) {
                     ctrl.$setValidity('card', false);
                     return undefined;
                 }
-                
+
                 ctrl.$setValidity('card', true);
                 return viewValue;
 
@@ -2098,7 +2270,7 @@ app.directive('isValidInteger', function () {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             ctrl.$validators.characters = function (modelValue, viewValue) {
                 var value = modelValue || viewValue;
                 if (attrs.allowEmptyValue == "true" && (value == "" || value == null)) {
@@ -2138,7 +2310,7 @@ app.directive('isValidNumber', function () {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            
+
             ctrl.$validators.characters = function (modelValue, viewValue) {
                 var value = modelValue || viewValue;
                 if (attrs.allowEmptyValue == "true" && (value == "" || value == null)) {
@@ -2174,713 +2346,715 @@ app.directive('isValidNumber', function () {
 });
 
 app.directive('promoCode', ['CartService', '$timeout', function (CartService, $timeout) {
-        
-        // Shared scope:
-        // cart: The cart to which the promo code should be applied
-        // onAdd: A function that will be called from scope when the currency is successfully changed. Will include the newly updated cart as a parameter.
-        // onRemove: A function that will be called from scope when the currency is successfully changed. Will include the newly updated cart as a parameter.
-        // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
-        // error: The error object to communicate errors.
-        
-        // Attributes
-        // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
-        
-        // An HTML template that shows the classes that should be applied to each component and state of the promotion code request
-        //<div class="col-xs-12 promo-code" ng-cloak promo-code cart="data.cart" error="data.error">
-        //    <label class="ask-promo-code">Enter Promo Code</label>
-        //    <div class="form-inline supply-promo-code">
-        //        <input class="form-control" type="text" placeholder="{{ 'Enter Promo Code' | translate}}">
-        //        <button type="submit" class="btn btn-info apply-promo-code">Apply</button>
-        //    </div>
-        //    <div class="applied-promo-code">
-        //        <strong translate>Discount applied.</strong>&nbsp;&nbsp;<strong class="text-success">{{data.cart.promotion_code}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash fa-lg pointer remove-promo-code"></i>
-        //    </div>
-        //</div>
-        
-        return {
-            restrict: 'A',
-            scope: {
-                cart: '=?',
-                params: '=?',
-                error: '=?',
-                onAdd: '=?',
-                onRemove: '=?',
-                onError: '=?'
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                var label = angular.element(elem[0].querySelector('.ask-promo-code'));
-                var request = angular.element(elem[0].querySelector('.supply-promo-code'));
-                var applied = angular.element(elem[0].querySelector('.applied-promo-code'));
-                var input = angular.element(elem.find("input"));
-                var button = angular.element(elem[0].querySelector('.apply-promo-code'));
-                var remove = angular.element(elem[0].querySelector('.remove-promo-code'));
-                
-                // Set the state
-                request.addClass("hidden");
-                applied.addClass("hidden");
-                
-                scope.$watch("cart", function (newCart, oldCart) {
-                    if (newCart) {
-                        if (newCart.promotion_code) {
-                            label.addClass("hidden");
-                            applied.removeClass("hidden");
-                        } else {
-                            applied.addClass("hidden");
-                        }
-                    }
-                });
-                
-                label.bind("click", function () {
-                    
-                    label.addClass("hidden");
-                    request.removeClass("hidden");
-                    
-                    // Focus the input
-                    $timeout(function () {
-                        elem.find("input")[0].focus();
-                    });
 
-                });
-                
-                button.bind("click", function () {
-                    
-                    // Get the promo code
-                    var promoCode = input.val();
-                    
-                    if (utils.isNullOrEmpty(promoCode)) {
-                        return;
-                    }
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Build the request
-                    var cart = { promotion_code: promoCode };
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    CartService.update(cart, scope.params).then(function (cart) {
-                        scope.cart = cart;
-                        
-                        // Fire the add event
-                        if (scope.onAdd) {
-                            scope.onAdd(cart);
-                        }
-                        
-                        // Hide the request form
-                        request.addClass("hidden");
-                        
-                        // Show the applied field
+    // Shared scope:
+    // cart: The cart to which the promo code should be applied
+    // onAdd: A function that will be called from scope when the currency is successfully changed. Will include the newly updated cart as a parameter.
+    // onRemove: A function that will be called from scope when the currency is successfully changed. Will include the newly updated cart as a parameter.
+    // onError: A function that will be called from scope when the currency change fails. Will include an error object as a parameter.
+    // error: The error object to communicate errors.
+
+    // Attributes
+    // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
+
+    // An HTML template that shows the classes that should be applied to each component and state of the promotion code request
+    //<div class="col-xs-12 promo-code" ng-cloak promo-code cart="data.cart" error="data.error">
+    //    <label class="ask-promo-code">Enter Promo Code</label>
+    //    <div class="form-inline supply-promo-code">
+    //        <input class="form-control" type="text" placeholder="{{ 'Enter Promo Code' | translate}}">
+    //        <button type="submit" class="btn btn-info apply-promo-code">Apply</button>
+    //    </div>
+    //    <div class="applied-promo-code">
+    //        <strong translate>Discount applied.</strong>&nbsp;&nbsp;<strong class="text-success">{{data.cart.promotion_code}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash fa-lg pointer remove-promo-code"></i>
+    //    </div>
+    //</div>
+
+    return {
+        restrict: 'A',
+        scope: {
+            cart: '=?',
+            params: '=?',
+            error: '=?',
+            onAdd: '=?',
+            onRemove: '=?',
+            onError: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            var label = angular.element(elem[0].querySelector('.ask-promo-code'));
+            var request = angular.element(elem[0].querySelector('.supply-promo-code'));
+            var applied = angular.element(elem[0].querySelector('.applied-promo-code'));
+            var input = angular.element(elem.find("input"));
+            var button = angular.element(elem[0].querySelector('.apply-promo-code'));
+            var remove = angular.element(elem[0].querySelector('.remove-promo-code'));
+
+            // Set the state
+            request.addClass("hidden");
+            applied.addClass("hidden");
+
+            scope.$watch("cart", function (newCart, oldCart) {
+                if (newCart) {
+                    if (newCart.promotion_code) {
+                        label.addClass("hidden");
                         applied.removeClass("hidden");
-
-                    }, function (error) {
-                        
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-
-                    });
-
-                });
-                
-                remove.bind("click", function () {
-                    
-                    // Reset the promo code
-                    input.val("");
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Build the request
-                    var cart = { promotion_code: null };
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, null);
-                    
-                    CartService.update(cart, scope.params).then(function (cart) {
-                        scope.cart = cart;
-                        
-                        // Fire the remove event
-                        if (scope.onRemove) {
-                            scope.onRemove(cart);
-                        }
-                        
-                        // Show the label
-                        label.removeClass("hidden");
-                        
-                        // Hide the applied field
+                    } else {
                         applied.addClass("hidden");
-
-                    }, function (error) {
-                        scope.error = error;
-                        
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
-
-                    });
-
-                });
-                
-                input.bind("blur", function () {
-                    
-                    // On blur, if no code is supplied, reset back to default
-                    if (utils.isNullOrEmpty(input.val())) {
-                        request.addClass("hidden");
-                        applied.addClass("hidden");
-                        label.removeClass("hidden");
-                        
-                        // Clear previous errors
-                        $timeout(function () {
-                            scope.error = null;
-                        });
                     }
-                
+                }
+            });
+
+            label.bind("click", function () {
+
+                label.addClass("hidden");
+                request.removeClass("hidden");
+
+                // Focus the input
+                $timeout(function () {
+                    elem.find("input")[0].focus();
                 });
 
-            }
-        };
-    }]);
+            });
+
+            button.bind("click", function () {
+
+                // Get the promo code
+                var promoCode = input.val();
+
+                if (utils.isNullOrEmpty(promoCode)) {
+                    return;
+                }
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Build the request
+                var cart = { promotion_code: promoCode };
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                CartService.update(cart, scope.params).then(function (cart) {
+                    scope.cart = cart;
+
+                    // Fire the add event
+                    if (scope.onAdd) {
+                        scope.onAdd(cart);
+                    }
+
+                    // Hide the request form
+                    request.addClass("hidden");
+
+                    // Show the applied field
+                    applied.removeClass("hidden");
+
+                }, function (error) {
+
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
+
+                });
+
+            });
+
+            remove.bind("click", function () {
+
+                // Reset the promo code
+                input.val("");
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Build the request
+                var cart = { promotion_code: null };
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                CartService.update(cart, scope.params).then(function (cart) {
+                    scope.cart = cart;
+
+                    // Fire the remove event
+                    if (scope.onRemove) {
+                        scope.onRemove(cart);
+                    }
+
+                    // Show the label
+                    label.removeClass("hidden");
+
+                    // Hide the applied field
+                    applied.addClass("hidden");
+
+                }, function (error) {
+                    scope.error = error;
+
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
+
+                });
+
+            });
+
+            input.bind("blur", function () {
+
+                // On blur, if no code is supplied, reset back to default
+                if (utils.isNullOrEmpty(input.val())) {
+                    request.addClass("hidden");
+                    applied.addClass("hidden");
+                    label.removeClass("hidden");
+
+                    // Clear previous errors
+                    $timeout(function () {
+                        scope.error = null;
+                    });
+                }
+
+            });
+
+        }
+    };
+}]);
 
 app.directive('customerSignin', ['CartService', '$timeout', function (CartService, $timeout) {
-        
-        // Shared scope:
-        // cart: The cart to which the login should be applied
-        // paymentMethod: The cart's payment method object
-        // onSigninSubmit: A function that will be called when the signin is submitted.
-        // onSignoutSubmit: A function that will be called when the signout is submitted.
-        // onSigninSuccess: A function that will be called when the signin is successfully completed. Will include the cart as a parameter.
-        // onSignoutSuccess: A function that will be called when the signout is successfully completed. Will include the cart as a parameter.
-        // onSigninError: A function that will be called when the signin fails. Will include an error object as a parameter.
-        // onSignoutError: A function that will be called when the signout fails. Will include an error object as a parameter.
-        // error: The error object to communicate errors.
-        // options: The cart options that indicates if the login prompt should be shown or not.
-        
-        // Attributes
-        // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
-        
-        // An HTML template that shows the classes that should be applied to each component and state of the signin
-        //<div customer-signin cart="data.cart" payment-method="data.payment_method" options="data.cart.options" error="data.error" params="params">
-        
-        //    <div class="well clearfix ask-signin">
-        //        <strong><span translate>Have an account?</span></strong>
-        //        <strong><a class="pointer pull-right show-signin" translate>Sign In</a></strong>
-        //    </div>
-        
-        //    <div class="well clearfix supply-signin">
-        //        <div class="col-xs-12 col-md-6" id="un">
-        //            <div class="form-group">
-        //                <label class="control-label" for="un" translate>Username</label>
-        //                <input class="form-control signin-username" name="un" type="text">
-        //            </div>
-        //        </div>
-        
-        //        <div class="col-xs-12 col-md-6" id="pw">
-        //            <div class="form-group">
-        //                <label class="control-label" for="pw" translate>Password</label>
-        //                <input class="form-control signin-password" name="pw" type="password">
-        //            </div>
-        //        </div>
-        
-        //        <div class="col-xs-12 text-right">
-        //            <button class="btn btn-sm cancel-signin" translate>Cancel</button>
-        //            <button type="submit" class="btn btn-default btn-sm submit-signin" customer-login cart="data.cart" username="data.un" password="data.pw" error="data.error" translate>Sign In</button>
-        //        </div>
-        //    </div>
-        
-        //    <div class="well signed-in">
-        //        <span>Signed in as {{data.cart.customer.username}}</span><strong><a class="pointer pull-right submit-signout" customer-logout cart="data.cart" error="data.error" translate>Sign out</a></strong>
-        //    </div>
-        
-        //</div>        
-        
-        
-        return {
-            restrict: 'A',
-            scope: {
-                cart: '=',
-                paymentMethod: '=?',
-                options: '=?',
-                params: '=?',
-                error: '=?',
-                onSigninSubmit: '=?',
-                onSignoutSubmit: '=?',
-                onSigninSuccess: '=?',
-                onSignoutSuccess: '=?',
-                onSigninError: '=?',
-                onSignoutError: '=?',
-            },
-            link: function (scope, elem, attrs) {
-                
-                var askSignin = angular.element(elem[0].querySelector('.ask-signin'));
-                var showSignin = angular.element(elem[0].querySelector('.show-signin'));
-                var supplySignin = angular.element(elem[0].querySelector('.supply-signin'));
-                var username = angular.element(elem[0].querySelector('.signin-username'));
-                var password = angular.element(elem[0].querySelector('.signin-password'));
-                var submit = angular.element(elem[0].querySelector('.submit-signin'));
-                var cancel = angular.element(elem[0].querySelector('.cancel-signin'));
-                var signedIn = angular.element(elem[0].querySelector('.signed-in'));
-                var signOut = angular.element(elem[0].querySelector('.submit-signout'));
-                
-                var hideAll = function () {
-                    askSignin.addClass("hidden");
-                    supplySignin.addClass("hidden");
-                    signedIn.addClass("hidden");
-                }
-                
-                // Set the default state
-                elem.addClass("hidden");
-                hideAll();
-                
-                scope.$watchGroup(["options", "cart"], function (newValues, oldValues) {
-                    
-                    var options = newValues[0];
-                    var cart = newValues[1];
-                    
-                    if (options) {
-                        if (options.customer_optional_fields) {
-                            if (options.customer_optional_fields.indexOf("username") >= 0) {
-                                hideAll();
-                                elem.removeClass("hidden");
-                                askSignin.removeClass("hidden");
-                            }
-                        }
-                    }
-                    
-                    if (cart) {
-                        if (cart.customer) {
+
+    // Shared scope:
+    // cart: The cart to which the login should be applied
+    // paymentMethod: The cart's payment method object
+    // onSigninSubmit: A function that will be called when the signin is submitted.
+    // onSignoutSubmit: A function that will be called when the signout is submitted.
+    // onSigninSuccess: A function that will be called when the signin is successfully completed. Will include the cart as a parameter.
+    // onSignoutSuccess: A function that will be called when the signout is successfully completed. Will include the cart as a parameter.
+    // onSigninError: A function that will be called when the signin fails. Will include an error object as a parameter.
+    // onSignoutError: A function that will be called when the signout fails. Will include an error object as a parameter.
+    // error: The error object to communicate errors.
+    // options: The cart options that indicates if the login prompt should be shown or not.
+
+    // Attributes
+    // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
+
+    // An HTML template that shows the classes that should be applied to each component and state of the signin
+    //<div customer-signin cart="data.cart" payment-method="data.payment_method" options="data.cart.options" error="data.error" params="params">
+
+    //    <div class="well clearfix ask-signin">
+    //        <strong><span translate>Have an account?</span></strong>
+    //        <strong><a class="pointer pull-right show-signin" translate>Sign In</a></strong>
+    //    </div>
+
+    //    <div class="well clearfix supply-signin">
+    //        <div class="col-xs-12 col-md-6" id="un">
+    //            <div class="form-group">
+    //                <label class="control-label" for="un" translate>Username</label>
+    //                <input class="form-control signin-username" name="un" type="text">
+    //            </div>
+    //        </div>
+
+    //        <div class="col-xs-12 col-md-6" id="pw">
+    //            <div class="form-group">
+    //                <label class="control-label" for="pw" translate>Password</label>
+    //                <input class="form-control signin-password" name="pw" type="password">
+    //            </div>
+    //        </div>
+
+    //        <div class="col-xs-12 text-right">
+    //            <button class="btn btn-sm cancel-signin" translate>Cancel</button>
+    //            <button type="submit" class="btn btn-default btn-sm submit-signin" customer-login cart="data.cart" username="data.un" password="data.pw" error="data.error" translate>Sign In</button>
+    //        </div>
+    //    </div>
+
+    //    <div class="well signed-in">
+    //        <span>Signed in as {{data.cart.customer.username}}</span><strong><a class="pointer pull-right submit-signout" customer-logout cart="data.cart" error="data.error" translate>Sign out</a></strong>
+    //    </div>
+
+    //</div>        
+
+
+    return {
+        restrict: 'A',
+        scope: {
+            cart: '=',
+            paymentMethod: '=?',
+            options: '=?',
+            params: '=?',
+            error: '=?',
+            onSigninSubmit: '=?',
+            onSignoutSubmit: '=?',
+            onSigninSuccess: '=?',
+            onSignoutSuccess: '=?',
+            onSigninError: '=?',
+            onSignoutError: '=?',
+        },
+        link: function (scope, elem, attrs) {
+
+            var askSignin = angular.element(elem[0].querySelector('.ask-signin'));
+            var showSignin = angular.element(elem[0].querySelector('.show-signin'));
+            var supplySignin = angular.element(elem[0].querySelector('.supply-signin'));
+            var username = angular.element(elem[0].querySelector('.signin-username'));
+            var password = angular.element(elem[0].querySelector('.signin-password'));
+            var submit = angular.element(elem[0].querySelector('.submit-signin'));
+            var cancel = angular.element(elem[0].querySelector('.cancel-signin'));
+            var signedIn = angular.element(elem[0].querySelector('.signed-in'));
+            var signOut = angular.element(elem[0].querySelector('.submit-signout'));
+
+            var hideAll = function () {
+                askSignin.addClass("hidden");
+                supplySignin.addClass("hidden");
+                signedIn.addClass("hidden");
+            }
+
+            // Set the default state
+            elem.addClass("hidden");
+            hideAll();
+
+            scope.$watchGroup(["options", "cart"], function (newValues, oldValues) {
+
+                var options = newValues[0];
+                var cart = newValues[1];
+
+                if (options) {
+                    if (options.customer_optional_fields) {
+                        if (options.customer_optional_fields.indexOf("username") >= 0) {
                             hideAll();
-                            if (cart.customer.username) {
-                                signedIn.removeClass("hidden");
-                            } else {
-                                askSignin.removeClass("hidden");
-                            }
+                            elem.removeClass("hidden");
+                            askSignin.removeClass("hidden");
                         }
                     }
+                }
 
-                }, true);
-                
-                showSignin.bind("click", function () {
-                    
-                    askSignin.addClass("hidden");
-                    supplySignin.removeClass("hidden");
-                    
-                    // Focus the input
-                    $timeout(function () {
-                        elem.find("input")[0].focus();
-                    });
+                if (cart) {
+                    if (cart.customer) {
+                        hideAll();
+                        if (cart.customer.username) {
+                            signedIn.removeClass("hidden");
+                        } else {
+                            askSignin.removeClass("hidden");
+                        }
+                    }
+                }
 
+            }, true);
+
+            showSignin.bind("click", function () {
+
+                askSignin.addClass("hidden");
+                supplySignin.removeClass("hidden");
+
+                // Focus the input
+                $timeout(function () {
+                    elem.find("input")[0].focus();
                 });
-                
-                // Bind to the password enter event
-                password.bind("keydown", function (event) {
-                    if (event.which == 13) {
-                        submitForm();
-                    }
-                });
-                
-                // Bind to the username enter event
-                username.bind("keydown", function (event) {
-                    if (event.which == 13) {
-                        submitForm();
-                    }
-                });
-                
-                // Bind to the submit button click          
-                submit.bind("click", function (event) {
+
+            });
+
+            // Bind to the password enter event
+            password.bind("keydown", function (event) {
+                if (event.which == 13) {
                     submitForm();
-                });
-                
-                signOut.bind("click", function () {
-                    
-                    // Fire the event
-                    if (scope.onSignoutSubmit) {
-                        scope.onSignoutSubmit();
+                }
+            });
+
+            // Bind to the username enter event
+            username.bind("keydown", function (event) {
+                if (event.which == 13) {
+                    submitForm();
+                }
+            });
+
+            // Bind to the submit button click          
+            submit.bind("click", function (event) {
+                submitForm();
+            });
+
+            signOut.bind("click", function () {
+
+                // Fire the event
+                if (scope.onSignoutSubmit) {
+                    scope.onSignoutSubmit();
+                }
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, "customer.payment_methods");
+
+                CartService.logout(scope.params).then(function (cart) {
+
+                    scope.cart = cart;
+
+                    // Delete the payment_method_id on the payment method object
+                    delete scope.paymentMethod.payment_method_id;
+
+                    // Fire the success event
+                    if (scope.onSignoutSuccess) {
+                        scope.onSignoutSuccess(cart);
                     }
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, "customer.payment_methods");
-                    
-                    CartService.logout(scope.params).then(function (cart) {
-                        
-                        scope.cart = cart;
-                        
-                        // Delete the payment_method_id on the payment method object
-                        delete scope.paymentMethod.payment_method_id;
-                        
-                        // Fire the success event
-                        if (scope.onSignoutSuccess) {
-                            scope.onSignoutSuccess(cart);
-                        }
 
-                    }, function (error) {
-                        
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onSignoutError) {
-                            scope.onSignoutError(error);
-                        }
+                }, function (error) {
 
-                    });
-                    
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onSignoutError) {
+                        scope.onSignoutError(error);
+                    }
+
                 });
-                
-                cancel.bind("click", function () {
-                    
-                    // Reset the username and password
+
+            });
+
+            cancel.bind("click", function () {
+
+                // Reset the username and password
+                username.val("");
+                password.val("");
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Reset back to login prompt.
+                hideAll();
+                askSignin.removeClass("hidden");
+
+            });
+
+            var submitForm = function () {
+
+                // Get the login values
+                var un = username.val();
+                var pw = password.val();
+
+                if (utils.isNullOrEmpty(un) || utils.isNullOrEmpty(pw)) {
+                    return;
+                }
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Fire the event
+                if (scope.onSigninSubmit) {
+                    scope.onSigninSubmit();
+                }
+
+                // Build the login object
+                var login = { username: un, password: pw };
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, "customer.payment_methods");
+
+                CartService.login(login, scope.params).then(function (cart) {
+
+                    scope.cart = cart;
+
+                    // Remove the username and password
                     username.val("");
                     password.val("");
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Reset back to login prompt.
-                    hideAll();
-                    askSignin.removeClass("hidden");
+
+                    // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
+                    if (cart.customer.payment_methods.data.length > 0 && scope.paymentMethod) {
+                        var payment_method_id = _.findWhere(cart.customer.payment_methods.data, { is_default: true }).payment_method_id;
+                        scope.paymentMethod.payment_method_id = payment_method_id;
+                    }
+
+                    // Fire the success event
+                    if (scope.onSigninSuccess) {
+                        scope.onSigninSuccess(cart);
+                    }
+
+                }, function (error) {
+
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onSigninError) {
+                        scope.onSigninError(error);
+                    }
 
                 });
-                
-                var submitForm = function () {
-                    
-                    // Get the login values
-                    var un = username.val();
-                    var pw = password.val();
-                    
-                    if (utils.isNullOrEmpty(un) || utils.isNullOrEmpty(pw)) {
-                        return;
-                    }
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Fire the event
-                    if (scope.onSigninSubmit) {
-                        scope.onSigninSubmit();
-                    }
-                    
-                    // Build the login object
-                    var login = { username: un, password: pw };
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, "customer.payment_methods");
-                    
-                    CartService.login(login, scope.params).then(function (cart) {
-                        
-                        scope.cart = cart;
-                        
-                        // Remove the username and password
-                        username.val("");
-                        password.val("");
-                        
-                        // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
-                        if (cart.customer.payment_methods.data.length > 0 && scope.paymentMethod) {
-                            var payment_method_id = _.findWhere(cart.customer.payment_methods.data, { is_default: true }).payment_method_id;
-                            scope.paymentMethod.payment_method_id = payment_method_id;
-                        }
-                        
-                        // Fire the success event
-                        if (scope.onSigninSuccess) {
-                            scope.onSigninSuccess(cart);
-                        }
-
-                    }, function (error) {
-                        
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onSigninError) {
-                            scope.onSigninError(error);
-                        }
-
-                    });
-
-                }
 
             }
-        };
-    }]);
+
+        }
+    };
+}]);
 
 app.directive('createAccount', ['CustomerService', '$timeout', function (CustomerService, $timeout) {
-        
-        // Shared scope:
-        // customer: The customer for which an account will be created. Must include the customer_id.
-        // onSubmit: A function that will be called when the signin is submitted.
-        // onSuccess: A function that will be called when the signin is successfully completed. Will include the cart as a parameter.
-        // onError: A function that will be called when the signout fails. Will include an error object as a parameter.
-        // error: The error object to communicate errors.
-        // options: The cart options that indicates if the create account prompt should be shown or not.
-        
-        // Attributes
-        // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
-        
-        // An HTML template that shows the classes that should be applied to each component and state of the signin
-        //<div customer-signin cart="data.cart" payment-method="data.payment_method" options="data.cart.options" error="data.error" params="params">
-        
-        //    <div class="well clearfix ask-signin">
-        //        <strong><span translate>Have an account?</span></strong>
-        //        <strong><a class="pointer pull-right show-signin" translate>Sign In</a></strong>
-        //    </div>
-        
-        //    <div class="well clearfix create-account">
-        //        <div class="col-xs-12 col-md-6" id="un">
-        //            <div class="form-group">
-        //                <label class="control-label" for="un" translate>Username</label>
-        //                <input class="form-control signin-username" name="un" type="text">
-        //            </div>
-        //        </div>
-        
-        //        <div class="col-xs-12 col-md-6" id="pw">
-        //            <div class="form-group">
-        //                <label class="control-label" for="pw" translate>Password</label>
-        //                <input class="form-control signin-password" name="pw" type="password">
-        //            </div>
-        //        </div>
-        
-        //        <div class="col-xs-12 text-right">
-        //            <button class="btn btn-sm cancel-signin" translate>Cancel</button>
-        //            <button type="submit" class="btn btn-default btn-sm submit-signin" customer-login cart="data.cart" username="data.un" password="data.pw" error="data.error" translate>Sign In</button>
-        //        </div>
-        //    </div>
-        
-        //    <div class="well signed-in">
-        //        <span>Signed in as {{data.cart.customer.username}}</span><strong><a class="pointer pull-right submit-signout" customer-logout cart="data.cart" error="data.error" translate>Sign out</a></strong>
-        //    </div>
-        
-        //</div>        
-        
-        
-        return {
-            restrict: 'A',
-            scope: {
-                customer: '=',
-                options: '=?',
-                params: '=?',
-                error: '=?',
-                onSubmit: '=?',
-                onSuccess: '=?',
-                onError: '=?'
-            },
-            link: function (scope, elem, attrs) {
-                
-                var supplyCredentials = angular.element(elem[0].querySelector('.supply-credentials'));
-                var username = angular.element(elem[0].querySelector('.create-account-username'));
-                var password = angular.element(elem[0].querySelector('.create-account-password'));
-                var submit = angular.element(elem[0].querySelector('.submit-create-account'));
-                var accountCreated = angular.element(elem[0].querySelector('.account-created'));
-                
-                // Set the default state
-                elem.addClass("hidden");
-                accountCreated.addClass("hidden");
-                
-                scope.$watchGroup(["options", "customer"], function (newValues, oldValues) {
-                    
-                    var options = newValues[0];
-                    var customer = newValues[1];
-                    
-                    // When both the options and customer come through, look to see if the field is set in the options and that a customer username is not already set.
-                    if (options && customer) {
-                        if (options.customer_optional_fields) {
-                            if (options.customer_optional_fields.indexOf("username") >= 0 && !customer.username) {
-                                // Show the form.
-                                elem.removeClass("hidden");
-                            }
-                        }
-                    }
-                });
-                
-                // Bind to the password enter event
-                password.bind("keydown", function (event) {
-                    if (event.which == 13) {
-                        submitForm();
-                    }
-                });
-                
-                // Bind to the username enter event
-                username.bind("keydown", function (event) {
-                    if (event.which == 13) {
-                        submitForm();
-                    }
-                });
-                
-                // Bind to the submit button click          
-                submit.bind("click", function (event) {
-                    submitForm();
-                });
-                
-                var submitForm = function () {
-                    
-                    // Get the login values
-                    var un = username.val();
-                    var pw = password.val();
-                    
-                    if (utils.isNullOrEmpty(un) || utils.isNullOrEmpty(pw)) {
-                        return;
-                    }
-                    
-                    // Clear previous errors
-                    scope.error = null;
-                    
-                    // Fire the event
-                    if (scope.onSubmit) {
-                        scope.onSubmit();
-                    }
-                    
-                    // Build the login object
-                    scope.customer.username = un;
-                    scope.customer.password = pw;
-                    
-                    // Prep the params
-                    var params = scope.params || attrs.params;
-                    params = utils.mergeParams(params, null, "customer.payment_methods");
-                    
-                    CustomerService.createAccount(scope.customer, scope.params).then(function (customer) {
-                        
-                        scope.customer = customer;
-                        
-                        // Remove the username and password
-                        username.val("");
-                        password.val("");
-                        
-                        // Show the success message
-                        accountCreated.removeClass("hidden");
-                        
-                        // Hide the login form
-                        supplyCredentials.addClass("hidden");
-                        
-                        // Fire the success event
-                        if (scope.onSuccess) {
-                            scope.onSuccess(customer);
-                        }
 
-                    }, function (error) {
-                        
-                        scope.error = error;
-                        // Fire the error event
-                        if (scope.onError) {
-                            scope.onError(error);
-                        }
+    // Shared scope:
+    // customer: The customer for which an account will be created. Must include the customer_id.
+    // onSubmit: A function that will be called when the signin is submitted.
+    // onSuccess: A function that will be called when the signin is successfully completed. Will include the cart as a parameter.
+    // onError: A function that will be called when the signout fails. Will include an error object as a parameter.
+    // error: The error object to communicate errors.
+    // options: The cart options that indicates if the create account prompt should be shown or not.
 
-                    });
+    // Attributes
+    // params: Any parameters you want to pass to the update function (i.e. expand, show, etc.)
+
+    // An HTML template that shows the classes that should be applied to each component and state of the signin
+    //<div customer-signin cart="data.cart" payment-method="data.payment_method" options="data.cart.options" error="data.error" params="params">
+
+    //    <div class="well clearfix ask-signin">
+    //        <strong><span translate>Have an account?</span></strong>
+    //        <strong><a class="pointer pull-right show-signin" translate>Sign In</a></strong>
+    //    </div>
+
+    //    <div class="well clearfix create-account">
+    //        <div class="col-xs-12 col-md-6" id="un">
+    //            <div class="form-group">
+    //                <label class="control-label" for="un" translate>Username</label>
+    //                <input class="form-control signin-username" name="un" type="text">
+    //            </div>
+    //        </div>
+
+    //        <div class="col-xs-12 col-md-6" id="pw">
+    //            <div class="form-group">
+    //                <label class="control-label" for="pw" translate>Password</label>
+    //                <input class="form-control signin-password" name="pw" type="password">
+    //            </div>
+    //        </div>
+
+    //        <div class="col-xs-12 text-right">
+    //            <button class="btn btn-sm cancel-signin" translate>Cancel</button>
+    //            <button type="submit" class="btn btn-default btn-sm submit-signin" customer-login cart="data.cart" username="data.un" password="data.pw" error="data.error" translate>Sign In</button>
+    //        </div>
+    //    </div>
+
+    //    <div class="well signed-in">
+    //        <span>Signed in as {{data.cart.customer.username}}</span><strong><a class="pointer pull-right submit-signout" customer-logout cart="data.cart" error="data.error" translate>Sign out</a></strong>
+    //    </div>
+
+    //</div>        
+
+
+    return {
+        restrict: 'A',
+        scope: {
+            customer: '=',
+            options: '=?',
+            params: '=?',
+            error: '=?',
+            onSubmit: '=?',
+            onSuccess: '=?',
+            onError: '=?'
+        },
+        link: function (scope, elem, attrs) {
+
+            var supplyCredentials = angular.element(elem[0].querySelector('.supply-credentials'));
+            var username = angular.element(elem[0].querySelector('.create-account-username'));
+            var password = angular.element(elem[0].querySelector('.create-account-password'));
+            var submit = angular.element(elem[0].querySelector('.submit-create-account'));
+            var accountCreated = angular.element(elem[0].querySelector('.account-created'));
+
+            // Set the default state
+            elem.addClass("hidden");
+            accountCreated.addClass("hidden");
+
+            scope.$watchGroup(["options", "customer"], function (newValues, oldValues) {
+
+                var options = newValues[0];
+                var customer = newValues[1];
+
+                // When both the options and customer come through, look to see if the field is set in the options and that a customer username is not already set.
+                if (options && customer) {
+                    if (options.customer_optional_fields) {
+                        if (options.customer_optional_fields.indexOf("username") >= 0 && !customer.username) {
+                            // Show the form.
+                            elem.removeClass("hidden");
+                        }
+                    }
                 }
+            });
+
+            // Bind to the password enter event
+            password.bind("keydown", function (event) {
+                if (event.which == 13) {
+                    submitForm();
+                }
+            });
+
+            // Bind to the username enter event
+            username.bind("keydown", function (event) {
+                if (event.which == 13) {
+                    submitForm();
+                }
+            });
+
+            // Bind to the submit button click          
+            submit.bind("click", function (event) {
+                submitForm();
+            });
+
+            var submitForm = function () {
+
+                // Get the login values
+                var un = username.val();
+                var pw = password.val();
+
+                if (utils.isNullOrEmpty(un) || utils.isNullOrEmpty(pw)) {
+                    return;
+                }
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Fire the event
+                if (scope.onSubmit) {
+                    scope.onSubmit();
+                }
+
+                // Build the login object
+                scope.customer.username = un;
+                scope.customer.password = pw;
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, "customer.payment_methods");
+
+                CustomerService.createAccount(scope.customer, scope.params).then(function (customer) {
+
+                    scope.customer = customer;
+
+                    // Remove the username and password
+                    username.val("");
+                    password.val("");
+
+                    // Show the success message
+                    accountCreated.removeClass("hidden");
+
+                    // Hide the login form
+                    supplyCredentials.addClass("hidden");
+
+                    // Fire the success event
+                    if (scope.onSuccess) {
+                        scope.onSuccess(customer);
+                    }
+
+                }, function (error) {
+
+                    scope.error = error;
+                    // Fire the error event
+                    if (scope.onError) {
+                        scope.onError(error);
+                    }
+
+                });
             }
-        };
-    }]);
+        }
+    };
+}]);
 
 app.directive('selectStateProv', ['GeoService', '$timeout', function (GeoService, $timeout) {
-        
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, elem, attrs, ctrl) {
-                
-                scope.$watch(attrs.country, function (country, oldCountry) {
-                    
-                    if (country) {
-                            var statesProvs = GeoService.getStatesProvs(country);
-                            
-                            var elemNg = angular.element(elem[0]);
-                            
-                            // Clear any previous options
-                            elemNg.html("");
-                            
-                            // Add a blank
-                            elemNg.append("<option></option>");
-                            
-                            var value = ctrl.$viewValue || ctrl.$modelValue;
-                            var hasSelected = false;
-                            
-                            _.each(statesProvs, function (stateProv) {
-                                var option = '<option value="' + stateProv.code + '"';
-                                if (value == stateProv.code) {
-                                    option += " selected";
-                                    hasSelected = true;
-                                }
-                                option += '>' + stateProv.name + '</option>';
-                                elemNg.append(option);
-                            });
-                            
-                            // If not item was selected, then there was no match. If the control currently has a value for state, reset it.
-                            if (hasSelected == false) {
-                                ctrl.$setViewValue(null);
-                            }
+
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+
+            scope.$watch(attrs.country, function (country, oldCountry) {
+
+                if (country) {
+                    var statesProvs = GeoService.getStatesProvs(country);
+
+                    var elemNg = angular.element(elem[0]);
+
+                    // Clear any previous options
+                    elemNg.html("");
+
+                    // Add a blank
+                    elemNg.append("<option></option>");
+
+                    var value = ctrl.$viewValue || ctrl.$modelValue;
+                    var hasSelected = false;
+
+                    _.each(statesProvs, function (stateProv) {
+                        var option = '<option value="' + stateProv.code + '"';
+                        if (value == stateProv.code) {
+                            option += " selected";
+                            hasSelected = true;
+                        }
+                        option += '>' + stateProv.name + '</option>';
+                        elemNg.append(option);
+                    });
+
+                    // If not item was selected, then there was no match. If the control currently has a value for state, reset it.
+                    if (hasSelected == false) {
+                        ctrl.$setViewValue(null);
                     }
-                });
-            }
-        };
-    }]);
+                }
+            });
+        }
+    };
+}]);
 
 app.directive('customerBackgroundSave', ['CartService', '$timeout', function (CartService, $timeout) {
-        
-        // Shared scope:
-        // cart: The updated cart to save. If an existing cart does not exist, one will be created and returned.
-        // error: The error object to communicate errors.
-        
-        // Attributes
-        // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
-        // quiet: true / false to indicate if the loading bar should be displayed while calling the API. Default is false.
-        
-        return {
-            restrict: 'A',
-            scope: {
-                cart: '=customerBackgroundSave',
-                shippingIsBilling: '=?',
-                params: '=?',
-                error: '=?'
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                // Find all inputs that have the attribute of customer-field
-                var fields = document.querySelectorAll(".customer-background-save");
-                
-                _.each(fields, function (input) {
-                    
-                    // Bind on blur as the default, on change for select.
-                    var event = "blur";
-                    if (input.nodeName == "SELECT") {
-                        event = "change";
+
+    // Shared scope:
+    // cart: The updated cart to save. If an existing cart does not exist, one will be created and returned.
+    // error: The error object to communicate errors.
+
+    // Attributes
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+    // quiet: true / false to indicate if the loading bar should be displayed while calling the API. Default is false.
+
+    return {
+        restrict: 'A',
+        scope: {
+            cart: '=customerBackgroundSave',
+            shippingIsBilling: '=?',
+            params: '=?',
+            error: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            // Find all inputs that have the attribute of customer-field
+            var fields = document.querySelectorAll(".customer-background-save");
+
+            _.each(fields, function (input) {
+
+                // Bind on blur as the default, on change for select.
+                var event = "blur";
+                if (input.nodeName == "SELECT") {
+                    event = "change";
+                }
+                if (input.type == "checkbox") {
+                    event = "click";
+                }
+
+                var inputNg = angular.element(input);
+
+                var updateBuffer;
+
+                inputNg.bind(event, function () {
+
+                    if (updateBuffer) {
+                        $timeout.cancel(updateBuffer);
                     }
-                    if (input.type == "checkbox") {
-                        event = "click";
-                    }
-                    
-                    var inputNg = angular.element(input);
-                    
-                    var updateBuffer;
-                    
-                    inputNg.bind(event, function () {
-                        
-                        if (updateBuffer) {
-                            $timeout.cancel(updateBuffer);
-                        }
-                        
-                        // Wrap in timeout and apply a buffer so that if a form fill agent is used you only perform one update at the end. The buffer is 25 ms, which seems to accomplish the job.
-                        updateBuffer = $timeout(function () {
-                            
-                            // Since this is a "background update", we need special handling. Angular converts required fields to undefined when they are zero-length, which means they are stripped from the api payload.
-                            // This means that if a user sets an item to blank, it will re-populate itself on update because the API didn't see it and didn't know to null it. We'll set all undefined items to null.
-                            var cartCopy = angular.copy(scope.cart)
-                            utils.undefinedToNull(cartCopy);
-                            
-                            // Prep the params
-                            var params = scope.params || attrs.params;
-                            params = utils.mergeParams(params, null, null);
-                            
-                            if (scope.cart) {
-                                
-                                // Use the ngModel attribute to get the property name
-                                var property = input.getAttribute("ng-model");
-                                
+
+                    // Wrap in timeout and apply a buffer so that if a form fill agent is used you only perform one update at the end. The buffer is 25 ms, which seems to accomplish the job.
+                    updateBuffer = $timeout(function () {
+
+                        // Since this is a "background update", we need special handling. Angular converts required fields to undefined when they are zero-length, which means they are stripped from the api payload.
+                        // This means that if a user sets an item to blank, it will re-populate itself on update because the API didn't see it and didn't know to null it. We'll set all undefined items to null.
+                        var cartCopy = angular.copy(scope.cart)
+                        utils.undefinedToNull(cartCopy);
+
+                        // Prep the params
+                        var params = scope.params || attrs.params;
+                        params = utils.mergeParams(params, null, null);
+
+                        if (scope.cart) {
+
+                            // Use the ngModel attribute to get the property name
+                            var property = input.getAttribute("ng-model");
+
+                            if (property) {
+
                                 // Strip everything before customer.
                                 property = property.split("customer.")[1];
-                                
+
                                 scope.cart.customer[property] = inputNg.val();
 
                                 // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
@@ -2895,14 +3069,14 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                                         cartCopy.customer.shipping_address.country = null;
                                     }
                                 }
-                                
+
                                 CartService.update(cartCopy, scope.params, true).then(function (cart) {
-                                    
+
                                     // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
                                     if (scope.cart) {
                                         cart.customer = scope.cart.customer;
                                     }
-                                    
+
                                     // Sync the scope to the response.
                                     scope.cart = cart;
 
@@ -2910,132 +3084,143 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                                     scope.error = error;
                                 });
                             }
-                        }, 25);
-                    });
+                        }
+                    }, 25);
                 });
-   
-            }
-        };
-    }]);
+            });
+
+        }
+    };
+}]);
 
 app.directive('creditCardImage', [function () {
-        
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
-                
-                scope.$watch(attrs.creditCardImage, function (creditCardImage) {
-                    
-                    if (creditCardImage) {
-                        var filename = creditCardImage.replace(" ", "").toLowerCase() + ".png";
-                        var image = '<img src="images/' + filename + '" />';
-                        var elemNg = angular.element(elem);
-                        elemNg.empty();
-                        elemNg.html(image);
-                    }
 
-                });
-            }
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+
+            scope.$watch(attrs.creditCardImage, function (creditCardImage) {
+
+                var path = "images/";
+                if (attrs.path) {
+                    path = attrs.path;
+                }
+
+                if (creditCardImage) {
+                    var filename = creditCardImage.replace(" ", "").toLowerCase() + ".png";
+                    var image = '<img src="' + path + filename + '" />';
+                    var elemNg = angular.element(elem);
+                    elemNg.empty();
+                    elemNg.html(image);
+                }
+
+            });
         }
-    }]);
+    }
+}]);
 
 app.directive('creditCards', ['CartService', function (CartService) {
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
-                
-                scope.$watch(attrs.creditCards, function (newVal) {
-                    if (_.isArray(newVal)) {
-                        var images = "";
-                        _.each(newVal, function (item) {
-                            var filename = item.replace(" ", "").toLowerCase() + ".png";
-                            images += '<img src="images/' + filename + '" title="' + item + '" />';
-                        });
-                        
-                        var elemNg = angular.element(elem);
-                        elemNg.empty();
-                        elemNg.html(images);
-                    }
-                });
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
 
+            var path = "images/";
+            if (attrs.path) {
+                path = attrs.path;
             }
+
+            scope.$watch(attrs.creditCards, function (newVal) {
+                if (_.isArray(newVal)) {
+                    var images = "";
+                    _.each(newVal, function (item) {
+                        var filename = item.replace(" ", "").toLowerCase() + ".png";
+                        images += '<img src="' + path + filename + '" title="' + item + '" />';
+                    });
+
+                    var elemNg = angular.element(elem);
+                    elemNg.empty();
+                    elemNg.html(images);
+                }
+            });
+
         }
-    }]);
+    }
+}]);
 
 app.directive('stateProvInput', ['GeoService', '$compile', function (GeoService, $compile) {
-        
-        return {
-            restrict: 'E',
-            terminal: true,
-            link: function (scope, elem, attrs) {
-                
-                attrs.$observe('country', function (country) {
-                    
-                    if (country) {
-                        
-                        var statesProvs = GeoService.getStatesProvs(attrs.country);
-                        
-                        if (attrs.type == "select") {
-                            
-                            // The select element is the template
-                            var template = elem[0].querySelector("select").outerHTML;
-                            
-                            if (statesProvs == null) {
-                                
-                                // Remove ngModel
-                                template = template.replace("ng-model", "suspend-model");
-                                var templateEl = angular.element(template);
-                                elem.empty();
-                                elem.append(templateEl);
-                                $compile(templateEl)(scope);
 
-                            } else {
-                                
-                                // Add ngModel
-                                template = template.replace("suspend-model", "ng-model");
-                                var templateEl = angular.element(template);
-                                elem.empty();
-                                elem.append(templateEl);
-                                $compile(templateEl)(scope);
+    return {
+        restrict: 'E',
+        terminal: true,
+        link: function (scope, elem, attrs) {
 
-                            }
+            attrs.$observe('country', function (country) {
+
+                if (country) {
+
+                    var statesProvs = GeoService.getStatesProvs(attrs.country);
+
+                    if (attrs.type == "select") {
+
+                        // The select element is the template
+                        var template = elem[0].querySelector("select").outerHTML;
+
+                        if (statesProvs == null) {
+
+                            // Remove ngModel
+                            template = template.replace("ng-model", "suspend-model");
+                            var templateEl = angular.element(template);
+                            elem.empty();
+                            elem.append(templateEl);
+                            $compile(templateEl)(scope);
+
+                        } else {
+
+                            // Add ngModel
+                            template = template.replace("suspend-model", "ng-model");
+                            var templateEl = angular.element(template);
+                            elem.empty();
+                            elem.append(templateEl);
+                            $compile(templateEl)(scope);
 
                         }
-                        
-                        if (attrs.type == "input") {
-                            
-                            // The select element is the template
-                            var template = elem[0].querySelector("input").outerHTML;
-                            
-                            if (statesProvs != null) {
-                                
-                                // Remove ngModel
-                                template = template.replace("ng-model", "suspend-model");
-                                var templateEl = angular.element(template);
-                                elem.empty();
-                                elem.append(templateEl);
-                                $compile(templateEl)(scope);
 
-                            } else {
-                                
-                                // Add ngModel
-                                template = template.replace("suspend-model", "ng-model");
-                                var templateEl = angular.element(template);
-                                elem.empty();
-                                elem.append(templateEl);
-                                $compile(templateEl)(scope);
-
-                            }
-
-                        }
-                        
                     }
-                });
 
-            }
-        };
+                    if (attrs.type == "input") {
 
-    }]);
+                        // The select element is the template
+                        var template = elem[0].querySelector("input").outerHTML;
+
+                        if (statesProvs != null) {
+
+                            // Remove ngModel
+                            template = template.replace("ng-model", "suspend-model");
+                            var templateEl = angular.element(template);
+                            elem.empty();
+                            elem.append(templateEl);
+                            $compile(templateEl)(scope);
+
+                        } else {
+
+                            // Add ngModel
+                            template = template.replace("suspend-model", "ng-model");
+                            var templateEl = angular.element(template);
+                            elem.empty();
+                            elem.append(templateEl);
+                            $compile(templateEl)(scope);
+
+                        }
+
+                    }
+
+                }
+            });
+
+        }
+    };
+
+}]);
 
 app.directive('selectOnClick', function () {
     return {
@@ -3049,337 +3234,337 @@ app.directive('selectOnClick', function () {
 });
 
 app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScope', 'LanguageService', function (CartService, InvoiceService, $timeout, $rootScope, LanguageService) {
-        
-        return {
-            restrict: 'AE',
-            templateUrl: "app/templates/fields.html",
-            scope: {
-                fieldlist: '=',
-                sale: '='
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                // Shared scope:
-                // fieldlist: The list of field configurations
-                // sale: The cart or invoice
-                
-                // The fieldlist will be supplied as a JSON string that must be parsed into an object.
-                scope.fields = [];
-                
-                var loadFields = function (fieldsJson) {
 
-                    // If the fields are a string, parse to an object.
-                    var fields = [];
+    return {
+        restrict: 'AE',
+        templateUrl: "app/templates/fields.html",
+        scope: {
+            fieldlist: '=',
+            sale: '='
+        },
+        link: function (scope, elem, attrs, ctrl) {
 
-                    if (typeof fieldsJson == "string" && utils.isNullOrEmpty(fieldsJson) == false) {
-                        // Make sure you have valid JSON
-                        try {
-                            fields = JSON.parse(fieldsJson);
-                        } catch (e) {
-                            // Set to an empty array if not.
-                            fields = [];
-                            // Log to help in debugging
-                            console.log("The JSON provided for custom fields is not valid JSON. As a result, no custom fields will display. Error message: " + e);
-                        };
-                    }
-                    
-                    // Group by section.
-                    fields = groupFields(fields)
-                    
-                    // If the user's language is provided in any of the fields, use that language.
-                    var language = LanguageService.getSelectedLanguage().code;
-                    
-                    _.each(fields, function (field) {
-                        
-                        if (field.languages) {
-                            if (field.languages[language]) {
-                                
-                                if (field.languages[language].label) {
-                                    field.label = field.languages[language].label;
-                                }
-                                
-                                if (field.languages[language].description) {
-                                    field.description = field.languages[language].description;
-                                }
+            // Shared scope:
+            // fieldlist: The list of field configurations
+            // sale: The cart or invoice
 
-                                if (field.languages[language].section) {
-                                    field.section = field.languages[language].section;
-                                }
+            // The fieldlist will be supplied as a JSON string that must be parsed into an object.
+            scope.fields = [];
 
-                                if (field.languages[language].options) {
-                                    field.options = field.languages[language].options;
-                                }
+            var loadFields = function (fieldsJson) {
 
-                            }
-                        }
+                // If the fields are a string, parse to an object.
+                var fields = [];
 
-                    });
-                    
-                    return fields;
-
+                if (typeof fieldsJson == "string" && utils.isNullOrEmpty(fieldsJson) == false) {
+                    // Make sure you have valid JSON
+                    try {
+                        fields = JSON.parse(fieldsJson);
+                    } catch (e) {
+                        // Set to an empty array if not.
+                        fields = [];
+                        // Log to help in debugging
+                        console.log("The JSON provided for custom fields is not valid JSON. As a result, no custom fields will display. Error message: " + e);
+                    };
                 }
-                
-                var groupFields = function (fields) { 
-                
-                    // Group the objects together by section
-                    var sorted = [];
-                    var processed = [];
-                    _.each(fields, function (item) {
-                        
-                        if (processed.indexOf(item.section) == -1) {
-                            var matches = _.where(fields, { section: item.section });
-                            
-                            if (matches) {
-                                sorted = sorted.concat(matches);
-                                processed.push(item.section);
+
+                // Group by section.
+                fields = groupFields(fields)
+
+                // If the user's language is provided in any of the fields, use that language.
+                var language = LanguageService.getSelectedLanguage().code;
+
+                _.each(fields, function (field) {
+
+                    if (field.languages) {
+                        if (field.languages[language]) {
+
+                            if (field.languages[language].label) {
+                                field.label = field.languages[language].label;
                             }
-                        }
 
-                    });
-
-                    return sorted;
-                }
-                
-                var loadDefaults = function (fields, meta) {
-
-                    // Loop through the fields and set the default values if a value is not already provided.
-                    for (var property in fields) {
-                        
-                        // Set default values for any selections that don't already have a value.
-                        if (fields.hasOwnProperty(property)) {
-                            if (scope.sale.meta[fields[property].name] == null) {
-                                scope.sale.meta[fields[property].name] = fields[property].default_value;
+                            if (field.languages[language].description) {
+                                field.description = field.languages[language].description;
                             }
+
+                            if (field.languages[language].section) {
+                                field.section = field.languages[language].section;
+                            }
+
+                            if (field.languages[language].options) {
+                                field.options = field.languages[language].options;
+                            }
+
                         }
-
                     }
 
-                }
-                
-                // Load the fields.           
-                scope.fields = loadFields(scope.fieldlist);
-                
-                // On the first time the sale is loaded, loop through the fields and set default vaules for items that don't already have a value.
-                var cancelWatch = scope.$watch('sale.meta', function (newVal, oldValue) {
-                    
-                    // If the sale isn't populated yet, return.
-                    if (scope.sale == null) {
-                        return;
-                    }
-                    
-                    // If the current selections are null, set to an empty object.
-                    if (scope.sale.meta == null) {
-                        scope.sale.meta = {};
-                    }
-                    
-                    loadDefaults(scope.fields, scope.sale.meta);
-                                        
-                    // With the initial load done, we can cancel the watcher.
-                    cancelWatch();
-
-                }, true);
-                
-                // If the language changes, reload the fields, which will update the display language.
-                $rootScope.$on("languageChanged", function (event, language) {
-                    scope.fields = loadFields(scope.fieldlist);
                 });
-                
-                scope.pushToProperty = function (property, value, recordOnChange) {
-                    
-                    // If it doesn't exist, add it. If it exists, remove it.
-                    if (scope.isInProperty(property, value) == false) {
-                        if (scope.sale.meta[property] == null) {
-                            scope.sale.meta[property] = [];
-                            scope.sale.meta[property].push(value);
-                        } else {
-                            scope.sale.meta[property].push(value);
+
+                return fields;
+
+            }
+
+            var groupFields = function (fields) {
+
+                // Group the objects together by section
+                var sorted = [];
+                var processed = [];
+                _.each(fields, function (item) {
+
+                    if (processed.indexOf(item.section) == -1) {
+                        var matches = _.where(fields, { section: item.section });
+
+                        if (matches) {
+                            sorted = sorted.concat(matches);
+                            processed.push(item.section);
                         }
+                    }
+
+                });
+
+                return sorted;
+            }
+
+            var loadDefaults = function (fields, meta) {
+
+                // Loop through the fields and set the default values if a value is not already provided.
+                for (var property in fields) {
+
+                    // Set default values for any selections that don't already have a value.
+                    if (fields.hasOwnProperty(property)) {
+                        if (scope.sale.meta[fields[property].name] == null) {
+                            scope.sale.meta[fields[property].name] = fields[property].default_value;
+                        }
+                    }
+
+                }
+
+            }
+
+            // Load the fields.           
+            scope.fields = loadFields(scope.fieldlist);
+
+            // On the first time the sale is loaded, loop through the fields and set default vaules for items that don't already have a value.
+            var cancelWatch = scope.$watch('sale.meta', function (newVal, oldValue) {
+
+                // If the sale isn't populated yet, return.
+                if (scope.sale == null) {
+                    return;
+                }
+
+                // If the current selections are null, set to an empty object.
+                if (scope.sale.meta == null) {
+                    scope.sale.meta = {};
+                }
+
+                loadDefaults(scope.fields, scope.sale.meta);
+
+                // With the initial load done, we can cancel the watcher.
+                cancelWatch();
+
+            }, true);
+
+            // If the language changes, reload the fields, which will update the display language.
+            $rootScope.$on("languageChanged", function (event, language) {
+                scope.fields = loadFields(scope.fieldlist);
+            });
+
+            scope.pushToProperty = function (property, value, recordOnChange) {
+
+                // If it doesn't exist, add it. If it exists, remove it.
+                if (scope.isInProperty(property, value) == false) {
+                    if (scope.sale.meta[property] == null) {
+                        scope.sale.meta[property] = [];
+                        scope.sale.meta[property].push(value);
                     } else {
-                        scope.sale.meta[property] = _.without(scope.sale.meta[property], value);
+                        scope.sale.meta[property].push(value);
                     }
-
-                    // If record, save the change
-                    if (recordOnChange) {
-                        scope.record();
-                    }
-
+                } else {
+                    scope.sale.meta[property] = _.without(scope.sale.meta[property], value);
                 }
-                
-                scope.isInProperty = function (property, value) {
-                    
-                    if (scope.sale == null) {
-                        return false;
-                    }
 
-                    if (scope.sale.meta == null) {
-                        return false;
-                    }
-                    
-                    if (scope.sale.meta[property] != null) {
-                        if (_.indexOf(scope.sale.meta[property], value) >= 0) {
-                            return true;
-                        }
-                    }
-                    
+                // If record, save the change
+                if (recordOnChange) {
+                    scope.record();
+                }
+
+            }
+
+            scope.isInProperty = function (property, value) {
+
+                if (scope.sale == null) {
                     return false;
-
                 }
-                
-                scope.isNewSection = function (field, index) {
-                    
-                    // The fields come from the api grouped in sections which makes it easy to determine when sections have changed.
-                    
-                    // The first item is always "new"
-                    if (index == 0) {
+
+                if (scope.sale.meta == null) {
+                    return false;
+                }
+
+                if (scope.sale.meta[property] != null) {
+                    if (_.indexOf(scope.sale.meta[property], value) >= 0) {
                         return true;
                     }
-                    
-                    // Otherwise, select the item immediately before this item and see if it's different
-                    var previous = scope.fields[index - 1];
-                    if (previous != null) {
-                        if (previous.section != field.section) {
-                            return true;
-                        }
-                    }
-                    
-                    return false;
+                }
 
-                }
-                
-                // Save any changes, as requested.
-                scope.record = function () {
-                    // We'll only update the meta
-                    var sale = { meta: scope.sale.meta };
-                    if (scope.sale.object == "invoice") {
-                        InvoiceService.update(sale);
-                    } else {
-                        CartService.update(sale);
-                    }
-                }
+                return false;
 
             }
-        }
 
-    }]);
+            scope.isNewSection = function (field, index) {
+
+                // The fields come from the api grouped in sections which makes it easy to determine when sections have changed.
+
+                // The first item is always "new"
+                if (index == 0) {
+                    return true;
+                }
+
+                // Otherwise, select the item immediately before this item and see if it's different
+                var previous = scope.fields[index - 1];
+                if (previous != null) {
+                    if (previous.section != field.section) {
+                        return true;
+                    }
+                }
+
+                return false;
+
+            }
+
+            // Save any changes, as requested.
+            scope.record = function () {
+                // We'll only update the meta
+                var sale = { meta: scope.sale.meta };
+                if (scope.sale.object == "invoice") {
+                    InvoiceService.update(sale);
+                } else {
+                    CartService.update(sale);
+                }
+            }
+
+        }
+    }
+
+}]);
 
 app.directive('validateField', ['gettextCatalog', '$timeout', function (gettextCatalog, $timeout) {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            scope: {
-                field: '=validateField',
-                error: '=?'
-            },
-            link: function (scope, elem, attrs, ctrl) {
-                
-                var error = scope.error;
-                var field = scope.field;
-                
-                // If required, initialize the error with a required error message.
-                if (utils.isNullOrEmpty(elem[0].value) && field.required == true) {
-                    scope.error = gettextCatalog.getString("Please provide a value.");
-                }
-                
-                // Use a different message for boolean or toggle.
-                if (field.type == "boolean" && field.required == true) {
-                    scope.error = gettextCatalog.getString("Please make a selection");
-                }
-                
-                // A toggle field with required == true means a checkbox that you must check (i.e. accept terms and conditions or something, not allowed to leave it unchecked)
-                if (field.type == "toggle" && field.required == true) {
-                    scope.error = gettextCatalog.getString("Please confirm");
-                }
-                
-                ctrl.$parsers.unshift(function (viewValue) {
-                    
-                    // Reset the error
-                    var errorMsg = null;
-                    
-                    // Do some additinal testing for decimals and numbers.
-                    if (viewValue != null || field.required == true) {
-                        
-                        switch (field.type) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            field: '=validateField',
+            error: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
 
-                            case "integer":
-                                
-                                if (!utils.isValidInteger(viewValue)) {
-                                    errorMsg = gettextCatalog.getString("Please supply a number without decimals");
-                                }
-                                break;
+            var error = scope.error;
+            var field = scope.field;
 
-                            case "decimal":
-                                
-                                if (!utils.isValidNumber(viewValue)) {
-                                    errorMsg = gettextCatalog.getString("Please supply a number");
-                                }
-                                break;
-
-                        }
-                        
-                        // Regardless of the above, if options is not null, change the text
-                        if (field.options != null && utils.isNullOrEmpty(viewValue)) {
-                            errorMsg = gettextCatalog.getString("Please make a selection");
-                        }
-                        
-                        // If no error, check restraints
-                        if (errorMsg == null) {
-                            
-                            // If a list of options are provided, ensure the provided value is within the range.
-                            if (field.options != null) {
-                                if (_.where(field.options, { value: viewValue }) == null) {
-                                    errorMsg = gettextCatalog.getString("Please provide one of the available options");
-                                }
-                            }
-                            
-                            // Range check if a integer or decimal
-                            if (field.type == "integer" || field.type == "decimal") {
-                                
-                                if (field.min_value) {
-                                    if (viewValue < field.min_value) {
-                                        errorMsg = gettextCatalog.getPlural(field.min_value, "The value you provide must be greater than {{$count}}", "The value you provide must be greater than {{$count}}", {});
-                                    }
-                                }
-                                
-                                if (field.max_value) {
-                                    if (viewValue > field.max_value) {
-                                        errorMsg = gettextCatalog.getPlural(field.max_value, "The value you provide must be less than {{$count}}", "The value you provide must be less than {{$count}}", {});
-                                    }
-                                }
-
-                            }
-                            
-                            // Size check if string or text
-                            if (field.type == "string" || field.type == "text") {
-                                
-                                if (field.min_length) {
-                                    if (viewValue.length < field.min_length) {
-                                        errorMsg = gettextCatalog.getPlural(field.min_length, "The value must be at least one character", "The value must be at least {{$count}} characters", {});
-                                    }
-                                }
-                                
-                                if (field.max_length) {
-                                    if (viewValue.length > field.max_length) {
-                                        errorMsg = gettextCatalog.getPlural(field.max_length, "The value must be less than one character", "The value must be less than {{$count}} characters", {});
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                    
-                    if (errorMsg != null) {
-                        ctrl.$setValidity('field', false);
-                        scope.error = errorMsg;
-                        return undefined;
-                    }
-                    
-                    ctrl.$setValidity('field', true);
-                    return viewValue;
-
-                });
+            // If required, initialize the error with a required error message.
+            if (utils.isNullOrEmpty(elem[0].value) && field.required == true) {
+                scope.error = gettextCatalog.getString("Please provide a value.");
             }
+
+            // Use a different message for boolean or toggle.
+            if (field.type == "boolean" && field.required == true) {
+                scope.error = gettextCatalog.getString("Please make a selection");
+            }
+
+            // A toggle field with required == true means a checkbox that you must check (i.e. accept terms and conditions or something, not allowed to leave it unchecked)
+            if (field.type == "toggle" && field.required == true) {
+                scope.error = gettextCatalog.getString("Please confirm");
+            }
+
+            ctrl.$parsers.unshift(function (viewValue) {
+
+                // Reset the error
+                var errorMsg = null;
+
+                // Do some additinal testing for decimals and numbers.
+                if (viewValue != null || field.required == true) {
+
+                    switch (field.type) {
+
+                        case "integer":
+
+                            if (!utils.isValidInteger(viewValue)) {
+                                errorMsg = gettextCatalog.getString("Please supply a number without decimals");
+                            }
+                            break;
+
+                        case "decimal":
+
+                            if (!utils.isValidNumber(viewValue)) {
+                                errorMsg = gettextCatalog.getString("Please supply a number");
+                            }
+                            break;
+
+                    }
+
+                    // Regardless of the above, if options is not null, change the text
+                    if (field.options != null && utils.isNullOrEmpty(viewValue)) {
+                        errorMsg = gettextCatalog.getString("Please make a selection");
+                    }
+
+                    // If no error, check restraints
+                    if (errorMsg == null) {
+
+                        // If a list of options are provided, ensure the provided value is within the range.
+                        if (field.options != null) {
+                            if (_.where(field.options, { value: viewValue }) == null) {
+                                errorMsg = gettextCatalog.getString("Please provide one of the available options");
+                            }
+                        }
+
+                        // Range check if a integer or decimal
+                        if (field.type == "integer" || field.type == "decimal") {
+
+                            if (field.min_value) {
+                                if (viewValue < field.min_value) {
+                                    errorMsg = gettextCatalog.getPlural(field.min_value, "The value you provide must be greater than {{$count}}", "The value you provide must be greater than {{$count}}", {});
+                                }
+                            }
+
+                            if (field.max_value) {
+                                if (viewValue > field.max_value) {
+                                    errorMsg = gettextCatalog.getPlural(field.max_value, "The value you provide must be less than {{$count}}", "The value you provide must be less than {{$count}}", {});
+                                }
+                            }
+
+                        }
+
+                        // Size check if string or text
+                        if (field.type == "string" || field.type == "text") {
+
+                            if (field.min_length) {
+                                if (viewValue.length < field.min_length) {
+                                    errorMsg = gettextCatalog.getPlural(field.min_length, "The value must be at least one character", "The value must be at least {{$count}} characters", {});
+                                }
+                            }
+
+                            if (field.max_length) {
+                                if (viewValue.length > field.max_length) {
+                                    errorMsg = gettextCatalog.getPlural(field.max_length, "The value must be less than one character", "The value must be less than {{$count}} characters", {});
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                if (errorMsg != null) {
+                    ctrl.$setValidity('field', false);
+                    scope.error = errorMsg;
+                    return undefined;
+                }
+
+                ctrl.$setValidity('field', true);
+                return viewValue;
+
+            });
         }
-    }]);
+    }
+}]);
 
 
 app.factory('appCache', ['$cacheFactory', function ($cacheFactory) {
@@ -3418,6 +3603,7 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
         getList: getList,
         update: update,
         remove: remove,
+        getItemPdf: getItemPdf,
         getToken: getToken,
         getTokenExpiration: getTokenExpiration
     });
@@ -3674,6 +3860,41 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
                 headers: {
                     "Authorization": "Bearer " + token,
                     "Content-Type": "application/json"
+                }
+            });
+
+            request.then(function (response) { onApiSuccess(response, deferred) }, function (error) { onApiError(error, deferred) });
+
+        }, function (error) {
+            deferred.reject(error);
+        });
+
+        return deferred.promise;
+
+    }
+
+    function getItemPdf(url, parameters, quiet) {
+
+        var deferred = $q.defer();
+
+        getToken().then(function (token) {
+
+            // Get the settings
+            var settings = SettingsService.get();
+
+            // Prepare the url
+            var endpoint = buildUrl(url, settings);
+
+            var request = $http({
+                ignoreLoadingBar: quiet,
+                method: "get",
+                url: endpoint + "?timezone=UTC",
+                params: parameters,
+                timeout: 15000,
+                responseType: "arraybuffer",
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Accept": "application/pdf"
                 }
             });
 
@@ -4137,7 +4358,7 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
             PaymentService.create(payment_method, url, parameters, quiet).then(function (payment) {
 
                 // If the payment status is completed or the payment status is pending and the payment method is credit card, delete the cart_id. Attempting to interact with a closed cart (due to a successful payment) will result in errors.
-                if (payment.status == "completed" || (payment.status == "pending" && payment.payment_method.type == "credit_card")) {
+                if (payment.status == "completed" || payment.status == "pending") {
                     StorageService.remove("cart_id");
                 }
 
@@ -4202,6 +4423,7 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
                     }
 
                     // Set the item into the cart
+                    cart.items = cart.items || [];
                     cart.items.push(item);
                     location.search(property, null);
 
@@ -4429,7 +4651,7 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
     return ({
         create: create,
         get: get,
-        capture: capture
+        commit: commit
     });
 
     function create(payment_method, url, parameters, quiet) {
@@ -4475,12 +4697,11 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
 
     }
 
-    function capture(payment_id, data, parameters, quiet) {
+    function commit(payment_id, data, parameters, quiet) {
 
-        // This is used for payment methods such as PayPal that need to be tiggered for completion or "capture" after they have been reviewed by the customer.
-        // In the case of PayPal, the data payload should be null or empty JSON (i.e. {}).
+        // This is used for payment methods such as PayPal and Amazon Pay that need to be tiggered for completion after they have been reviewed by the customer.
 
-        var url = "/payments/" + payment_id + "/capture";
+        var url = "/payments/" + payment_id + "/commit";
 
         var deferred = $q.defer();
         parameters = setDefaultParameters(parameters);
@@ -4488,8 +4709,8 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
         ApiService.create(data, url, parameters, quiet).then(function (response) {
             var payment = response.data;
 
-            // If the payment status is completed, delete the cart_id and / or invoice_id. Attempting to interact with a closed cart or invoice (due to a successful payment) will result in errors.
-            if (payment.status == "completed" || (payment.status == "pending" && payment.payment_method.type == "credit_card")) {
+            // If the payment status is completed or pending, delete the cart_id and / or invoice_id. Attempting to interact with a closed cart or invoice (due to a successful payment) will result in errors.
+            if (payment.status == "completed" || payment.status == "pending") {
                 StorageService.remove("cart_id");
                 StorageService.remove("invoice_id");
             }
@@ -4861,7 +5082,7 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
 
     }
 
-    function setLanguage(language) {
+    function setLanguage(language, languagesPath) {
 
         // Only attempt to set the language if the supplied value is valid.
         if (isSupportedLanguage(language) == false) {
@@ -4878,7 +5099,7 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
             // English does not need to be loaded since it's embedded in the HTML.
             if (language != "en") {
                 // Load the language configuration file.
-                gettextCatalog.loadRemote("languages/" + language + "/" + language + ".json");
+                gettextCatalog.loadRemote((languagesPath || "languages/") + language + "/" + language + ".json");
             }
         }
 
@@ -4922,7 +5143,7 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
 
     }
 
-    function establishLanguage() {
+    function establishLanguage(languagesPath) {
 
         // This called when the app is intially bootstrapped and sets the language according to the user's preference, auto-detected language or default language.
         getUserLanguage().then(function (language) {
@@ -4933,7 +5154,7 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
             }
 
             // Set the language
-            setLanguage(language);
+            setLanguage(language, languagesPath);
 
         });
 

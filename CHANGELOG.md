@@ -1,4 +1,11 @@
-﻿<a name="1.0.3"></a>
+﻿<a name="1.0.4"></a>
+# 1.0.4
+
+- Integrate Kit version 1.0.3. See Kit release notes for changes.
+- Add support for PayPal recurring.
+- Bug fix for container width in scss variables file.
+
+<a name="1.0.3"></a>
 # 1.0.3
 
 - Allow PayPal payments for invoices
