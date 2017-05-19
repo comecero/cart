@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿1.0.3
+Comecero Cart version: ﻿1.0.4
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -100,12 +100,6 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
                 $document.scrollTop(0, 500);
             }
         });
-
-    }]);
-app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
- 
-        $scope.settings = SettingsService.get();
-        $scope.currency = CurrencyService.getCurrencyName();
 
     }]);
 app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, $document) {
@@ -280,6 +274,12 @@ app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'Car
 
     }]);
 
+app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
+ 
+        $scope.settings = SettingsService.get();
+        $scope.currency = CurrencyService.getCurrencyName();
+
+    }]);
 app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
         
         // Define a place to hold your data

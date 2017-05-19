@@ -104,11 +104,9 @@ $navbar-border-radius: 0;
 $grid-gutter-width: 30px;
 
 /* Navbar vs. Boxed Layout */
-@if $layout == boxed or $layout == hybrid {
-    $container-tablet: (720px + $grid-gutter-width);
-    $container-desktop: (720px + $grid-gutter-width);
-    $container-large-desktop: (720px + $grid-gutter-width);
-}
+$container-tablet: (720px + $grid-gutter-width);
+$container-desktop: (720px + $grid-gutter-width);
+$container-large-desktop: (720px + $grid-gutter-width);
 
 /* Otherwise, hide the boxed elements */
 @if $layout == full {
