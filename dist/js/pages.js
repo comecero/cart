@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿1.0.4
+Comecero Cart version: ﻿1.0.5
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -188,6 +188,47 @@ app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'G
         });
 
     }]);
+app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
+ 
+        $scope.settings = SettingsService.get();
+        $scope.currency = CurrencyService.getCurrencyName();
+
+    }]);
+app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load the geo service for countries, states, provinces (used for dropdowns).
+        $scope.geo = GeoService.getData();
+        $scope.settings = SettingsService.get();
+        
+        $scope.data.params = {};
+        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
+        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
+        $scope.data.params.currency = CurrencyService.getCurrency();
+        $scope.data.params.formatted = true;
+        $scope.data.params.limit = 50;
+        
+        // Load the products
+        ProductService.getList($scope.data.params).then(function (products) {
+            $scope.data.products = products;
+        }, function (error) {
+            $scope.data.error = error;
+        });
+        
+        $scope.onAddToCart = function (item) {
+            $location.path("/cart");
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
 app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'CartService', 'PaymentService', 'SettingsService', 'HelperService', 'GeoService', '$document', function ($scope, $location, $routeParams, CartService, PaymentService, SettingsService, HelperService, GeoService, $document) {
         
         // Define a place to hold your data
@@ -274,47 +315,6 @@ app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'Car
 
     }]);
 
-app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
- 
-        $scope.settings = SettingsService.get();
-        $scope.currency = CurrencyService.getCurrencyName();
-
-    }]);
-app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
-        
-        // Define a place to hold your data
-        $scope.data = {};
-        
-        // Load the geo service for countries, states, provinces (used for dropdowns).
-        $scope.geo = GeoService.getData();
-        $scope.settings = SettingsService.get();
-        
-        $scope.data.params = {};
-        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
-        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
-        $scope.data.params.currency = CurrencyService.getCurrency();
-        $scope.data.params.formatted = true;
-        $scope.data.params.limit = 50;
-        
-        // Load the products
-        ProductService.getList($scope.data.params).then(function (products) {
-            $scope.data.products = products;
-        }, function (error) {
-            $scope.data.error = error;
-        });
-        
-        $scope.onAddToCart = function (item) {
-            $location.path("/cart");
-        }
-        
-        // Watch for error to be populated, and if so, scroll to it.
-        $scope.$watch("data.error", function (newVal, oldVal) {
-            if ($scope.data.error) {
-                $document.scrollTop(0, 500);
-            }
-        });
-
-    }]);
 app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'OrderService', 'SettingsService', 'HelperService', '$document', function ($scope, $routeParams, PaymentService, OrderService, SettingsService, HelperService, $document) {
 
     // Define a place to hold your data
@@ -325,7 +325,7 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
 
     $scope.data.params = {};
     $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options";
-    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.items.type,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
+    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.items.type,order.items.license_pending,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.data.params.expand += ",order.items.download,order.items.license";
@@ -388,13 +388,16 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
 
         count = count || 0;
 
-        if (_.where($scope.data.payment.order.items, { type: "digital", license: null, download: null }).length > 0) {
+        if (_.where($scope.data.payment.order.items, { license_pending: true }).length > 0) {
             $scope.data.awaitingLicense = true;
         } else {
             $scope.data.awaitingLicense = false;
         }
 
         if ($scope.data.awaitingLicense == false || count > 3) {
+            $scope.$apply(function () {
+                $scope.data.awaitingLicense = false;
+            });
             return;
         }
 
