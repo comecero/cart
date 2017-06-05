@@ -1,4 +1,9 @@
-﻿<a name="1.0.4"></a>
+﻿<a name="1.0.5"></a>
+# 1.0.5
+
+- Bug fix to prevent "getting license" spinner from appearing when a digital product is not configured to obtain a license.
+
+<a name="1.0.4"></a>
 # 1.0.4
 
 - Integrate Kit version 1.0.3. See Kit release notes for changes.
