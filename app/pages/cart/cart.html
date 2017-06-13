@@ -411,12 +411,14 @@
             <div ng-show="data.cart.customer.payment_methods.data.length > 0">
                 <h4 translate>Choose a Payment Method</h4>
 
-                <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data">
+                <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data" ng-show="method.type == 'credit_card'">
+
                     <span class="radio-group inline" ng-if="method.type == 'credit_card'">
                         <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.card.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.card.payment_method_id == method.payment_method_id" />
                         <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">{{method.data.label}} (<span>exp.</span> {{method.data.exp_month}}/{{method.data.exp_year}})</label>
+                        <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
                     </span>
-                    <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
+
                 </div>
 
                 <div class="well clearfix">
