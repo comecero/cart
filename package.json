@@ -1,0 +1,19 @@
+{
+  "name": "comecero-cart",
+  "version": "1.0.5",
+  "description": "A fully featured, highly customizable shopping cart ready for production use",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comecero/cart.git"
+  },
+  "author": "Comecero, LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/comecero/cart/issues"
+  },
+  "homepage": "https://github.com/comecero/cart#readme",
+  "devDependencies": {
+    "grunt-angular-gettext": "^2.3.5"
+  }
+}

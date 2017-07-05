@@ -10,7 +10,7 @@ window.__settings.app = {
     "exp_select": false,
     "ask_save_cards": true,
     "show_digital_delivery": true,
-    "enable_languages": false,
+    "enable_languages": true,
     "header_html": null,
     "footer_html": null,
     "footer_text": null,
