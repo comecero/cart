@@ -4067,7 +4067,10 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
         fromParams: fromParams
     });
 
-    function create(data, parameters, quiet) {
+    function create(data, parameters, quiet, fromParams) {
+
+        // The fromParams parameter indicates if this call is being made with a cart created from URL parameters.
+        // This helps determine how invalid promotion codes should be handled.
 
         var deferred = $q.defer();
         parameters = setDefaultParameters(parameters);
@@ -4088,8 +4091,22 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
             syncCurrency(cart.currency);
 
             deferred.resolve(cart);
+
         }, function (error) {
-            deferred.reject(error);
+
+            // If the error is 400, the error code is "invalid_promotion_code" and the cart was built from URL parameters, replay the request without the promotion code.
+            // This allows a user to still create a cart when the URL contains an invalid embedded promotion code, although without a promotion. But it allows the order to continue.
+            if (error.code == "invalid_promotion_code" && fromParams) {
+                delete data.promotion_code;
+                create(data, parameters, quiet, false).then(function (response) {
+                    deferred.resolve(response);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+            } else {
+                // Jus reject it
+                deferred.reject(error);
+            }
         });
 
         return deferred.promise;
@@ -4150,7 +4167,10 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
 
     }
 
-    function update(data, parameters, quiet) {
+    function update(data, parameters, quiet, fromParams) {
+
+        // The fromParams parameter indicates if this call is being made with a cart created from URL parameters.
+        // This helps determine how invalid promotion codes should be handled.
 
         var deferred = $q.defer();
         parameters = setDefaultParameters(parameters);
@@ -4172,19 +4192,32 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
 
             }, function (error) {
 
-                // If 404, perform a session reset.
-                if (error.status == 404) {
-                    HelperService.newSessionRedirect(true, "Performing a session reset due to an invalid cart_id in the cookie / request. (404 - cart not found)");
+                // If the error is 400, the error code is "invalid_promotion_code" and the cart was built from URL parameters, replay the request without the promotion code.
+                // This allows a user to still create a cart when the URL contains an invalid embedded promotion code, although without a promotion. But it allows the order to continue.
+                if (error.code == "invalid_promotion_code" && fromParams) {
+                    delete data.promotion_code;
+                    update(data, parameters, quiet, false).then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+                } else {
+                    // If 404, perform a session reset.
+                    if (error.status == 404) {
+                        HelperService.newSessionRedirect(true, "Performing a session reset due to an invalid cart_id in the cookie / request. (404 - cart not found)");
+                    }
+
+                    // If invalid state, then the cart is already closed, perform a session reset.
+                    if (error.code == "invalid_state") {
+                        // Delete the cart_id as it can no longer be modified.
+                        StorageService.remove("cart_id");
+                        HelperService.newSessionRedirect(false, "Performing a cart_id reset due to an invalid cart_id in the cookie / request. (422 - invalid state): " + error.message);
+                    }
+
+                    deferred.reject(error);
+
                 }
 
-                // If invalid state, then the cart is already closed, perform a session reset.
-                if (error.code == "invalid_state") {
-                    // Delete the cart_id as it can no longer be modified.
-                    StorageService.remove("cart_id");
-                    HelperService.newSessionRedirect(false, "Performing a cart_id reset due to an invalid cart_id in the cookie / request. (422 - invalid state): " + error.message);
-                }
-
-                deferred.reject(error);
             });
 
             return deferred.promise;
