@@ -369,6 +369,11 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
         // Make the payment available to the view.
         $scope.data.payment = payment;
 
+        // Invoke the conversion. If the user reloads the receipt page the conversion code will prevent the conversion from being recorded multiple times.
+        if (window.__conversion && window.__conversion.recordConversion) {
+            window.__conversion.recordConversion(payment.order.order_id);
+        }
+
         // Load unpopulated licenses as necessary.
         setTimeout(function () {
             getLicenses(payment.order.order_id);
