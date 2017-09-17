@@ -1,4 +1,10 @@
-﻿<a name="1.0.5"></a>
+﻿<a name="1.0.6"></a>
+# 1.0.6
+
+- Fix bug that prevented cart from loading when a bad coupon code was passed through the URL string
+- Update way that analytics and conversions are loaded to provide more complete data
+
+<a name="1.0.5"></a>
 # 1.0.5
 
 - Bug fix to prevent "getting license" spinner from appearing when a digital product is not configured to obtain a license.
