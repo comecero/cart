@@ -35,7 +35,7 @@
         cart = CartService.fromParams(cart, $location);
 
         // Update the cart. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
-        CartService.update(cart, $scope.data.params).then(function (cart) {
+        CartService.update(cart, $scope.data.params, false, true).then(function (cart) {
 
             // Set the scope on the cart.
             $scope.data.cart = cart;

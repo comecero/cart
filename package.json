@@ -1,0 +1,33 @@
+{
+  "name": "comecero-cart",
+  "version": "1.0.5",
+  "description": "A fully featured, highly customizable shopping cart ready for production use",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comecero/cart.git"
+  },
+  "author": "Comecero, LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/comecero/cart/issues"
+  },
+  "homepage": "https://github.com/comecero/cart#readme",
+  "devDependencies": {
+    "grunt-angular-gettext": "2.3.5",
+    "gulp": "3.9.1",
+    "gulp-batch": "1.0.5",
+    "gulp-concat": "2.6.0",
+    "gulp-less": "3.1.0",
+    "gulp-rename": "1.2.2",
+    "gulp-uglify": "2.0.0",
+    "gulp-watch": "4.3.9",
+    "gulp-sourcemaps": "2.6.0",
+    "gulp-header": "1.8.8",
+    "gulp-zip": "4.0.0",
+    "gulp-sass": "3.1.0",
+    "load-grunt-tasks": "3.5.2",
+    "run-sequence": "1.2.2",
+    "grunt": "1.0.1"
+  }
+}
