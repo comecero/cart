@@ -3,6 +3,7 @@
 
 - Fix bug that prevented cart from loading when a bad coupon code was passed through the URL string
 - Update way that analytics and conversions are loaded to provide more complete data
+- Integrate Kit version 1.0.4. See Kit release notes for changes.
 
 <a name="1.0.5"></a>
 # 1.0.5
