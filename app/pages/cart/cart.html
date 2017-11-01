@@ -1,6 +1,6 @@
 ﻿<div ng-controller="CartController">
 
-    <form name="form" customer-fields options="data.cart.options" items="data.cart.items" shipping-is-billing="data.shipping_is_billing" customer-background-save="data.cart" params="data.params" novalidate>
+    <form name="form" shipping-is-billing="data.shipping_is_billing" customer-background-save="data.cart" params="data.params" novalidate>
 
         <div class="dropdown pull-right currency-button spacer-b10" uib-dropdown ng-if="settings.account.currencies.length > 1">
             <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
