@@ -931,7 +931,8 @@ var duScrollDefaultEasing = function (e) { "use strict"; return .5 > e ? Math.po
 
  * Version: 2.5.0 - 2017-01-28
  * License: MIT
- */angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.alert","ui.bootstrap.dropdown","ui.bootstrap.multiMap","ui.bootstrap.position","ui.bootstrap.modal","ui.bootstrap.stackedMap"]),angular.module("ui.bootstrap.tpls",["uib/template/alert/alert.html","uib/template/modal/window.html"]),angular.module("ui.bootstrap.alert",[]).controller("UibAlertController",["$scope","$element","$attrs","$interpolate","$timeout",function(e,t,o,n,r){e.closeable=!!o.close,t.addClass("alert"),o.$set("role","alert"),e.closeable&&t.addClass("alert-dismissible");var i=angular.isDefined(o.dismissOnTimeout)?n(o.dismissOnTimeout)(e.$parent):null;i&&r(function(){e.close()},parseInt(i,10))}]).directive("uibAlert",function(){return{controller:"UibAlertController",controllerAs:"alert",restrict:"A",templateUrl:function(e,t){return t.templateUrl||"uib/template/alert/alert.html"},transclude:!0,scope:{close:"&"}}}),angular.module("ui.bootstrap.dropdown",["ui.bootstrap.multiMap","ui.bootstrap.position"]).constant("uibDropdownConfig",{appendToOpenClass:"uib-dropdown-open",openClass:"open"}).service("uibDropdownService",["$document","$rootScope","$$multiMap",function(e,t,o){var n=null,r=o.createNew();this.isOnlyOpen=function(e,t){var o=r.get(t);if(o){var n=o.reduce(function(t,o){return o.scope===e?o:t},{});if(n)return 1===o.length}return!1},this.open=function(t,o,a){if(n||e.on("click",i),n&&n!==t&&(n.isOpen=!1),n=t,a){var l=r.get(a);if(l){var s=l.map(function(e){return e.scope});-1===s.indexOf(t)&&r.put(a,{scope:t})}else r.put(a,{scope:t})}},this.close=function(t,o,a){if(n===t&&(e.off("click",i),e.off("keydown",this.keybindFilter),n=null),a){var l=r.get(a);if(l){var s=l.reduce(function(e,o){return o.scope===t?o:e},{});s&&r.remove(a,s)}}};var i=function(e){if(n&&n.isOpen&&!(e&&"disabled"===n.getAutoClose()||e&&3===e.which)){var o=n.getToggleElement();if(!(e&&o&&o[0].contains(e.target))){var r=n.getDropdownElement();e&&"outsideClick"===n.getAutoClose()&&r&&r[0].contains(e.target)||(n.focusToggleElement(),n.isOpen=!1,t.$$phase||n.$apply())}}};this.keybindFilter=function(e){if(n){var t=n.getDropdownElement(),o=n.getToggleElement(),r=t&&t[0].contains(e.target),a=o&&o[0].contains(e.target);27===e.which?(e.stopPropagation(),n.focusToggleElement(),i()):n.isKeynavEnabled()&&-1!==[38,40].indexOf(e.which)&&n.isOpen&&(r||a)&&(e.preventDefault(),e.stopPropagation(),n.focusDropdownEntry(e.which))}}}]).controller("UibDropdownController",["$scope","$element","$attrs","$parse","uibDropdownConfig","uibDropdownService","$animate","$uibPosition","$document","$compile","$templateRequest",function(e,t,o,n,r,i,a,l,s,d,u){function p(){t.append(m.dropdownMenu)}var c,f,m=this,h=e.$new(),g=r.appendToOpenClass,b=r.openClass,v=angular.noop,w=o.onToggle?n(o.onToggle):angular.noop,$=!1,y=s.find("body");t.addClass("dropdown"),this.init=function(){o.isOpen&&(f=n(o.isOpen),v=f.assign,e.$watch(f,function(e){h.isOpen=!!e})),$=angular.isDefined(o.keyboardNav)},this.toggle=function(e){return h.isOpen=arguments.length?!!e:!h.isOpen,angular.isFunction(v)&&v(h,h.isOpen),h.isOpen},this.isOpen=function(){return h.isOpen},h.getToggleElement=function(){return m.toggleElement},h.getAutoClose=function(){return o.autoClose||"always"},h.getElement=function(){return t},h.isKeynavEnabled=function(){return $},h.focusDropdownEntry=function(e){var o=m.dropdownMenu?angular.element(m.dropdownMenu).find("a"):t.find("ul").eq(0).find("a");switch(e){case 40:m.selectedOption=angular.isNumber(m.selectedOption)?m.selectedOption===o.length-1?m.selectedOption:m.selectedOption+1:0;break;case 38:m.selectedOption=angular.isNumber(m.selectedOption)?0===m.selectedOption?0:m.selectedOption-1:o.length-1}o[m.selectedOption].focus()},h.getDropdownElement=function(){return m.dropdownMenu},h.focusToggleElement=function(){m.toggleElement&&m.toggleElement[0].focus()},h.$watch("isOpen",function(r,f){var $=null,C=!1;if(angular.isDefined(o.dropdownAppendTo)){var k=n(o.dropdownAppendTo)(h);k&&($=angular.element(k))}if(angular.isDefined(o.dropdownAppendToBody)){var M=n(o.dropdownAppendToBody)(h);M!==!1&&(C=!0)}if(C&&!$&&($=y),$&&m.dropdownMenu&&(r?($.append(m.dropdownMenu),t.on("$destroy",p)):(t.off("$destroy",p),p())),$&&m.dropdownMenu){var E,O,T,D=l.positionElements(t,m.dropdownMenu,"bottom-left",!0),S=0;if(E={top:D.top+"px",display:r?"block":"none"},O=m.dropdownMenu.hasClass("dropdown-menu-right"),O?(E.left="auto",T=l.scrollbarPadding($),T.heightOverflow&&T.scrollbarWidth&&(S=T.scrollbarWidth),E.right=window.innerWidth-S-(D.left+t.prop("offsetWidth"))+"px"):(E.left=D.left+"px",E.right="auto"),!C){var x=l.offset($);E.top=D.top-x.top+"px",O?E.right=window.innerWidth-(D.left-x.left+t.prop("offsetWidth"))+"px":E.left=D.left-x.left+"px"}m.dropdownMenu.css(E)}var N=$?$:t,A=$?g:b,R=N.hasClass(A),I=i.isOnlyOpen(e,$);if(R===!r){var W;W=$?I?"removeClass":"addClass":r?"addClass":"removeClass",a[W](N,A).then(function(){angular.isDefined(r)&&r!==f&&w(e,{open:!!r})})}if(r)m.dropdownMenuTemplateUrl?u(m.dropdownMenuTemplateUrl).then(function(e){c=h.$new(),d(e.trim())(c,function(e){var t=e;m.dropdownMenu.replaceWith(t),m.dropdownMenu=t,s.on("keydown",i.keybindFilter)})}):s.on("keydown",i.keybindFilter),h.focusToggleElement(),i.open(h,t,$);else{if(i.close(h,t,$),m.dropdownMenuTemplateUrl){c&&c.$destroy();var F=angular.element('<ul class="dropdown-menu"></ul>');m.dropdownMenu.replaceWith(F),m.dropdownMenu=F}m.selectedOption=null}angular.isFunction(v)&&v(e,r)})}]).directive("uibDropdown",function(){return{controller:"UibDropdownController",link:function(e,t,o,n){n.init()}}}).directive("uibDropdownMenu",function(){return{restrict:"A",require:"?^uibDropdown",link:function(e,t,o,n){if(n&&!angular.isDefined(o.dropdownNested)){t.addClass("dropdown-menu");var r=o.templateUrl;r&&(n.dropdownMenuTemplateUrl=r),n.dropdownMenu||(n.dropdownMenu=t)}}}}).directive("uibDropdownToggle",function(){return{require:"?^uibDropdown",link:function(e,t,o,n){if(n){t.addClass("dropdown-toggle"),n.toggleElement=t;var r=function(r){r.preventDefault(),t.hasClass("disabled")||o.disabled||e.$apply(function(){n.toggle()})};t.on("click",r),t.attr({"aria-haspopup":!0,"aria-expanded":!1}),e.$watch(n.isOpen,function(e){t.attr("aria-expanded",!!e)}),e.$on("$destroy",function(){t.off("click",r)})}}}}),angular.module("ui.bootstrap.multiMap",[]).factory("$$multiMap",function(){return{createNew:function(){var e={};return{entries:function(){return Object.keys(e).map(function(t){return{key:t,value:e[t]}})},get:function(t){return e[t]},hasKey:function(t){return!!e[t]},keys:function(){return Object.keys(e)},put:function(t,o){e[t]||(e[t]=[]),e[t].push(o)},remove:function(t,o){var n=e[t];if(n){var r=n.indexOf(o);-1!==r&&n.splice(r,1),n.length||delete e[t]}}}}}}),angular.module("ui.bootstrap.position",[]).factory("$uibPosition",["$document","$window",function(e,t){var o,n,r={normal:/(auto|scroll)/,hidden:/(auto|scroll|hidden)/},i={auto:/\s?auto?\s?/i,primary:/^(top|bottom|left|right)$/,secondary:/^(top|bottom|left|right|center)$/,vertical:/^(top|bottom)$/},a=/(HTML|BODY)/;return{getRawNode:function(e){return e.nodeName?e:e[0]||e},parseStyle:function(e){return e=parseFloat(e),isFinite(e)?e:0},offsetParent:function(o){function n(e){return"static"===(t.getComputedStyle(e).position||"static")}o=this.getRawNode(o);for(var r=o.offsetParent||e[0].documentElement;r&&r!==e[0].documentElement&&n(r);)r=r.offsetParent;return r||e[0].documentElement},scrollbarWidth:function(r){if(r){if(angular.isUndefined(n)){var i=e.find("body");i.addClass("uib-position-body-scrollbar-measure"),n=t.innerWidth-i[0].clientWidth,n=isFinite(n)?n:0,i.removeClass("uib-position-body-scrollbar-measure")}return n}if(angular.isUndefined(o)){var a=angular.element('<div class="uib-position-scrollbar-measure"></div>');e.find("body").append(a),o=a[0].offsetWidth-a[0].clientWidth,o=isFinite(o)?o:0,a.remove()}return o},scrollbarPadding:function(e){e=this.getRawNode(e);var o=t.getComputedStyle(e),n=this.parseStyle(o.paddingRight),r=this.parseStyle(o.paddingBottom),i=this.scrollParent(e,!1,!0),l=this.scrollbarWidth(a.test(i.tagName));return{scrollbarWidth:l,widthOverflow:i.scrollWidth>i.clientWidth,right:n+l,originalRight:n,heightOverflow:i.scrollHeight>i.clientHeight,bottom:r+l,originalBottom:r}},isScrollable:function(e,o){e=this.getRawNode(e);var n=o?r.hidden:r.normal,i=t.getComputedStyle(e);return n.test(i.overflow+i.overflowY+i.overflowX)},scrollParent:function(o,n,i){o=this.getRawNode(o);var a=n?r.hidden:r.normal,l=e[0].documentElement,s=t.getComputedStyle(o);if(i&&a.test(s.overflow+s.overflowY+s.overflowX))return o;var d="absolute"===s.position,u=o.parentElement||l;if(u===l||"fixed"===s.position)return l;for(;u.parentElement&&u!==l;){var p=t.getComputedStyle(u);if(d&&"static"!==p.position&&(d=!1),!d&&a.test(p.overflow+p.overflowY+p.overflowX))break;u=u.parentElement}return u},position:function(o,n){o=this.getRawNode(o);var r=this.offset(o);if(n){var i=t.getComputedStyle(o);r.top-=this.parseStyle(i.marginTop),r.left-=this.parseStyle(i.marginLeft)}var a=this.offsetParent(o),l={top:0,left:0};return a!==e[0].documentElement&&(l=this.offset(a),l.top+=a.clientTop-a.scrollTop,l.left+=a.clientLeft-a.scrollLeft),{width:Math.round(angular.isNumber(r.width)?r.width:o.offsetWidth),height:Math.round(angular.isNumber(r.height)?r.height:o.offsetHeight),top:Math.round(r.top-l.top),left:Math.round(r.left-l.left)}},offset:function(o){o=this.getRawNode(o);var n=o.getBoundingClientRect();return{width:Math.round(angular.isNumber(n.width)?n.width:o.offsetWidth),height:Math.round(angular.isNumber(n.height)?n.height:o.offsetHeight),top:Math.round(n.top+(t.pageYOffset||e[0].documentElement.scrollTop)),left:Math.round(n.left+(t.pageXOffset||e[0].documentElement.scrollLeft))}},viewportOffset:function(o,n,r){o=this.getRawNode(o),r=r!==!1?!0:!1;var i=o.getBoundingClientRect(),a={top:0,left:0,bottom:0,right:0},l=n?e[0].documentElement:this.scrollParent(o),s=l.getBoundingClientRect();if(a.top=s.top+l.clientTop,a.left=s.left+l.clientLeft,l===e[0].documentElement&&(a.top+=t.pageYOffset,a.left+=t.pageXOffset),a.bottom=a.top+l.clientHeight,a.right=a.left+l.clientWidth,r){var d=t.getComputedStyle(l);a.top+=this.parseStyle(d.paddingTop),a.bottom-=this.parseStyle(d.paddingBottom),a.left+=this.parseStyle(d.paddingLeft),a.right-=this.parseStyle(d.paddingRight)}return{top:Math.round(i.top-a.top),bottom:Math.round(a.bottom-i.bottom),left:Math.round(i.left-a.left),right:Math.round(a.right-i.right)}},parsePlacement:function(e){var t=i.auto.test(e);return t&&(e=e.replace(i.auto,"")),e=e.split("-"),e[0]=e[0]||"top",i.primary.test(e[0])||(e[0]="top"),e[1]=e[1]||"center",i.secondary.test(e[1])||(e[1]="center"),e[2]=t?!0:!1,e},positionElements:function(e,o,n,r){e=this.getRawNode(e),o=this.getRawNode(o);var a=angular.isDefined(o.offsetWidth)?o.offsetWidth:o.prop("offsetWidth"),l=angular.isDefined(o.offsetHeight)?o.offsetHeight:o.prop("offsetHeight");n=this.parsePlacement(n);var s=r?this.offset(e):this.position(e),d={top:0,left:0,placement:""};if(n[2]){var u=this.viewportOffset(e,r),p=t.getComputedStyle(o),c={width:a+Math.round(Math.abs(this.parseStyle(p.marginLeft)+this.parseStyle(p.marginRight))),height:l+Math.round(Math.abs(this.parseStyle(p.marginTop)+this.parseStyle(p.marginBottom)))};if(n[0]="top"===n[0]&&c.height>u.top&&c.height<=u.bottom?"bottom":"bottom"===n[0]&&c.height>u.bottom&&c.height<=u.top?"top":"left"===n[0]&&c.width>u.left&&c.width<=u.right?"right":"right"===n[0]&&c.width>u.right&&c.width<=u.left?"left":n[0],n[1]="top"===n[1]&&c.height-s.height>u.bottom&&c.height-s.height<=u.top?"bottom":"bottom"===n[1]&&c.height-s.height>u.top&&c.height-s.height<=u.bottom?"top":"left"===n[1]&&c.width-s.width>u.right&&c.width-s.width<=u.left?"right":"right"===n[1]&&c.width-s.width>u.left&&c.width-s.width<=u.right?"left":n[1],"center"===n[1])if(i.vertical.test(n[0])){var f=s.width/2-a/2;u.left+f<0&&c.width-s.width<=u.right?n[1]="left":u.right+f<0&&c.width-s.width<=u.left&&(n[1]="right")}else{var m=s.height/2-c.height/2;u.top+m<0&&c.height-s.height<=u.bottom?n[1]="top":u.bottom+m<0&&c.height-s.height<=u.top&&(n[1]="bottom")}}switch(n[0]){case"top":d.top=s.top-l;break;case"bottom":d.top=s.top+s.height;break;case"left":d.left=s.left-a;break;case"right":d.left=s.left+s.width}switch(n[1]){case"top":d.top=s.top;break;case"bottom":d.top=s.top+s.height-l;break;case"left":d.left=s.left;break;case"right":d.left=s.left+s.width-a;break;case"center":i.vertical.test(n[0])?d.left=s.left+s.width/2-a/2:d.top=s.top+s.height/2-l/2}return d.top=Math.round(d.top),d.left=Math.round(d.left),d.placement="center"===n[1]?n[0]:n[0]+"-"+n[1],d},adjustTop:function(e,t,o,n){return-1!==e.indexOf("top")&&o!==n?{top:t.top-n+"px"}:void 0},positionArrow:function(e,o){e=this.getRawNode(e);var n=e.querySelector(".tooltip-inner, .popover-inner");if(n){var r=angular.element(n).hasClass("tooltip-inner"),a=e.querySelector(r?".tooltip-arrow":".arrow");if(a){var l={top:"",bottom:"",left:"",right:""};if(o=this.parsePlacement(o),"center"===o[1])return void angular.element(a).css(l);var s="border-"+o[0]+"-width",d=t.getComputedStyle(a)[s],u="border-";u+=i.vertical.test(o[0])?o[0]+"-"+o[1]:o[1]+"-"+o[0],u+="-radius";var p=t.getComputedStyle(r?n:e)[u];switch(o[0]){case"top":l.bottom=r?"0":"-"+d;break;case"bottom":l.top=r?"0":"-"+d;break;case"left":l.right=r?"0":"-"+d;break;case"right":l.left=r?"0":"-"+d}l[o[1]]=p,angular.element(a).css(l)}}}}}]),angular.module("ui.bootstrap.modal",["ui.bootstrap.multiMap","ui.bootstrap.stackedMap","ui.bootstrap.position"]).provider("$uibResolve",function(){var e=this;this.resolver=null,this.setResolver=function(e){this.resolver=e},this.$get=["$injector","$q",function(t,o){var n=e.resolver?t.get(e.resolver):null;return{resolve:function(e,r,i,a){if(n)return n.resolve(e,r,i,a);var l=[];return angular.forEach(e,function(e){l.push(angular.isFunction(e)||angular.isArray(e)?o.resolve(t.invoke(e)):angular.isString(e)?o.resolve(t.get(e)):o.resolve(e))}),o.all(l).then(function(t){var o={},n=0;return angular.forEach(e,function(e,r){o[r]=t[n++]}),o})}}}]}).directive("uibModalBackdrop",["$animate","$injector","$uibModalStack",function(e,t,o){function n(t,n,r){r.modalInClass&&(e.addClass(n,r.modalInClass),t.$on(o.NOW_CLOSING_EVENT,function(o,i){var a=i();t.modalOptions.animation?e.removeClass(n,r.modalInClass).then(a):a()}))}return{restrict:"A",compile:function(e,t){return e.addClass(t.backdropClass),n}}}]).directive("uibModalWindow",["$uibModalStack","$q","$animateCss","$document",function(e,t,o,n){return{scope:{index:"@"},restrict:"A",transclude:!0,templateUrl:function(e,t){return t.templateUrl||"uib/template/modal/window.html"},link:function(r,i,a){i.addClass(a.windowTopClass||""),r.size=a.size,r.close=function(t){var o=e.getTop();o&&o.value.backdrop&&"static"!==o.value.backdrop&&t.target===t.currentTarget&&(t.preventDefault(),t.stopPropagation(),e.dismiss(o.key,"backdrop click"))},i.on("click",r.close),r.$isRendered=!0;var l=t.defer();r.$$postDigest(function(){l.resolve()}),l.promise.then(function(){var l=null;a.modalInClass&&(l=o(i,{addClass:a.modalInClass}).start(),r.$on(e.NOW_CLOSING_EVENT,function(e,t){var n=t();o(i,{removeClass:a.modalInClass}).start().then(n)})),t.when(l).then(function(){var t=e.getTop();if(t&&e.modalRendered(t.key),!n[0].activeElement||!i[0].contains(n[0].activeElement)){var o=i[0].querySelector("[autofocus]");o?o.focus():i[0].focus()}})})}}}]).directive("uibModalAnimationClass",function(){return{compile:function(e,t){t.modalAnimation&&e.addClass(t.uibModalAnimationClass)}}}).directive("uibModalTransclude",["$animate",function(e){return{link:function(t,o,n,r,i){i(t.$parent,function(t){o.empty(),e.enter(t,o)})}}}]).factory("$uibModalStack",["$animate","$animateCss","$document","$compile","$rootScope","$q","$$multiMap","$$stackedMap","$uibPosition",function(e,t,o,n,r,i,a,l,s){function d(e){var t="-";return e.replace(x,function(e,o){return(o?t:"")+e.toLowerCase()})}function u(e){return!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length)}function p(){for(var e=-1,t=k.keys(),o=0;o<t.length;o++)k.get(t[o]).value.backdrop&&(e=o);return e>-1&&O>e&&(e=O),e}function c(e,t){var o=k.get(e).value,n=o.appendTo;k.remove(e),T=k.top(),T&&(O=parseInt(T.value.modalDomEl.attr("index"),10)),h(o.modalDomEl,o.modalScope,function(){var t=o.openedClass||C;M.remove(t,e);var r=M.hasKey(t);n.toggleClass(t,r),!r&&y&&y.heightOverflow&&y.scrollbarWidth&&(n.css(y.originalRight?{paddingRight:y.originalRight+"px"}:{paddingRight:""}),y=null),f(!0)},o.closedDeferred),m(),t&&t.focus?t.focus():n.focus&&n.focus()}function f(e){var t;k.length()>0&&(t=k.top().value,t.modalDomEl.toggleClass(t.windowTopClass||"",e))}function m(){if(w&&-1===p()){var e=$;h(w,$,function(){e=null}),w=void 0,$=void 0}}function h(t,o,n,r){function a(){a.done||(a.done=!0,e.leave(t).then(function(){n&&n(),t.remove(),r&&r.resolve()}),o.$destroy())}var l,s=null,d=function(){return l||(l=i.defer(),s=l.promise),function(){l.resolve()}};return o.$broadcast(E.NOW_CLOSING_EVENT,d),i.when(s).then(a)}function g(e){if(e.isDefaultPrevented())return e;var t=k.top();if(t)switch(e.which){case 27:t.value.keyboard&&(e.preventDefault(),r.$apply(function(){E.dismiss(t.key,"escape key press")}));break;case 9:var o=E.loadFocusElementList(t),n=!1;e.shiftKey?(E.isFocusInFirstItem(e,o)||E.isModalFocused(e,t))&&(n=E.focusLastFocusableElement(o)):E.isFocusInLastItem(e,o)&&(n=E.focusFirstFocusableElement(o)),n&&(e.preventDefault(),e.stopPropagation())}}function b(e,t,o){return!e.value.modalScope.$broadcast("modal.closing",t,o).defaultPrevented}function v(){Array.prototype.forEach.call(document.querySelectorAll("["+D+"]"),function(e){var t=parseInt(e.getAttribute(D),10),o=t-1;e.setAttribute(D,o),o||(e.removeAttribute(D),e.removeAttribute("aria-hidden"))})}var w,$,y,C="modal-open",k=l.createNew(),M=a.createNew(),E={NOW_CLOSING_EVENT:"modal.stack.now-closing"},O=0,T=null,D="data-bootstrap-modal-aria-hidden-count",S="a[href], area[href], input:not([disabled]):not([tabindex='-1']), button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']), textarea:not([disabled]):not([tabindex='-1']), iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true]",x=/[A-Z]/g;return r.$watch(p,function(e){$&&($.index=e)}),o.on("keydown",g),r.$on("$destroy",function(){o.off("keydown",g)}),E.open=function(t,i){function a(e){function t(e){var t=e.parent()?e.parent().children():[];return Array.prototype.filter.call(t,function(t){return t!==e[0]})}if(e&&"BODY"!==e[0].tagName)return t(e).forEach(function(e){var t="true"===e.getAttribute("aria-hidden"),o=parseInt(e.getAttribute(D),10);o||(o=t?1:0),e.setAttribute(D,o+1),e.setAttribute("aria-hidden","true")}),a(e.parent())}var l=o[0].activeElement,u=i.openedClass||C;f(!1),T=k.top(),k.add(t,{deferred:i.deferred,renderDeferred:i.renderDeferred,closedDeferred:i.closedDeferred,modalScope:i.scope,backdrop:i.backdrop,keyboard:i.keyboard,openedClass:i.openedClass,windowTopClass:i.windowTopClass,animation:i.animation,appendTo:i.appendTo}),M.put(u,t);var c=i.appendTo,m=p();m>=0&&!w&&($=r.$new(!0),$.modalOptions=i,$.index=m,w=angular.element('<div uib-modal-backdrop="modal-backdrop"></div>'),w.attr({"class":"modal-backdrop","ng-style":"{'z-index': 1040 + (index && 1 || 0) + index*10}","uib-modal-animation-class":"fade","modal-in-class":"in"}),i.backdropClass&&w.addClass(i.backdropClass),i.animation&&w.attr("modal-animation","true"),n(w)($),e.enter(w,c),s.isScrollable(c)&&(y=s.scrollbarPadding(c),y.heightOverflow&&y.scrollbarWidth&&c.css({paddingRight:y.right+"px"})));var h;i.component?(h=document.createElement(d(i.component.name)),h=angular.element(h),h.attr({resolve:"$resolve","modal-instance":"$uibModalInstance",close:"$close($value)",dismiss:"$dismiss($value)"})):h=i.content,O=T?parseInt(T.value.modalDomEl.attr("index"),10)+1:0;var g=angular.element('<div uib-modal-window="modal-window"></div>');g.attr({"class":"modal","template-url":i.windowTemplateUrl,"window-top-class":i.windowTopClass,role:"dialog","aria-labelledby":i.ariaLabelledBy,"aria-describedby":i.ariaDescribedBy,size:i.size,index:O,animate:"animate","ng-style":"{'z-index': 1050 + $$topModalIndex*10, display: 'block'}",tabindex:-1,"uib-modal-animation-class":"fade","modal-in-class":"in"}).append(h),i.windowClass&&g.addClass(i.windowClass),i.animation&&g.attr("modal-animation","true"),c.addClass(u),i.scope&&(i.scope.$$topModalIndex=O),e.enter(n(g)(i.scope),c),k.top().value.modalDomEl=g,k.top().value.modalOpener=l,a(g)},E.close=function(e,t){var o=k.get(e);return v(),o&&b(o,t,!0)?(o.value.modalScope.$$uibDestructionScheduled=!0,o.value.deferred.resolve(t),c(e,o.value.modalOpener),!0):!o},E.dismiss=function(e,t){var o=k.get(e);return v(),o&&b(o,t,!1)?(o.value.modalScope.$$uibDestructionScheduled=!0,o.value.deferred.reject(t),c(e,o.value.modalOpener),!0):!o},E.dismissAll=function(e){for(var t=this.getTop();t&&this.dismiss(t.key,e);)t=this.getTop()},E.getTop=function(){return k.top()},E.modalRendered=function(e){var t=k.get(e);t&&t.value.renderDeferred.resolve()},E.focusFirstFocusableElement=function(e){return e.length>0?(e[0].focus(),!0):!1},E.focusLastFocusableElement=function(e){return e.length>0?(e[e.length-1].focus(),!0):!1},E.isModalFocused=function(e,t){if(e&&t){var o=t.value.modalDomEl;if(o&&o.length)return(e.target||e.srcElement)===o[0]}return!1},E.isFocusInFirstItem=function(e,t){return t.length>0?(e.target||e.srcElement)===t[0]:!1},E.isFocusInLastItem=function(e,t){return t.length>0?(e.target||e.srcElement)===t[t.length-1]:!1},E.loadFocusElementList=function(e){if(e){var t=e.value.modalDomEl;if(t&&t.length){var o=t[0].querySelectorAll(S);return o?Array.prototype.filter.call(o,function(e){return u(e)}):o}}},E}]).provider("$uibModal",function(){var e={options:{animation:!0,backdrop:!0,keyboard:!0},$get:["$rootScope","$q","$document","$templateRequest","$controller","$uibResolve","$uibModalStack",function(t,o,n,r,i,a,l){function s(e){return e.template?o.when(e.template):r(angular.isFunction(e.templateUrl)?e.templateUrl():e.templateUrl)}var d={},u=null;return d.getPromiseChain=function(){return u},d.open=function(r){function d(){return g}var p=o.defer(),c=o.defer(),f=o.defer(),m=o.defer(),h={result:p.promise,opened:c.promise,closed:f.promise,rendered:m.promise,close:function(e){return l.close(h,e)},dismiss:function(e){return l.dismiss(h,e)}};if(r=angular.extend({},e.options,r),r.resolve=r.resolve||{},r.appendTo=r.appendTo||n.find("body").eq(0),!r.appendTo.length)throw new Error("appendTo element not found. Make sure that the element passed is in DOM.");if(!r.component&&!r.template&&!r.templateUrl)throw new Error("One of component or template or templateUrl options is required.");var g;g=r.component?o.when(a.resolve(r.resolve,{},null,null)):o.all([s(r),a.resolve(r.resolve,{},null,null)]);var b;return b=u=o.all([u]).then(d,d).then(function(e){function o(t,o,n,r){t.$scope=a,t.$scope.$resolve={},n?t.$scope.$uibModalInstance=h:t.$uibModalInstance=h;var i=o?e[1]:e;angular.forEach(i,function(e,o){r&&(t[o]=e),t.$scope.$resolve[o]=e})}var n=r.scope||t,a=n.$new();a.$close=h.close,a.$dismiss=h.dismiss,a.$on("$destroy",function(){a.$$uibDestructionScheduled||a.$dismiss("$uibUnscheduledDestruction")});var s,d,u={scope:a,deferred:p,renderDeferred:m,closedDeferred:f,animation:r.animation,backdrop:r.backdrop,keyboard:r.keyboard,backdropClass:r.backdropClass,windowTopClass:r.windowTopClass,windowClass:r.windowClass,windowTemplateUrl:r.windowTemplateUrl,ariaLabelledBy:r.ariaLabelledBy,ariaDescribedBy:r.ariaDescribedBy,size:r.size,openedClass:r.openedClass,appendTo:r.appendTo},g={},b={};r.component?(o(g,!1,!0,!1),g.name=r.component,u.component=g):r.controller&&(o(b,!0,!1,!0),d=i(r.controller,b,!0,r.controllerAs),r.controllerAs&&r.bindToController&&(s=d.instance,s.$close=a.$close,s.$dismiss=a.$dismiss,angular.extend(s,{$resolve:b.$scope.$resolve},n)),s=d(),angular.isFunction(s.$onInit)&&s.$onInit()),r.component||(u.content=e[0]),l.open(h,u),c.resolve(!0)},function(e){c.reject(e),p.reject(e)})["finally"](function(){u===b&&(u=null)}),h},d}]};return e}),angular.module("ui.bootstrap.stackedMap",[]).factory("$$stackedMap",function(){return{createNew:function(){var e=[];return{add:function(t,o){e.push({key:t,value:o})},get:function(t){for(var o=0;o<e.length;o++)if(t===e[o].key)return e[o]},keys:function(){for(var t=[],o=0;o<e.length;o++)t.push(e[o].key);return t},top:function(){return e[e.length-1]},remove:function(t){for(var o=-1,n=0;n<e.length;n++)if(t===e[n].key){o=n;break}return e.splice(o,1)[0]},removeTop:function(){return e.pop()},length:function(){return e.length}}}}}),angular.module("uib/template/alert/alert.html",[]).run(["$templateCache",function(e){e.put("uib/template/alert/alert.html",'<button ng-show="closeable" type="button" class="close" ng-click="close({$event: $event})">\n  <span aria-hidden="true">&times;</span>\n  <span class="sr-only">Close</span>\n</button>\n<div ng-transclude></div>\n')}]),angular.module("uib/template/modal/window.html",[]).run(["$templateCache",function(e){e.put("uib/template/modal/window.html","<div class=\"modal-dialog {{size ? 'modal-' + size : ''}}\"><div class=\"modal-content\" uib-modal-transclude></div></div>\n")}]),angular.module("ui.bootstrap.position").run(function(){!angular.$$csp().noInlineStyle&&!angular.$$uibPositionCss&&angular.element(document).find("head").prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style>'),angular.$$uibPositionCss=!0});
+ */
+angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.alert", "ui.bootstrap.dropdown", "ui.bootstrap.multiMap", "ui.bootstrap.position", "ui.bootstrap.modal", "ui.bootstrap.stackedMap"]), angular.module("ui.bootstrap.tpls", ["uib/template/alert/alert.html", "uib/template/modal/window.html"]), angular.module("ui.bootstrap.alert", []).controller("UibAlertController", ["$scope", "$element", "$attrs", "$interpolate", "$timeout", function (e, t, o, n, r) { e.closeable = !!o.close, t.addClass("alert"), o.$set("role", "alert"), e.closeable && t.addClass("alert-dismissible"); var i = angular.isDefined(o.dismissOnTimeout) ? n(o.dismissOnTimeout)(e.$parent) : null; i && r(function () { e.close() }, parseInt(i, 10)) }]).directive("uibAlert", function () { return { controller: "UibAlertController", controllerAs: "alert", restrict: "A", templateUrl: function (e, t) { return t.templateUrl || "uib/template/alert/alert.html" }, transclude: !0, scope: { close: "&" } } }), angular.module("ui.bootstrap.dropdown", ["ui.bootstrap.multiMap", "ui.bootstrap.position"]).constant("uibDropdownConfig", { appendToOpenClass: "uib-dropdown-open", openClass: "open" }).service("uibDropdownService", ["$document", "$rootScope", "$$multiMap", function (e, t, o) { var n = null, r = o.createNew(); this.isOnlyOpen = function (e, t) { var o = r.get(t); if (o) { var n = o.reduce(function (t, o) { return o.scope === e ? o : t }, {}); if (n) return 1 === o.length } return !1 }, this.open = function (t, o, a) { if (n || e.on("click", i), n && n !== t && (n.isOpen = !1), n = t, a) { var l = r.get(a); if (l) { var s = l.map(function (e) { return e.scope }); -1 === s.indexOf(t) && r.put(a, { scope: t }) } else r.put(a, { scope: t }) } }, this.close = function (t, o, a) { if (n === t && (e.off("click", i), e.off("keydown", this.keybindFilter), n = null), a) { var l = r.get(a); if (l) { var s = l.reduce(function (e, o) { return o.scope === t ? o : e }, {}); s && r.remove(a, s) } } }; var i = function (e) { if (n && n.isOpen && !(e && "disabled" === n.getAutoClose() || e && 3 === e.which)) { var o = n.getToggleElement(); if (!(e && o && o[0].contains(e.target))) { var r = n.getDropdownElement(); e && "outsideClick" === n.getAutoClose() && r && r[0].contains(e.target) || (n.focusToggleElement(), n.isOpen = !1, t.$$phase || n.$apply()) } } }; this.keybindFilter = function (e) { if (n) { var t = n.getDropdownElement(), o = n.getToggleElement(), r = t && t[0].contains(e.target), a = o && o[0].contains(e.target); 27 === e.which ? (e.stopPropagation(), n.focusToggleElement(), i()) : n.isKeynavEnabled() && -1 !== [38, 40].indexOf(e.which) && n.isOpen && (r || a) && (e.preventDefault(), e.stopPropagation(), n.focusDropdownEntry(e.which)) } } }]).controller("UibDropdownController", ["$scope", "$element", "$attrs", "$parse", "uibDropdownConfig", "uibDropdownService", "$animate", "$uibPosition", "$document", "$compile", "$templateRequest", function (e, t, o, n, r, i, a, l, s, d, u) { function p() { t.append(m.dropdownMenu) } var c, f, m = this, h = e.$new(), g = r.appendToOpenClass, b = r.openClass, v = angular.noop, w = o.onToggle ? n(o.onToggle) : angular.noop, $ = !1, y = s.find("body"); t.addClass("dropdown"), this.init = function () { o.isOpen && (f = n(o.isOpen), v = f.assign, e.$watch(f, function (e) { h.isOpen = !!e })), $ = angular.isDefined(o.keyboardNav) }, this.toggle = function (e) { return h.isOpen = arguments.length ? !!e : !h.isOpen, angular.isFunction(v) && v(h, h.isOpen), h.isOpen }, this.isOpen = function () { return h.isOpen }, h.getToggleElement = function () { return m.toggleElement }, h.getAutoClose = function () { return o.autoClose || "always" }, h.getElement = function () { return t }, h.isKeynavEnabled = function () { return $ }, h.focusDropdownEntry = function (e) { var o = m.dropdownMenu ? angular.element(m.dropdownMenu).find("a") : t.find("ul").eq(0).find("a"); switch (e) { case 40: m.selectedOption = angular.isNumber(m.selectedOption) ? m.selectedOption === o.length - 1 ? m.selectedOption : m.selectedOption + 1 : 0; break; case 38: m.selectedOption = angular.isNumber(m.selectedOption) ? 0 === m.selectedOption ? 0 : m.selectedOption - 1 : o.length - 1 } o[m.selectedOption].focus() }, h.getDropdownElement = function () { return m.dropdownMenu }, h.focusToggleElement = function () { m.toggleElement && m.toggleElement[0].focus() }, h.$watch("isOpen", function (r, f) { var $ = null, C = !1; if (angular.isDefined(o.dropdownAppendTo)) { var k = n(o.dropdownAppendTo)(h); k && ($ = angular.element(k)) } if (angular.isDefined(o.dropdownAppendToBody)) { var M = n(o.dropdownAppendToBody)(h); M !== !1 && (C = !0) } if (C && !$ && ($ = y), $ && m.dropdownMenu && (r ? ($.append(m.dropdownMenu), t.on("$destroy", p)) : (t.off("$destroy", p), p())), $ && m.dropdownMenu) { var E, O, T, D = l.positionElements(t, m.dropdownMenu, "bottom-left", !0), S = 0; if (E = { top: D.top + "px", display: r ? "block" : "none" }, O = m.dropdownMenu.hasClass("dropdown-menu-right"), O ? (E.left = "auto", T = l.scrollbarPadding($), T.heightOverflow && T.scrollbarWidth && (S = T.scrollbarWidth), E.right = window.innerWidth - S - (D.left + t.prop("offsetWidth")) + "px") : (E.left = D.left + "px", E.right = "auto"), !C) { var x = l.offset($); E.top = D.top - x.top + "px", O ? E.right = window.innerWidth - (D.left - x.left + t.prop("offsetWidth")) + "px" : E.left = D.left - x.left + "px" } m.dropdownMenu.css(E) } var N = $ ? $ : t, A = $ ? g : b, R = N.hasClass(A), I = i.isOnlyOpen(e, $); if (R === !r) { var W; W = $ ? I ? "removeClass" : "addClass" : r ? "addClass" : "removeClass", a[W](N, A).then(function () { angular.isDefined(r) && r !== f && w(e, { open: !!r }) }) } if (r) m.dropdownMenuTemplateUrl ? u(m.dropdownMenuTemplateUrl).then(function (e) { c = h.$new(), d(e.trim())(c, function (e) { var t = e; m.dropdownMenu.replaceWith(t), m.dropdownMenu = t, s.on("keydown", i.keybindFilter) }) }) : s.on("keydown", i.keybindFilter), h.focusToggleElement(), i.open(h, t, $); else { if (i.close(h, t, $), m.dropdownMenuTemplateUrl) { c && c.$destroy(); var F = angular.element('<ul class="dropdown-menu"></ul>'); m.dropdownMenu.replaceWith(F), m.dropdownMenu = F } m.selectedOption = null } angular.isFunction(v) && v(e, r) }) }]).directive("uibDropdown", function () { return { controller: "UibDropdownController", link: function (e, t, o, n) { n.init() } } }).directive("uibDropdownMenu", function () { return { restrict: "A", require: "?^uibDropdown", link: function (e, t, o, n) { if (n && !angular.isDefined(o.dropdownNested)) { t.addClass("dropdown-menu"); var r = o.templateUrl; r && (n.dropdownMenuTemplateUrl = r), n.dropdownMenu || (n.dropdownMenu = t) } } } }).directive("uibDropdownToggle", function () { return { require: "?^uibDropdown", link: function (e, t, o, n) { if (n) { t.addClass("dropdown-toggle"), n.toggleElement = t; var r = function (r) { r.preventDefault(), t.hasClass("disabled") || o.disabled || e.$apply(function () { n.toggle() }) }; t.on("click", r), t.attr({ "aria-haspopup": !0, "aria-expanded": !1 }), e.$watch(n.isOpen, function (e) { t.attr("aria-expanded", !!e) }), e.$on("$destroy", function () { t.off("click", r) }) } } } }), angular.module("ui.bootstrap.multiMap", []).factory("$$multiMap", function () { return { createNew: function () { var e = {}; return { entries: function () { return Object.keys(e).map(function (t) { return { key: t, value: e[t] } }) }, get: function (t) { return e[t] }, hasKey: function (t) { return !!e[t] }, keys: function () { return Object.keys(e) }, put: function (t, o) { e[t] || (e[t] = []), e[t].push(o) }, remove: function (t, o) { var n = e[t]; if (n) { var r = n.indexOf(o); -1 !== r && n.splice(r, 1), n.length || delete e[t] } } } } } }), angular.module("ui.bootstrap.position", []).factory("$uibPosition", ["$document", "$window", function (e, t) { var o, n, r = { normal: /(auto|scroll)/, hidden: /(auto|scroll|hidden)/ }, i = { auto: /\s?auto?\s?/i, primary: /^(top|bottom|left|right)$/, secondary: /^(top|bottom|left|right|center)$/, vertical: /^(top|bottom)$/ }, a = /(HTML|BODY)/; return { getRawNode: function (e) { return e.nodeName ? e : e[0] || e }, parseStyle: function (e) { return e = parseFloat(e), isFinite(e) ? e : 0 }, offsetParent: function (o) { function n(e) { return "static" === (t.getComputedStyle(e).position || "static") } o = this.getRawNode(o); for (var r = o.offsetParent || e[0].documentElement; r && r !== e[0].documentElement && n(r) ;) r = r.offsetParent; return r || e[0].documentElement }, scrollbarWidth: function (r) { if (r) { if (angular.isUndefined(n)) { var i = e.find("body"); i.addClass("uib-position-body-scrollbar-measure"), n = t.innerWidth - i[0].clientWidth, n = isFinite(n) ? n : 0, i.removeClass("uib-position-body-scrollbar-measure") } return n } if (angular.isUndefined(o)) { var a = angular.element('<div class="uib-position-scrollbar-measure"></div>'); e.find("body").append(a), o = a[0].offsetWidth - a[0].clientWidth, o = isFinite(o) ? o : 0, a.remove() } return o }, scrollbarPadding: function (e) { e = this.getRawNode(e); var o = t.getComputedStyle(e), n = this.parseStyle(o.paddingRight), r = this.parseStyle(o.paddingBottom), i = this.scrollParent(e, !1, !0), l = this.scrollbarWidth(a.test(i.tagName)); return { scrollbarWidth: l, widthOverflow: i.scrollWidth > i.clientWidth, right: n + l, originalRight: n, heightOverflow: i.scrollHeight > i.clientHeight, bottom: r + l, originalBottom: r } }, isScrollable: function (e, o) { e = this.getRawNode(e); var n = o ? r.hidden : r.normal, i = t.getComputedStyle(e); return n.test(i.overflow + i.overflowY + i.overflowX) }, scrollParent: function (o, n, i) { o = this.getRawNode(o); var a = n ? r.hidden : r.normal, l = e[0].documentElement, s = t.getComputedStyle(o); if (i && a.test(s.overflow + s.overflowY + s.overflowX)) return o; var d = "absolute" === s.position, u = o.parentElement || l; if (u === l || "fixed" === s.position) return l; for (; u.parentElement && u !== l;) { var p = t.getComputedStyle(u); if (d && "static" !== p.position && (d = !1), !d && a.test(p.overflow + p.overflowY + p.overflowX)) break; u = u.parentElement } return u }, position: function (o, n) { o = this.getRawNode(o); var r = this.offset(o); if (n) { var i = t.getComputedStyle(o); r.top -= this.parseStyle(i.marginTop), r.left -= this.parseStyle(i.marginLeft) } var a = this.offsetParent(o), l = { top: 0, left: 0 }; return a !== e[0].documentElement && (l = this.offset(a), l.top += a.clientTop - a.scrollTop, l.left += a.clientLeft - a.scrollLeft), { width: Math.round(angular.isNumber(r.width) ? r.width : o.offsetWidth), height: Math.round(angular.isNumber(r.height) ? r.height : o.offsetHeight), top: Math.round(r.top - l.top), left: Math.round(r.left - l.left) } }, offset: function (o) { o = this.getRawNode(o); var n = o.getBoundingClientRect(); return { width: Math.round(angular.isNumber(n.width) ? n.width : o.offsetWidth), height: Math.round(angular.isNumber(n.height) ? n.height : o.offsetHeight), top: Math.round(n.top + (t.pageYOffset || e[0].documentElement.scrollTop)), left: Math.round(n.left + (t.pageXOffset || e[0].documentElement.scrollLeft)) } }, viewportOffset: function (o, n, r) { o = this.getRawNode(o), r = r !== !1 ? !0 : !1; var i = o.getBoundingClientRect(), a = { top: 0, left: 0, bottom: 0, right: 0 }, l = n ? e[0].documentElement : this.scrollParent(o), s = l.getBoundingClientRect(); if (a.top = s.top + l.clientTop, a.left = s.left + l.clientLeft, l === e[0].documentElement && (a.top += t.pageYOffset, a.left += t.pageXOffset), a.bottom = a.top + l.clientHeight, a.right = a.left + l.clientWidth, r) { var d = t.getComputedStyle(l); a.top += this.parseStyle(d.paddingTop), a.bottom -= this.parseStyle(d.paddingBottom), a.left += this.parseStyle(d.paddingLeft), a.right -= this.parseStyle(d.paddingRight) } return { top: Math.round(i.top - a.top), bottom: Math.round(a.bottom - i.bottom), left: Math.round(i.left - a.left), right: Math.round(a.right - i.right) } }, parsePlacement: function (e) { var t = i.auto.test(e); return t && (e = e.replace(i.auto, "")), e = e.split("-"), e[0] = e[0] || "top", i.primary.test(e[0]) || (e[0] = "top"), e[1] = e[1] || "center", i.secondary.test(e[1]) || (e[1] = "center"), e[2] = t ? !0 : !1, e }, positionElements: function (e, o, n, r) { e = this.getRawNode(e), o = this.getRawNode(o); var a = angular.isDefined(o.offsetWidth) ? o.offsetWidth : o.prop("offsetWidth"), l = angular.isDefined(o.offsetHeight) ? o.offsetHeight : o.prop("offsetHeight"); n = this.parsePlacement(n); var s = r ? this.offset(e) : this.position(e), d = { top: 0, left: 0, placement: "" }; if (n[2]) { var u = this.viewportOffset(e, r), p = t.getComputedStyle(o), c = { width: a + Math.round(Math.abs(this.parseStyle(p.marginLeft) + this.parseStyle(p.marginRight))), height: l + Math.round(Math.abs(this.parseStyle(p.marginTop) + this.parseStyle(p.marginBottom))) }; if (n[0] = "top" === n[0] && c.height > u.top && c.height <= u.bottom ? "bottom" : "bottom" === n[0] && c.height > u.bottom && c.height <= u.top ? "top" : "left" === n[0] && c.width > u.left && c.width <= u.right ? "right" : "right" === n[0] && c.width > u.right && c.width <= u.left ? "left" : n[0], n[1] = "top" === n[1] && c.height - s.height > u.bottom && c.height - s.height <= u.top ? "bottom" : "bottom" === n[1] && c.height - s.height > u.top && c.height - s.height <= u.bottom ? "top" : "left" === n[1] && c.width - s.width > u.right && c.width - s.width <= u.left ? "right" : "right" === n[1] && c.width - s.width > u.left && c.width - s.width <= u.right ? "left" : n[1], "center" === n[1]) if (i.vertical.test(n[0])) { var f = s.width / 2 - a / 2; u.left + f < 0 && c.width - s.width <= u.right ? n[1] = "left" : u.right + f < 0 && c.width - s.width <= u.left && (n[1] = "right") } else { var m = s.height / 2 - c.height / 2; u.top + m < 0 && c.height - s.height <= u.bottom ? n[1] = "top" : u.bottom + m < 0 && c.height - s.height <= u.top && (n[1] = "bottom") } } switch (n[0]) { case "top": d.top = s.top - l; break; case "bottom": d.top = s.top + s.height; break; case "left": d.left = s.left - a; break; case "right": d.left = s.left + s.width } switch (n[1]) { case "top": d.top = s.top; break; case "bottom": d.top = s.top + s.height - l; break; case "left": d.left = s.left; break; case "right": d.left = s.left + s.width - a; break; case "center": i.vertical.test(n[0]) ? d.left = s.left + s.width / 2 - a / 2 : d.top = s.top + s.height / 2 - l / 2 } return d.top = Math.round(d.top), d.left = Math.round(d.left), d.placement = "center" === n[1] ? n[0] : n[0] + "-" + n[1], d }, adjustTop: function (e, t, o, n) { return -1 !== e.indexOf("top") && o !== n ? { top: t.top - n + "px" } : void 0 }, positionArrow: function (e, o) { e = this.getRawNode(e); var n = e.querySelector(".tooltip-inner, .popover-inner"); if (n) { var r = angular.element(n).hasClass("tooltip-inner"), a = e.querySelector(r ? ".tooltip-arrow" : ".arrow"); if (a) { var l = { top: "", bottom: "", left: "", right: "" }; if (o = this.parsePlacement(o), "center" === o[1]) return void angular.element(a).css(l); var s = "border-" + o[0] + "-width", d = t.getComputedStyle(a)[s], u = "border-"; u += i.vertical.test(o[0]) ? o[0] + "-" + o[1] : o[1] + "-" + o[0], u += "-radius"; var p = t.getComputedStyle(r ? n : e)[u]; switch (o[0]) { case "top": l.bottom = r ? "0" : "-" + d; break; case "bottom": l.top = r ? "0" : "-" + d; break; case "left": l.right = r ? "0" : "-" + d; break; case "right": l.left = r ? "0" : "-" + d } l[o[1]] = p, angular.element(a).css(l) } } } } }]), angular.module("ui.bootstrap.modal", ["ui.bootstrap.multiMap", "ui.bootstrap.stackedMap", "ui.bootstrap.position"]).provider("$uibResolve", function () { var e = this; this.resolver = null, this.setResolver = function (e) { this.resolver = e }, this.$get = ["$injector", "$q", function (t, o) { var n = e.resolver ? t.get(e.resolver) : null; return { resolve: function (e, r, i, a) { if (n) return n.resolve(e, r, i, a); var l = []; return angular.forEach(e, function (e) { l.push(angular.isFunction(e) || angular.isArray(e) ? o.resolve(t.invoke(e)) : angular.isString(e) ? o.resolve(t.get(e)) : o.resolve(e)) }), o.all(l).then(function (t) { var o = {}, n = 0; return angular.forEach(e, function (e, r) { o[r] = t[n++] }), o }) } } }] }).directive("uibModalBackdrop", ["$animate", "$injector", "$uibModalStack", function (e, t, o) { function n(t, n, r) { r.modalInClass && (e.addClass(n, r.modalInClass), t.$on(o.NOW_CLOSING_EVENT, function (o, i) { var a = i(); t.modalOptions.animation ? e.removeClass(n, r.modalInClass).then(a) : a() })) } return { restrict: "A", compile: function (e, t) { return e.addClass(t.backdropClass), n } } }]).directive("uibModalWindow", ["$uibModalStack", "$q", "$animateCss", "$document", function (e, t, o, n) { return { scope: { index: "@" }, restrict: "A", transclude: !0, templateUrl: function (e, t) { return t.templateUrl || "uib/template/modal/window.html" }, link: function (r, i, a) { i.addClass(a.windowTopClass || ""), r.size = a.size, r.close = function (t) { var o = e.getTop(); o && o.value.backdrop && "static" !== o.value.backdrop && t.target === t.currentTarget && (t.preventDefault(), t.stopPropagation(), e.dismiss(o.key, "backdrop click")) }, i.on("click", r.close), r.$isRendered = !0; var l = t.defer(); r.$$postDigest(function () { l.resolve() }), l.promise.then(function () { var l = null; a.modalInClass && (l = o(i, { addClass: a.modalInClass }).start(), r.$on(e.NOW_CLOSING_EVENT, function (e, t) { var n = t(); o(i, { removeClass: a.modalInClass }).start().then(n) })), t.when(l).then(function () { var t = e.getTop(); if (t && e.modalRendered(t.key), !n[0].activeElement || !i[0].contains(n[0].activeElement)) { var o = i[0].querySelector("[autofocus]"); o ? o.focus() : i[0].focus() } }) }) } } }]).directive("uibModalAnimationClass", function () { return { compile: function (e, t) { t.modalAnimation && e.addClass(t.uibModalAnimationClass) } } }).directive("uibModalTransclude", ["$animate", function (e) { return { link: function (t, o, n, r, i) { i(t.$parent, function (t) { o.empty(), e.enter(t, o) }) } } }]).factory("$uibModalStack", ["$animate", "$animateCss", "$document", "$compile", "$rootScope", "$q", "$$multiMap", "$$stackedMap", "$uibPosition", function (e, t, o, n, r, i, a, l, s) { function d(e) { var t = "-"; return e.replace(x, function (e, o) { return (o ? t : "") + e.toLowerCase() }) } function u(e) { return !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length) } function p() { for (var e = -1, t = k.keys(), o = 0; o < t.length; o++) k.get(t[o]).value.backdrop && (e = o); return e > -1 && O > e && (e = O), e } function c(e, t) { var o = k.get(e).value, n = o.appendTo; k.remove(e), T = k.top(), T && (O = parseInt(T.value.modalDomEl.attr("index"), 10)), h(o.modalDomEl, o.modalScope, function () { var t = o.openedClass || C; M.remove(t, e); var r = M.hasKey(t); n.toggleClass(t, r), !r && y && y.heightOverflow && y.scrollbarWidth && (n.css(y.originalRight ? { paddingRight: y.originalRight + "px" } : { paddingRight: "" }), y = null), f(!0) }, o.closedDeferred), m(), t && t.focus ? t.focus() : n.focus && n.focus() } function f(e) { var t; k.length() > 0 && (t = k.top().value, t.modalDomEl.toggleClass(t.windowTopClass || "", e)) } function m() { if (w && -1 === p()) { var e = $; h(w, $, function () { e = null }), w = void 0, $ = void 0 } } function h(t, o, n, r) { function a() { a.done || (a.done = !0, e.leave(t).then(function () { n && n(), t.remove(), r && r.resolve() }), o.$destroy()) } var l, s = null, d = function () { return l || (l = i.defer(), s = l.promise), function () { l.resolve() } }; return o.$broadcast(E.NOW_CLOSING_EVENT, d), i.when(s).then(a) } function g(e) { if (e.isDefaultPrevented()) return e; var t = k.top(); if (t) switch (e.which) { case 27: t.value.keyboard && (e.preventDefault(), r.$apply(function () { E.dismiss(t.key, "escape key press") })); break; case 9: var o = E.loadFocusElementList(t), n = !1; e.shiftKey ? (E.isFocusInFirstItem(e, o) || E.isModalFocused(e, t)) && (n = E.focusLastFocusableElement(o)) : E.isFocusInLastItem(e, o) && (n = E.focusFirstFocusableElement(o)), n && (e.preventDefault(), e.stopPropagation()) } } function b(e, t, o) { return !e.value.modalScope.$broadcast("modal.closing", t, o).defaultPrevented } function v() { Array.prototype.forEach.call(document.querySelectorAll("[" + D + "]"), function (e) { var t = parseInt(e.getAttribute(D), 10), o = t - 1; e.setAttribute(D, o), o || (e.removeAttribute(D), e.removeAttribute("aria-hidden")) }) } var w, $, y, C = "modal-open", k = l.createNew(), M = a.createNew(), E = { NOW_CLOSING_EVENT: "modal.stack.now-closing" }, O = 0, T = null, D = "data-bootstrap-modal-aria-hidden-count", S = "a[href], area[href], input:not([disabled]):not([tabindex='-1']), button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']), textarea:not([disabled]):not([tabindex='-1']), iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true]", x = /[A-Z]/g; return r.$watch(p, function (e) { $ && ($.index = e) }), o.on("keydown", g), r.$on("$destroy", function () { o.off("keydown", g) }), E.open = function (t, i) { function a(e) { function t(e) { var t = e.parent() ? e.parent().children() : []; return Array.prototype.filter.call(t, function (t) { return t !== e[0] }) } if (e && "BODY" !== e[0].tagName) return t(e).forEach(function (e) { var t = "true" === e.getAttribute("aria-hidden"), o = parseInt(e.getAttribute(D), 10); o || (o = t ? 1 : 0), e.setAttribute(D, o + 1), e.setAttribute("aria-hidden", "true") }), a(e.parent()) } var l = o[0].activeElement, u = i.openedClass || C; f(!1), T = k.top(), k.add(t, { deferred: i.deferred, renderDeferred: i.renderDeferred, closedDeferred: i.closedDeferred, modalScope: i.scope, backdrop: i.backdrop, keyboard: i.keyboard, openedClass: i.openedClass, windowTopClass: i.windowTopClass, animation: i.animation, appendTo: i.appendTo }), M.put(u, t); var c = i.appendTo, m = p(); m >= 0 && !w && ($ = r.$new(!0), $.modalOptions = i, $.index = m, w = angular.element('<div uib-modal-backdrop="modal-backdrop"></div>'), w.attr({ "class": "modal-backdrop", "ng-style": "{'z-index': 1040 + (index && 1 || 0) + index*10}", "uib-modal-animation-class": "fade", "modal-in-class": "in" }), i.backdropClass && w.addClass(i.backdropClass), i.animation && w.attr("modal-animation", "true"), n(w)($), e.enter(w, c), s.isScrollable(c) && (y = s.scrollbarPadding(c), y.heightOverflow && y.scrollbarWidth && c.css({ paddingRight: y.right + "px" }))); var h; i.component ? (h = document.createElement(d(i.component.name)), h = angular.element(h), h.attr({ resolve: "$resolve", "modal-instance": "$uibModalInstance", close: "$close($value)", dismiss: "$dismiss($value)" })) : h = i.content, O = T ? parseInt(T.value.modalDomEl.attr("index"), 10) + 1 : 0; var g = angular.element('<div uib-modal-window="modal-window"></div>'); g.attr({ "class": "modal", "template-url": i.windowTemplateUrl, "window-top-class": i.windowTopClass, role: "dialog", "aria-labelledby": i.ariaLabelledBy, "aria-describedby": i.ariaDescribedBy, size: i.size, index: O, animate: "animate", "ng-style": "{'z-index': 1050 + $$topModalIndex*10, display: 'block'}", tabindex: -1, "uib-modal-animation-class": "fade", "modal-in-class": "in" }).append(h), i.windowClass && g.addClass(i.windowClass), i.animation && g.attr("modal-animation", "true"), c.addClass(u), i.scope && (i.scope.$$topModalIndex = O), e.enter(n(g)(i.scope), c), k.top().value.modalDomEl = g, k.top().value.modalOpener = l, a(g) }, E.close = function (e, t) { var o = k.get(e); return v(), o && b(o, t, !0) ? (o.value.modalScope.$$uibDestructionScheduled = !0, o.value.deferred.resolve(t), c(e, o.value.modalOpener), !0) : !o }, E.dismiss = function (e, t) { var o = k.get(e); return v(), o && b(o, t, !1) ? (o.value.modalScope.$$uibDestructionScheduled = !0, o.value.deferred.reject(t), c(e, o.value.modalOpener), !0) : !o }, E.dismissAll = function (e) { for (var t = this.getTop() ; t && this.dismiss(t.key, e) ;) t = this.getTop() }, E.getTop = function () { return k.top() }, E.modalRendered = function (e) { var t = k.get(e); t && t.value.renderDeferred.resolve() }, E.focusFirstFocusableElement = function (e) { return e.length > 0 ? (e[0].focus(), !0) : !1 }, E.focusLastFocusableElement = function (e) { return e.length > 0 ? (e[e.length - 1].focus(), !0) : !1 }, E.isModalFocused = function (e, t) { if (e && t) { var o = t.value.modalDomEl; if (o && o.length) return (e.target || e.srcElement) === o[0] } return !1 }, E.isFocusInFirstItem = function (e, t) { return t.length > 0 ? (e.target || e.srcElement) === t[0] : !1 }, E.isFocusInLastItem = function (e, t) { return t.length > 0 ? (e.target || e.srcElement) === t[t.length - 1] : !1 }, E.loadFocusElementList = function (e) { if (e) { var t = e.value.modalDomEl; if (t && t.length) { var o = t[0].querySelectorAll(S); return o ? Array.prototype.filter.call(o, function (e) { return u(e) }) : o } } }, E }]).provider("$uibModal", function () { var e = { options: { animation: !0, backdrop: !0, keyboard: !0 }, $get: ["$rootScope", "$q", "$document", "$templateRequest", "$controller", "$uibResolve", "$uibModalStack", function (t, o, n, r, i, a, l) { function s(e) { return e.template ? o.when(e.template) : r(angular.isFunction(e.templateUrl) ? e.templateUrl() : e.templateUrl) } var d = {}, u = null; return d.getPromiseChain = function () { return u }, d.open = function (r) { function d() { return g } var p = o.defer(), c = o.defer(), f = o.defer(), m = o.defer(), h = { result: p.promise, opened: c.promise, closed: f.promise, rendered: m.promise, close: function (e) { return l.close(h, e) }, dismiss: function (e) { return l.dismiss(h, e) } }; if (r = angular.extend({}, e.options, r), r.resolve = r.resolve || {}, r.appendTo = r.appendTo || n.find("body").eq(0), !r.appendTo.length) throw new Error("appendTo element not found. Make sure that the element passed is in DOM."); if (!r.component && !r.template && !r.templateUrl) throw new Error("One of component or template or templateUrl options is required."); var g; g = r.component ? o.when(a.resolve(r.resolve, {}, null, null)) : o.all([s(r), a.resolve(r.resolve, {}, null, null)]); var b; return b = u = o.all([u]).then(d, d).then(function (e) { function o(t, o, n, r) { t.$scope = a, t.$scope.$resolve = {}, n ? t.$scope.$uibModalInstance = h : t.$uibModalInstance = h; var i = o ? e[1] : e; angular.forEach(i, function (e, o) { r && (t[o] = e), t.$scope.$resolve[o] = e }) } var n = r.scope || t, a = n.$new(); a.$close = h.close, a.$dismiss = h.dismiss, a.$on("$destroy", function () { a.$$uibDestructionScheduled || a.$dismiss("$uibUnscheduledDestruction") }); var s, d, u = { scope: a, deferred: p, renderDeferred: m, closedDeferred: f, animation: r.animation, backdrop: r.backdrop, keyboard: r.keyboard, backdropClass: r.backdropClass, windowTopClass: r.windowTopClass, windowClass: r.windowClass, windowTemplateUrl: r.windowTemplateUrl, ariaLabelledBy: r.ariaLabelledBy, ariaDescribedBy: r.ariaDescribedBy, size: r.size, openedClass: r.openedClass, appendTo: r.appendTo }, g = {}, b = {}; r.component ? (o(g, !1, !0, !1), g.name = r.component, u.component = g) : r.controller && (o(b, !0, !1, !0), d = i(r.controller, b, !0, r.controllerAs), r.controllerAs && r.bindToController && (s = d.instance, s.$close = a.$close, s.$dismiss = a.$dismiss, angular.extend(s, { $resolve: b.$scope.$resolve }, n)), s = d(), angular.isFunction(s.$onInit) && s.$onInit()), r.component || (u.content = e[0]), l.open(h, u), c.resolve(!0) }, function (e) { c.reject(e), p.reject(e) })["finally"](function () { u === b && (u = null) }), h }, d }] }; return e }), angular.module("ui.bootstrap.stackedMap", []).factory("$$stackedMap", function () { return { createNew: function () { var e = []; return { add: function (t, o) { e.push({ key: t, value: o }) }, get: function (t) { for (var o = 0; o < e.length; o++) if (t === e[o].key) return e[o] }, keys: function () { for (var t = [], o = 0; o < e.length; o++) t.push(e[o].key); return t }, top: function () { return e[e.length - 1] }, remove: function (t) { for (var o = -1, n = 0; n < e.length; n++) if (t === e[n].key) { o = n; break } return e.splice(o, 1)[0] }, removeTop: function () { return e.pop() }, length: function () { return e.length } } } } }), angular.module("uib/template/alert/alert.html", []).run(["$templateCache", function (e) { e.put("uib/template/alert/alert.html", '<button ng-show="closeable" type="button" class="close" ng-click="close({$event: $event})">\n  <span aria-hidden="true">&times;</span>\n  <span class="sr-only">Close</span>\n</button>\n<div ng-transclude></div>\n') }]), angular.module("uib/template/modal/window.html", []).run(["$templateCache", function (e) { e.put("uib/template/modal/window.html", "<div class=\"modal-dialog {{size ? 'modal-' + size : ''}}\"><div class=\"modal-content\" uib-modal-transclude></div></div>\n") }]), angular.module("ui.bootstrap.position").run(function () { !angular.$$csp().noInlineStyle && !angular.$$uibPositionCss && angular.element(document).find("head").prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style>'), angular.$$uibPositionCss = !0 });
 app.directive('updateCart', ['CartService', function (CartService) {
 
     // Shared scope:
@@ -1111,7 +1112,7 @@ app.directive('addToCart', ['CartService', 'gettextCatalog', function (CartServi
                 if (ctrl.$invalid == true) {
                     scope.$apply(function () {
                         scope.error = { type: "bad_request", reference: "AWu1twY", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
-                    })
+                    });
                     return;
                 }
 
@@ -1150,12 +1151,13 @@ app.directive('addToCart', ['CartService', 'gettextCatalog', function (CartServi
     };
 }]);
 
-app.directive('submitPayment', ['CartService', 'InvoiceService', 'gettextCatalog', function (CartService, InvoiceService, gettextCatalog) {
+app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService', 'gettextCatalog', function (CartService, InvoiceService, PaymentService, gettextCatalog) {
 
     // Shared scope:
     // submitPayment: Provide the payment_method to be used for payment. Should include, at a minimum, the following properties: payment_type, data (data includes payment method-specific fields such as credit card number).
     // cart: Provide the cart that will be paid for. The cart will automatically be updated (or created if not yet created) through the API before the payment for the payment is submitted. Cart or invoice can be supplied, but not both.
     // invoice: Provide the invoice that will be paid for. The invoice will automatically be updated through the API before the payment for the payment is submitted (i.e. a currency change). Cart or invoice can be supplied, but not both.
+    // payment: Provide the payment object for a direct, stand-alone payment (no cart or invoice). If payment is provided cart and invoice should NOT be provided.
     // error: The error object to communicate errors.
     // onSubmit: A function that will be called from scope when a payment is submitted.
     // onSuccess: A function that will be called from scope when the payment is successfully completed. Will include the response payment object as a parameter.
@@ -1172,12 +1174,13 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'gettextCatalog
             paymentMethod: '=submitPayment',
             cart: '=?',
             invoice: '=?',
+            payment: '=?',
             params: '=?',
             error: '=?',
             onSubmit: '=?',
             onSuccess: '=?',
             onError: '=?',
-            shippingIsBilling: '=?',
+            shippingIsBilling: '=?'
         },
         link: function (scope, elem, attrs, ctrl) {
 
@@ -1272,6 +1275,40 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'gettextCatalog
                     });
                 }
 
+                if (scope.payment) {
+
+                    scope.payment.payment_method = scope.paymentMethod;
+
+                    // If billing is shipping, remove the shipping address
+                    if (scope.shippingIsBilling && scope.payment.customer) {
+                        delete scope.payment.customer.shipping_address;
+                    }
+
+                    PaymentService.createDirect(scope.payment, params).then(function (payment) {
+
+                        // Fire the success event
+                        if (scope.onSuccess) {
+                            scope.onSuccess(payment);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    }, function (error) {
+
+                        scope.error = error;
+
+                        // Fire the error event
+                        if (scope.onError) {
+                            scope.onError(error);
+                        }
+
+                        // Remove the disabled attribute
+                        elem.prop("disabled", null);
+
+                    });
+                }
+
             });
 
         }
@@ -1306,7 +1343,7 @@ app.directive('commitPayment', ['CartService', 'InvoiceService', 'PaymentService
             error: '=?',
             onSubmit: '=?',
             onSuccess: '=?',
-            onError: '=?',
+            onError: '=?'
         },
         link: function (scope, elem, attrs, ctrl) {
 
@@ -1368,7 +1405,7 @@ app.directive('commitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         elem.prop("disabled", null);
 
                     });
-                }
+                };
 
                 // Perform the commit. If a cart, update the cart before running the payment.
                 if (attrs.saleType == "cart") {
@@ -1400,7 +1437,7 @@ app.directive('commitPayment', ['CartService', 'InvoiceService', 'PaymentService
     };
 }]);
 
-app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceService', 'ProductService', 'SettingsService', '$timeout', '$rootScope', function (CurrencyService, CartService, InvoiceService, ProductService, SettingsService, $timeout, $rootScope) {
+app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceService', 'PaymentService', 'ProductService', 'SettingsService', '$timeout', '$rootScope', function (CurrencyService, CartService, InvoiceService, PaymentService, ProductService, SettingsService, $timeout, $rootScope) {
 
     return {
         restrict: 'A',
@@ -1408,11 +1445,13 @@ app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceServi
             currency: '=selectCurrency',
             cart: '=?',
             invoice: '=?',
+            payment: '=?',
+            options: '=?',
             products: '=?',
             params: '=?',
             onSuccess: '=?',
             onError: '=?',
-            error: '=?',
+            error: '=?'
         },
         link: function (scope, elem, attrs) {
 
@@ -1420,6 +1459,8 @@ app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceServi
             // currency: The new currency
             // cart: If running on a page with an cart, pass the cart object in and it will be updated with the pricing in the new currency
             // invoice: If running on a page with an invoice, pass the invoice object in and it will be updated with the pricing in the new currency
+            // payment: If running on a page with a stand-alone payment, pass the payment object in and the currency will be set on the object
+            // options: If suppying a payment, you can supply the payment/options object and it will be updated with a new version as a result of the currency selection / change.
             // product: If running on a page with a single product, pass the product in and it will be updated with the pricing in the new currency
             // products: If running on a page with a list of products, pass the products list in and it will be updated with the pricing in the new currency
             // error: The error object to communicate errors.
@@ -1547,6 +1588,23 @@ app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceServi
 
                     }
 
+                    // If a payment object has been passed in, set the currency on the payment.
+                    if (scope.payment) {
+                        scope.payment.currency = selectedCurrency;
+
+                        if (scope.options) {
+                            // Update the options according to the supplied currency.
+                            PaymentService.getOptions({ currency: selectedCurrency }).then(function (options) {
+                                scope.options = options;
+                            }, function (error) {
+                                scope.error = error;
+                                if (scope.onError) {
+                                    scope.onError(error);
+                                }
+                            });
+                        }
+                    }
+
                     // If products were supplied, refresh
                     if (scope.products) {
 
@@ -1594,7 +1652,7 @@ app.directive('currencySelect', ['CurrencyService', 'CartService', 'InvoiceServi
                         scope.onError(error);
                     }
                 });
-            }
+            };
         }
     };
 }]);
@@ -1687,7 +1745,7 @@ app.directive('shippingSelect', ['CartService', 'InvoiceService', '$timeout', fu
             params: '=?',
             onSuccess: '=?',
             onError: '=?',
-            error: '=?',
+            error: '=?'
         },
         link: function (scope, elem, attrs) {
 
@@ -1803,7 +1861,7 @@ app.directive('shippingRadio', ['CartService', 'InvoiceService', '$timeout', fun
             params: '=?',
             onSuccess: '=?',
             onError: '=?',
-            error: '=?',
+            error: '=?'
         },
         link: function (scope, elem, attrs) {
 
@@ -1906,7 +1964,7 @@ app.directive('customerCountries', ['GeoService', '$timeout', function (GeoServi
                     // Get the entire list of countries
                     var countries = GeoService.getData().countries;
 
-                    countries = _.filter(countries, function (country) { return customerCountries.indexOf(country.code) > -1 });
+                    countries = _.filter(countries, function (country) { return customerCountries.indexOf(country.code) > -1; });
 
                     // Insert a blank at the top
                     elemNg.append("<option></option>");
@@ -2022,7 +2080,7 @@ app.directive('showErrors', ['$timeout', 'SettingsService', function ($timeout, 
                     });
 
                 });
-            }
+            };
 
             // Set the initial listener
             load();
@@ -2034,7 +2092,7 @@ app.directive('showErrors', ['$timeout', 'SettingsService', function ($timeout, 
                 });
             }
         }
-    }
+    };
 }]);
 
 app.directive('conversion', ['SettingsService', 'StorageService', function (SettingsService, StorageService) {
@@ -2045,7 +2103,7 @@ app.directive('conversion', ['SettingsService', 'StorageService', function (Sett
     return {
         restrict: 'A',
         scope: {
-            conversion: '@',
+            conversion: '@'
         },
         link: function (scope, elem, attrs, ctrl) {
 
@@ -2070,7 +2128,7 @@ app.directive('conversion', ['SettingsService', 'StorageService', function (Sett
                         head.appendChild(js);
                     }
                 });
-            }
+            };
 
             // Get the settings
             var settings = SettingsService.get();
@@ -2093,7 +2151,7 @@ app.directive('validateOnSubmit', function () {
             });
 
         }
-    }
+    };
 });
 
 app.directive('validateExpMonth', function () {
@@ -2126,7 +2184,7 @@ app.directive('validateExpMonth', function () {
 
         }
 
-    }
+    };
 
 });
 
@@ -2160,7 +2218,7 @@ app.directive('validateExpYear', function () {
 
         }
 
-    }
+    };
 
 });
 
@@ -2214,7 +2272,7 @@ app.directive('validateCvv', function () {
 
         }
 
-    }
+    };
 
 });
 
@@ -2261,7 +2319,7 @@ app.directive('validateCard', function () {
 
         }
 
-    }
+    };
 
 });
 
@@ -2300,7 +2358,7 @@ app.directive('isValidInteger', function () {
                     }
                 }
                 return true;
-            }
+            };
         }
     };
 });
@@ -2340,7 +2398,7 @@ app.directive('isValidNumber', function () {
                     }
                 }
                 return true;
-            }
+            };
         }
     };
 });
@@ -2521,10 +2579,11 @@ app.directive('promoCode', ['CartService', '$timeout', function (CartService, $t
     };
 }]);
 
-app.directive('customerSignin', ['CartService', '$timeout', function (CartService, $timeout) {
+app.directive('customerSignin', ['CartService', 'CustomerService', '$timeout', function (CartService, CustomerService, $timeout) {
 
     // Shared scope:
-    // cart: The cart to which the login should be applied
+    // cart: The cart to which the login should be applied, if the login is associated with a cart
+    // customer: The customer object to which the login should be applied. Must be provided if a cart is not provided, if a cart is provided this is unnecessary and will not be used.
     // paymentMethod: The cart's payment method object
     // onSigninSubmit: A function that will be called when the signin is submitted.
     // onSignoutSubmit: A function that will be called when the signout is submitted.
@@ -2578,6 +2637,7 @@ app.directive('customerSignin', ['CartService', '$timeout', function (CartServic
         restrict: 'A',
         scope: {
             cart: '=',
+            customer: '=',
             paymentMethod: '=?',
             options: '=?',
             params: '=?',
@@ -2587,7 +2647,7 @@ app.directive('customerSignin', ['CartService', '$timeout', function (CartServic
             onSigninSuccess: '=?',
             onSignoutSuccess: '=?',
             onSigninError: '=?',
-            onSignoutError: '=?',
+            onSignoutError: '=?'
         },
         link: function (scope, elem, attrs) {
 
@@ -2605,16 +2665,17 @@ app.directive('customerSignin', ['CartService', '$timeout', function (CartServic
                 askSignin.addClass("hidden");
                 supplySignin.addClass("hidden");
                 signedIn.addClass("hidden");
-            }
+            };
 
             // Set the default state
             elem.addClass("hidden");
             hideAll();
 
-            scope.$watchGroup(["options", "cart"], function (newValues, oldValues) {
+            scope.$watchGroup(["options", "cart", "customer"], function (newValues, oldValues) {
 
                 var options = newValues[0];
                 var cart = newValues[1];
+                var customer = newValues[2];
 
                 if (options) {
                     if (options.customer_optional_fields) {
@@ -2634,6 +2695,15 @@ app.directive('customerSignin', ['CartService', '$timeout', function (CartServic
                         } else {
                             askSignin.removeClass("hidden");
                         }
+                    }
+                }
+
+                if (customer) {
+                    hideAll();
+                    if (cart.customer.username) {
+                        signedIn.removeClass("hidden");
+                    } else {
+                        askSignin.removeClass("hidden");
                     }
                 }
 
@@ -2677,31 +2747,34 @@ app.directive('customerSignin', ['CartService', '$timeout', function (CartServic
                     scope.onSignoutSubmit();
                 }
 
-                // Prep the params
-                var params = scope.params || attrs.params;
-                params = utils.mergeParams(params, null, "customer.payment_methods");
+                // If associated with a cart, log the customer out of the cart to disassociated the cart from the user.
+                if (scope.cart) {
+                    // Prep the params
+                    var params = scope.params || attrs.params;
+                    params = utils.mergeParams(params, null, "customer.payment_methods");
 
-                CartService.logout(scope.params).then(function (cart) {
+                    CartService.logout(params).then(function (cart) {
 
-                    scope.cart = cart;
+                        scope.cart = cart;
 
-                    // Delete the payment_method_id on the payment method object
-                    delete scope.paymentMethod.payment_method_id;
+                        // Delete the payment_method_id on the payment method object
+                        delete scope.paymentMethod.payment_method_id;
 
-                    // Fire the success event
-                    if (scope.onSignoutSuccess) {
-                        scope.onSignoutSuccess(cart);
-                    }
+                        // Fire the success event
+                        if (scope.onSignoutSuccess) {
+                            scope.onSignoutSuccess(cart);
+                        }
 
-                }, function (error) {
+                    }, function (error) {
 
-                    scope.error = error;
-                    // Fire the error event
-                    if (scope.onSignoutError) {
-                        scope.onSignoutError(error);
-                    }
+                        scope.error = error;
+                        // Fire the error event
+                        if (scope.onSignoutError) {
+                            scope.onSignoutError(error);
+                        }
 
-                });
+                    });
+                }
 
             });
 
@@ -2741,40 +2814,83 @@ app.directive('customerSignin', ['CartService', '$timeout', function (CartServic
                 // Build the login object
                 var login = { username: un, password: pw };
 
-                // Prep the params
-                var params = scope.params || attrs.params;
-                params = utils.mergeParams(params, null, "customer.payment_methods");
+                // If a cart is provided, log the user into the cart.
+                if (scope.cart) {
 
-                CartService.login(login, scope.params).then(function (cart) {
+                    // Prep the params
+                    var params = scope.params || attrs.params;
+                    params = utils.mergeParams(params, null, "customer.payment_methods");
 
-                    scope.cart = cart;
+                    CartService.login(login, params).then(function (cart) {
 
-                    // Remove the username and password
-                    username.val("");
-                    password.val("");
+                        scope.cart = cart;
 
-                    // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
-                    if (cart.customer.payment_methods.data.length > 0 && scope.paymentMethod) {
-                        var payment_method_id = _.findWhere(cart.customer.payment_methods.data, { is_default: true }).payment_method_id;
-                        scope.paymentMethod.payment_method_id = payment_method_id;
-                    }
+                        // Remove the username and password
+                        username.val("");
+                        password.val("");
 
-                    // Fire the success event
-                    if (scope.onSigninSuccess) {
-                        scope.onSigninSuccess(cart);
-                    }
+                        // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
+                        if (cart.customer.payment_methods.data.length > 0 && scope.paymentMethod) {
+                            var payment_method_id = _.findWhere(cart.customer.payment_methods.data, { is_default: true }).payment_method_id;
+                            scope.paymentMethod.payment_method_id = payment_method_id;
+                        }
 
-                }, function (error) {
+                        // Fire the success event
+                        if (scope.onSigninSuccess) {
+                            scope.onSigninSuccess(cart);
+                        }
 
-                    scope.error = error;
-                    // Fire the error event
-                    if (scope.onSigninError) {
-                        scope.onSigninError(error);
-                    }
+                    }, function (error) {
 
-                });
+                        scope.error = error;
+                        // Fire the error event
+                        if (scope.onSigninError) {
+                            scope.onSigninError(error);
+                        }
 
-            }
+                    });
+
+                } else {
+
+                    // Otherwise, log the customer in directly.
+
+                    // Prep the params
+                    var params = scope.params || attrs.params;
+                    params = utils.mergeParams(params, null, "payment_methods");
+
+                    CustomerService.login(login, params).then(function (customer) {
+
+                        // Update the customer object with the returned customer.
+                        scope.customer = customer;
+
+                        // Remove the username and password
+                        username.val("");
+                        password.val("");
+
+                        // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
+                        if (customer.payment_methods.data.length > 0 && scope.paymentMethod) {
+                            var payment_method_id = _.findWhere(customer.payment_methods.data, { is_default: true }).payment_method_id;
+                            scope.paymentMethod.payment_method_id = payment_method_id;
+                        }
+
+                        // Fire the success event
+                        if (scope.onSigninSuccess) {
+                            scope.onSigninSuccess(customer);
+                        }
+
+                    }, function (error) {
+
+                        scope.error = error;
+                        // Fire the error event
+                        if (scope.onSigninError) {
+                            scope.onSigninError(error);
+                        }
+
+                    });
+
+                }
+
+            };
 
         }
     };
@@ -2941,7 +3057,7 @@ app.directive('createAccount', ['CustomerService', '$timeout', function (Custome
                     }
 
                 });
-            }
+            };
         }
     };
 }]);
@@ -3038,7 +3154,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
 
                         // Since this is a "background update", we need special handling. Angular converts required fields to undefined when they are zero-length, which means they are stripped from the api payload.
                         // This means that if a user sets an item to blank, it will re-populate itself on update because the API didn't see it and didn't know to null it. We'll set all undefined items to null.
-                        var cartCopy = angular.copy(scope.cart)
+                        var cartCopy = angular.copy(scope.cart);
                         utils.undefinedToNull(cartCopy);
 
                         // Prep the params
@@ -3116,7 +3232,7 @@ app.directive('creditCardImage', [function () {
 
             });
         }
-    }
+    };
 }]);
 
 app.directive('creditCards', ['CartService', function (CartService) {
@@ -3144,7 +3260,7 @@ app.directive('creditCards', ['CartService', function (CartService) {
             });
 
         }
-    }
+    };
 }]);
 
 app.directive('stateProvInput', ['GeoService', '$compile', function (GeoService, $compile) {
@@ -3265,11 +3381,11 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
                         fields = [];
                         // Log to help in debugging
                         console.log("The JSON provided for custom fields is not valid JSON. As a result, no custom fields will display. Error message: " + e);
-                    };
+                    }
                 }
 
                 // Group by section.
-                fields = groupFields(fields)
+                fields = groupFields(fields);
 
                 // If the user's language is provided in any of the fields, use that language.
                 var language = LanguageService.getSelectedLanguage().code;
@@ -3302,7 +3418,7 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
 
                 return fields;
 
-            }
+            };
 
             var groupFields = function (fields) {
 
@@ -3323,7 +3439,7 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
                 });
 
                 return sorted;
-            }
+            };
 
             var loadDefaults = function (fields, meta) {
 
@@ -3339,7 +3455,7 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
 
                 }
 
-            }
+            };
 
             // Load the fields.           
             scope.fields = loadFields(scope.fieldlist);
@@ -3388,7 +3504,7 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
                     scope.record();
                 }
 
-            }
+            };
 
             scope.isInProperty = function (property, value) {
 
@@ -3408,7 +3524,7 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
 
                 return false;
 
-            }
+            };
 
             scope.isNewSection = function (field, index) {
 
@@ -3429,7 +3545,7 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
 
                 return false;
 
-            }
+            };
 
             // Save any changes, as requested.
             scope.record = function () {
@@ -3440,10 +3556,10 @@ app.directive('fields', ['CartService', 'InvoiceService', '$timeout', '$rootScop
                 } else {
                     CartService.update(sale);
                 }
-            }
+            };
 
         }
-    }
+    };
 
 }]);
 
@@ -3563,8 +3679,19 @@ app.directive('validateField', ['gettextCatalog', '$timeout', function (gettextC
 
             });
         }
-    }
+    };
 }]);
+
+app.directive('number', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, ele, attr, ctrl) {
+            ctrl.$parsers.unshift(function (viewValue) {
+                return parseFloat(viewValue, 2);
+            });
+        }
+    };
+});
 
 
 app.factory('appCache', ['$cacheFactory', function ($cacheFactory) {
@@ -4225,7 +4352,7 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
         } else {
 
             // No cart exists. Create a new cart.
-            return create(data, parameters, quiet);
+            return create(data, parameters, quiet, fromParams);
 
         }
 
@@ -4556,7 +4683,7 @@ app.service("InvoiceService", ['$http', '$q', '$rootScope', 'ApiService', 'Payme
     return ({
         get: get,
         update: update,
-        pay: pay,
+        pay: pay
     });
 
     function get(parameters, quiet) {
@@ -4683,8 +4810,11 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
     // Return public API.
     return ({
         create: create,
+        createDirect: createDirect,
         get: get,
-        commit: commit
+        getOptions: getOptions,
+        commit: commit,
+        fromParams: fromParams
     });
 
     function create(payment_method, url, parameters, quiet) {
@@ -4698,6 +4828,23 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
         ApiService.create(data, url, parameters, quiet).then(function (response) {
             var payment = response.data;
             deferred.resolve(payment);
+        }, function (error) {
+            deferred.reject(error);
+        });
+
+        return deferred.promise;
+
+    }
+
+    function createDirect(payment, parameters, quiet) {
+
+        var deferred = $q.defer();
+        parameters = setDefaultParameters(parameters);
+        var url = "/payments"
+
+        ApiService.create(payment, url, parameters, quiet).then(function (response) {
+            var result = response.data;
+            deferred.resolve(result);
         }, function (error) {
             deferred.reject(error);
         });
@@ -4730,6 +4877,22 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
 
     }
 
+    function getOptions(parameters, quiet) {
+
+        var deferred = $q.defer();
+
+            var url = "/payments/options";
+            ApiService.getItem(url, parameters, quiet).then(function (response) {
+                var options = response.data;
+                deferred.resolve(options);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+
+    }
+
     function commit(payment_id, data, parameters, quiet) {
 
         // This is used for payment methods such as PayPal and Amazon Pay that need to be tiggered for completion after they have been reviewed by the customer.
@@ -4754,6 +4917,83 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
         });
 
         return deferred.promise;
+
+    }
+
+    function fromParams(payment, location) {
+
+        // location should be the angular $location object
+
+        // Make a copy so we can modify without changing the original params
+        var params = angular.copy(location.search());
+
+        // This is designed to be used for a "hosted payment page", where the customer makes an arbitrary payment not associated with a cart or invoice. Parameters such as amount, currency, description, reference and customer details can be passed as URL params.
+
+        if (params.subtotal) {
+            payment.subtotal = params.subtotal;
+            delete params.subtotal;
+        }
+
+        if (params.shipping) {
+            payment.shipping = params.shipping;
+            delete params.shipping;
+        }
+
+        if (params.tax) {
+            payment.tax = params.tax;
+            delete params.tax;
+        }
+
+        if (params.currency) {
+            payment.currency = params.currency;
+            delete params.currency;
+        }
+
+        if (params.reference) {
+            payment.reference = params.reference;
+            delete params.reference;
+        }
+
+        if (params.description) {
+            payment.description = params.description;
+            delete params.description;
+        }
+
+        payment.customer = payment.customer || {};
+
+        if (params.company_name) {
+            payment.customer.company_name = params.company_name;
+            delete params.company_name;
+        }
+
+        if (params.name) {
+            payment.customer.name = params.name;
+            delete params.name;
+        }
+
+        if (params.email) {
+            if (utils.isValidEmail(params.email)) {
+                payment.customer.email = params.email;
+            }
+            delete params.email;
+        }
+
+        if (params.referrer) {
+            payment.referrer = params.referrer;
+            delete params.referrer;
+        }
+
+        // Append any other parameters as meta
+        for (var property in params) {
+            if (params.hasOwnProperty(property)) {
+                if (payment.meta == null) {
+                    payment.meta = {};
+                }
+                payment.meta[property] = params[property];
+            }
+        }
+
+        return payment;
 
     }
 
@@ -4835,7 +5075,8 @@ app.service("CustomerService", ['$http', '$q', 'ApiService', function ($http, $q
 
     // Return public API.
     return ({
-        createAccount: createAccount
+        createAccount: createAccount,
+        login: login
     });
 
     function createAccount(customer, parameters, quiet) {
@@ -4855,6 +5096,24 @@ app.service("CustomerService", ['$http', '$q', 'ApiService', function ($http, $q
             deferred.reject({ "type": "bad_request", reference: "8b1oMYs", code: "invalid_input", message: "The request could not be completed.", status: 400 });
             console.log("The customer object in the account creation request did not contain a customer_id.");
         }
+
+        return deferred.promise;
+
+    }
+
+    function login(data, parameters, quiet) {
+
+        var deferred = $q.defer();
+
+        var url = "/customers/login";
+        ApiService.create(data, url, parameters, quiet).then(function (response) {
+
+            var customer = response.data;
+            deferred.resolve(customer);
+
+        }, function (error) {
+            deferred.reject(error);
+        });
 
         return deferred.promise;
 
@@ -4991,7 +5250,7 @@ app.service("CurrencyService", ['$q', '$rootScope', 'SettingsService', 'CartServ
     return ({
         getCurrency: getCurrency,
         getCurrencyName: getCurrencyName,
-        setCurrency: setCurrency,
+        setCurrency: setCurrency
     });
 
     function getCurrency() {
@@ -5376,9 +5635,10 @@ app.service("HelperService", ['SettingsService', 'StorageService', '$location', 
     function hasShippingAddress(customer) {
 
         if (customer) {
-            if (customer.shipping_address) { }
-            if (customer.shipping_address.address_1) {
-                return true;
+            if (customer.shipping_address) {
+                if (customer.shipping_address.address_1) {
+                    return true;
+                }
             }
         };
 
@@ -5475,7 +5735,7 @@ app.service("StorageService", ['appCache', function (appCache) {
     return ({
         get: get,
         set: set,
-        remove: remove,
+        remove: remove
     });
 
     function get(key) {
