@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿1.0.6
+Comecero Cart version: ﻿1.0.7
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
