@@ -5080,6 +5080,9 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
 
     function fromParams(payment, location) {
 
+        // Set payment as an object if null
+        payment = payment || {}
+
         // location should be the angular $location object
 
         // Make a copy so we can modify without changing the original params
