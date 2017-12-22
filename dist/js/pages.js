@@ -114,6 +114,12 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
     });
 
 }]);
+app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
+ 
+        $scope.settings = SettingsService.get();
+        $scope.currency = CurrencyService.getCurrencyName();
+
+    }]);
 app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, $document) {
         
         // Define a place to hold your data
@@ -200,12 +206,6 @@ app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'G
         });
 
     }]);
-app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
- 
-        $scope.settings = SettingsService.get();
-        $scope.currency = CurrencyService.getCurrencyName();
-
-    }]);
 app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'CartService', 'PaymentService', 'SettingsService', 'HelperService', 'GeoService', '$document', function ($scope, $location, $routeParams, CartService, PaymentService, SettingsService, HelperService, GeoService, $document) {
         
         // Define a place to hold your data
@@ -251,6 +251,21 @@ app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'Car
             $scope.data.sale = payment.cart || payment.invoice;
             if (payment.cart) {
                 $scope.options.isCartPayment = true;
+            }
+
+            // Only display images if all items in the items have images
+            $scope.showImages = false;
+            var hasImageCount = 0;
+            _.each($scope.data.sale.items, function (item) {
+                if (item.product != null) {
+                    if (item.product.images.length > 0) {
+                        hasImageCount++;
+                    }
+                }
+            });
+
+            if (hasImageCount == $scope.data.sale.items.length) {
+                $scope.showImages = true;
             }
             
             // Set flags to indicate if we need to request the company name and phone number fields, which happens when they're required and not already populated.
@@ -361,7 +376,7 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
         var hasImageCount = 0;
         _.each(payment.order.items, function (item) {
             if (item.product != null) {
-                if (item.product.images.length == 0) {
+                if (item.product.images.length > 0) {
                     hasImageCount++;
                 }
             }
