@@ -3327,7 +3327,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                                 });
                             }
                         }
-                    }, 200);
+                    }, 25);
                 });
             });
 

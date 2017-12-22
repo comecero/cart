@@ -2,6 +2,7 @@
 # 1.0.7
 
 - Bug fix when logging out of cart.
+- Big fix displaying product images on payment review and receipt page.
 - Integrate Kit version 1.0.5. See Kit release notes for changes.
 
 <a name="1.0.6"></a>
