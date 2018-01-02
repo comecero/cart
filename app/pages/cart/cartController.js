@@ -91,6 +91,7 @@
     $scope.onSignOut = function () {
         if ($scope.data.card) {
             $scope.data.card.payment_method_id = null;
+            $scope.data.card.type = "credit_card";
         }
     }
 
