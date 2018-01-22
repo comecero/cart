@@ -91,7 +91,13 @@
     $scope.onSignOut = function () {
         if ($scope.data.card) {
             $scope.data.card.payment_method_id = null;
+            $scope.data.card.type = "credit_card";
         }
+    }
+
+    $scope.resetPaymentMethod = function (id) {
+        // Remove the payment method data such as card number, expiration date, etc. This is used to flush the data when an existing payment method is selected from a logged-in customer.
+        $scope.data.card = { payment_method_id: id };
     }
 
     // Watch for error to be populated, and if so, scroll to it.

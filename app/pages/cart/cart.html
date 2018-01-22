@@ -100,7 +100,7 @@
         </div>
 
         <div class="row"></div>
-
+        
         <div ng-show="data.cart.items.length > 0">
 
             <div class="section-header">
@@ -108,7 +108,7 @@
             </div>
 
             <!-- Login option -->
-            <div customer-signin cart="data.cart" options="data.cart.options" payment-method="data.payment_method" on-signout-success="onSignOut" error="data.error" params="data.params">
+            <div customer-signin cart="data.cart" options="data.cart.options" payment-method="data.card" on-signout-success="onSignOut" error="data.error" params="data.params">
 
                 <div class="well header clearfix ask-signin">
                     <strong><span translate>Have an account?</span></strong>
@@ -414,7 +414,7 @@
                 <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data" ng-show="method.type == 'credit_card'">
 
                     <span class="radio-group inline" ng-if="method.type == 'credit_card'">
-                        <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.card.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.card.payment_method_id == method.payment_method_id" />
+                        <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.card.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.card.payment_method_id == method.payment_method_id" ng-click="resetPaymentMethod(method.payment_method_id)" />
                         <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">{{method.data.label}} (<span>exp.</span> {{method.data.exp_month}}/{{method.data.exp_year}})</label>
                         <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
                     </span>
@@ -430,7 +430,7 @@
 
             </div>
 
-            <div ng-show="!data.card.payment_method_id">
+            <div ng-if="!data.card.payment_method_id">
                 <div class="col-xs-12">
                     <div class="form-group" show-errors="data.cart.options">
                         <label class="control-label required" for="card_number" translate>Card Number</label>

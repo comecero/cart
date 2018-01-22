@@ -32,7 +32,7 @@
         var hasImageCount = 0;
         _.each(payment.order.items, function (item) {
             if (item.product != null) {
-                if (item.product.images.length == 0) {
+                if (item.product.images.length > 0) {
                     hasImageCount++;
                 }
             }
