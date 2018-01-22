@@ -1,8 +1,15 @@
-﻿<a name="1.0.6"></a>
+﻿<a name="1.0.7"></a>
+# 1.0.7
+
+- Bug fix when logging out of cart.
+- Big fix displaying product images on payment review and receipt page.
+- Integrate Kit version 1.0.5. See Kit release notes for changes.
+
+<a name="1.0.6"></a>
 # 1.0.6
 
-- Fix bug that prevented cart from loading when a bad coupon code was passed through the URL string
-- Update way that analytics and conversions are loaded to provide more complete data
+- Fix bug that prevented cart from loading when a bad coupon code was passed through the URL string.
+- Update way that analytics and conversions are loaded to provide more complete data.
 - Integrate Kit version 1.0.4. See Kit release notes for changes.
 
 <a name="1.0.5"></a>
@@ -20,7 +27,7 @@
 <a name="1.0.3"></a>
 # 1.0.3
 
-- Allow PayPal payments for invoices
+- Allow PayPal payments for invoices.
 
 <a name="1.0.2"></a>
 # 1.0.2

@@ -44,6 +44,21 @@
             if (payment.cart) {
                 $scope.options.isCartPayment = true;
             }
+
+            // Only display images if all items in the items have images
+            $scope.showImages = false;
+            var hasImageCount = 0;
+            _.each($scope.data.sale.items, function (item) {
+                if (item.product != null) {
+                    if (item.product.images.length > 0) {
+                        hasImageCount++;
+                    }
+                }
+            });
+
+            if (hasImageCount == $scope.data.sale.items.length) {
+                $scope.showImages = true;
+            }
             
             // Set flags to indicate if we need to request the company name and phone number fields, which happens when they're required and not already populated.
             if (HelperService.isRequiredCustomerField('company_name', $scope.data.sale.options) && $scope.data.sale.customer.company_name == null) {

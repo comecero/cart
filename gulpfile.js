@@ -16,7 +16,7 @@ gulp.task("concat-pages-js", function () {
 });
 
 gulp.task("compress", function () {
-    return gulp.src(["./dist/js/*.js", "!./dist/js/*.min.js"])
+    return gulp.src(["./dist/js/*.js", "!./dist/js/*.min.js", "!./dist/js/kit.js"])
     .pipe(uglify())
      .pipe(rename({
         extname: ".min.js"

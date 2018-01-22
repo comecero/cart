@@ -9,7 +9,7 @@ module.exports = function (grunt) {
         nggettext_extract: {
             pot: {
                 files: {
-                    '../cart/languages/template/template.pot': ['../cart/**/*.html', '../cart/app/**/*.html', '../cart/dist/js/kit.js', '../cart/app/**/*.js']
+                    '../cart/languages/template/template.po': ['../cart/**/*.html', '../cart/app/**/*.html', '../cart/dist/js/kit.js', '../cart/app/**/*.js', '!../cart/node_modules/**']
                 }
             }
         },
