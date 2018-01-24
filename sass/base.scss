@@ -400,8 +400,7 @@ p.security-badges img {
 
 /* Product icon image */
 img.product-icon {
-    height: 75px;
-    width: 75px;
+    max-height: 75px;
     border: 1px solid $product-icon-border-color;
 }
 

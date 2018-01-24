@@ -16,6 +16,7 @@ window.__settings.app = {
     "footer_text": null,
     "main_shopping_url": null,
     "not_found_url": null,
+    "use_square_images": false,
     "favicon_medium": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/md_favicon.ico",
     "favicon_large": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/lg_favicon.ico",
     "favicon_square": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/sq_favicon.ico",
