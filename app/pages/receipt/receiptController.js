@@ -8,7 +8,7 @@
 
     $scope.data.params = {};
     $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options";
-    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.items.type,order.items.license_pending,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
+    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.items.type,order.items.license_pending,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.items.product.images.link_small,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.data.params.expand += ",order.items.download,order.items.license";
@@ -27,13 +27,18 @@
     // Get the payment, if any.
     PaymentService.get($routeParams.id, $scope.data.params).then(function (payment) {
 
-        // Only display images if all items in the items have images
+        // Only display images if all items in the sale have images
         $scope.showImages = false;
         var hasImageCount = 0;
         _.each(payment.order.items, function (item) {
             if (item.product != null) {
                 if (item.product.images.length > 0) {
                     hasImageCount++;
+                    if ($scope.settings.app.use_square_images) {
+                        item.image_link = item.product.images[0].link_square;
+                    } else {
+                        item.image_link = item.product.images[0].link_small;
+                    }
                 }
             }
         });

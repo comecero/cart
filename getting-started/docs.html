@@ -1,0 +1,122 @@
+﻿<div ng-controller="DocsController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="typography">Using the Shopping Cart</h1>
+            </div>
+        </div>
+    </div>
+
+    <p>The Shopping Cart is a highly customizable, single-step, mobile-ready checkout solution for your website. The Shopping Cart includes features such as support for discount codes, customizable fields, subscription payments, PayPal, multiple currencies and languages, customer account creation and more.</p>
+
+    <div>
+        <h3>See an example</h3>
+        <hr />
+        <div ng-show="!data.product">To see the Shopping Cart in action, return to your account and add a product. When complete, return to this page and reload it.</div>
+        <div ng-show="data.product">
+            <p>Click the button to see Shopping Cart in action. Keep reading for more details on how to customize it to meet your needs.</p>
+            <p class="text-center"><a ng-href="{{data.src}}/#/cart?product_id:{{data.product.product_id}}" target="_blank"><span class="btn btn-success"><i class="fa fa-external-link" aria-hidden="true"></i> Open Shopping Cart</span></a></p>
+            <div ng-if="data.test">
+                <p>
+                    To place a test payment, you can use the payment details below:
+                    <ul>
+                        <li>Card number: 4444555566661111</li>
+                        <li>Expiration Date: (any future date)</li>
+                        <li>CVC: (any three digit number)</li>
+                        <li>Other details: Whatever you want. Make sure you use your own email address as a payment confirmation email will be sent if you're account is configured to send payment confirmations.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Creating Links to Shopping Cart</h3>
+        <hr />
+        <p>You can create links manually using the documentation provided below, or even easier, use the Link Builder tool.</p>
+        <p class="text-center"><a ng-href="#/link-builder"><button class="btn btn-info"><i class="fa fa-link" aria-hidden="true"></i> Open Link Builder</button></a></p>
+    </div>
+
+    <div>
+        <h3>Customization Options</h3>
+        <hr />
+        <p>Shopping Cart allows a number of customizations, such as:</p>
+        <ul class="spacer-b20">
+            <li>Full control over the design, colors, logo, etc.</li>
+            <li>Collect payment in multiple currencies</li>
+            <li>Multi-language order form</li>
+            <li>Payments by credit card or PayPal with others to be added in the future</li>
+            <li>Allow customers to save their payment method with a username and password for speedy future payments</li>
+            <li>Collect custom data from customers with custom fields that can be optional or required</li>
+            <li>Support for discount codes, either provided through the URL or directly input by the customer</li>
+            <li>Provide additional custom data with the payment for your reference</li>
+        </ul>
+
+        <p>To set your preferences, login to your account, go to Apps> Shopping Cart. Click on the arrow next to "Launch" and select "Settings" and "Style"</p>
+
+    </div>
+
+    <div>
+        <h3>Creating Links Manually</h3>
+        <hr />
+
+        <p>Below are several examples, you can mix and match parameters to provide the options you want.</p>
+
+        <p>
+            <strong>Add a product to the cart</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001</code><br />
+        </p>
+
+        <p>
+            <strong>Add a product to the cart, specify the quantity</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001=2</code><br />
+        </p>
+
+        <p>
+            <strong>Add multiple products to the cart</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001&product_id:1002</code><br />
+            <span class="help">You can provide an unlimited number of products in a single URL</span>
+        </p>
+
+        <p>
+            <strong>Add multiple products to the cart, specify the quantity for each</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001=1&product_id:1002=2</code><br />
+        </p>
+
+        <p>
+            <strong>Add a product to the cart, remove any existing items already in the cart</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001&empty_cart=true</code><br />
+        </p>
+
+        <p>
+            <strong>Specify a promotion code</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001&promotion_code=xxx</code><br />
+            <span class="help">You can create promotion codes in Store> Promotions</span>
+        </p>
+
+        <p>
+            <strong>Provide customer details</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001&name=John%20Doe&email=john@example.com</code><br />
+        </p>
+
+        <p>
+            <strong>Provide referrer data</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001&referrer=my-custom-value</code><br />
+            <span class="help">Allows you to specify custom data that will help you know where the sale came from. The value you provide will be recorded with the cart and completed order.</span>
+        </p>
+
+        <p>
+            <strong>Define the payment currency</strong><br />
+            <code>{{data.src}}/#/cart?currency=EUR&product_id:1001</code><br />
+            <span class="help">Generally you don't need to specify the currency. If not supplied, the best currency for the customer will be automatically selected and the customer is able to change the currency in the cart.</span>
+        </p>
+
+        <p>
+            <strong>Provide custom data</strong><br />
+            <code>{{data.src}}/#/cart?product_id:1001&this=that&more=stuff</code><br />
+            <span class="help">Any parameters you specify will be stored with the cart and completed order, for your reference. You can supply up to 2048 characters of custom data.</span>
+        </p>
+
+    </div>
+
+</div>

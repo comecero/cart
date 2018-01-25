@@ -1,0 +1,204 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h1 id="typography">Shopping Cart Link Builder</h1>
+        </div>
+    </div>
+</div>
+
+
+<form name="form" ng-controller="LinkBuilderController" novalidate>
+
+    <p><i>Fill in the form below to generate a link to the Shopping Cart to provide to a customer</i></p>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Products</strong><span class="btn btn-xs btn-danger pull-right" ng-click="functions.reset()">Reset</span>
+        </div>
+        <div class="panel-body">
+
+            <div class="col-xs-12">
+
+                <div class="form-group">
+                    <label for="name" class="control-label" translate>Product Search</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" ng-model="data.q" ng-change="functions.search()" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 750, blur: 0 } }">
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button">Search</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-header" ng-if="data.products">
+                    <span style="top:-10px">Search Results</span>
+                </div>
+
+                <table ng-show="data.products">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th class="text-right">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="data.products.length == 0">
+                        <tr>
+                            <td colspan="3" class="text-center"><i>No products found</i></td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-repeat="product in data.products" ng-if="data.products.length > 0">
+                        <tr>
+                            <td data-label="ID"><strong><span class="faux-link" ng-click="functions.addProduct(product)">{{product.product_id}}</span></strong></td>
+                            <td data-label="Name">{{product.name}}</td>
+                            <td class="text-right" data-label="Price">{{product.formatted.price}} {{product.currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="section-header" ng-if="data.addedProducts.length > 0">
+                    <span style="top:-10px">Added Products</span>
+                </div>
+
+                <table class="cart" ng-show="data.addedProducts.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th class="text-right">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="product in data.addedProducts">
+                        <tr>
+                            <td data-label="Name"><strong>{{product.name}}</strong> <i class="fa fa-trash pointer" style="color: #808080;" ng-click="functions.removeProduct(product)" title="Remove"></i></td>
+                            <td class="has-input" data-label="Quantity">
+                                <input type="tel" name="quantity" ng-model="product.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
+                            </td>
+                            <td class="text-right" data-label="Price">{{product.formatted.price}} {{product.currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="panel-heading"><strong>Discounts</strong></div>
+        <div class="panel-body">
+
+            <div class="col-xs-12">
+                <div class="form-group" show-errors>
+                    <label for="reference" class="control-label">Promotion Code</label>
+                    <input type="text" class="form-control" name="reference" ng-model="link.promotion_code" placeholder="Optional">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-heading"><strong>Customer Info</strong></div>
+        <div class="panel-body">
+
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group" show-errors>
+                    <label for="name" class="control-label">Customer Name</label>
+                    <input type="text" class="form-control" name="name" ng-model="link.name" placeholder="Optional">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group" show-errors>
+                    <label for="email" class="control-label">Email</label>
+                    <input type="text" class="form-control" name="email" ng-model="link.email" placeholder="Optional">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-heading"><strong>Custom Data</strong></div>
+        <div class="panel-body">
+
+            <div class="col-xs-12" style="margin-bottom: -15px;">
+                <p><i>Enter any custom values you would like to be recorded with the cart and order</i></p>
+            </div>
+
+            <div ng-repeat="item in meta">
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label for="meta_name" class="control-label">Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="meta_name" ng-model="item.name">
+                            <span class="input-group-addon pointer" ng-click="functions.removeMeta($index)"><i class="fa fa-trash pointer text-default" title="Remove"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label for="meta_value" class="control-label">Value</label>
+                        <input type="text" class="form-control" name="meta_value" ng-model="item.value">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12">
+                <btn class="btn btn-info btn-xs" ng-click="meta.push({name: '', value: ''})">Add Custom Data</btn>
+            </div>
+
+        </div>
+
+        <div class="panel-heading"><strong>Other</strong></div>
+        <div class="panel-body">
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group" show-errors>
+                    <label for="total" class="control-label">Currency</label>
+                    <select class="form-control" name="currency" ng-model="link.currency" ng-options="currency.code as ((currency.code || '' ) + ' ' + currency.name) for currency in data.options.currencies"></select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-8">
+                <div class="form-group">
+                    <label for="reference" class="control-label">Referrer</label>
+                    <input type="text" class="form-control" name="referrer" ng-model="link.referrer" placeholder="Optional">
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label class="radio-group-label">Empty Cart?</label>
+                    <div class="radio-group inline">
+                        <input type="radio" id="allow_save_cards-1" class="radio" name="allow_save_cards" ng-model="link.empty_cart" ng-value="true">
+                        <label for="allow_save_cards-1" class="radio-label">Yes</label>
+                        <input type="radio" id="allow_save_cards-2" class="radio" name="allow_save_cards" ng-model="link.empty_cart" ng-value="false">
+                        <label for="allow_save_cards-2" class="radio-label">No</label>
+                    </div>
+                    <div>
+                        <p class="help">Indicates if you want any items already in the customer's cart to be removed before these items are added to the cart.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-heading"><strong>Get the Link</strong></div>
+        <div class="panel-body">
+
+            <div class="col-xs-12">
+                <btn class="btn btn-success" ng-click="functions.getLink()">Generate Link</btn>
+
+                <div class="row"></div>
+
+                <div class="input-group spacer-t20" ng-show="url">
+                    <input type="text" class="form-control" name="url" id="url" value="{{url}}" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info clipboard" data-clipboard-target="#url"><i class="fa fa-copy" aria-hidden="true"></i> Copy</button>
+                        <a ng-href="{{url}}" target="_blank" class="btn btn-primary"><i class="fa fa-external-link" aria-hidden="true"></i> Open</a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>

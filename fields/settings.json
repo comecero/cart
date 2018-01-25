@@ -27,6 +27,15 @@
     "required": false
   },
   {
+    "name": "use_square_images",
+    "type": "boolean",
+    "label": "Use Square Product Images?",
+    "description": "Indicates if you would like to use square product images, resulting in consistent size of all images. Otherwise, the default shape of the product images will be used.",
+    "section": "Design",
+    "required": true,
+    "default_value": true
+  },
+  {
     "name": "page_title",
     "type": "string",
     "label": "Page Title",
@@ -117,7 +126,7 @@
     "section": "Features",
     "required": true,
     "default_value": false
-  },  
+  },
   {
     "name": "exp_select",
     "type": "boolean",

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="gettingStarted">
+<head>
+    <title ng-bind="title">Comecero Shopping Cart Docs</title>
+
+    <!-- Scale set to 1.0001 to address a bug in Safari on iOS 9.x -->
+    <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
+
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../sass/style.css" rel="stylesheet" />
+    <link href="../getting-started/style.css" rel="stylesheet" />
+
+    <!-- Pull in the app and account settings. Must come before any app bootstrapping. -->
+    <script src="../settings/app.js"></script>
+    <script src="../settings/account.js"></script>
+
+    <!-- Frameworks. AngularJS is loaded here to enable ng-cloak as needed. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="../dist/js/highlight.pack.js"></script>
+    <link href="../dist/css/code-highlight.css" rel="stylesheet" />
+
+    <!-- Clipboard.js -->
+    <script src="../dist/js/clipboard.min.js"></script>
+
+    <style type="text/css">
+        body {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .page-header {
+            padding-bottom: 9px;
+            margin: 40px 0 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        pre code {
+            white-space: unset;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        .help {
+            font-style: italic;
+            font-size: 90%;
+        }
+
+        h3 {
+            margin-top: 50px;
+        }
+
+        .label-lg {
+            font-size: 14px;
+            margin: 10px 4px 4px 0;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <ng-view autoscroll="true"></ng-view>
+
+    </div>
+
+    <div class="spacer-b20">&nbsp;</div>
+
+    <!-- Modules (CDN)  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-sanitize.min.js"></script>
+
+    <!-- Main Application File. Must come before kit.js. -->
+    <script src="app.js"></script>
+
+    <!-- Controller -->
+    <script src="../getting-started/controller.js"></script>
+
+    <!-- App Kit -->
+    <script src="../dist/js/kit.min.js"></script>
+
+</body>
+</html>

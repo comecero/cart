@@ -10,7 +10,7 @@
         // Set the invoice parameters
         $scope.data.params = {};
         $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
-        $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_small,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+        $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
         
         // Set default values.
         $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
@@ -28,16 +28,21 @@
         
         // Get the invoice
         InvoiceService.get($scope.data.params).then(function (invoice) {
-            
+
             $scope.data.invoice = invoice;
-            
+
             // Only display images if all items in the invoice have images
             $scope.showImages = false;
             var hasImageCount = 0;
             _.each(invoice.items, function (item) {
                 if (item.product != null) {
-                    if (item.product.images.length == 0) {
+                    if (item.product.images.length > 0) {
                         hasImageCount++;
+                        if ($scope.settings.app.use_square_images) {
+                            item.image_link = item.product.images[0].link_square;
+                        } else {
+                            item.image_link = item.product.images[0].link_small;
+                        }
                     }
                 }
             });

@@ -11,7 +11,7 @@
     // Set the cart parameters
     $scope.data.params = {};
     $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
-    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_small,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
 
     // Set default values.
     $scope.data.shipping_is_billing = true; // User can toggle.
@@ -45,6 +45,12 @@
             _.each(cart.items, function (item) {
                 if (item.product.images.length == 0) {
                     $scope.showImages = false;
+                } else {
+                    if ($scope.settings.app.use_square_images) {
+                        item.image_link = item.product.images[0].link_square;
+                    } else {
+                        item.image_link = item.product.images[0].link_small;
+                    }
                 }
             });
 

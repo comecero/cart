@@ -1,0 +1,12 @@
+﻿.container {
+    max-width: 750px;
+}
+
+code {
+    color: #443974;
+    background-color: #f3f1f8;
+}
+
+p {
+    margin-bottom: 25px;
+}

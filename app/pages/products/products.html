@@ -27,7 +27,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 text-center spacer-b40" ng-repeat="product in data.products.data">
-            <div class="spacer-b20"><img class="product-icon" ng-src="{{product.images[0].link_square}}" /></div>
+            <div class="spacer-b20" ng-if="product.image_link"><img class="product-icon" ng-src="{{product.image_link}}" /></div>
             <div class="spacer-b10">{{product.name}}</div>
             <div class="spacer-b10">{{product.formatted.price}}</div>
             <div class="spacer-b10" ng-bind-html="product.description"></div>
