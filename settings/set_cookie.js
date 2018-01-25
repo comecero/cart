@@ -27,8 +27,8 @@ $(document).ready(function () {
 
     $("#submit").click(function () {
 
-        setCookie("token", $("#token").val());
-        document.write("The cookie value for token is: " + getCookie("token"));
+        setCookie($("#name").val(), $("#value").val(), $("#expires").val());
+        $("#msg").html("The cookie value for " + $("#name").val() + " is: " + getCookie($("#name").val()));
 
     });
 

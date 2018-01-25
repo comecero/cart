@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- This page is used for manually applying an API token for development and test purposes. This file shouldn't be used in production code. -->
+    <title>Set Cookie</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="set_cookie.js"></script>
+</head>
+
+<body>
+    <input type="text" id="name" name="name" placeholder="Cookie name" style="width: 400px;"><br /><br />
+    <input type="text" id="value" name="value" placeholder="Cookie value" style="width: 400px;"><br /><br />
+
+    How many minutes till the cookie expires?<br />
+    <input type="text" id="expires" name="expires" style="width: 100px;" value="1440"><br /><br />
+
+    <input type="submit" id="submit" value="Set Cookie"><br /><br />
+    <span id="msg"></span>
+</body>
+
+</html>
