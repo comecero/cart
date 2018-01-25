@@ -1,4 +1,9 @@
-﻿<a name="1.0.7"></a>
+﻿<a name="1.0.8"></a>
+# 1.0.8
+
+- New setting to allow a choice between square or default image shapes for product icons
+
+<a name="1.0.7"></a>
 # 1.0.7
 
 - Bug fix when logging out of cart.
