@@ -87,7 +87,7 @@
             <!-- PayPal -->
             <div class="row spacer-t20" ng-show="helpers.supportsPaymentMethod('paypal', data.cart.options)">
                 <div class="col-xs-12 text-right">
-                    <input type="image" submit-payment="data.paypal" class="pointer" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" error="data.error" src="images/pp_checkout.png" />
+                    <img submit-payment="data.paypal" class="pointer" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" error="data.error" src="images/pp_checkout.png" />
                 </div>
             </div>
 
