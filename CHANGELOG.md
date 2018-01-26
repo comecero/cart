@@ -1,4 +1,11 @@
-﻿<a name="1.0.8"></a>
+﻿<a name="1.0.9"></a>
+# 1.0.9
+
+- Integrate Kit version 1.0.6. See Kit release notes for changes.
+- Bug fix that prevents product images from disappearing when a cart, invoice or order is updated or refreshed
+- Other minor bug fixes
+
+<a name="1.0.8"></a>
 # 1.0.8
 
 - New setting to allow a choice between square or default image shapes for product icons
