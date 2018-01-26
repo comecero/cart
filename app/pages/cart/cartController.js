@@ -44,12 +44,6 @@
             _.each(cart.items, function (item) {
                 if (item.product.images.length == 0) {
                     $scope.showImages = false;
-                } else {
-                    if ($scope.settings.app.use_square_images) {
-                        item.image_link = item.product.images[0].link_square;
-                    } else {
-                        item.image_link = item.product.images[0].link_small;
-                    }
                 }
             });
 

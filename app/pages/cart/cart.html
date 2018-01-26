@@ -46,7 +46,7 @@
                 </thead>
                 <tbody ng-repeat="item in data.cart.items">
                     <tr>
-                        <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{item.image_link}}" /></td>
+                        <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                         <td data-label="{{ 'Name' | translate}}"><strong>{{item.name}}</strong></td>
                         <td class="has-input" data-label="{{ 'Quantity' | translate}}" ng-if="!settings.app.hide_quantity">
                             <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
