@@ -1,6 +1,7 @@
 ﻿<a name="1.0.9"></a>
 # 1.0.9
 
+- Allow customers that sign into the page to pay with an existing PayPal account if saved as a customer payment method
 - Integrate Kit version 1.0.6. See Kit release notes for changes.
 - Bug fix that prevents product images from disappearing when a cart, invoice or order is updated or refreshed
 - Other minor bug fixes
