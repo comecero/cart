@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿1.0.8
+Comecero Cart version: ﻿1.0.9
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -337,18 +337,6 @@ app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$d
         // Load the products
         ProductService.getList($scope.data.params).then(function (products) {
             $scope.data.products = products;
-
-            // Determine the image to use
-            _.each($scope.data.products.data, function (product) {
-                if (product.images.length) {
-                    if ($scope.settings.app.use_square_images) {
-                        product.image_link = product.images[0].link_square;
-                    } else {
-                        product.image_link = product.images[0].link_small;
-                    }
-                }
-            });
-
         }, function (error) {
             $scope.data.error = error;
         });
