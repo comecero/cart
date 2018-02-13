@@ -34,9 +34,6 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
         }
     }
 
-    // REMOVE REMOVE REMOVE JUST A TEST
-    var message = gettextCatalog.getString("The item you are trying to access could not be found.");
-
     // Get the current cart
     CartService.get().then(function (cart) {
 
