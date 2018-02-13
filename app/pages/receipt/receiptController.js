@@ -34,11 +34,6 @@
             if (item.product != null) {
                 if (item.product.images.length > 0) {
                     hasImageCount++;
-                    if ($scope.settings.app.use_square_images) {
-                        item.image_link = item.product.images[0].link_square;
-                    } else {
-                        item.image_link = item.product.images[0].link_small;
-                    }
                 }
             }
         });

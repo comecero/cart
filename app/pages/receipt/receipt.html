@@ -111,7 +111,7 @@
         </thead>
         <tbody ng-repeat="item in data.payment.order.items">
             <tr>
-                <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{item.image_link}}" /></td>
+                <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                 <td data-label="{{ 'Name' | translate}}"><strong>{{item.name}}</strong></td>
                 <td data-label="{{ 'Quantity' | translate}}"><span>{{item.quantity}}</span></td>
                 <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.payment.order.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.payment.order.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>

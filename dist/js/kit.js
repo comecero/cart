@@ -1,5 +1,5 @@
 /*
-Comecero Kit version: ﻿1.0.5
+Comecero Kit version: ﻿1.0.6
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -2958,7 +2958,7 @@ app.directive('customerSignin', ['CartService', 'CustomerService', '$timeout', f
                         // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
                         if (cart.customer.payment_methods.data.length > 0 && scope.paymentMethod) {
                             var payment_method_id = _.findWhere(cart.customer.payment_methods.data, { is_default: true }).payment_method_id;
-                            scope.paymentMethod.payment_method_id = payment_method_id;
+                            scope.paymentMethod = { payment_method_id: payment_method_id };
                         }
 
                         // Fire the success event
@@ -2996,7 +2996,7 @@ app.directive('customerSignin', ['CartService', 'CustomerService', '$timeout', f
                         // If the customer has payment methods and the payment method object is supplied, assign the default payment method id
                         if (customer.payment_methods.data.length > 0 && scope.paymentMethod) {
                             var payment_method_id = _.findWhere(customer.payment_methods.data, { is_default: true }).payment_method_id;
-                            scope.paymentMethod.payment_method_id = payment_method_id;
+                            scope.paymentMethod = { payment_method_id: payment_method_id };
                         }
 
                         // Fire the success event
@@ -3910,11 +3910,11 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
         }
 
         // The account_id is only needed in development environments. The hosted environment can call this endpoint without the account_id and it will be determined on the api side from the hostname.
-        var parameters = {};
+        var parameters = { browser_info: true };
         var settings = SettingsService.get();
 
         if (settings.account.account_id && settings.config.development == true) {
-            parameters = { account_id: settings.account.account_id, browser_info: true };
+            parameters = { account_id: settings.account.account_id };
         }
 
         // Prepare the url
@@ -4910,7 +4910,14 @@ app.service("InvoiceService", ['$http', '$q', '$rootScope', 'ApiService', 'Payme
 
             // Run the payment
             PaymentService.create(payment_method, url, parameters, quiet).then(function (payment) {
+
+                // If the payment is completed or pending, remove the invoice_id from the cookie.
+                if (payment.status == "completed" || payment.status == "pending") {
+                    StorageService.remove("invoice_id");
+                }
+
                 deferred.resolve(payment);
+
             }, function (error) {
                 deferred.reject(error);
             });
@@ -5047,13 +5054,13 @@ app.service("PaymentService", ['$http', '$q', 'ApiService', 'SettingsService', '
 
         var deferred = $q.defer();
 
-            var url = "/payments/options";
-            ApiService.getItem(url, parameters, quiet).then(function (response) {
-                var options = response.data;
-                deferred.resolve(options);
-            }, function (error) {
-                deferred.reject(error);
-            });
+        var url = "/payments/options";
+        ApiService.getItem(url, parameters, quiet).then(function (response) {
+            var options = response.data;
+            deferred.resolve(options);
+        }, function (error) {
+            deferred.reject(error);
+        });
 
         return deferred.promise;
 
