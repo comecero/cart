@@ -5,114 +5,114 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: Comecero Public Storefront Apps\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ./app/pages/cart/cart.html:186
 #: ./app/pages/cart/cart.html:261
 msgid "Address"
-msgstr "Dirección"
+msgstr "住所"
 
 #: ./app/pages/cart/cart.html:194
 #: ./app/pages/cart/cart.html:269
 msgid "Address 2"
-msgstr "Dirección dos"
+msgstr "住所2"
 
 #: ./app/shared/services.js:444
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
-msgstr "Ocurrió un error al intentar procesar tu solicitud. Intenta realizar tu solicitud de nuevo. Ponte en contacto con nuestro servicio de asistencia si el problema persiste."
+msgstr "リクエストの処理中にエラーが発生しました。もう一度お試しください。エラーが引き続き発生する場合には、サポートまでご連絡ください。"
 
 #: ./app/pages/cart/cart.html:323
 #: ./app/pages/cart/cart.html:88
 #: ./app/pages/payment/review.html:72
 #: ./app/pages/payment/review.html:73
 msgid "Apply"
-msgstr "Aplicar"
+msgstr "適用"
 
 #: ./app/pages/cart/cart.html:150
 #: ./app/pages/payment/review.html:27
 msgid "Billing Address"
-msgstr "Dirección de facturación"
+msgstr "請求先住所"
 
 #: ./app/pages/products/products.html:29
 msgid "Buy Now"
-msgstr "Comprar ahora"
+msgstr "今すぐ購入"
 
 #: ./app/pages/cart/cart.html:137
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "キャンセル"
 
 #: ./app/pages/cart/cart.html:356
 msgid "Card Number"
-msgstr "Número de tarjeta"
+msgstr "カード番号"
 
 #: ./app/pages/cart/cart.html:339
 msgid "Choose a Payment Method"
-msgstr "Elige una forma de pago"
+msgstr "支払い方法を選択してください"
 
 #: ./app/pages/cart/cart.html:202
 #: ./app/pages/cart/cart.html:277
 msgid "City"
-msgstr "Ciudad"
+msgstr "都市"
 
 #: ./app/pages/cart/cart.html:154
 #: ./app/pages/payment/review.html:53
 msgid "Company Name"
-msgstr "Nombre de la empresa"
+msgstr "企業名"
 
 #: ./app/pages/cart/cart.html:75
 msgid "Continue Shopping"
-msgstr "Continuar comprando"
+msgstr "ショッピングを続ける"
 
 #: ./app/pages/cart/cart.html:232
 #: ./app/pages/cart/cart.html:307
 msgid "Country"
-msgstr "País"
+msgstr "国"
 
 #: ./app/pages/cart/cart.html:11
 msgid "Currency"
-msgstr "Moneda"
+msgstr "通貨"
 
 #: ./app/pages/cart/cart.html:63
 msgid "Discount"
-msgstr "Descuento"
+msgstr "ディスカウント"
 
 #: ./app/pages/cart/cart.html:91
 msgid "Discount applied."
-msgstr "Descuento aplicado."
+msgstr "ディスカウントが適用されました。"
 
 #: ./app/pages/cart/cart.html:170
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "メールアドレス"
 
 #: ./app/pages/cart/cart.html:87
 msgid "Enter Promo Code"
-msgstr "Introduce el código promocional"
+msgstr "プロモコードを入力してください"
 
 #: ./app/pages/cart/cart.html:364
 msgid "Expiration Month"
-msgstr "Mes de caducidad"
+msgstr "有効期限の月"
 
 #: ./app/pages/cart/cart.html:372
 msgid "Expiration Year"
-msgstr "Año de caducidad"
+msgstr "有効期限の年"
 
 #: ./app/pages/receipt/receipt.html:37
 msgid "Expires"
-msgstr "Caduca"
+msgstr "有効期限日時"
 
 #: ./app/pages/cart/cart.html:117
 msgid "Have an account?"
-msgstr "¿Ya tienes una cuenta?"
+msgstr "アカウントをお持ちですか?"
 
 #: ./app/pages/cart/cart.html:325
 #: ./app/pages/payment/review.html:75
 msgid "If this order is for a business, please provide your VAT Number."
-msgstr "Si este pedido es para una empresa, proporciónanos tu número de identificación fiscal."
+msgstr "こちらがビジネス向けのご注文である場合には、VAT番号を入力してください。"
 
 #: ./app/pages/cart/cart.html:18
 msgid "Language"
-msgstr "Idioma"
+msgstr "言語"
 
 #: ./app/pages/cart/cart.html:162
 #: ./app/pages/cart/cart.html:253
@@ -120,432 +120,429 @@ msgstr "Idioma"
 #: ./app/pages/payment/review.html:92
 #: ./app/pages/receipt/receipt.html:51
 msgid "Name"
-msgstr "Nombre"
+msgstr "名前"
 
 #: ./app/templates/fields.html:54
 msgid "No"
-msgstr "No"
+msgstr "いいえ"
 
 #: ./app/pages/cart/cart.html:322
 #: ./app/pages/payment/review.html:71
 msgid "Optional"
-msgstr "Opcional"
+msgstr "任意"
 
 #: ./app/pages/cart/cart.html:131
 msgid "Password"
-msgstr "Contraseña"
+msgstr "パスワード"
 
 #: ./app/pages/cart/cart.html:347
 msgid "Pay with a new card"
-msgstr "Pagar con una tarjeta nueva"
+msgstr "新たなカードで支払い"
 
 #: ./app/pages/cart/cart.html:334
 msgid "Payment Information"
-msgstr "Información de pago"
+msgstr "支払い情報"
 
 #: ./app/pages/receipt/receipt.html:34
 msgid "Payment Method"
-msgstr "Forma de pago"
+msgstr "支払い方法"
 
 #: ./app/pages/cart/cart.html:178
 #: ./app/pages/payment/review.html:61
 msgid "Phone"
-msgstr "Teléfono"
+msgstr "電話"
 
 #: ./app/shared/directives.js:2771
 msgid "Please confirm"
-msgstr "Por favor, confirma"
+msgstr "ご確認ください"
 
 #: ./app/shared/directives.js:2766
 #: ./app/shared/directives.js:2802
 msgid "Please make a selection"
-msgstr "Por favor, haz una selección"
+msgstr "選択してください"
 
 #: ./app/pages/cart/cart.html:204
 #: ./app/pages/cart/cart.html:279
 msgid "Please provide a city"
-msgstr "Por favor, proporciona una ciudad"
+msgstr "年を入力してください"
 
 #: ./app/pages/cart/cart.html:156
 #: ./app/pages/payment/review.html:55
 msgid "Please provide a company name"
-msgstr "Por favor, proporciona el nombre de la empresa"
+msgstr "企業名を入力してください"
 
 #: ./app/pages/cart/cart.html:234
 #: ./app/pages/cart/cart.html:309
 msgid "Please provide a country"
-msgstr "Por favor, proporciona un país"
+msgstr "国を入力してください"
 
 #: ./app/pages/cart/cart.html:164
 #: ./app/pages/cart/cart.html:255
 msgid "Please provide a name"
-msgstr "Por favor, proporciona un nombre"
+msgstr "名前を入力してください"
 
 #: ./app/pages/cart/cart.html:218
 #: ./app/pages/cart/cart.html:293
 msgid "Please provide a region / province"
-msgstr "Por favor, proporciona una región o provincia"
+msgstr "地域 / 地方を入力してください"
 
 #: ./app/pages/cart/cart.html:212
 #: ./app/pages/cart/cart.html:287
 msgid "Please provide a state / province"
-msgstr "Por favor, proporciona un estado o una provincia"
+msgstr "州 / 地方を入力してください"
 
 #: ./app/pages/cart/cart.html:358
 msgid "Please provide a valid card number"
-msgstr "Por favor, proporciona un número de tarjeta válido"
+msgstr "有効なカード番号を入力してください"
 
 #: ./app/pages/cart/cart.html:172
 msgid "Please provide a valid email address"
-msgstr "Por favor, proporciona una dirección de correo electrónica válida"
+msgstr "有効なメールアドレスを入力してください"
 
 #: ./app/pages/cart/cart.html:366
 msgid "Please provide a valid expiration month"
-msgstr "Por favor, proporciona un mes de caducidad válido"
+msgstr "有効な有効期限の月を入力してください"
 
 #: ./app/pages/cart/cart.html:374
 msgid "Please provide a valid expiration year"
-msgstr "Por favor, proporciona un año de caducidad válido"
+msgstr "有効な有効期限の年を入力してください"
 
 #: ./app/pages/cart/cart.html:180
 #: ./app/pages/payment/review.html:63
 msgid "Please provide a valid phone number"
-msgstr "Por favor, proporciona un número de teléfono válido"
+msgstr "有効な電話番号を入力してください"
 
 #: ./app/pages/cart/cart.html:382
 msgid "Please provide a valid security code"
-msgstr "Por favor, proporciona un código de seguridad válido"
+msgstr "有効なセキュリティコードを入力してください"
 
 #: ./app/pages/cart/cart.html:226
 #: ./app/pages/cart/cart.html:301
 msgid "Please provide a zip / postal code"
-msgstr "Por favor, proporciona un código postal válido"
+msgstr "有効な郵便番号を入力してください"
 
 #: ./app/pages/cart/cart.html:188
 #: ./app/pages/cart/cart.html:196
 #: ./app/pages/cart/cart.html:263
 #: ./app/pages/cart/cart.html:271
 msgid "Please provide an address"
-msgstr "Por favor, proporciona una dirección"
+msgstr "有効な住所を入力してください"
 
 #: ./app/shared/directives.js:279
 msgid "Please provide an amount for your payment."
-msgstr "Por favor, proporciona un monto para tu pago."
+msgstr "支払い金額を入力してください。"
 
 #: ./app/shared/directives.js:2811
 msgid "Please provide one of the available options"
-msgstr "Por favor, proporciona una de las opciones disponibles"
+msgstr "利用可能なオプションから一つ選択してください"
 
 #: ./app/shared/directives.js:2794
 msgid "Please supply a number"
-msgstr "Por favor, facilita un número"
+msgstr "番号を入力してください"
 
 #: ./app/shared/directives.js:2787
 msgid "Please supply a number without decimals"
-msgstr "Por favor, facilita un número sin decimales"
+msgstr "少数なしの番号を入力してください"
 
 #: ./app/pages/products/products.html:17
 msgid "Products"
-msgstr "Productos"
+msgstr "商品"
 
 #: ./app/pages/cart/cart.html:34
 #: ./app/pages/payment/review.html:91
 #: ./app/pages/receipt/receipt.html:50
 msgid "Quantity"
-msgstr "Cantidad"
+msgstr "数量"
 
 #: ./app/pages/receipt/receipt.html:9
 msgid "Receipt"
-msgstr "Recibo"
+msgstr "支払証明書"
 
 #: ./app/pages/cart/cart.html:216
 #: ./app/pages/cart/cart.html:291
 msgid "Region / Province"
-msgstr "Región o provincia"
+msgstr "地域 / 地方"
 
 #: ./app/pages/payment/review.html:21
 msgid "Return to PayPal to try your payment again."
-msgstr "Volver a PayPal para intentar realizar el pago nuevamente."
+msgstr "PayPalへと戻ってもう一度支払いを実行してください。"
 
 #: ./app/pages/payment/review.html:11
 msgid "Review Your Order"
-msgstr "Revisa tu pedido"
+msgstr "注文を確認してください"
 
 #: ./app/pages/cart/cart.html:380
 msgid "Security Code"
-msgstr "Código de seguridad"
+msgstr "セキュリティコード"
 
 #: ./app/pages/cart/cart.html:243
 #: ./app/pages/payment/review.html:38
 msgid "Shipping Address"
-msgstr "Dirección de envío"
+msgstr "発送先住所"
 
 #: ./app/pages/cart/cart.html:25
 msgid "Shopping Cart"
-msgstr "Carrito de compras"
+msgstr "ショッピングカート"
 
 #: ./app/pages/cart/cart.html:118
 #: ./app/pages/cart/cart.html:138
 msgid "Sign In"
-msgstr "Iniciar sesión"
+msgstr "サインイン"
 
 #: ./app/pages/cart/cart.html:144
 msgid "Sign out"
-msgstr "Cerrar sesión"
+msgstr "サインアウト"
 
 #: ./app/pages/cart/cart.html:210
 #: ./app/pages/cart/cart.html:285
 msgid "State / Province"
-msgstr "Estado o provincia"
+msgstr "州 / 地方"
 
 #: ./app/pages/cart/cart.html:36
 #: ./app/pages/payment/review.html:93
 #: ./app/pages/receipt/receipt.html:52
 msgid "Subtotal"
-msgstr "Subtotal"
+msgstr "小計"
 
 #: ./app/pages/cart/cart.html:57
 #: ./app/pages/payment/review.html:113
 #: ./app/pages/receipt/receipt.html:72
 msgid "Tax"
-msgstr "Impuesto"
+msgstr "税金"
 
 #: ./app/pages/receipt/receipt.html:17
 msgid "Thank you! Your order is complete."
-msgstr "¡Gracias! Tu pedido está completo."
+msgstr "ありがとうございます!　ご注文が完了しました。"
 
 #: ./app/shared/services.js:438
 msgid "The item you are trying to access could not be found."
-msgstr "No se pudo encontrar el artículo al que intentas acceder."
+msgstr "アクセスをご希望の商品が見つかりませんでした。"
 
 #: ./app/shared/directives.js:2837
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
-msgstr[0] "El valor tiene que ser de al menos un carácter"
-msgstr[1] "El valor tiene que ser de al menos {{$count}} caracteres"
+msgstr[0] "入力値は少なくとも1文字以上でなければなりません"
 
 #: ./app/shared/directives.js:2843
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
-msgstr[0] "El valor tiene que ser menor que un carácter"
-msgstr[1] "El valor tiene que ser menor que {{$count}} caracteres"
+msgstr[0] "入力値は1文字以下でなければなりません"
 
 #: ./app/shared/directives.js:2820
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
-msgstr[0] "El valor que proporciones tiene que ser mayor que {{$count}}"
-msgstr[1] "El valor que proporciones tiene que ser mayor que {{$count}}"
+msgstr[0] "入力値は{{$count}}以上でなければなりません"
 
 #: ./app/shared/directives.js:2826
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
-msgstr[0] "El valor que proporciones tiene que ser menor que {{$count}}"
-msgstr[1] "El valor que proporciones tiene que ser menor que {{$count}}"
+msgstr[0] "入力値は{{$count}}以下でなければなりません"
 
 #: ./app/pages/cart/cart.html:74
 msgid "There are no items in your cart"
-msgstr "No hay artículos en tu carrito"
+msgstr "カートには商品が入れられていません"
 
 #: ./app/shared/directives.js:179
 #: ./app/shared/directives.js:263
 #: ./app/shared/directives.js:458
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
-msgstr "Parte de la información que proporcionaste no es válida. Revisa los errores y vuelve a intentarlo."
+msgstr "入力された情報の一部に問題がありました。エラーを修正して、もう一度お試しください。"
 
 #: ./app/pages/cart/cart.html:68
 #: ./app/pages/payment/review.html:119
 #: ./app/pages/receipt/receipt.html:78
 msgid "Total"
-msgstr "Total"
+msgstr "合計"
 
 #: ./app/pages/cart/cart.html:98
 msgid "Update Cart"
-msgstr "Actualizar carrito"
+msgstr "カートをアップデート"
 
 #: ./app/pages/cart/cart.html:124
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "ユーザーネーム"
 
 #: ./app/pages/cart/cart.html:320
 #: ./app/pages/payment/review.html:69
 msgid "VAT Number"
-msgstr "Número de identificación fiscal"
+msgstr "VAT番号"
 
 #: ./app/templates/fields.html:52
 msgid "Yes"
-msgstr "Sí"
+msgstr "はい"
 
 #: ./app/pages/cart/cart.html:110
 msgid "Your Information"
-msgstr "Su información"
+msgstr "お客様の情報"
 
 #: ./app/pages/cart/cart.html:224
 #: ./app/pages/cart/cart.html:299
 msgid "Zip / Postal Code"
-msgstr "Código postal"
+msgstr "郵便番号"
 
 #: ./app/pages/cart/cart.html:342
 msgid "expiration"
-msgstr "caducidad"
+msgstr "有効期限"
 
 #: ./app/pages/invoice/invoice.html:51
 msgid "Billing Information"
-msgstr "Datos de facturación"
+msgstr "請求先情報"
 
 #: ./app/pages/cart/cart.html:489
 #: ./app/pages/payment/review.html:179
 msgid "Complete Order"
-msgstr "Finalizar el pedido"
+msgstr "注文を完了する"
 
 #: ./app/pages/pay/pay.html:347
 #: ./app/pages/review/review.html:137
 msgid "Complete Payment"
-msgstr "Finalizar el pago"
+msgstr "支払いを完了する"
 
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
-msgstr "Derechos de autor &copy; {{settings.account.year}} {{settings.app.company_name}}. Todos los derechos reservados."
+msgstr "著作権©{{設定.アカウント.年度}} {{設定.アプリ.企業名}}. 無断転用禁止。"
 
 #: ./app/pages/receipt/receipt.html:58
 msgid "Create Account"
-msgstr "Crear cuenta"
+msgstr "アカウントを開く"
 
 #: ./app/pages/receipt/receipt.html:29
 msgid "Date"
-msgstr "Fecha"
+msgstr "日付"
 
 #: ./app/pages/invoice/invoice.html:103
 #: ./app/pages/receipt/receipt.html:124
 msgid "Download Now"
-msgstr "Descargar ahora"
+msgstr "すぐダウンロードする"
 
 #: ./app/pages/invoice/invoice.html:39
 msgid "Due Date"
-msgstr "Fecha de vencimiento"
+msgstr "支払い期日"
 
 #: ./app/pages/cart/cart.html:77
 msgid "Enter"
-msgstr "Introducir"
+msgstr "入力する"
 
 #: ./app/pages/pay/pay.html:151
 msgid "Full Name"
-msgstr "Nombre completo"
+msgstr "姓名"
 
 #: ./app/pages/invoice/invoice.html:22
 msgid "Invoice"
-msgstr "Factura"
+msgstr "送り状"
 
 #: ./app/pages/invoice/invoice.html:79
 msgid "Invoice Details"
-msgstr "Detalles de la factura"
+msgstr "送り状明細"
 
 #: ./app/pages/invoice/invoice.html:120
 msgid "Invoice Summary"
-msgstr "Resumen de la factura"
+msgstr "送り状概要"
 
 #: ./app/pages/cart/cart.html:41
 #: ./app/pages/invoice/invoice.html:85
 #: ./app/pages/payment/review.html:98
 #: ./app/pages/receipt/receipt.html:106
 msgid "Item"
-msgstr "Artículo"
+msgstr "アイテム"
 
 #: ./app/pages/payment/review.html:92
 #: ./app/pages/receipt/receipt.html:95
 msgid "Order Details"
-msgstr "Detalles del pedido"
+msgstr "注文内容明細"
 
 #: ./app/pages/cart/cart.html:362
 msgid "Order Summary"
-msgstr "Resumen del pedido"
+msgstr "注文内容概要"
 
 #: ./app/pages/invoice/invoice.html:30
 msgid "Paid"
-msgstr "Pagado"
+msgstr "支払い済み"
 
 #: ./app/pages/pay/pay.html:248
 #: ./app/pages/receipt/receipt.html:96
 msgid "Payment Details"
-msgstr "Datos de pago"
+msgstr "支払い明細"
 
 #: ./app/pages/payment/review.html:136
 #: ./app/pages/receipt/receipt.html:141
 msgid "Payment Summary"
-msgstr "Resumen de pago"
+msgstr "支払い概要"
 
 #: ./app/pages/pay/pay.html:179
 msgid "Please provide a phone"
-msgstr "Por favor, indique un teléfono"
+msgstr "電話番号を入力してください"
 
 #: ./app/pages/pay/pay.html:323
 msgid "Save this card to my account"
-msgstr "Guardar esta tarjeta en mi cuenta"
+msgstr "このカードをマイアカウントに保存する"
 
 #: ./app/pages/simple/checkout.html:278
 #: ./app/pages/simple/review.html:158
 msgid "Shipping"
-msgstr "Envío"
+msgstr "発送"
 
 #: ./app/pages/invoice/invoice.html:64
 msgid "Shipping Information"
-msgstr "Información de envío"
+msgstr "発送先情報"
 
+#. When the user is shown the shopping cart, they are given the option to indicate that their shipping address is the same as their billing address. This text is shown next to a checkbox that allows the user to indicate if their shipping address is the same as the billing address.
 #: ./app/pages/cart/cart.html:256
 msgid "Shipping is same as billing"
-msgstr "La información de envío es igual a la de facturación"
+msgstr "発送先は請求先と同住所"
 
 #: ./app/pages/receipt/receipt.html:69
 msgid "Sold To"
-msgstr "Vendido a"
+msgstr "販売先"
 
 #: ./app/pages/invoice/invoice.html:263
 msgid "Thank you for your business"
-msgstr "Gracias por su confianza"
+msgstr "お取り引きいただきまして、ありがとうございます。"
 
 #: ./app/pages/receipt/receipt.html:184
 msgid "Thank you for your order"
-msgstr "Gracias por su pedido"
+msgstr "ご注文いただきまして、ありがとうございます。"
 
 #: ./app/pages/receipt/receipt.html:22
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
-msgstr "¡Gracias! Su pedido ha sido enviado para ser procesado. En breve recibirá un correo electrónico con más información sobre el estado de su pedido."
+msgstr "ありがとうございます！ご注文の品の発送手続きに入らせていただきます。ご注文の状況につきましては、Eメールにて詳しい情報を取り急ぎご連絡申し上げます。"
 
 #: ./app/pages/invoice/invoice.html:34
 msgid "This invoice is closed"
-msgstr "Esta factura está cerrada"
+msgstr "このインボイスは締め切られました"
 
 #: ./app/pages/receipt/receipt.html:35
 msgid "To manage your order online, create an account."
-msgstr "Para gestionar su pedido en línea, cree una cuenta."
+msgstr "ご注文内容をオンラインで管理するためには、アカウントを開いていただく必要があります。"
 
 #: ./app/pages/cart/cart.html:22
 msgid "Your Order"
-msgstr "Su pedido"
+msgstr "お客様のご注文"
 
 #: ./app/pages/receipt/receipt.html:64
 msgid "Your account has been created."
-msgstr "Su cuenta ha sido creada."
+msgstr "お客様のアカウントが作成されました"
 
 #: ./app/pages/cart/cart.html:397
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.cart.formatted.tax}}"
+msgstr "お客様の合計金額には税金が含まれています。 {{データ.カート.フォーマット済み.税}}"
 
 #: ./app/pages/invoice/invoice.html:154
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.invoice.formatted.tax}}"
+msgstr "お客様の合計金額には税金が含まれております。{{データ.インボイス.フォーマット済.税}}"
 
 #: ./app/pages/receipt/receipt.html:175
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.payment.order.formatted.tax}}"
+msgstr "お客様の合計金額には税金が含まれております。{{データ.支払い.注文.フォーマット済み.税}}"
 
 #: ./app/pages/payment/review.html:170
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.sale.formatted.tax}}"
+msgstr "お客様の合計金額には税金が含まれております{{データ.販売.フォーマット済み.税金}}"
 
 #: ./app/pages/pay/pay.html:34
 #: ./app/pages/pay/pay.html:56
 msgid "Amount"
-msgstr "Cantidad"
+msgstr "金額"
 
 #: ./app/pages/pay/pay.html:33
 #: ./app/pages/pay/pay.html:48
@@ -556,119 +553,119 @@ msgstr "Cantidad"
 #: ./app/pages/review/review.html:45
 #: ./app/pages/review/review.html:94
 msgid "Description"
-msgstr "Descripción"
+msgstr "明細"
 
 #: ./app/pages/receipt/receipt.html:70
 msgid "Made By"
-msgstr "Hecho por"
+msgstr "製造元"
 
 #: ./app/pages/receipt/receipt.html:151
 msgid "Make Another Payment"
-msgstr "Hacer otro pago"
+msgstr "別件の支払いをする"
 
 #: ./app/shared/directives.js:2761
 msgid "Please provide a value"
-msgstr "Por favor, indique un valor"
+msgstr "価格をご連絡ください"
 
 #: ./app/pages/pay/pay.html:59
 msgid "Please provide an amount"
-msgstr "Por favor, indique una cantidad"
+msgstr "金額をご連絡ください"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
 msgid "Review & Finish"
-msgstr "Revisar y terminar"
+msgstr "確認して終了する"
 
 #: ./app/pages/review/review.html:15
 msgid "Review Your Payment"
-msgstr "Revise el pago"
+msgstr "お客様のお支払い内容をご確認ください"
 
 #: ./app/pages/receipt/receipt.html:146
 msgid "Thank you for your payment"
-msgstr "Gracias por realizar el pago"
+msgstr "お支払いいただきまして、ありがとうございます。"
 
 #: ./app/pages/receipt/receipt.html:25
 msgid "Thank you! Your payment is complete."
-msgstr "¡Gracias! El pago ha sido efectuado."
+msgstr "ありがとうございます！お客様のお支払いが完了しました。"
 
 #: ./app/pages/receipt/receipt.html:36
 msgid "To manage your account online, create an account."
-msgstr "Para gestionar su cuenta en línea, cree una cuenta."
+msgstr "お客様のアカウントをオンラインで管理するためには、アカウントを開いていただく必要があります。"
 
 #: ./app/pages/pay/pay.html:22
 msgid "Your Payment"
-msgstr "Su pago"
+msgstr "お客様のお支払い金額"
 
 #: ./app/pages/simple/checkout.html:295
 #: ./app/pages/simple/review.html:175
 msgid "An email has been sent to {{data.payment.order.customer.email}}."
-msgstr "Se ha enviado un correo electrónico a {{data.payment.order.customer.email}}."
+msgstr "Eメールを〜様宛にお送りいたしました"
 
 #: ./app/pages/simple/checkout.html:231
 msgid "Choose other payment method"
-msgstr "Elija otro método de pago"
+msgstr "他のお支払い方法を選択する"
 
 #: ./app/pages/simple/checkout.html:305
 #: ./app/pages/simple/review.html:185
 msgid "Close"
-msgstr "Cerrar"
+msgstr "閉じる"
 
 #: ./app/pages/simple/review.html:117
 msgid "Confirm Payment"
-msgstr "Confirmar el pago"
+msgstr "支払いを確認する"
 
 #: ./app/pages/simple/checkout.html:303
 #: ./app/pages/simple/review.html:183
 msgid "Continue"
-msgstr "Continuar"
+msgstr "続ける"
 
 #: ./app/pages/simple/checkout.html:48
 msgid "Email Address"
-msgstr "Dirección de correo electrónico"
+msgstr "Eメールアドレス"
 
 #: ./app/pages/simple/checkout.html:125
 #: ./app/pages/simple/review.html:62
 msgid "Enter VAT Number"
-msgstr "Introduzca el número de identificación fiscal"
+msgstr "VAT（付加価値税）番号を入力する"
 
 #: ./app/pages/simple/checkout.html:306
 #: ./app/pages/simple/review.html:186
 msgid "Finish"
-msgstr "Terminar"
+msgstr "終了"
 
 #: ./app/pages/simple/checkout.html:223
 msgid "Pay Now"
-msgstr "Pagar ahora"
+msgstr "今支払う"
 
 #: ./app/shared/commonDirectives.js:106
 msgid "Postal Code"
-msgstr "Código postal"
+msgstr "郵便番号"
 
 #: ./app/pages/simple/checkout.html:313
 #: ./app/pages/simple/review.html:193
 msgid "Print receipt"
-msgstr "Imprimir el recibo"
+msgstr "領収書を印刷する"
 
 #: ./app/pages/simple/checkout.html:102
 msgid "Region"
-msgstr "Región"
+msgstr "地域"
 
 #: ./app/pages/simple/checkout.html:304
 #: ./app/pages/simple/review.html:184
 msgid "Return"
-msgstr "Volver"
+msgstr "返品"
 
 #: ./app/pages/simple/checkout.html:223
 msgid "Submit Order"
-msgstr "Enviar el pedido"
+msgstr "注文する"
 
 #: ./app/pages/simple/checkout.html:262
 #: ./app/pages/simple/review.html:142
 msgid "Summary"
-msgstr "Resumen"
+msgstr "概要"
 
 #: ./app/pages/simple/checkout.html:252
 #: ./app/pages/simple/review.html:132
 msgid "Thank you for your purchase!"
-msgstr "¡Gracias por su compra!"
+msgstr "お買い上げいただきまして、ありがとうございます！"
 

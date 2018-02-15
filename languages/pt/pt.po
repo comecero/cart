@@ -5,22 +5,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: Comecero Public Storefront Apps\n"
-"Language: es\n"
+"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ./app/pages/cart/cart.html:186
 #: ./app/pages/cart/cart.html:261
 msgid "Address"
-msgstr "Dirección"
+msgstr "Endereço"
 
 #: ./app/pages/cart/cart.html:194
 #: ./app/pages/cart/cart.html:269
 msgid "Address 2"
-msgstr "Dirección dos"
+msgstr "Endereço 2"
 
 #: ./app/shared/services.js:444
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
-msgstr "Ocurrió un error al intentar procesar tu solicitud. Intenta realizar tu solicitud de nuevo. Ponte en contacto con nuestro servicio de asistencia si el problema persiste."
+msgstr "Ocorreu um erro ao tentar processar o seu pedido. Por favor, tente fazer de novo o seu pedido. Se o problema persistir, entre em contacto com o suporte."
 
 #: ./app/pages/cart/cart.html:323
 #: ./app/pages/cart/cart.html:88
@@ -32,11 +32,11 @@ msgstr "Aplicar"
 #: ./app/pages/cart/cart.html:150
 #: ./app/pages/payment/review.html:27
 msgid "Billing Address"
-msgstr "Dirección de facturación"
+msgstr "Endereço de faturação"
 
 #: ./app/pages/products/products.html:29
 msgid "Buy Now"
-msgstr "Comprar ahora"
+msgstr "Comprar agora"
 
 #: ./app/pages/cart/cart.html:137
 msgid "Cancel"
@@ -44,25 +44,25 @@ msgstr "Cancelar"
 
 #: ./app/pages/cart/cart.html:356
 msgid "Card Number"
-msgstr "Número de tarjeta"
+msgstr "Número do cartão"
 
 #: ./app/pages/cart/cart.html:339
 msgid "Choose a Payment Method"
-msgstr "Elige una forma de pago"
+msgstr "Escolha um método de pagamento"
 
 #: ./app/pages/cart/cart.html:202
 #: ./app/pages/cart/cart.html:277
 msgid "City"
-msgstr "Ciudad"
+msgstr "Cidade"
 
 #: ./app/pages/cart/cart.html:154
 #: ./app/pages/payment/review.html:53
 msgid "Company Name"
-msgstr "Nombre de la empresa"
+msgstr "Nome da empresa"
 
 #: ./app/pages/cart/cart.html:75
 msgid "Continue Shopping"
-msgstr "Continuar comprando"
+msgstr "Continuar a comprar"
 
 #: ./app/pages/cart/cart.html:232
 #: ./app/pages/cart/cart.html:307
@@ -71,44 +71,44 @@ msgstr "País"
 
 #: ./app/pages/cart/cart.html:11
 msgid "Currency"
-msgstr "Moneda"
+msgstr "Moeda"
 
 #: ./app/pages/cart/cart.html:63
 msgid "Discount"
-msgstr "Descuento"
+msgstr "Desconto"
 
 #: ./app/pages/cart/cart.html:91
 msgid "Discount applied."
-msgstr "Descuento aplicado."
+msgstr "Desconto aplicado."
 
 #: ./app/pages/cart/cart.html:170
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "Email"
 
 #: ./app/pages/cart/cart.html:87
 msgid "Enter Promo Code"
-msgstr "Introduce el código promocional"
+msgstr "Introduzir código promocional"
 
 #: ./app/pages/cart/cart.html:364
 msgid "Expiration Month"
-msgstr "Mes de caducidad"
+msgstr "Mês de expiração"
 
 #: ./app/pages/cart/cart.html:372
 msgid "Expiration Year"
-msgstr "Año de caducidad"
+msgstr "Ano de expiração"
 
 #: ./app/pages/receipt/receipt.html:37
 msgid "Expires"
-msgstr "Caduca"
+msgstr "Expira em"
 
 #: ./app/pages/cart/cart.html:117
 msgid "Have an account?"
-msgstr "¿Ya tienes una cuenta?"
+msgstr "Já tem uma conta?"
 
 #: ./app/pages/cart/cart.html:325
 #: ./app/pages/payment/review.html:75
 msgid "If this order is for a business, please provide your VAT Number."
-msgstr "Si este pedido es para una empresa, proporciónanos tu número de identificación fiscal."
+msgstr "Se este pedido se destinar a uma empresa, indique o seu número de IVA."
 
 #: ./app/pages/cart/cart.html:18
 msgid "Language"
@@ -120,11 +120,11 @@ msgstr "Idioma"
 #: ./app/pages/payment/review.html:92
 #: ./app/pages/receipt/receipt.html:51
 msgid "Name"
-msgstr "Nombre"
+msgstr "Nome"
 
 #: ./app/templates/fields.html:54
 msgid "No"
-msgstr "No"
+msgstr "Não"
 
 #: ./app/pages/cart/cart.html:322
 #: ./app/pages/payment/review.html:71
@@ -133,126 +133,126 @@ msgstr "Opcional"
 
 #: ./app/pages/cart/cart.html:131
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Palavra-passe"
 
 #: ./app/pages/cart/cart.html:347
 msgid "Pay with a new card"
-msgstr "Pagar con una tarjeta nueva"
+msgstr "Pagar com um novo cartão"
 
 #: ./app/pages/cart/cart.html:334
 msgid "Payment Information"
-msgstr "Información de pago"
+msgstr "Informação de pagamento"
 
 #: ./app/pages/receipt/receipt.html:34
 msgid "Payment Method"
-msgstr "Forma de pago"
+msgstr "Método de pagamento"
 
 #: ./app/pages/cart/cart.html:178
 #: ./app/pages/payment/review.html:61
 msgid "Phone"
-msgstr "Teléfono"
+msgstr "Telefone"
 
 #: ./app/shared/directives.js:2771
 msgid "Please confirm"
-msgstr "Por favor, confirma"
+msgstr "Por favor, confirme"
 
 #: ./app/shared/directives.js:2766
 #: ./app/shared/directives.js:2802
 msgid "Please make a selection"
-msgstr "Por favor, haz una selección"
+msgstr "Por favor, faça uma seleção"
 
 #: ./app/pages/cart/cart.html:204
 #: ./app/pages/cart/cart.html:279
 msgid "Please provide a city"
-msgstr "Por favor, proporciona una ciudad"
+msgstr "Por favor, forneça uma cidade"
 
 #: ./app/pages/cart/cart.html:156
 #: ./app/pages/payment/review.html:55
 msgid "Please provide a company name"
-msgstr "Por favor, proporciona el nombre de la empresa"
+msgstr "Por favor, forneça o nome de uma empresa"
 
 #: ./app/pages/cart/cart.html:234
 #: ./app/pages/cart/cart.html:309
 msgid "Please provide a country"
-msgstr "Por favor, proporciona un país"
+msgstr "Por favor, forneça um país"
 
 #: ./app/pages/cart/cart.html:164
 #: ./app/pages/cart/cart.html:255
 msgid "Please provide a name"
-msgstr "Por favor, proporciona un nombre"
+msgstr "Por favor, forneça um nome"
 
 #: ./app/pages/cart/cart.html:218
 #: ./app/pages/cart/cart.html:293
 msgid "Please provide a region / province"
-msgstr "Por favor, proporciona una región o provincia"
+msgstr "Por favor, forneça uma região / província"
 
 #: ./app/pages/cart/cart.html:212
 #: ./app/pages/cart/cart.html:287
 msgid "Please provide a state / province"
-msgstr "Por favor, proporciona un estado o una provincia"
+msgstr "Por favor, forneça um estado / província"
 
 #: ./app/pages/cart/cart.html:358
 msgid "Please provide a valid card number"
-msgstr "Por favor, proporciona un número de tarjeta válido"
+msgstr "Por favor, forneça um número de cartão válido"
 
 #: ./app/pages/cart/cart.html:172
 msgid "Please provide a valid email address"
-msgstr "Por favor, proporciona una dirección de correo electrónica válida"
+msgstr "Por favor, forneça um endereço de email válido"
 
 #: ./app/pages/cart/cart.html:366
 msgid "Please provide a valid expiration month"
-msgstr "Por favor, proporciona un mes de caducidad válido"
+msgstr "Por favor, forneça um mês de expiração válido"
 
 #: ./app/pages/cart/cart.html:374
 msgid "Please provide a valid expiration year"
-msgstr "Por favor, proporciona un año de caducidad válido"
+msgstr "Por favor, forneça um ano de expiração válido"
 
 #: ./app/pages/cart/cart.html:180
 #: ./app/pages/payment/review.html:63
 msgid "Please provide a valid phone number"
-msgstr "Por favor, proporciona un número de teléfono válido"
+msgstr "Por favor, forneça um número de telefone válido"
 
 #: ./app/pages/cart/cart.html:382
 msgid "Please provide a valid security code"
-msgstr "Por favor, proporciona un código de seguridad válido"
+msgstr "Por favor, forneça um código de segurança válido"
 
 #: ./app/pages/cart/cart.html:226
 #: ./app/pages/cart/cart.html:301
 msgid "Please provide a zip / postal code"
-msgstr "Por favor, proporciona un código postal válido"
+msgstr "Por favor, forneça um código postal"
 
 #: ./app/pages/cart/cart.html:188
 #: ./app/pages/cart/cart.html:196
 #: ./app/pages/cart/cart.html:263
 #: ./app/pages/cart/cart.html:271
 msgid "Please provide an address"
-msgstr "Por favor, proporciona una dirección"
+msgstr "Por favor, forneça um endereço"
 
 #: ./app/shared/directives.js:279
 msgid "Please provide an amount for your payment."
-msgstr "Por favor, proporciona un monto para tu pago."
+msgstr "Por favor, forneça um montante para o seu pagamento."
 
 #: ./app/shared/directives.js:2811
 msgid "Please provide one of the available options"
-msgstr "Por favor, proporciona una de las opciones disponibles"
+msgstr "Por favor, indique uma das opções disponíveis"
 
 #: ./app/shared/directives.js:2794
 msgid "Please supply a number"
-msgstr "Por favor, facilita un número"
+msgstr "Por favor, forneça um número"
 
 #: ./app/shared/directives.js:2787
 msgid "Please supply a number without decimals"
-msgstr "Por favor, facilita un número sin decimales"
+msgstr "Por favor, forneça um número sem casas decimais"
 
 #: ./app/pages/products/products.html:17
 msgid "Products"
-msgstr "Productos"
+msgstr "Produtos"
 
 #: ./app/pages/cart/cart.html:34
 #: ./app/pages/payment/review.html:91
 #: ./app/pages/receipt/receipt.html:50
 msgid "Quantity"
-msgstr "Cantidad"
+msgstr "Quantidade"
 
 #: ./app/pages/receipt/receipt.html:9
 msgid "Receipt"
@@ -261,42 +261,42 @@ msgstr "Recibo"
 #: ./app/pages/cart/cart.html:216
 #: ./app/pages/cart/cart.html:291
 msgid "Region / Province"
-msgstr "Región o provincia"
+msgstr "Região / Província"
 
 #: ./app/pages/payment/review.html:21
 msgid "Return to PayPal to try your payment again."
-msgstr "Volver a PayPal para intentar realizar el pago nuevamente."
+msgstr "Voltar para o PayPal para tentar de novo o seu pagamento."
 
 #: ./app/pages/payment/review.html:11
 msgid "Review Your Order"
-msgstr "Revisa tu pedido"
+msgstr "Rever o seu pedido"
 
 #: ./app/pages/cart/cart.html:380
 msgid "Security Code"
-msgstr "Código de seguridad"
+msgstr "Código de segurança"
 
 #: ./app/pages/cart/cart.html:243
 #: ./app/pages/payment/review.html:38
 msgid "Shipping Address"
-msgstr "Dirección de envío"
+msgstr "Endereço de entrega"
 
 #: ./app/pages/cart/cart.html:25
 msgid "Shopping Cart"
-msgstr "Carrito de compras"
+msgstr "Carrinho de compras"
 
 #: ./app/pages/cart/cart.html:118
 #: ./app/pages/cart/cart.html:138
 msgid "Sign In"
-msgstr "Iniciar sesión"
+msgstr "Entrar"
 
 #: ./app/pages/cart/cart.html:144
 msgid "Sign out"
-msgstr "Cerrar sesión"
+msgstr "Sair"
 
 #: ./app/pages/cart/cart.html:210
 #: ./app/pages/cart/cart.html:285
 msgid "State / Province"
-msgstr "Estado o provincia"
+msgstr "Estado / Província"
 
 #: ./app/pages/cart/cart.html:36
 #: ./app/pages/payment/review.html:93
@@ -308,49 +308,49 @@ msgstr "Subtotal"
 #: ./app/pages/payment/review.html:113
 #: ./app/pages/receipt/receipt.html:72
 msgid "Tax"
-msgstr "Impuesto"
+msgstr "Imposto"
 
 #: ./app/pages/receipt/receipt.html:17
 msgid "Thank you! Your order is complete."
-msgstr "¡Gracias! Tu pedido está completo."
+msgstr "Obrigado! O seu pedido está concluído."
 
 #: ./app/shared/services.js:438
 msgid "The item you are trying to access could not be found."
-msgstr "No se pudo encontrar el artículo al que intentas acceder."
+msgstr "O item a que está a tentar aceder não pôde ser encontrado."
 
 #: ./app/shared/directives.js:2837
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
-msgstr[0] "El valor tiene que ser de al menos un carácter"
-msgstr[1] "El valor tiene que ser de al menos {{$count}} caracteres"
+msgstr[0] "O valor tem de ter, pelo menos, um caractere"
+msgstr[1] "O valor tem de ter, pelo menos, {{$count}} caracteres"
 
 #: ./app/shared/directives.js:2843
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
-msgstr[0] "El valor tiene que ser menor que un carácter"
-msgstr[1] "El valor tiene que ser menor que {{$count}} caracteres"
+msgstr[0] "O valor tem de ser inferior a um caractere"
+msgstr[1] "O valor tem de ser inferior a {{$count}} caracteres"
 
 #: ./app/shared/directives.js:2820
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
-msgstr[0] "El valor que proporciones tiene que ser mayor que {{$count}}"
-msgstr[1] "El valor que proporciones tiene que ser mayor que {{$count}}"
+msgstr[0] "O valor a fornecer deve ser superior a {{$count}}"
+msgstr[1] "O valor a fornecer deve ser superior a {{$count}}"
 
 #: ./app/shared/directives.js:2826
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
-msgstr[0] "El valor que proporciones tiene que ser menor que {{$count}}"
-msgstr[1] "El valor que proporciones tiene que ser menor que {{$count}}"
+msgstr[0] "O valor a fornecer deve ser inferior a {{$count}}"
+msgstr[1] "O valor a fornecer deve ser inferior a {{$count}}"
 
 #: ./app/pages/cart/cart.html:74
 msgid "There are no items in your cart"
-msgstr "No hay artículos en tu carrito"
+msgstr "Não existem itens no seu carrinho"
 
 #: ./app/shared/directives.js:179
 #: ./app/shared/directives.js:263
 #: ./app/shared/directives.js:458
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
-msgstr "Parte de la información que proporcionaste no es válida. Revisa los errores y vuelve a intentarlo."
+msgstr "Houve um problema com algumas das informações que forneceu. Por favor, reveja os erros e tente de novo."
 
 #: ./app/pages/cart/cart.html:68
 #: ./app/pages/payment/review.html:119
@@ -360,192 +360,192 @@ msgstr "Total"
 
 #: ./app/pages/cart/cart.html:98
 msgid "Update Cart"
-msgstr "Actualizar carrito"
+msgstr "Atualizar carrinho"
 
 #: ./app/pages/cart/cart.html:124
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "Nome de utilizador"
 
 #: ./app/pages/cart/cart.html:320
 #: ./app/pages/payment/review.html:69
 msgid "VAT Number"
-msgstr "Número de identificación fiscal"
+msgstr "Número VAT"
 
 #: ./app/templates/fields.html:52
 msgid "Yes"
-msgstr "Sí"
+msgstr "Sim"
 
 #: ./app/pages/cart/cart.html:110
 msgid "Your Information"
-msgstr "Su información"
+msgstr "A Sua Informação"
 
 #: ./app/pages/cart/cart.html:224
 #: ./app/pages/cart/cart.html:299
 msgid "Zip / Postal Code"
-msgstr "Código postal"
+msgstr "Códido Postal"
 
 #: ./app/pages/cart/cart.html:342
 msgid "expiration"
-msgstr "caducidad"
+msgstr "validade"
 
 #: ./app/pages/invoice/invoice.html:51
 msgid "Billing Information"
-msgstr "Datos de facturación"
+msgstr "Informação de Faturação"
 
 #: ./app/pages/cart/cart.html:489
 #: ./app/pages/payment/review.html:179
 msgid "Complete Order"
-msgstr "Finalizar el pedido"
+msgstr "Pedido Completo"
 
 #: ./app/pages/pay/pay.html:347
 #: ./app/pages/review/review.html:137
 msgid "Complete Payment"
-msgstr "Finalizar el pago"
+msgstr "Pagamento Completo"
 
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
-msgstr "Derechos de autor &copy; {{settings.account.year}} {{settings.app.company_name}}. Todos los derechos reservados."
+msgstr "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. Todos os Direitos Reservados."
 
 #: ./app/pages/receipt/receipt.html:58
 msgid "Create Account"
-msgstr "Crear cuenta"
+msgstr "Criar Conta"
 
 #: ./app/pages/receipt/receipt.html:29
 msgid "Date"
-msgstr "Fecha"
+msgstr "Data"
 
 #: ./app/pages/invoice/invoice.html:103
 #: ./app/pages/receipt/receipt.html:124
 msgid "Download Now"
-msgstr "Descargar ahora"
+msgstr "Descarregar Agora"
 
 #: ./app/pages/invoice/invoice.html:39
 msgid "Due Date"
-msgstr "Fecha de vencimiento"
+msgstr "Data Limite"
 
 #: ./app/pages/cart/cart.html:77
 msgid "Enter"
-msgstr "Introducir"
+msgstr "Introduzir"
 
 #: ./app/pages/pay/pay.html:151
 msgid "Full Name"
-msgstr "Nombre completo"
+msgstr "Nome Completo"
 
 #: ./app/pages/invoice/invoice.html:22
 msgid "Invoice"
-msgstr "Factura"
+msgstr "Fatura"
 
 #: ./app/pages/invoice/invoice.html:79
 msgid "Invoice Details"
-msgstr "Detalles de la factura"
+msgstr "Dados da Fatura"
 
 #: ./app/pages/invoice/invoice.html:120
 msgid "Invoice Summary"
-msgstr "Resumen de la factura"
+msgstr "Resumo da Fatura"
 
 #: ./app/pages/cart/cart.html:41
 #: ./app/pages/invoice/invoice.html:85
 #: ./app/pages/payment/review.html:98
 #: ./app/pages/receipt/receipt.html:106
 msgid "Item"
-msgstr "Artículo"
+msgstr "Item"
 
 #: ./app/pages/payment/review.html:92
 #: ./app/pages/receipt/receipt.html:95
 msgid "Order Details"
-msgstr "Detalles del pedido"
+msgstr "Dados do Pedido"
 
 #: ./app/pages/cart/cart.html:362
 msgid "Order Summary"
-msgstr "Resumen del pedido"
+msgstr "Resumo do Pedido"
 
 #: ./app/pages/invoice/invoice.html:30
 msgid "Paid"
-msgstr "Pagado"
+msgstr "Pago"
 
 #: ./app/pages/pay/pay.html:248
 #: ./app/pages/receipt/receipt.html:96
 msgid "Payment Details"
-msgstr "Datos de pago"
+msgstr "Dados do Pagamento"
 
 #: ./app/pages/payment/review.html:136
 #: ./app/pages/receipt/receipt.html:141
 msgid "Payment Summary"
-msgstr "Resumen de pago"
+msgstr "Resumo do Pagamento"
 
 #: ./app/pages/pay/pay.html:179
 msgid "Please provide a phone"
-msgstr "Por favor, indique un teléfono"
+msgstr "Por favor, forneça um número de telefone"
 
 #: ./app/pages/pay/pay.html:323
 msgid "Save this card to my account"
-msgstr "Guardar esta tarjeta en mi cuenta"
+msgstr "Guarde este cartão na minha conta"
 
 #: ./app/pages/simple/checkout.html:278
 #: ./app/pages/simple/review.html:158
 msgid "Shipping"
-msgstr "Envío"
+msgstr "Envio"
 
 #: ./app/pages/invoice/invoice.html:64
 msgid "Shipping Information"
-msgstr "Información de envío"
+msgstr "Informação de Envio"
 
 #: ./app/pages/cart/cart.html:256
 msgid "Shipping is same as billing"
-msgstr "La información de envío es igual a la de facturación"
+msgstr "O envio é o mesmo da faturação"
 
 #: ./app/pages/receipt/receipt.html:69
 msgid "Sold To"
-msgstr "Vendido a"
+msgstr "Vendido Para"
 
 #: ./app/pages/invoice/invoice.html:263
 msgid "Thank you for your business"
-msgstr "Gracias por su confianza"
+msgstr "Obrigado pela sua participação"
 
 #: ./app/pages/receipt/receipt.html:184
 msgid "Thank you for your order"
-msgstr "Gracias por su pedido"
+msgstr "Obrigado pelo seu pedido"
 
 #: ./app/pages/receipt/receipt.html:22
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
-msgstr "¡Gracias! Su pedido ha sido enviado para ser procesado. En breve recibirá un correo electrónico con más información sobre el estado de su pedido."
+msgstr "Obrigado! O seu pedido foi submetido para processamento. Irá receber um email em breve com informações adicionais sobre o estado do seu pedido."
 
 #: ./app/pages/invoice/invoice.html:34
 msgid "This invoice is closed"
-msgstr "Esta factura está cerrada"
+msgstr "Esta fatura está encerrada"
 
 #: ./app/pages/receipt/receipt.html:35
 msgid "To manage your order online, create an account."
-msgstr "Para gestionar su pedido en línea, cree una cuenta."
+msgstr "Para gerir o seu pedido online, crie uma conta."
 
 #: ./app/pages/cart/cart.html:22
 msgid "Your Order"
-msgstr "Su pedido"
+msgstr "O Seu Pedido"
 
 #: ./app/pages/receipt/receipt.html:64
 msgid "Your account has been created."
-msgstr "Su cuenta ha sido creada."
+msgstr "O seu pedido foi criado."
 
 #: ./app/pages/cart/cart.html:397
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.cart.formatted.tax}}"
+msgstr "O seu total inclui {{data.cart.formatted.tax}} taxa"
 
 #: ./app/pages/invoice/invoice.html:154
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.invoice.formatted.tax}}"
+msgstr "O seu total inclui {{data.invoice.formatted.tax}} taxa"
 
 #: ./app/pages/receipt/receipt.html:175
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.payment.order.formatted.tax}}"
+msgstr "O seu total inclui {{data.payment.order.formatted.tax}} taxa"
 
 #: ./app/pages/payment/review.html:170
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.sale.formatted.tax}}"
+msgstr "O seu total inclui {{data.sale.formatted.tax}} taxa"
 
 #: ./app/pages/pay/pay.html:34
 #: ./app/pages/pay/pay.html:56
 msgid "Amount"
-msgstr "Cantidad"
+msgstr "Montante"
 
 #: ./app/pages/pay/pay.html:33
 #: ./app/pages/pay/pay.html:48
@@ -556,66 +556,66 @@ msgstr "Cantidad"
 #: ./app/pages/review/review.html:45
 #: ./app/pages/review/review.html:94
 msgid "Description"
-msgstr "Descripción"
+msgstr "Descrição"
 
 #: ./app/pages/receipt/receipt.html:70
 msgid "Made By"
-msgstr "Hecho por"
+msgstr "Feito Por"
 
 #: ./app/pages/receipt/receipt.html:151
 msgid "Make Another Payment"
-msgstr "Hacer otro pago"
+msgstr "Fazer Outro Pagamento"
 
 #: ./app/shared/directives.js:2761
 msgid "Please provide a value"
-msgstr "Por favor, indique un valor"
+msgstr "Por favor, forneça um valor"
 
 #: ./app/pages/pay/pay.html:59
 msgid "Please provide an amount"
-msgstr "Por favor, indique una cantidad"
+msgstr "Por favor, forneça um montante"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
 msgid "Review & Finish"
-msgstr "Revisar y terminar"
+msgstr "Analisar & Finalizar"
 
 #: ./app/pages/review/review.html:15
 msgid "Review Your Payment"
-msgstr "Revise el pago"
+msgstr "Analise o Seu Pagamento"
 
 #: ./app/pages/receipt/receipt.html:146
 msgid "Thank you for your payment"
-msgstr "Gracias por realizar el pago"
+msgstr "Obrigado pelo seu pagamento"
 
 #: ./app/pages/receipt/receipt.html:25
 msgid "Thank you! Your payment is complete."
-msgstr "¡Gracias! El pago ha sido efectuado."
+msgstr "Obrigado! O seu pagamento está completo."
 
 #: ./app/pages/receipt/receipt.html:36
 msgid "To manage your account online, create an account."
-msgstr "Para gestionar su cuenta en línea, cree una cuenta."
+msgstr "Para gerir a sua conta online, crie uma conta."
 
 #: ./app/pages/pay/pay.html:22
 msgid "Your Payment"
-msgstr "Su pago"
+msgstr "O Seu Pagamento"
 
 #: ./app/pages/simple/checkout.html:295
 #: ./app/pages/simple/review.html:175
 msgid "An email has been sent to {{data.payment.order.customer.email}}."
-msgstr "Se ha enviado un correo electrónico a {{data.payment.order.customer.email}}."
+msgstr "Um email foi enviado para {{data.payment.order.customer.email}}."
 
 #: ./app/pages/simple/checkout.html:231
 msgid "Choose other payment method"
-msgstr "Elija otro método de pago"
+msgstr "Escolha outro método de pagamento"
 
 #: ./app/pages/simple/checkout.html:305
 #: ./app/pages/simple/review.html:185
 msgid "Close"
-msgstr "Cerrar"
+msgstr "Fechar"
 
 #: ./app/pages/simple/review.html:117
 msgid "Confirm Payment"
-msgstr "Confirmar el pago"
+msgstr "Confirmar Pagamento"
 
 #: ./app/pages/simple/checkout.html:303
 #: ./app/pages/simple/review.html:183
@@ -624,12 +624,12 @@ msgstr "Continuar"
 
 #: ./app/pages/simple/checkout.html:48
 msgid "Email Address"
-msgstr "Dirección de correo electrónico"
+msgstr "Endereço de Email"
 
 #: ./app/pages/simple/checkout.html:125
 #: ./app/pages/simple/review.html:62
 msgid "Enter VAT Number"
-msgstr "Introduzca el número de identificación fiscal"
+msgstr "Introduza o Número VAT"
 
 #: ./app/pages/simple/checkout.html:306
 #: ./app/pages/simple/review.html:186
@@ -638,37 +638,37 @@ msgstr "Terminar"
 
 #: ./app/pages/simple/checkout.html:223
 msgid "Pay Now"
-msgstr "Pagar ahora"
+msgstr "Pagar Agora"
 
 #: ./app/shared/commonDirectives.js:106
 msgid "Postal Code"
-msgstr "Código postal"
+msgstr "Código Postal"
 
 #: ./app/pages/simple/checkout.html:313
 #: ./app/pages/simple/review.html:193
 msgid "Print receipt"
-msgstr "Imprimir el recibo"
+msgstr "Imprimir Recibo"
 
 #: ./app/pages/simple/checkout.html:102
 msgid "Region"
-msgstr "Región"
+msgstr "Região"
 
 #: ./app/pages/simple/checkout.html:304
 #: ./app/pages/simple/review.html:184
 msgid "Return"
-msgstr "Volver"
+msgstr "Voltar"
 
 #: ./app/pages/simple/checkout.html:223
 msgid "Submit Order"
-msgstr "Enviar el pedido"
+msgstr "Enviar Pedido"
 
 #: ./app/pages/simple/checkout.html:262
 #: ./app/pages/simple/review.html:142
 msgid "Summary"
-msgstr "Resumen"
+msgstr "Resumo"
 
 #: ./app/pages/simple/checkout.html:252
 #: ./app/pages/simple/review.html:132
 msgid "Thank you for your purchase!"
-msgstr "¡Gracias por su compra!"
+msgstr "Obrigado pela sua compra!"
 

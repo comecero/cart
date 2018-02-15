@@ -58,18 +58,62 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
             {
                 code: "en",
                 name: "English"
+            },        
+            {
+                code: "cs",
+                name: "čeština"
             },
             {
-                code: "fr",
-                name: "français"
+                code: "de",
+                name: "Deutsche"
+            },
+            {
+                code: "el",
+                name: "Ελληνικά"
             },
             {
                 code: "es",
                 name: "Español"
+            },                
+            {
+                code: "fi",
+                name: "Suomalainen"
+            },
+            {
+                code: "fr",
+                name: "français"
+            },            
+            {
+                code: "it",
+                name: "italiano"
+            },
+            {
+                code: "ja",
+                name: "日本語"
+            },
+            {
+                code: "ko",
+                name: "한국어"
+            },
+            {
+                code: "nl",
+                name: "Nederlands"
+            },
+            {
+                code: "pl",
+                name: "Polskie"
+            },
+            {
+                code: "pt",
+                name: "Português"
             },
             {
                 code: "ru",
                 name: "русский"
+            },            
+            {
+                code: "sv",
+                name: "svenska"
             }
         ]
     }

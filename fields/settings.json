@@ -158,10 +158,10 @@
     "name": "enable_languages",
     "type": "boolean",
     "label": "Enable Languages",
-    "description": "Allows users to select from different languages during the checkout process. <strong>Note:</strong> This is currently a beta feature and should <strong>not</strong> be enabled for live orders.",
+    "description": "Allows users to select from different languages during the checkout process.",
     "section": "Features",
     "required": true,
-    "default_value": false
+    "default_value": true
   },
   {
     "name": "main_shopping_url",

@@ -5,114 +5,114 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: Comecero Public Storefront Apps\n"
-"Language: es\n"
+"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ./app/pages/cart/cart.html:186
 #: ./app/pages/cart/cart.html:261
 msgid "Address"
-msgstr "Dirección"
+msgstr "Διεύθυνση"
 
 #: ./app/pages/cart/cart.html:194
 #: ./app/pages/cart/cart.html:269
 msgid "Address 2"
-msgstr "Dirección dos"
+msgstr "Διεύθυνση 2"
 
 #: ./app/shared/services.js:444
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
-msgstr "Ocurrió un error al intentar procesar tu solicitud. Intenta realizar tu solicitud de nuevo. Ponte en contacto con nuestro servicio de asistencia si el problema persiste."
+msgstr "Παρουσιάστηκε σφάλμα κατά την προσπάθεια επεξεργασίας του αιτήματός σας. Δοκιμάστε ξανά το αίτημά σας. Αν το πρόβλημα παραμένει, παρακαλούμε επικοινωνήστε με την υποστήριξη."
 
 #: ./app/pages/cart/cart.html:323
 #: ./app/pages/cart/cart.html:88
 #: ./app/pages/payment/review.html:72
 #: ./app/pages/payment/review.html:73
 msgid "Apply"
-msgstr "Aplicar"
+msgstr "Εφαρμογή"
 
 #: ./app/pages/cart/cart.html:150
 #: ./app/pages/payment/review.html:27
 msgid "Billing Address"
-msgstr "Dirección de facturación"
+msgstr "Διεύθυνση Χρέωσης"
 
 #: ./app/pages/products/products.html:29
 msgid "Buy Now"
-msgstr "Comprar ahora"
+msgstr "Αγορά Τώρα"
 
 #: ./app/pages/cart/cart.html:137
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Ακύρωση"
 
 #: ./app/pages/cart/cart.html:356
 msgid "Card Number"
-msgstr "Número de tarjeta"
+msgstr "Αριθμός Κάρτας"
 
 #: ./app/pages/cart/cart.html:339
 msgid "Choose a Payment Method"
-msgstr "Elige una forma de pago"
+msgstr "Επιλέξτε Μέθοδο Πληρωμής"
 
 #: ./app/pages/cart/cart.html:202
 #: ./app/pages/cart/cart.html:277
 msgid "City"
-msgstr "Ciudad"
+msgstr "Πόλη"
 
 #: ./app/pages/cart/cart.html:154
 #: ./app/pages/payment/review.html:53
 msgid "Company Name"
-msgstr "Nombre de la empresa"
+msgstr "Ονομασία Εταιρείας"
 
 #: ./app/pages/cart/cart.html:75
 msgid "Continue Shopping"
-msgstr "Continuar comprando"
+msgstr "Συνέχιση Αγορών"
 
 #: ./app/pages/cart/cart.html:232
 #: ./app/pages/cart/cart.html:307
 msgid "Country"
-msgstr "País"
+msgstr "Χώρα"
 
 #: ./app/pages/cart/cart.html:11
 msgid "Currency"
-msgstr "Moneda"
+msgstr "Νόμισμα"
 
 #: ./app/pages/cart/cart.html:63
 msgid "Discount"
-msgstr "Descuento"
+msgstr "Έκπτωση"
 
 #: ./app/pages/cart/cart.html:91
 msgid "Discount applied."
-msgstr "Descuento aplicado."
+msgstr "Η έκπτωση εφαρμόστηκε."
 
 #: ./app/pages/cart/cart.html:170
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "Email"
 
 #: ./app/pages/cart/cart.html:87
 msgid "Enter Promo Code"
-msgstr "Introduce el código promocional"
+msgstr "Δώστε Κωδικό Προσφοράς"
 
 #: ./app/pages/cart/cart.html:364
 msgid "Expiration Month"
-msgstr "Mes de caducidad"
+msgstr "Μήνας Λήξης"
 
 #: ./app/pages/cart/cart.html:372
 msgid "Expiration Year"
-msgstr "Año de caducidad"
+msgstr "Έτος Λήξης"
 
 #: ./app/pages/receipt/receipt.html:37
 msgid "Expires"
-msgstr "Caduca"
+msgstr "Λήγει"
 
 #: ./app/pages/cart/cart.html:117
 msgid "Have an account?"
-msgstr "¿Ya tienes una cuenta?"
+msgstr "Έχετε λογαριασμό;"
 
 #: ./app/pages/cart/cart.html:325
 #: ./app/pages/payment/review.html:75
 msgid "If this order is for a business, please provide your VAT Number."
-msgstr "Si este pedido es para una empresa, proporciónanos tu número de identificación fiscal."
+msgstr "Αν η παραγγελία αυτή είναι για επιχείρηση, παρακαλούμε δώστε τον Αριθμό Μητρώου ΦΠΑ σας."
 
 #: ./app/pages/cart/cart.html:18
 msgid "Language"
-msgstr "Idioma"
+msgstr "Γλώσσα"
 
 #: ./app/pages/cart/cart.html:162
 #: ./app/pages/cart/cart.html:253
@@ -120,432 +120,432 @@ msgstr "Idioma"
 #: ./app/pages/payment/review.html:92
 #: ./app/pages/receipt/receipt.html:51
 msgid "Name"
-msgstr "Nombre"
+msgstr "Όνομα"
 
 #: ./app/templates/fields.html:54
 msgid "No"
-msgstr "No"
+msgstr "Όχι"
 
 #: ./app/pages/cart/cart.html:322
 #: ./app/pages/payment/review.html:71
 msgid "Optional"
-msgstr "Opcional"
+msgstr "Προαιρετικό"
 
 #: ./app/pages/cart/cart.html:131
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Κωδικός Πρόσβασης"
 
 #: ./app/pages/cart/cart.html:347
 msgid "Pay with a new card"
-msgstr "Pagar con una tarjeta nueva"
+msgstr "Πληρώστε με νέα κάρτα"
 
 #: ./app/pages/cart/cart.html:334
 msgid "Payment Information"
-msgstr "Información de pago"
+msgstr "Στοιχεία Πληρωμής"
 
 #: ./app/pages/receipt/receipt.html:34
 msgid "Payment Method"
-msgstr "Forma de pago"
+msgstr "Μέθοδος Πληρωμής"
 
 #: ./app/pages/cart/cart.html:178
 #: ./app/pages/payment/review.html:61
 msgid "Phone"
-msgstr "Teléfono"
+msgstr "Τηλέφωνο"
 
 #: ./app/shared/directives.js:2771
 msgid "Please confirm"
-msgstr "Por favor, confirma"
+msgstr "Παρακαλούμε επιβεβαιώστε"
 
 #: ./app/shared/directives.js:2766
 #: ./app/shared/directives.js:2802
 msgid "Please make a selection"
-msgstr "Por favor, haz una selección"
+msgstr "Παρακαλούμε επιλέξτε"
 
 #: ./app/pages/cart/cart.html:204
 #: ./app/pages/cart/cart.html:279
 msgid "Please provide a city"
-msgstr "Por favor, proporciona una ciudad"
+msgstr "Παρακαλούμε δώστε πόλη"
 
 #: ./app/pages/cart/cart.html:156
 #: ./app/pages/payment/review.html:55
 msgid "Please provide a company name"
-msgstr "Por favor, proporciona el nombre de la empresa"
+msgstr "Παρακαλούμε δώστε ονομασία εταιρείας"
 
 #: ./app/pages/cart/cart.html:234
 #: ./app/pages/cart/cart.html:309
 msgid "Please provide a country"
-msgstr "Por favor, proporciona un país"
+msgstr "Παρακαλούμε δώστε χώρα"
 
 #: ./app/pages/cart/cart.html:164
 #: ./app/pages/cart/cart.html:255
 msgid "Please provide a name"
-msgstr "Por favor, proporciona un nombre"
+msgstr "Παρακαλούμε δώστε όνομα"
 
 #: ./app/pages/cart/cart.html:218
 #: ./app/pages/cart/cart.html:293
 msgid "Please provide a region / province"
-msgstr "Por favor, proporciona una región o provincia"
+msgstr "Παρακαλούμε δώστε περιοχή / επαρχία"
 
 #: ./app/pages/cart/cart.html:212
 #: ./app/pages/cart/cart.html:287
 msgid "Please provide a state / province"
-msgstr "Por favor, proporciona un estado o una provincia"
+msgstr "Παρακαλούμε δώστε νομό / επαρχία"
 
 #: ./app/pages/cart/cart.html:358
 msgid "Please provide a valid card number"
-msgstr "Por favor, proporciona un número de tarjeta válido"
+msgstr "Παρακαλούμε δώστε έναν έγκυρο αριθμό κάρτας"
 
 #: ./app/pages/cart/cart.html:172
 msgid "Please provide a valid email address"
-msgstr "Por favor, proporciona una dirección de correo electrónica válida"
+msgstr "Παρακαλούμε δώστε μια έγκυρη διεύθυνση email"
 
 #: ./app/pages/cart/cart.html:366
 msgid "Please provide a valid expiration month"
-msgstr "Por favor, proporciona un mes de caducidad válido"
+msgstr "Παρακαλούμε δώστε έναν έγκυρο μήνα λήξης"
 
 #: ./app/pages/cart/cart.html:374
 msgid "Please provide a valid expiration year"
-msgstr "Por favor, proporciona un año de caducidad válido"
+msgstr "Παρακαλούμε δώστε ένα έγκυρο έτος λήξης"
 
 #: ./app/pages/cart/cart.html:180
 #: ./app/pages/payment/review.html:63
 msgid "Please provide a valid phone number"
-msgstr "Por favor, proporciona un número de teléfono válido"
+msgstr "Παρακαλούμε δώστε έναν έγκυρο αριθμό τηλεφώνου"
 
 #: ./app/pages/cart/cart.html:382
 msgid "Please provide a valid security code"
-msgstr "Por favor, proporciona un código de seguridad válido"
+msgstr "Παρακαλούμε δώστε έναν έγκυρο κωδικό ασφαλείας"
 
 #: ./app/pages/cart/cart.html:226
 #: ./app/pages/cart/cart.html:301
 msgid "Please provide a zip / postal code"
-msgstr "Por favor, proporciona un código postal válido"
+msgstr "Παρακαλούμε δώστε έναν ταχυδρομικό κώδικα"
 
 #: ./app/pages/cart/cart.html:188
 #: ./app/pages/cart/cart.html:196
 #: ./app/pages/cart/cart.html:263
 #: ./app/pages/cart/cart.html:271
 msgid "Please provide an address"
-msgstr "Por favor, proporciona una dirección"
+msgstr "Παρακαλούμε δώστε διεύθυνση"
 
 #: ./app/shared/directives.js:279
 msgid "Please provide an amount for your payment."
-msgstr "Por favor, proporciona un monto para tu pago."
+msgstr "Παρακαλούμε δώστε ένα ποσό για την πληρωμή σας."
 
 #: ./app/shared/directives.js:2811
 msgid "Please provide one of the available options"
-msgstr "Por favor, proporciona una de las opciones disponibles"
+msgstr "Παρακαλούμε διαλέξτε μια από τις διαθέσιμες επιλογές"
 
 #: ./app/shared/directives.js:2794
 msgid "Please supply a number"
-msgstr "Por favor, facilita un número"
+msgstr "Παρακαλούμε δώστε έναν αριθμό"
 
 #: ./app/shared/directives.js:2787
 msgid "Please supply a number without decimals"
-msgstr "Por favor, facilita un número sin decimales"
+msgstr "Παρακαλούμε δώστε έναν αριθμό χωρίς δεκαδικά ψηφία"
 
 #: ./app/pages/products/products.html:17
 msgid "Products"
-msgstr "Productos"
+msgstr "Προϊόντα"
 
 #: ./app/pages/cart/cart.html:34
 #: ./app/pages/payment/review.html:91
 #: ./app/pages/receipt/receipt.html:50
 msgid "Quantity"
-msgstr "Cantidad"
+msgstr "Ποσότητα"
 
 #: ./app/pages/receipt/receipt.html:9
 msgid "Receipt"
-msgstr "Recibo"
+msgstr "Απόδειξη"
 
 #: ./app/pages/cart/cart.html:216
 #: ./app/pages/cart/cart.html:291
 msgid "Region / Province"
-msgstr "Región o provincia"
+msgstr "Περιοχή / Επαρχία"
 
 #: ./app/pages/payment/review.html:21
 msgid "Return to PayPal to try your payment again."
-msgstr "Volver a PayPal para intentar realizar el pago nuevamente."
+msgstr "Επιστρέψτε στο PayPal για να δοκιμάσετε πάλι την πληρωμή σας."
 
 #: ./app/pages/payment/review.html:11
 msgid "Review Your Order"
-msgstr "Revisa tu pedido"
+msgstr "Ελέγξτε Την Παραγγελία Σας"
 
 #: ./app/pages/cart/cart.html:380
 msgid "Security Code"
-msgstr "Código de seguridad"
+msgstr "Κωδικός Ασφαλείας"
 
 #: ./app/pages/cart/cart.html:243
 #: ./app/pages/payment/review.html:38
 msgid "Shipping Address"
-msgstr "Dirección de envío"
+msgstr "Διεύθυνση Αποστολής"
 
 #: ./app/pages/cart/cart.html:25
 msgid "Shopping Cart"
-msgstr "Carrito de compras"
+msgstr "Καλάθι Αγορών"
 
 #: ./app/pages/cart/cart.html:118
 #: ./app/pages/cart/cart.html:138
 msgid "Sign In"
-msgstr "Iniciar sesión"
+msgstr "Είσοδος"
 
 #: ./app/pages/cart/cart.html:144
 msgid "Sign out"
-msgstr "Cerrar sesión"
+msgstr "Έξοδος"
 
 #: ./app/pages/cart/cart.html:210
 #: ./app/pages/cart/cart.html:285
 msgid "State / Province"
-msgstr "Estado o provincia"
+msgstr "Νομός / Επαρχία"
 
 #: ./app/pages/cart/cart.html:36
 #: ./app/pages/payment/review.html:93
 #: ./app/pages/receipt/receipt.html:52
 msgid "Subtotal"
-msgstr "Subtotal"
+msgstr "Μερικό Σύνολο"
 
 #: ./app/pages/cart/cart.html:57
 #: ./app/pages/payment/review.html:113
 #: ./app/pages/receipt/receipt.html:72
 msgid "Tax"
-msgstr "Impuesto"
+msgstr "Φόρος"
 
 #: ./app/pages/receipt/receipt.html:17
 msgid "Thank you! Your order is complete."
-msgstr "¡Gracias! Tu pedido está completo."
+msgstr "Σας ευχαριστούμε! Η παραγγελία σας ολοκληρώθηκε."
 
 #: ./app/shared/services.js:438
 msgid "The item you are trying to access could not be found."
-msgstr "No se pudo encontrar el artículo al que intentas acceder."
+msgstr "Δεν κατέστη δυνατή η εύρεση του είδος που προσπαθήσατε να βρείτε."
 
 #: ./app/shared/directives.js:2837
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
-msgstr[0] "El valor tiene que ser de al menos un carácter"
-msgstr[1] "El valor tiene que ser de al menos {{$count}} caracteres"
+msgstr[0] "Η τιμή πρέπει να έχει μήκος τουλάχιστον ενός χαρακτήρα"
+msgstr[1] "Η τιμή πρέπει να έχει μήκος τουλάχιστον {{$count}} χαρακτήρων"
 
 #: ./app/shared/directives.js:2843
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
-msgstr[0] "El valor tiene que ser menor que un carácter"
-msgstr[1] "El valor tiene que ser menor que {{$count}} caracteres"
+msgstr[0] "Η τιμή δεν μπορεί να έχει μήκος μικρότερο από ένα χαρακτήρα"
+msgstr[1] "Η τιμή πρέπει να έχει μήκος μικρότερο από {{$count}} χαρακτήρες"
 
 #: ./app/shared/directives.js:2820
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
-msgstr[0] "El valor que proporciones tiene que ser mayor que {{$count}}"
-msgstr[1] "El valor que proporciones tiene que ser mayor que {{$count}}"
+msgstr[0] "Η τιμή που δίνετε πρέπει να είναι μεγαλύτερη από {{$count}}"
+msgstr[1] "Η τιμή που δίνετε πρέπει να είναι μεγαλύτερη από {{$count}}"
 
 #: ./app/shared/directives.js:2826
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
-msgstr[0] "El valor que proporciones tiene que ser menor que {{$count}}"
-msgstr[1] "El valor que proporciones tiene que ser menor que {{$count}}"
+msgstr[0] "Η τιμή που δίνετε πρέπει να είναι μικρότερη από {{$count}}"
+msgstr[1] "Η τιμή που δίνετε πρέπει να είναι μικρότερη από {{$count}}"
 
 #: ./app/pages/cart/cart.html:74
 msgid "There are no items in your cart"
-msgstr "No hay artículos en tu carrito"
+msgstr "Δεν υπάρχουν είδη στο καλάθι σας"
 
 #: ./app/shared/directives.js:179
 #: ./app/shared/directives.js:263
 #: ./app/shared/directives.js:458
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
-msgstr "Parte de la información que proporcionaste no es válida. Revisa los errores y vuelve a intentarlo."
+msgstr "Παρουσιάστηκε κάποιο πρόβλημα με μερικά από τα στοιχεία που δώσατε. Παρακαλούμε ελέγξτε για λάθη και δοκιμάστε πάλι."
 
 #: ./app/pages/cart/cart.html:68
 #: ./app/pages/payment/review.html:119
 #: ./app/pages/receipt/receipt.html:78
 msgid "Total"
-msgstr "Total"
+msgstr "Σύνολο"
 
 #: ./app/pages/cart/cart.html:98
 msgid "Update Cart"
-msgstr "Actualizar carrito"
+msgstr "Ενημέρωση Καλαθιού"
 
 #: ./app/pages/cart/cart.html:124
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "Όνομα Χρήστη"
 
 #: ./app/pages/cart/cart.html:320
 #: ./app/pages/payment/review.html:69
 msgid "VAT Number"
-msgstr "Número de identificación fiscal"
+msgstr "Αριθμός Μητρώου ΦΠΑ"
 
 #: ./app/templates/fields.html:52
 msgid "Yes"
-msgstr "Sí"
+msgstr "Ναι"
 
 #: ./app/pages/cart/cart.html:110
 msgid "Your Information"
-msgstr "Su información"
+msgstr "Τα Στοιχεία σας"
 
 #: ./app/pages/cart/cart.html:224
 #: ./app/pages/cart/cart.html:299
 msgid "Zip / Postal Code"
-msgstr "Código postal"
+msgstr "Ταχυδρομικός Κώδικας"
 
 #: ./app/pages/cart/cart.html:342
 msgid "expiration"
-msgstr "caducidad"
+msgstr "λήξη"
 
 #: ./app/pages/invoice/invoice.html:51
 msgid "Billing Information"
-msgstr "Datos de facturación"
+msgstr "Στοιχεία Χρέωσης"
 
 #: ./app/pages/cart/cart.html:489
 #: ./app/pages/payment/review.html:179
 msgid "Complete Order"
-msgstr "Finalizar el pedido"
+msgstr "Ολοκλήρωση Παραγγελίας"
 
 #: ./app/pages/pay/pay.html:347
 #: ./app/pages/review/review.html:137
 msgid "Complete Payment"
-msgstr "Finalizar el pago"
+msgstr "Ολοκλήρωση Πληρωμής"
 
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
-msgstr "Derechos de autor &copy; {{settings.account.year}} {{settings.app.company_name}}. Todos los derechos reservados."
+msgstr "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. Με Επιφύλαξη Παντός Δικαιώματος."
 
 #: ./app/pages/receipt/receipt.html:58
 msgid "Create Account"
-msgstr "Crear cuenta"
+msgstr "Δημιουργία Λογαριασμού"
 
 #: ./app/pages/receipt/receipt.html:29
 msgid "Date"
-msgstr "Fecha"
+msgstr "Ημερομηνία"
 
 #: ./app/pages/invoice/invoice.html:103
 #: ./app/pages/receipt/receipt.html:124
 msgid "Download Now"
-msgstr "Descargar ahora"
+msgstr "Κατεβάστε Τώρα"
 
 #: ./app/pages/invoice/invoice.html:39
 msgid "Due Date"
-msgstr "Fecha de vencimiento"
+msgstr "Ημερομηνία Λήξης"
 
 #: ./app/pages/cart/cart.html:77
 msgid "Enter"
-msgstr "Introducir"
+msgstr "Γράψτε"
 
 #: ./app/pages/pay/pay.html:151
 msgid "Full Name"
-msgstr "Nombre completo"
+msgstr "Πλήρες Όνομα"
 
 #: ./app/pages/invoice/invoice.html:22
 msgid "Invoice"
-msgstr "Factura"
+msgstr "Τιμολόγιο"
 
 #: ./app/pages/invoice/invoice.html:79
 msgid "Invoice Details"
-msgstr "Detalles de la factura"
+msgstr "Στοιχεία Τιμολογίου"
 
 #: ./app/pages/invoice/invoice.html:120
 msgid "Invoice Summary"
-msgstr "Resumen de la factura"
+msgstr "Σύνοψη Τιμολογίου"
 
 #: ./app/pages/cart/cart.html:41
 #: ./app/pages/invoice/invoice.html:85
 #: ./app/pages/payment/review.html:98
 #: ./app/pages/receipt/receipt.html:106
 msgid "Item"
-msgstr "Artículo"
+msgstr "Είδος"
 
 #: ./app/pages/payment/review.html:92
 #: ./app/pages/receipt/receipt.html:95
 msgid "Order Details"
-msgstr "Detalles del pedido"
+msgstr "Στοιχεία Παραγγελίας"
 
 #: ./app/pages/cart/cart.html:362
 msgid "Order Summary"
-msgstr "Resumen del pedido"
+msgstr "Σύνοψη Παραγγελίας"
 
 #: ./app/pages/invoice/invoice.html:30
 msgid "Paid"
-msgstr "Pagado"
+msgstr "Πληρώθηκε"
 
 #: ./app/pages/pay/pay.html:248
 #: ./app/pages/receipt/receipt.html:96
 msgid "Payment Details"
-msgstr "Datos de pago"
+msgstr "Στοιχεία Πληρωμής"
 
 #: ./app/pages/payment/review.html:136
 #: ./app/pages/receipt/receipt.html:141
 msgid "Payment Summary"
-msgstr "Resumen de pago"
+msgstr "Σύνοψη Πληρωμής"
 
 #: ./app/pages/pay/pay.html:179
 msgid "Please provide a phone"
-msgstr "Por favor, indique un teléfono"
+msgstr "Παρακαλούμε δώστε ένα τηλέφωνο"
 
 #: ./app/pages/pay/pay.html:323
 msgid "Save this card to my account"
-msgstr "Guardar esta tarjeta en mi cuenta"
+msgstr "Αποθηκεύστε αυτήν την κάρτα στον λογαριασμό μου"
 
 #: ./app/pages/simple/checkout.html:278
 #: ./app/pages/simple/review.html:158
 msgid "Shipping"
-msgstr "Envío"
+msgstr "Αποστολή"
 
 #: ./app/pages/invoice/invoice.html:64
 msgid "Shipping Information"
-msgstr "Información de envío"
+msgstr "Στοιχεία Αποστολής"
 
 #: ./app/pages/cart/cart.html:256
 msgid "Shipping is same as billing"
-msgstr "La información de envío es igual a la de facturación"
+msgstr "Αποστολή ίδια με χρέωση"
 
 #: ./app/pages/receipt/receipt.html:69
 msgid "Sold To"
-msgstr "Vendido a"
+msgstr "Πωλήθηκε Σε"
 
 #: ./app/pages/invoice/invoice.html:263
 msgid "Thank you for your business"
-msgstr "Gracias por su confianza"
+msgstr "Σας ευχαριστούμε για την προτίμηση"
 
 #: ./app/pages/receipt/receipt.html:184
 msgid "Thank you for your order"
-msgstr "Gracias por su pedido"
+msgstr "Σας ευχαριστούμε για την παραγγελία σας"
 
 #: ./app/pages/receipt/receipt.html:22
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
-msgstr "¡Gracias! Su pedido ha sido enviado para ser procesado. En breve recibirá un correo electrónico con más información sobre el estado de su pedido."
+msgstr "Σας ευχαριστούμε! Η παραγγελία σας έχει υποβληθεί για επεξεργασία. Θα λάβετε σύντομα ένα email με πρόσθετες πληροφορίες σχετικά με την κατάσταση της παραγγελίας σας."
 
 #: ./app/pages/invoice/invoice.html:34
 msgid "This invoice is closed"
-msgstr "Esta factura está cerrada"
+msgstr "Το τιμολόγιο αυτό έχει κλείσει"
 
 #: ./app/pages/receipt/receipt.html:35
 msgid "To manage your order online, create an account."
-msgstr "Para gestionar su pedido en línea, cree una cuenta."
+msgstr "Ανοίξτε έναν λογαριασμό για να διαχειρίζεστε online την παραγγελία σας."
 
 #: ./app/pages/cart/cart.html:22
 msgid "Your Order"
-msgstr "Su pedido"
+msgstr "Η Παραγγελία σας"
 
 #: ./app/pages/receipt/receipt.html:64
 msgid "Your account has been created."
-msgstr "Su cuenta ha sido creada."
+msgstr "Ο λογαριασμός σας δημιουργήθηκε."
 
 #: ./app/pages/cart/cart.html:397
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.cart.formatted.tax}}"
+msgstr "Το σύνολό σας περιλαμβάνει φόρο {{data.cart.formatted.tax}}"
 
 #: ./app/pages/invoice/invoice.html:154
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.invoice.formatted.tax}}"
+msgstr "Το σύνολό σας περιλαμβάνει φόρο {{data.invoice.formatted.tax}}"
 
 #: ./app/pages/receipt/receipt.html:175
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.payment.order.formatted.tax}}"
+msgstr "Το σύνολό σας περιλαμβάνει φόρο {{data.payment.order.formatted.tax}}"
 
 #: ./app/pages/payment/review.html:170
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
-msgstr "El total incluye impuestos de {{data.sale.formatted.tax}}"
+msgstr "Το σύνολό σας περιλαμβάνει φόρο {{data.sale.formatted.tax}}"
 
 #: ./app/pages/pay/pay.html:34
 #: ./app/pages/pay/pay.html:56
 msgid "Amount"
-msgstr "Cantidad"
+msgstr "Ποσό"
 
 #: ./app/pages/pay/pay.html:33
 #: ./app/pages/pay/pay.html:48
@@ -556,119 +556,119 @@ msgstr "Cantidad"
 #: ./app/pages/review/review.html:45
 #: ./app/pages/review/review.html:94
 msgid "Description"
-msgstr "Descripción"
+msgstr "Περιγραφή"
 
 #: ./app/pages/receipt/receipt.html:70
 msgid "Made By"
-msgstr "Hecho por"
+msgstr "Κατασκευασμένο Από"
 
 #: ./app/pages/receipt/receipt.html:151
 msgid "Make Another Payment"
-msgstr "Hacer otro pago"
+msgstr "Κάντε Άλλη Μια Πληρωμή"
 
 #: ./app/shared/directives.js:2761
 msgid "Please provide a value"
-msgstr "Por favor, indique un valor"
+msgstr "Παρακαλούμε δώστε μια αξία"
 
 #: ./app/pages/pay/pay.html:59
 msgid "Please provide an amount"
-msgstr "Por favor, indique una cantidad"
+msgstr "Παρακαλούμε δώστε ένα ποσό"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
 msgid "Review & Finish"
-msgstr "Revisar y terminar"
+msgstr "Έλεγχος και Ολοκλήρωση"
 
 #: ./app/pages/review/review.html:15
 msgid "Review Your Payment"
-msgstr "Revise el pago"
+msgstr "Ελέγξτε Την Πληρωμή Σας"
 
 #: ./app/pages/receipt/receipt.html:146
 msgid "Thank you for your payment"
-msgstr "Gracias por realizar el pago"
+msgstr "Σας ευχαριστούμε για την πληρωμή σας"
 
 #: ./app/pages/receipt/receipt.html:25
 msgid "Thank you! Your payment is complete."
-msgstr "¡Gracias! El pago ha sido efectuado."
+msgstr "Σας ευχαριστούμε! Η πληρωμή σας ολοκληρώθηκε."
 
 #: ./app/pages/receipt/receipt.html:36
 msgid "To manage your account online, create an account."
-msgstr "Para gestionar su cuenta en línea, cree una cuenta."
+msgstr "Ανοίξτε έναν λογαριασμό για να διαχειρίζεστε online τον λογαριασμό σας."
 
 #: ./app/pages/pay/pay.html:22
 msgid "Your Payment"
-msgstr "Su pago"
+msgstr "Η Πληρωμή Σας"
 
 #: ./app/pages/simple/checkout.html:295
 #: ./app/pages/simple/review.html:175
 msgid "An email has been sent to {{data.payment.order.customer.email}}."
-msgstr "Se ha enviado un correo electrónico a {{data.payment.order.customer.email}}."
+msgstr "Έχει σταλεί ένα email στο {{data.payment.order.customer.email}}."
 
 #: ./app/pages/simple/checkout.html:231
 msgid "Choose other payment method"
-msgstr "Elija otro método de pago"
+msgstr "Επιλέξτε άλλη μέθοδο πληρωμής"
 
 #: ./app/pages/simple/checkout.html:305
 #: ./app/pages/simple/review.html:185
 msgid "Close"
-msgstr "Cerrar"
+msgstr "Κλείσιμο"
 
 #: ./app/pages/simple/review.html:117
 msgid "Confirm Payment"
-msgstr "Confirmar el pago"
+msgstr "Επιβεβαίωση Πληρωμής"
 
 #: ./app/pages/simple/checkout.html:303
 #: ./app/pages/simple/review.html:183
 msgid "Continue"
-msgstr "Continuar"
+msgstr "Συνέχεια"
 
 #: ./app/pages/simple/checkout.html:48
 msgid "Email Address"
-msgstr "Dirección de correo electrónico"
+msgstr "Διεύθυνση Email"
 
 #: ./app/pages/simple/checkout.html:125
 #: ./app/pages/simple/review.html:62
 msgid "Enter VAT Number"
-msgstr "Introduzca el número de identificación fiscal"
+msgstr "Δώστε Αριθμό Μητρώου ΦΠΑ"
 
 #: ./app/pages/simple/checkout.html:306
 #: ./app/pages/simple/review.html:186
 msgid "Finish"
-msgstr "Terminar"
+msgstr "Τέλος"
 
 #: ./app/pages/simple/checkout.html:223
 msgid "Pay Now"
-msgstr "Pagar ahora"
+msgstr "Πληρωμή Τώρα"
 
 #: ./app/shared/commonDirectives.js:106
 msgid "Postal Code"
-msgstr "Código postal"
+msgstr "Ταχυδρομικός Κώδικας"
 
 #: ./app/pages/simple/checkout.html:313
 #: ./app/pages/simple/review.html:193
 msgid "Print receipt"
-msgstr "Imprimir el recibo"
+msgstr "Εκτύπωση απόδειξης"
 
 #: ./app/pages/simple/checkout.html:102
 msgid "Region"
-msgstr "Región"
+msgstr "Περιοχή"
 
 #: ./app/pages/simple/checkout.html:304
 #: ./app/pages/simple/review.html:184
 msgid "Return"
-msgstr "Volver"
+msgstr "Επιστροφή"
 
 #: ./app/pages/simple/checkout.html:223
 msgid "Submit Order"
-msgstr "Enviar el pedido"
+msgstr "Υποβολή Παραγγελίας"
 
 #: ./app/pages/simple/checkout.html:262
 #: ./app/pages/simple/review.html:142
 msgid "Summary"
-msgstr "Resumen"
+msgstr "Σύνοψη"
 
 #: ./app/pages/simple/checkout.html:252
 #: ./app/pages/simple/review.html:132
 msgid "Thank you for your purchase!"
-msgstr "¡Gracias por su compra!"
+msgstr "Σας ευχαριστούμε για την αγορά σας!"
 
