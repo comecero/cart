@@ -3712,7 +3712,7 @@ app.directive('validateField', ['gettextCatalog', '$timeout', function (gettextC
 
             // If required, initialize the error with a required error message.
             if (utils.isNullOrEmpty(elem[0].value) && field.required == true) {
-                scope.error = gettextCatalog.getString("Please provide a value.");
+                scope.error = gettextCatalog.getString("Please provide a value");
             }
 
             // Use a different message for boolean or toggle.
