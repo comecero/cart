@@ -584,7 +584,7 @@ msgstr "Пожалуйста, укажите сумму"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "Просмотр и окончание"
 
 #: ./app/pages/review/review.html:15

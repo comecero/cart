@@ -576,7 +576,7 @@ msgstr "Por favor, forneça um montante"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "Analisar & Finalizar"
 
 #: ./app/pages/review/review.html:15

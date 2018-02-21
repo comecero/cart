@@ -573,7 +573,7 @@ msgstr "수량을 입력해 주세요"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "재검토 & 완료하기"
 
 #: ./app/pages/review/review.html:15

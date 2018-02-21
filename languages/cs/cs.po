@@ -580,7 +580,7 @@ msgstr "Uveďte prosím částku"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "Zkontrolovat a dokončit"
 
 #: ./app/pages/review/review.html:15

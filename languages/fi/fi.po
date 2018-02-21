@@ -576,7 +576,7 @@ msgstr "Ole hyvä ja syötä määrä"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "Tarkastele & vie loppuun"
 
 #: ./app/pages/review/review.html:15

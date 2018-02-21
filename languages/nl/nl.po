@@ -576,7 +576,7 @@ msgstr "Voer alstublieft een bedrag in"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "Controleren en voltooien"
 
 #: ./app/pages/review/review.html:15

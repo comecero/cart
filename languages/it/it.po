@@ -576,7 +576,7 @@ msgstr "Fornisci un importo"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "Rivedi e concludi"
 
 #: ./app/pages/review/review.html:15

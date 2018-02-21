@@ -573,7 +573,7 @@ msgstr "金額をご連絡ください"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review & Finish"
+msgid "Review &amp; Finish"
 msgstr "確認して終了する"
 
 #: ./app/pages/review/review.html:15
