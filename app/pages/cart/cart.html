@@ -411,7 +411,7 @@
             <div ng-show="data.cart.customer.payment_methods.data.length > 0">
                 <h4 translate>Choose a Payment Method</h4>
 
-                <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal'">
+                <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal' || method.type == 'amazon_pay'">
 
                     <span class="radio-group inline" ng-if="method.type == 'credit_card'">
                         <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
@@ -419,10 +419,14 @@
                         <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
                     </span>
 
-                    <span class="radio-group inline" ng-if="method.type == 'paypal'">
+                    <span class="radio-group inline" ng-if="method.type != 'credit_card'">
                         <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
-                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">PayPal</label>
-                        <span class="pull-right credit-card-image" credit-card-image="'paypal'"></span>
+                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">
+                            <span ng-show="method.type == 'paypal'">PayPal</span>
+                            <span ng-show="method.type == 'amazon_pay'">Amazon Pay</span>
+                        </label>
+                        <span class="pull-right credit-card-image" credit-card-image="'paypal'" ng-show="method.type == 'paypal'"></span>
+                        <span class="pull-right credit-card-image" credit-card-image="'amazon_pay'" ng-show="method.type == 'amazon_pay'"></span>
                     </span>
 
                 </div>
