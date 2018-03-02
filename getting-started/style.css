@@ -10,3 +10,7 @@ code {
 p {
     margin-bottom: 25px;
 }
+
+.quantity-stepper {
+    padding-top: 2px;
+}

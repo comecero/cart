@@ -63,7 +63,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Quantity</th>
+                            <th class="text-center">Quantity</th>
                             <th class="text-right">Price</th>
                         </tr>
                     </thead>
@@ -71,7 +71,19 @@
                         <tr>
                             <td data-label="Name"><strong>{{product.name}}</strong> <i class="fa fa-trash pointer" style="color: #808080;" ng-click="functions.removeProduct(product)" title="Remove"></i></td>
                             <td class="has-input" data-label="Quantity">
-                                <input type="tel" name="quantity" ng-model="product.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
+                                <div class="input-group quantity-stepper">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </span>
+                                    <input type="tel" name="quantity" ng-model="product.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </td>
                             <td class="text-right" data-label="Price">{{product.formatted.price}} {{product.currency}}</td>
                         </tr>
