@@ -8,64 +8,67 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ./app/pages/cart/cart.html:186
-#: ./app/pages/cart/cart.html:261
+#: ./app/pages/cart/cart.html:199
+#: ./app/pages/cart/cart.html:279
 msgid "Address"
 msgstr "住所"
 
-#: ./app/pages/cart/cart.html:194
-#: ./app/pages/cart/cart.html:269
+#: ./app/pages/cart/cart.html:207
+#: ./app/pages/cart/cart.html:287
 msgid "Address 2"
 msgstr "住所2"
 
-#: ./app/shared/services.js:444
+#: ./dist/js/kit.js:4314
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "リクエストの処理中にエラーが発生しました。もう一度お試しください。エラーが引き続き発生する場合には、サポートまでご連絡ください。"
 
-#: ./app/pages/cart/cart.html:323
-#: ./app/pages/cart/cart.html:88
-#: ./app/pages/payment/review.html:72
-#: ./app/pages/payment/review.html:73
+#: ./app/pages/cart/cart.html:345
+#: ./app/pages/cart/cart.html:89
+#: ./app/pages/payment/review.html:75
+#: ./app/pages/payment/review.html:76
 msgid "Apply"
 msgstr "適用"
 
-#: ./app/pages/cart/cart.html:150
-#: ./app/pages/payment/review.html:27
+#: ./app/pages/cart/cart.html:161
+#: ./app/pages/payment/review.html:28
 msgid "Billing Address"
 msgstr "請求先住所"
 
-#: ./app/pages/products/products.html:29
+#: ./app/pages/products/products.html:34
 msgid "Buy Now"
 msgstr "今すぐ購入"
 
-#: ./app/pages/cart/cart.html:137
+#: ./app/pages/cart/cart.html:149
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: ./app/pages/cart/cart.html:356
+#: ./app/pages/cart/cart.html:455
+#: ./app/pages/invoice/invoice.html:211
 msgid "Card Number"
 msgstr "カード番号"
 
-#: ./app/pages/cart/cart.html:339
+#: ./app/pages/cart/cart.html:421
+#: ./app/pages/invoice/invoice.html:177
 msgid "Choose a Payment Method"
 msgstr "支払い方法を選択してください"
 
-#: ./app/pages/cart/cart.html:202
-#: ./app/pages/cart/cart.html:277
+#: ./app/pages/cart/cart.html:217
+#: ./app/pages/cart/cart.html:297
 msgid "City"
 msgstr "都市"
 
-#: ./app/pages/cart/cart.html:154
-#: ./app/pages/payment/review.html:53
+#: ./app/pages/cart/cart.html:183
+#: ./app/pages/payment/review.html:56
 msgid "Company Name"
 msgstr "企業名"
 
-#: ./app/pages/cart/cart.html:75
+#: ./app/pages/cart/cart.html:105
+#: ./app/pages/cart/cart.html:32
 msgid "Continue Shopping"
 msgstr "ショッピングを続ける"
 
-#: ./app/pages/cart/cart.html:232
-#: ./app/pages/cart/cart.html:307
+#: ./app/pages/cart/cart.html:249
+#: ./app/pages/cart/cart.html:329
 msgid "Country"
 msgstr "国"
 
@@ -73,15 +76,24 @@ msgstr "国"
 msgid "Currency"
 msgstr "通貨"
 
-#: ./app/pages/cart/cart.html:63
+#: ./app/pages/cart/cart.html:390
+#: ./app/pages/cart/cart.html:391
+#: ./app/pages/cart/cart.html:78
+#: ./app/pages/cart/cart.html:79
+#: ./app/pages/invoice/invoice.html:138
+#: ./app/pages/invoice/invoice.html:139
+#: ./app/pages/payment/review.html:154
+#: ./app/pages/payment/review.html:155
+#: ./app/pages/receipt/receipt.html:159
+#: ./app/pages/receipt/receipt.html:160
 msgid "Discount"
 msgstr "ディスカウント"
 
-#: ./app/pages/cart/cart.html:91
+#: ./app/pages/cart/cart.html:92
 msgid "Discount applied."
 msgstr "ディスカウントが適用されました。"
 
-#: ./app/pages/cart/cart.html:170
+#: ./app/pages/cart/cart.html:173
 msgid "Email"
 msgstr "メールアドレス"
 
@@ -89,24 +101,26 @@ msgstr "メールアドレス"
 msgid "Enter Promo Code"
 msgstr "プロモコードを入力してください"
 
-#: ./app/pages/cart/cart.html:364
+#: ./app/pages/cart/cart.html:468
+#: ./app/pages/invoice/invoice.html:224
 msgid "Expiration Month"
 msgstr "有効期限の月"
 
-#: ./app/pages/cart/cart.html:372
+#: ./app/pages/cart/cart.html:477
+#: ./app/pages/invoice/invoice.html:233
 msgid "Expiration Year"
 msgstr "有効期限の年"
 
-#: ./app/pages/receipt/receipt.html:37
+#: ./app/pages/receipt/receipt.html:85
 msgid "Expires"
 msgstr "有効期限日時"
 
-#: ./app/pages/cart/cart.html:117
+#: ./app/pages/cart/cart.html:123
 msgid "Have an account?"
 msgstr "アカウントをお持ちですか?"
 
-#: ./app/pages/cart/cart.html:325
-#: ./app/pages/payment/review.html:75
+#: ./app/pages/cart/cart.html:347
+#: ./app/pages/payment/review.html:78
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr "こちらがビジネス向けのご注文である場合には、VAT番号を入力してください。"
 
@@ -114,11 +128,14 @@ msgstr "こちらがビジネス向けのご注文である場合には、VAT番
 msgid "Language"
 msgstr "言語"
 
-#: ./app/pages/cart/cart.html:162
-#: ./app/pages/cart/cart.html:253
-#: ./app/pages/cart/cart.html:35
-#: ./app/pages/payment/review.html:92
-#: ./app/pages/receipt/receipt.html:51
+#: ./app/pages/cart/cart.html:42
+#: ./app/pages/cart/cart.html:50
+#: ./app/pages/invoice/invoice.html:86
+#: ./app/pages/invoice/invoice.html:94
+#: ./app/pages/payment/review.html:107
+#: ./app/pages/payment/review.html:99
+#: ./app/pages/receipt/receipt.html:107
+#: ./app/pages/receipt/receipt.html:115
 msgid "Name"
 msgstr "名前"
 
@@ -126,16 +143,18 @@ msgstr "名前"
 msgid "No"
 msgstr "いいえ"
 
-#: ./app/pages/cart/cart.html:322
-#: ./app/pages/payment/review.html:71
+#: ./app/pages/cart/cart.html:344
+#: ./app/pages/payment/review.html:74
 msgid "Optional"
 msgstr "任意"
 
-#: ./app/pages/cart/cart.html:131
+#: ./app/pages/cart/cart.html:140
+#: ./app/pages/receipt/receipt.html:48
 msgid "Password"
 msgstr "パスワード"
 
-#: ./app/pages/cart/cart.html:347
+#: ./app/pages/cart/cart.html:446
+#: ./app/pages/invoice/invoice.html:202
 msgid "Pay with a new card"
 msgstr "新たなカードで支払い"
 
@@ -143,140 +162,149 @@ msgstr "新たなカードで支払い"
 msgid "Payment Information"
 msgstr "支払い情報"
 
-#: ./app/pages/receipt/receipt.html:34
+#: ./app/pages/receipt/receipt.html:82
 msgid "Payment Method"
 msgstr "支払い方法"
 
-#: ./app/pages/cart/cart.html:178
-#: ./app/pages/payment/review.html:61
+#: ./app/pages/cart/cart.html:191
+#: ./app/pages/payment/review.html:64
 msgid "Phone"
 msgstr "電話"
 
-#: ./app/shared/directives.js:2771
+#: ./dist/js/kit.js:3725
 msgid "Please confirm"
 msgstr "ご確認ください"
 
-#: ./app/shared/directives.js:2766
-#: ./app/shared/directives.js:2802
+#: ./dist/js/kit.js:3720
+#: ./dist/js/kit.js:3756
 msgid "Please make a selection"
 msgstr "選択してください"
 
-#: ./app/pages/cart/cart.html:204
-#: ./app/pages/cart/cart.html:279
+#: ./app/pages/cart/cart.html:219
+#: ./app/pages/cart/cart.html:299
 msgid "Please provide a city"
 msgstr "年を入力してください"
 
-#: ./app/pages/cart/cart.html:156
-#: ./app/pages/payment/review.html:55
+#: ./app/pages/cart/cart.html:185
+#: ./app/pages/payment/review.html:58
 msgid "Please provide a company name"
 msgstr "企業名を入力してください"
 
-#: ./app/pages/cart/cart.html:234
-#: ./app/pages/cart/cart.html:309
+#: ./app/pages/cart/cart.html:251
+#: ./app/pages/cart/cart.html:331
 msgid "Please provide a country"
 msgstr "国を入力してください"
 
-#: ./app/pages/cart/cart.html:164
-#: ./app/pages/cart/cart.html:255
+#: ./app/pages/cart/cart.html:167
+#: ./app/pages/cart/cart.html:273
 msgid "Please provide a name"
 msgstr "名前を入力してください"
 
-#: ./app/pages/cart/cart.html:218
-#: ./app/pages/cart/cart.html:293
+#: ./app/pages/cart/cart.html:233
+#: ./app/pages/cart/cart.html:313
 msgid "Please provide a region / province"
 msgstr "地域 / 地方を入力してください"
 
-#: ./app/pages/cart/cart.html:212
-#: ./app/pages/cart/cart.html:287
+#: ./app/pages/cart/cart.html:227
+#: ./app/pages/cart/cart.html:307
 msgid "Please provide a state / province"
 msgstr "州 / 地方を入力してください"
 
-#: ./app/pages/cart/cart.html:358
+#: ./app/pages/cart/cart.html:460
+#: ./app/pages/invoice/invoice.html:216
 msgid "Please provide a valid card number"
 msgstr "有効なカード番号を入力してください"
 
-#: ./app/pages/cart/cart.html:172
+#: ./app/pages/cart/cart.html:175
 msgid "Please provide a valid email address"
 msgstr "有効なメールアドレスを入力してください"
 
-#: ./app/pages/cart/cart.html:366
+#: ./app/pages/cart/cart.html:471
+#: ./app/pages/invoice/invoice.html:227
 msgid "Please provide a valid expiration month"
 msgstr "有効な有効期限の月を入力してください"
 
-#: ./app/pages/cart/cart.html:374
+#: ./app/pages/cart/cart.html:480
+#: ./app/pages/invoice/invoice.html:236
 msgid "Please provide a valid expiration year"
 msgstr "有効な有効期限の年を入力してください"
 
-#: ./app/pages/cart/cart.html:180
-#: ./app/pages/payment/review.html:63
+#: ./app/pages/payment/review.html:66
 msgid "Please provide a valid phone number"
 msgstr "有効な電話番号を入力してください"
 
-#: ./app/pages/cart/cart.html:382
+#: ./app/pages/cart/cart.html:488
+#: ./app/pages/invoice/invoice.html:244
 msgid "Please provide a valid security code"
 msgstr "有効なセキュリティコードを入力してください"
 
-#: ./app/pages/cart/cart.html:226
-#: ./app/pages/cart/cart.html:301
+#: ./app/pages/cart/cart.html:241
+#: ./app/pages/cart/cart.html:321
 msgid "Please provide a zip / postal code"
 msgstr "有効な郵便番号を入力してください"
 
-#: ./app/pages/cart/cart.html:188
-#: ./app/pages/cart/cart.html:196
-#: ./app/pages/cart/cart.html:263
-#: ./app/pages/cart/cart.html:271
+#: ./app/pages/cart/cart.html:201
+#: ./app/pages/cart/cart.html:209
+#: ./app/pages/cart/cart.html:281
+#: ./app/pages/cart/cart.html:289
 msgid "Please provide an address"
 msgstr "有効な住所を入力してください"
 
-#: ./app/shared/directives.js:279
+#: ./dist/js/kit.js:1233
 msgid "Please provide an amount for your payment."
 msgstr "支払い金額を入力してください。"
 
-#: ./app/shared/directives.js:2811
+#: ./dist/js/kit.js:3765
 msgid "Please provide one of the available options"
 msgstr "利用可能なオプションから一つ選択してください"
 
-#: ./app/shared/directives.js:2794
+#: ./dist/js/kit.js:3748
 msgid "Please supply a number"
 msgstr "番号を入力してください"
 
-#: ./app/shared/directives.js:2787
+#: ./dist/js/kit.js:3741
 msgid "Please supply a number without decimals"
 msgstr "少数なしの番号を入力してください"
 
-#: ./app/pages/products/products.html:17
+#: ./app/pages/products/products.html:22
 msgid "Products"
 msgstr "商品"
 
-#: ./app/pages/cart/cart.html:34
-#: ./app/pages/payment/review.html:91
-#: ./app/pages/receipt/receipt.html:50
+#: ./app/pages/cart/cart.html:43
+#: ./app/pages/cart/cart.html:51
+#: ./app/pages/invoice/invoice.html:87
+#: ./app/pages/invoice/invoice.html:95
+#: ./app/pages/payment/review.html:100
+#: ./app/pages/payment/review.html:108
+#: ./app/pages/receipt/receipt.html:108
+#: ./app/pages/receipt/receipt.html:116
 msgid "Quantity"
 msgstr "数量"
 
-#: ./app/pages/receipt/receipt.html:9
+#: ./app/pages/receipt/receipt.html:13
 msgid "Receipt"
 msgstr "支払証明書"
 
-#: ./app/pages/cart/cart.html:216
-#: ./app/pages/cart/cart.html:291
+#: ./app/pages/cart/cart.html:231
+#: ./app/pages/cart/cart.html:311
 msgid "Region / Province"
 msgstr "地域 / 地方"
 
-#: ./app/pages/payment/review.html:21
+#: ./app/pages/payment/review.html:24
 msgid "Return to PayPal to try your payment again."
 msgstr "PayPalへと戻ってもう一度支払いを実行してください。"
 
-#: ./app/pages/payment/review.html:11
+#: ./app/pages/payment/review.html:15
 msgid "Review Your Order"
 msgstr "注文を確認してください"
 
-#: ./app/pages/cart/cart.html:380
+#: ./app/pages/cart/cart.html:486
+#: ./app/pages/invoice/invoice.html:242
 msgid "Security Code"
 msgstr "セキュリティコード"
 
-#: ./app/pages/cart/cart.html:243
-#: ./app/pages/payment/review.html:38
+#: ./app/pages/cart/cart.html:260
+#: ./app/pages/payment/review.html:41
 msgid "Shipping Address"
 msgstr "発送先住所"
 
@@ -284,73 +312,96 @@ msgstr "発送先住所"
 msgid "Shopping Cart"
 msgstr "ショッピングカート"
 
-#: ./app/pages/cart/cart.html:118
-#: ./app/pages/cart/cart.html:138
+#: ./app/pages/cart/cart.html:124
+#: ./app/pages/cart/cart.html:150
 msgid "Sign In"
 msgstr "サインイン"
 
-#: ./app/pages/cart/cart.html:144
+#: ./app/pages/cart/cart.html:156
 msgid "Sign out"
 msgstr "サインアウト"
 
-#: ./app/pages/cart/cart.html:210
-#: ./app/pages/cart/cart.html:285
+#: ./app/pages/cart/cart.html:225
+#: ./app/pages/cart/cart.html:305
 msgid "State / Province"
 msgstr "州 / 地方"
 
-#: ./app/pages/cart/cart.html:36
-#: ./app/pages/payment/review.html:93
-#: ./app/pages/receipt/receipt.html:52
+#: ./app/pages/cart/cart.html:377
+#: ./app/pages/cart/cart.html:378
+#: ./app/pages/cart/cart.html:44
+#: ./app/pages/cart/cart.html:67
+#: ./app/pages/invoice/invoice.html:126
+#: ./app/pages/invoice/invoice.html:127
+#: ./app/pages/invoice/invoice.html:88
+#: ./app/pages/invoice/invoice.html:96
+#: ./app/pages/payment/review.html:101
+#: ./app/pages/payment/review.html:109
+#: ./app/pages/payment/review.html:142
+#: ./app/pages/payment/review.html:143
+#: ./app/pages/receipt/receipt.html:109
+#: ./app/pages/receipt/receipt.html:117
+#: ./app/pages/receipt/receipt.html:147
+#: ./app/pages/receipt/receipt.html:148
 msgid "Subtotal"
 msgstr "小計"
 
-#: ./app/pages/cart/cart.html:57
-#: ./app/pages/payment/review.html:113
-#: ./app/pages/receipt/receipt.html:72
+#: ./app/pages/cart/cart.html:396
+#: ./app/pages/cart/cart.html:397
+#: ./app/pages/invoice/invoice.html:144
+#: ./app/pages/invoice/invoice.html:145
+#: ./app/pages/payment/review.html:160
+#: ./app/pages/payment/review.html:161
+#: ./app/pages/receipt/receipt.html:165
+#: ./app/pages/receipt/receipt.html:166
 msgid "Tax"
 msgstr "税金"
 
-#: ./app/pages/receipt/receipt.html:17
+#: ./app/pages/receipt/receipt.html:20
 msgid "Thank you! Your order is complete."
 msgstr "ありがとうございます!　ご注文が完了しました。"
 
-#: ./app/shared/services.js:438
+#: ./dist/js/kit.js:4308
 msgid "The item you are trying to access could not be found."
 msgstr "アクセスをご希望の商品が見つかりませんでした。"
 
-#: ./app/shared/directives.js:2837
+#: ./dist/js/kit.js:3791
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "入力値は少なくとも1文字以上でなければなりません"
 
-#: ./app/shared/directives.js:2843
+#: ./dist/js/kit.js:3797
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "入力値は1文字以下でなければなりません"
 
-#: ./app/shared/directives.js:2820
+#: ./dist/js/kit.js:3774
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "入力値は{{$count}}以上でなければなりません"
 
-#: ./app/shared/directives.js:2826
+#: ./dist/js/kit.js:3780
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "入力値は{{$count}}以下でなければなりません"
 
-#: ./app/pages/cart/cart.html:74
+#: ./app/pages/cart/cart.html:31
 msgid "There are no items in your cart"
 msgstr "カートには商品が入れられていません"
 
-#: ./app/shared/directives.js:179
-#: ./app/shared/directives.js:263
-#: ./app/shared/directives.js:458
+#: ./dist/js/kit.js:1133
+#: ./dist/js/kit.js:1217
+#: ./dist/js/kit.js:1412
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "入力された情報の一部に問題がありました。エラーを修正して、もう一度お試しください。"
 
-#: ./app/pages/cart/cart.html:68
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:78
+#: ./app/pages/cart/cart.html:402
+#: ./app/pages/cart/cart.html:403
+#: ./app/pages/invoice/invoice.html:150
+#: ./app/pages/invoice/invoice.html:151
+#: ./app/pages/payment/review.html:166
+#: ./app/pages/payment/review.html:167
+#: ./app/pages/receipt/receipt.html:171
+#: ./app/pages/receipt/receipt.html:172
 msgid "Total"
 msgstr "合計"
 
@@ -358,12 +409,13 @@ msgstr "合計"
 msgid "Update Cart"
 msgstr "カートをアップデート"
 
-#: ./app/pages/cart/cart.html:124
+#: ./app/pages/cart/cart.html:130
+#: ./app/pages/receipt/receipt.html:38
 msgid "Username"
 msgstr "ユーザーネーム"
 
-#: ./app/pages/cart/cart.html:320
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/cart/cart.html:342
+#: ./app/pages/payment/review.html:72
 msgid "VAT Number"
 msgstr "VAT番号"
 
@@ -371,12 +423,12 @@ msgstr "VAT番号"
 msgid "Yes"
 msgstr "はい"
 
-#: ./app/pages/cart/cart.html:110
+#: ./app/pages/cart/cart.html:116
 msgid "Your Information"
 msgstr "お客様の情報"
 
-#: ./app/pages/cart/cart.html:224
-#: ./app/pages/cart/cart.html:299
+#: ./app/pages/cart/cart.html:239
+#: ./app/pages/cart/cart.html:319
 msgid "Zip / Postal Code"
 msgstr "郵便番号"
 
@@ -388,25 +440,25 @@ msgstr "有効期限"
 msgid "Billing Information"
 msgstr "請求先情報"
 
-#: ./app/pages/cart/cart.html:489
+#: ./app/pages/cart/cart.html:502
 #: ./app/pages/payment/review.html:179
 msgid "Complete Order"
 msgstr "注文を完了する"
 
-#: ./app/pages/pay/pay.html:347
-#: ./app/pages/review/review.html:137
+#: ./app/pages/invoice/invoice.html:258
 msgid "Complete Payment"
 msgstr "支払いを完了する"
 
+#: ./index.html:59
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
 msgstr "著作権©{{設定.アカウント.年度}} {{設定.アプリ.企業名}}. 無断転用禁止。"
 
-#: ./app/pages/receipt/receipt.html:58
+#: ./app/pages/receipt/receipt.html:57
 msgid "Create Account"
 msgstr "アカウントを開く"
 
-#: ./app/pages/receipt/receipt.html:29
+#: ./app/pages/receipt/receipt.html:28
 msgid "Date"
 msgstr "日付"
 
@@ -419,11 +471,12 @@ msgstr "すぐダウンロードする"
 msgid "Due Date"
 msgstr "支払い期日"
 
-#: ./app/pages/cart/cart.html:77
+#: ./app/pages/cart/cart.html:86
 msgid "Enter"
 msgstr "入力する"
 
-#: ./app/pages/pay/pay.html:151
+#: ./app/pages/cart/cart.html:165
+#: ./app/pages/cart/cart.html:271
 msgid "Full Name"
 msgstr "姓名"
 
@@ -451,7 +504,7 @@ msgstr "アイテム"
 msgid "Order Details"
 msgstr "注文内容明細"
 
-#: ./app/pages/cart/cart.html:362
+#: ./app/pages/cart/cart.html:371
 msgid "Order Summary"
 msgstr "注文内容概要"
 
@@ -459,8 +512,8 @@ msgstr "注文内容概要"
 msgid "Paid"
 msgstr "支払い済み"
 
-#: ./app/pages/pay/pay.html:248
-#: ./app/pages/receipt/receipt.html:96
+#: ./app/pages/cart/cart.html:416
+#: ./app/pages/invoice/invoice.html:165
 msgid "Payment Details"
 msgstr "支払い明細"
 
@@ -469,16 +522,18 @@ msgstr "支払い明細"
 msgid "Payment Summary"
 msgstr "支払い概要"
 
-#: ./app/pages/pay/pay.html:179
+#: ./app/pages/cart/cart.html:193
 msgid "Please provide a phone"
 msgstr "電話番号を入力してください"
 
-#: ./app/pages/pay/pay.html:323
+#: ./app/pages/cart/cart.html:495
+#: ./app/pages/invoice/invoice.html:251
 msgid "Save this card to my account"
 msgstr "このカードをマイアカウントに保存する"
 
-#: ./app/pages/simple/checkout.html:278
-#: ./app/pages/simple/review.html:158
+#: ./app/pages/cart/cart.html:357
+#: ./app/pages/cart/cart.html:383
+#: ./app/pages/payment/review.html:121
 msgid "Shipping"
 msgstr "発送"
 
@@ -487,7 +542,7 @@ msgid "Shipping Information"
 msgstr "発送先情報"
 
 #. When the user is shown the shopping cart, they are given the option to indicate that their shipping address is the same as their billing address. This text is shown next to a checkbox that allows the user to indicate if their shipping address is the same as the billing address.
-#: ./app/pages/cart/cart.html:256
+#: ./app/pages/cart/cart.html:265
 msgid "Shipping is same as billing"
 msgstr "発送先は請求先と同住所"
 
@@ -495,7 +550,7 @@ msgstr "発送先は請求先と同住所"
 msgid "Sold To"
 msgstr "販売先"
 
-#: ./app/pages/invoice/invoice.html:263
+#: ./app/pages/invoice/invoice.html:267
 msgid "Thank you for your business"
 msgstr "お取り引きいただきまして、ありがとうございます。"
 
@@ -519,11 +574,12 @@ msgstr "ご注文内容をオンラインで管理するためには、アカウ
 msgid "Your Order"
 msgstr "お客様のご注文"
 
-#: ./app/pages/receipt/receipt.html:64
+#: ./app/pages/invoice/invoice.html:45
+#: ./app/pages/receipt/receipt.html:63
 msgid "Your account has been created."
 msgstr "お客様のアカウントが作成されました"
 
-#: ./app/pages/cart/cart.html:397
+#: ./app/pages/cart/cart.html:406
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
 msgstr "お客様の合計金額には税金が含まれています。 {{データ.カート.フォーマット済み.税}}"
 
@@ -563,7 +619,7 @@ msgstr "製造元"
 msgid "Make Another Payment"
 msgstr "別件の支払いをする"
 
-#: ./app/shared/directives.js:2761
+#: ./dist/js/kit.js:3715
 msgid "Please provide a value"
 msgstr "価格をご連絡ください"
 
@@ -573,7 +629,7 @@ msgstr "金額をご連絡ください"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review &amp; Finish"
+msgid "Review & Finish"
 msgstr "確認して終了する"
 
 #: ./app/pages/review/review.html:15
@@ -668,4 +724,8 @@ msgstr "概要"
 #: ./app/pages/simple/review.html:132
 msgid "Thank you for your purchase!"
 msgstr "お買い上げいただきまして、ありがとうございます！"
+
+#: ./app/pages/cart/cart.html:65
+msgid "Remove"
+msgstr "削除する"
 

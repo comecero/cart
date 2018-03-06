@@ -8,64 +8,67 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ./app/pages/cart/cart.html:186
-#: ./app/pages/cart/cart.html:261
+#: ./app/pages/cart/cart.html:199
+#: ./app/pages/cart/cart.html:279
 msgid "Address"
 msgstr "Osoite"
 
-#: ./app/pages/cart/cart.html:194
-#: ./app/pages/cart/cart.html:269
+#: ./app/pages/cart/cart.html:207
+#: ./app/pages/cart/cart.html:287
 msgid "Address 2"
 msgstr "Osoite 2"
 
-#: ./app/shared/services.js:444
+#: ./dist/js/kit.js:4314
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "Kohtasimme häiriön käsitellessämme pyyntöäsi. Yritä suorittaa pyyntö uudelleen. Ota yhteyttä käyttäjätukeen ongelman jatkuessa."
 
-#: ./app/pages/cart/cart.html:323
-#: ./app/pages/cart/cart.html:88
-#: ./app/pages/payment/review.html:72
-#: ./app/pages/payment/review.html:73
+#: ./app/pages/cart/cart.html:345
+#: ./app/pages/cart/cart.html:89
+#: ./app/pages/payment/review.html:75
+#: ./app/pages/payment/review.html:76
 msgid "Apply"
 msgstr "Käytä"
 
-#: ./app/pages/cart/cart.html:150
-#: ./app/pages/payment/review.html:27
+#: ./app/pages/cart/cart.html:161
+#: ./app/pages/payment/review.html:28
 msgid "Billing Address"
 msgstr "Laskutusosoite"
 
-#: ./app/pages/products/products.html:29
+#: ./app/pages/products/products.html:34
 msgid "Buy Now"
 msgstr "Osta nyt"
 
-#: ./app/pages/cart/cart.html:137
+#: ./app/pages/cart/cart.html:149
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: ./app/pages/cart/cart.html:356
+#: ./app/pages/cart/cart.html:455
+#: ./app/pages/invoice/invoice.html:211
 msgid "Card Number"
 msgstr "Kortin numero"
 
-#: ./app/pages/cart/cart.html:339
+#: ./app/pages/cart/cart.html:421
+#: ./app/pages/invoice/invoice.html:177
 msgid "Choose a Payment Method"
 msgstr "Valitse maksutapa"
 
-#: ./app/pages/cart/cart.html:202
-#: ./app/pages/cart/cart.html:277
+#: ./app/pages/cart/cart.html:217
+#: ./app/pages/cart/cart.html:297
 msgid "City"
 msgstr "Kunta"
 
-#: ./app/pages/cart/cart.html:154
-#: ./app/pages/payment/review.html:53
+#: ./app/pages/cart/cart.html:183
+#: ./app/pages/payment/review.html:56
 msgid "Company Name"
 msgstr "Yrityksen nimi"
 
-#: ./app/pages/cart/cart.html:75
+#: ./app/pages/cart/cart.html:105
+#: ./app/pages/cart/cart.html:32
 msgid "Continue Shopping"
 msgstr "Jatka ostoksia"
 
-#: ./app/pages/cart/cart.html:232
-#: ./app/pages/cart/cart.html:307
+#: ./app/pages/cart/cart.html:249
+#: ./app/pages/cart/cart.html:329
 msgid "Country"
 msgstr "Maa"
 
@@ -73,15 +76,24 @@ msgstr "Maa"
 msgid "Currency"
 msgstr "Valuutta"
 
-#: ./app/pages/cart/cart.html:63
+#: ./app/pages/cart/cart.html:390
+#: ./app/pages/cart/cart.html:391
+#: ./app/pages/cart/cart.html:78
+#: ./app/pages/cart/cart.html:79
+#: ./app/pages/invoice/invoice.html:138
+#: ./app/pages/invoice/invoice.html:139
+#: ./app/pages/payment/review.html:154
+#: ./app/pages/payment/review.html:155
+#: ./app/pages/receipt/receipt.html:159
+#: ./app/pages/receipt/receipt.html:160
 msgid "Discount"
 msgstr "Alennus"
 
-#: ./app/pages/cart/cart.html:91
+#: ./app/pages/cart/cart.html:92
 msgid "Discount applied."
 msgstr "Alennus käytetty."
 
-#: ./app/pages/cart/cart.html:170
+#: ./app/pages/cart/cart.html:173
 msgid "Email"
 msgstr "Sähköposti"
 
@@ -89,24 +101,26 @@ msgstr "Sähköposti"
 msgid "Enter Promo Code"
 msgstr "Syötä promootiokoodi"
 
-#: ./app/pages/cart/cart.html:364
+#: ./app/pages/cart/cart.html:468
+#: ./app/pages/invoice/invoice.html:224
 msgid "Expiration Month"
 msgstr "Umpeutumiskuu"
 
-#: ./app/pages/cart/cart.html:372
+#: ./app/pages/cart/cart.html:477
+#: ./app/pages/invoice/invoice.html:233
 msgid "Expiration Year"
 msgstr "Umpeutumisvuosi"
 
-#: ./app/pages/receipt/receipt.html:37
+#: ./app/pages/receipt/receipt.html:85
 msgid "Expires"
 msgstr "Umpeutuu"
 
-#: ./app/pages/cart/cart.html:117
+#: ./app/pages/cart/cart.html:123
 msgid "Have an account?"
 msgstr "Onko sinulla jo käyttäjätili?"
 
-#: ./app/pages/cart/cart.html:325
-#: ./app/pages/payment/review.html:75
+#: ./app/pages/cart/cart.html:347
+#: ./app/pages/payment/review.html:78
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr "Anna ALV-numerosi, jos tämä tilaus on yritykselle."
 
@@ -114,11 +128,14 @@ msgstr "Anna ALV-numerosi, jos tämä tilaus on yritykselle."
 msgid "Language"
 msgstr "Kieli"
 
-#: ./app/pages/cart/cart.html:162
-#: ./app/pages/cart/cart.html:253
-#: ./app/pages/cart/cart.html:35
-#: ./app/pages/payment/review.html:92
-#: ./app/pages/receipt/receipt.html:51
+#: ./app/pages/cart/cart.html:42
+#: ./app/pages/cart/cart.html:50
+#: ./app/pages/invoice/invoice.html:86
+#: ./app/pages/invoice/invoice.html:94
+#: ./app/pages/payment/review.html:107
+#: ./app/pages/payment/review.html:99
+#: ./app/pages/receipt/receipt.html:107
+#: ./app/pages/receipt/receipt.html:115
 msgid "Name"
 msgstr "Nimi"
 
@@ -126,16 +143,18 @@ msgstr "Nimi"
 msgid "No"
 msgstr "Ei"
 
-#: ./app/pages/cart/cart.html:322
-#: ./app/pages/payment/review.html:71
+#: ./app/pages/cart/cart.html:344
+#: ./app/pages/payment/review.html:74
 msgid "Optional"
 msgstr "Valinnainen"
 
-#: ./app/pages/cart/cart.html:131
+#: ./app/pages/cart/cart.html:140
+#: ./app/pages/receipt/receipt.html:48
 msgid "Password"
 msgstr "Salasana"
 
-#: ./app/pages/cart/cart.html:347
+#: ./app/pages/cart/cart.html:446
+#: ./app/pages/invoice/invoice.html:202
 msgid "Pay with a new card"
 msgstr "Maksa uudella kortilla"
 
@@ -143,140 +162,149 @@ msgstr "Maksa uudella kortilla"
 msgid "Payment Information"
 msgstr "Maksutiedot"
 
-#: ./app/pages/receipt/receipt.html:34
+#: ./app/pages/receipt/receipt.html:82
 msgid "Payment Method"
 msgstr "Maksutapa"
 
-#: ./app/pages/cart/cart.html:178
-#: ./app/pages/payment/review.html:61
+#: ./app/pages/cart/cart.html:191
+#: ./app/pages/payment/review.html:64
 msgid "Phone"
 msgstr "Puhelin"
 
-#: ./app/shared/directives.js:2771
+#: ./dist/js/kit.js:3725
 msgid "Please confirm"
 msgstr "Vahvista"
 
-#: ./app/shared/directives.js:2766
-#: ./app/shared/directives.js:2802
+#: ./dist/js/kit.js:3720
+#: ./dist/js/kit.js:3756
 msgid "Please make a selection"
 msgstr "Tee valinta"
 
-#: ./app/pages/cart/cart.html:204
-#: ./app/pages/cart/cart.html:279
+#: ./app/pages/cart/cart.html:219
+#: ./app/pages/cart/cart.html:299
 msgid "Please provide a city"
 msgstr "Ilmoita kaupunki"
 
-#: ./app/pages/cart/cart.html:156
-#: ./app/pages/payment/review.html:55
+#: ./app/pages/cart/cart.html:185
+#: ./app/pages/payment/review.html:58
 msgid "Please provide a company name"
 msgstr "Ilmoita yrityksen nimi"
 
-#: ./app/pages/cart/cart.html:234
-#: ./app/pages/cart/cart.html:309
+#: ./app/pages/cart/cart.html:251
+#: ./app/pages/cart/cart.html:331
 msgid "Please provide a country"
 msgstr "Ilmoita maa"
 
-#: ./app/pages/cart/cart.html:164
-#: ./app/pages/cart/cart.html:255
+#: ./app/pages/cart/cart.html:167
+#: ./app/pages/cart/cart.html:273
 msgid "Please provide a name"
 msgstr "Ilmoita nimi"
 
-#: ./app/pages/cart/cart.html:218
-#: ./app/pages/cart/cart.html:293
+#: ./app/pages/cart/cart.html:233
+#: ./app/pages/cart/cart.html:313
 msgid "Please provide a region / province"
 msgstr "Ilmoita lääni/provinssi"
 
-#: ./app/pages/cart/cart.html:212
-#: ./app/pages/cart/cart.html:287
+#: ./app/pages/cart/cart.html:227
+#: ./app/pages/cart/cart.html:307
 msgid "Please provide a state / province"
 msgstr "Ilmoita osavaltio/provinssi"
 
-#: ./app/pages/cart/cart.html:358
+#: ./app/pages/cart/cart.html:460
+#: ./app/pages/invoice/invoice.html:216
 msgid "Please provide a valid card number"
 msgstr "Ilmoita käypä kortin numero"
 
-#: ./app/pages/cart/cart.html:172
+#: ./app/pages/cart/cart.html:175
 msgid "Please provide a valid email address"
 msgstr "Ilmoita käypä sähköpostiosoite"
 
-#: ./app/pages/cart/cart.html:366
+#: ./app/pages/cart/cart.html:471
+#: ./app/pages/invoice/invoice.html:227
 msgid "Please provide a valid expiration month"
 msgstr "Ilmoita käypä umpeutumiskuu"
 
-#: ./app/pages/cart/cart.html:374
+#: ./app/pages/cart/cart.html:480
+#: ./app/pages/invoice/invoice.html:236
 msgid "Please provide a valid expiration year"
 msgstr "Ilmoita käypä umpeutumisvuosi"
 
-#: ./app/pages/cart/cart.html:180
-#: ./app/pages/payment/review.html:63
+#: ./app/pages/payment/review.html:66
 msgid "Please provide a valid phone number"
 msgstr "Ilmoita käypä puhelinnumero"
 
-#: ./app/pages/cart/cart.html:382
+#: ./app/pages/cart/cart.html:488
+#: ./app/pages/invoice/invoice.html:244
 msgid "Please provide a valid security code"
 msgstr "Ilmoita käypä turvakoodi"
 
-#: ./app/pages/cart/cart.html:226
-#: ./app/pages/cart/cart.html:301
+#: ./app/pages/cart/cart.html:241
+#: ./app/pages/cart/cart.html:321
 msgid "Please provide a zip / postal code"
 msgstr "Ilmoita postinumero"
 
-#: ./app/pages/cart/cart.html:188
-#: ./app/pages/cart/cart.html:196
-#: ./app/pages/cart/cart.html:263
-#: ./app/pages/cart/cart.html:271
+#: ./app/pages/cart/cart.html:201
+#: ./app/pages/cart/cart.html:209
+#: ./app/pages/cart/cart.html:281
+#: ./app/pages/cart/cart.html:289
 msgid "Please provide an address"
 msgstr "Ilmoita osoite"
 
-#: ./app/shared/directives.js:279
+#: ./dist/js/kit.js:1233
 msgid "Please provide an amount for your payment."
 msgstr "Anna maksettava summa."
 
-#: ./app/shared/directives.js:2811
+#: ./dist/js/kit.js:3765
 msgid "Please provide one of the available options"
 msgstr "Anna yksi saatavilla olevista vaihtoehdoista"
 
-#: ./app/shared/directives.js:2794
+#: ./dist/js/kit.js:3748
 msgid "Please supply a number"
 msgstr "Anna numero"
 
-#: ./app/shared/directives.js:2787
+#: ./dist/js/kit.js:3741
 msgid "Please supply a number without decimals"
 msgstr "Anna numero ilman desimaaleja"
 
-#: ./app/pages/products/products.html:17
+#: ./app/pages/products/products.html:22
 msgid "Products"
 msgstr "Tuotteet"
 
-#: ./app/pages/cart/cart.html:34
-#: ./app/pages/payment/review.html:91
-#: ./app/pages/receipt/receipt.html:50
+#: ./app/pages/cart/cart.html:43
+#: ./app/pages/cart/cart.html:51
+#: ./app/pages/invoice/invoice.html:87
+#: ./app/pages/invoice/invoice.html:95
+#: ./app/pages/payment/review.html:100
+#: ./app/pages/payment/review.html:108
+#: ./app/pages/receipt/receipt.html:108
+#: ./app/pages/receipt/receipt.html:116
 msgid "Quantity"
 msgstr "Lukumäärä"
 
-#: ./app/pages/receipt/receipt.html:9
+#: ./app/pages/receipt/receipt.html:13
 msgid "Receipt"
 msgstr "Kuitti"
 
-#: ./app/pages/cart/cart.html:216
-#: ./app/pages/cart/cart.html:291
+#: ./app/pages/cart/cart.html:231
+#: ./app/pages/cart/cart.html:311
 msgid "Region / Province"
 msgstr "Lääni/Provinssi"
 
-#: ./app/pages/payment/review.html:21
+#: ./app/pages/payment/review.html:24
 msgid "Return to PayPal to try your payment again."
 msgstr "Palaa PayPaliin kokeillaksesi maksaa uudelleen."
 
-#: ./app/pages/payment/review.html:11
+#: ./app/pages/payment/review.html:15
 msgid "Review Your Order"
 msgstr "Tarkista tilauksesi"
 
-#: ./app/pages/cart/cart.html:380
+#: ./app/pages/cart/cart.html:486
+#: ./app/pages/invoice/invoice.html:242
 msgid "Security Code"
 msgstr "Turvakoodi"
 
-#: ./app/pages/cart/cart.html:243
-#: ./app/pages/payment/review.html:38
+#: ./app/pages/cart/cart.html:260
+#: ./app/pages/payment/review.html:41
 msgid "Shipping Address"
 msgstr "Toimitusosoite"
 
@@ -284,77 +312,100 @@ msgstr "Toimitusosoite"
 msgid "Shopping Cart"
 msgstr "Ostoskärry"
 
-#: ./app/pages/cart/cart.html:118
-#: ./app/pages/cart/cart.html:138
+#: ./app/pages/cart/cart.html:124
+#: ./app/pages/cart/cart.html:150
 msgid "Sign In"
 msgstr "Kirjaudu sisään"
 
-#: ./app/pages/cart/cart.html:144
+#: ./app/pages/cart/cart.html:156
 msgid "Sign out"
 msgstr "Kirjaudu ulos"
 
-#: ./app/pages/cart/cart.html:210
-#: ./app/pages/cart/cart.html:285
+#: ./app/pages/cart/cart.html:225
+#: ./app/pages/cart/cart.html:305
 msgid "State / Province"
 msgstr "Osavaltio/Provinssi"
 
-#: ./app/pages/cart/cart.html:36
-#: ./app/pages/payment/review.html:93
-#: ./app/pages/receipt/receipt.html:52
+#: ./app/pages/cart/cart.html:377
+#: ./app/pages/cart/cart.html:378
+#: ./app/pages/cart/cart.html:44
+#: ./app/pages/cart/cart.html:67
+#: ./app/pages/invoice/invoice.html:126
+#: ./app/pages/invoice/invoice.html:127
+#: ./app/pages/invoice/invoice.html:88
+#: ./app/pages/invoice/invoice.html:96
+#: ./app/pages/payment/review.html:101
+#: ./app/pages/payment/review.html:109
+#: ./app/pages/payment/review.html:142
+#: ./app/pages/payment/review.html:143
+#: ./app/pages/receipt/receipt.html:109
+#: ./app/pages/receipt/receipt.html:117
+#: ./app/pages/receipt/receipt.html:147
+#: ./app/pages/receipt/receipt.html:148
 msgid "Subtotal"
 msgstr "Välisumma"
 
-#: ./app/pages/cart/cart.html:57
-#: ./app/pages/payment/review.html:113
-#: ./app/pages/receipt/receipt.html:72
+#: ./app/pages/cart/cart.html:396
+#: ./app/pages/cart/cart.html:397
+#: ./app/pages/invoice/invoice.html:144
+#: ./app/pages/invoice/invoice.html:145
+#: ./app/pages/payment/review.html:160
+#: ./app/pages/payment/review.html:161
+#: ./app/pages/receipt/receipt.html:165
+#: ./app/pages/receipt/receipt.html:166
 msgid "Tax"
 msgstr "Verot"
 
-#: ./app/pages/receipt/receipt.html:17
+#: ./app/pages/receipt/receipt.html:20
 msgid "Thank you! Your order is complete."
 msgstr "Kiitoksia! Tilauksesi on valmis."
 
-#: ./app/shared/services.js:438
+#: ./dist/js/kit.js:4308
 msgid "The item you are trying to access could not be found."
 msgstr "Hakemaasi kohdetta ei löytynyt."
 
-#: ./app/shared/directives.js:2837
+#: ./dist/js/kit.js:3791
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "Arvon on oltava vähintään yhden merkin pituinen"
 msgstr[1] "Arvon on oltava vähintään {{$count}} merkin pituinen"
 
-#: ./app/shared/directives.js:2843
+#: ./dist/js/kit.js:3797
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "Arvon on oltava alle yhden merkin pituinen"
 msgstr[1] "Arvon on oltava alle {{$count}} merkin pituinen"
 
-#: ./app/shared/directives.js:2820
+#: ./dist/js/kit.js:3774
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "Arvon on oltava yli {{$count}} merkin pituinen"
 msgstr[1] "Arvon on oltava yli {{$count}} merkin pituinen"
 
-#: ./app/shared/directives.js:2826
+#: ./dist/js/kit.js:3780
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "Annettavan arvon on oltava alle {{$count}}"
 msgstr[1] "Annettavan arvon on oltava alle {{$count}}"
 
-#: ./app/pages/cart/cart.html:74
+#: ./app/pages/cart/cart.html:31
 msgid "There are no items in your cart"
 msgstr "Kärryssäsi ei ole tuotteita"
 
-#: ./app/shared/directives.js:179
-#: ./app/shared/directives.js:263
-#: ./app/shared/directives.js:458
+#: ./dist/js/kit.js:1133
+#: ./dist/js/kit.js:1217
+#: ./dist/js/kit.js:1412
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "Antamissasi tiedoissa ilmeni virheitä. Tarkista tiedot ja yritä uudelleen."
 
-#: ./app/pages/cart/cart.html:68
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:78
+#: ./app/pages/cart/cart.html:402
+#: ./app/pages/cart/cart.html:403
+#: ./app/pages/invoice/invoice.html:150
+#: ./app/pages/invoice/invoice.html:151
+#: ./app/pages/payment/review.html:166
+#: ./app/pages/payment/review.html:167
+#: ./app/pages/receipt/receipt.html:171
+#: ./app/pages/receipt/receipt.html:172
 msgid "Total"
 msgstr "Yhteensä"
 
@@ -362,12 +413,13 @@ msgstr "Yhteensä"
 msgid "Update Cart"
 msgstr "Päivitä kärry"
 
-#: ./app/pages/cart/cart.html:124
+#: ./app/pages/cart/cart.html:130
+#: ./app/pages/receipt/receipt.html:38
 msgid "Username"
 msgstr "Käyttäjänimi"
 
-#: ./app/pages/cart/cart.html:320
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/cart/cart.html:342
+#: ./app/pages/payment/review.html:72
 msgid "VAT Number"
 msgstr "ALV-tunniste"
 
@@ -375,12 +427,12 @@ msgstr "ALV-tunniste"
 msgid "Yes"
 msgstr "Kyllä"
 
-#: ./app/pages/cart/cart.html:110
+#: ./app/pages/cart/cart.html:116
 msgid "Your Information"
 msgstr "Sinun tietosi"
 
-#: ./app/pages/cart/cart.html:224
-#: ./app/pages/cart/cart.html:299
+#: ./app/pages/cart/cart.html:239
+#: ./app/pages/cart/cart.html:319
 msgid "Zip / Postal Code"
 msgstr "Postinumero"
 
@@ -392,25 +444,25 @@ msgstr "päättymispäivä"
 msgid "Billing Information"
 msgstr "Laskutustiedot"
 
-#: ./app/pages/cart/cart.html:489
+#: ./app/pages/cart/cart.html:502
 #: ./app/pages/payment/review.html:179
 msgid "Complete Order"
 msgstr "Viimeistele tilaus"
 
-#: ./app/pages/pay/pay.html:347
-#: ./app/pages/review/review.html:137
+#: ./app/pages/invoice/invoice.html:258
 msgid "Complete Payment"
 msgstr "Viimeistele maksu"
 
+#: ./index.html:59
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
 msgstr "Tekijänoikeus &kappale; {{settings.account.year}} {{settings.app.company_name}}. Kaikki oikeudet pidätetään."
 
-#: ./app/pages/receipt/receipt.html:58
+#: ./app/pages/receipt/receipt.html:57
 msgid "Create Account"
 msgstr "Luo tili"
 
-#: ./app/pages/receipt/receipt.html:29
+#: ./app/pages/receipt/receipt.html:28
 msgid "Date"
 msgstr "Päivämäärä"
 
@@ -423,11 +475,12 @@ msgstr "Lataa nyt"
 msgid "Due Date"
 msgstr "Eräpäivä"
 
-#: ./app/pages/cart/cart.html:77
+#: ./app/pages/cart/cart.html:86
 msgid "Enter"
 msgstr "Syötä"
 
-#: ./app/pages/pay/pay.html:151
+#: ./app/pages/cart/cart.html:165
+#: ./app/pages/cart/cart.html:271
 msgid "Full Name"
 msgstr "Koko nimi"
 
@@ -455,7 +508,7 @@ msgstr "Kappale"
 msgid "Order Details"
 msgstr "Tilauksen tiedot"
 
-#: ./app/pages/cart/cart.html:362
+#: ./app/pages/cart/cart.html:371
 msgid "Order Summary"
 msgstr "Tilauksen yhteenveto"
 
@@ -463,8 +516,8 @@ msgstr "Tilauksen yhteenveto"
 msgid "Paid"
 msgstr "Maksettu"
 
-#: ./app/pages/pay/pay.html:248
-#: ./app/pages/receipt/receipt.html:96
+#: ./app/pages/cart/cart.html:416
+#: ./app/pages/invoice/invoice.html:165
 msgid "Payment Details"
 msgstr "Maksun tiedot"
 
@@ -473,16 +526,18 @@ msgstr "Maksun tiedot"
 msgid "Payment Summary"
 msgstr "Maksun yhteenveto"
 
-#: ./app/pages/pay/pay.html:179
+#: ./app/pages/cart/cart.html:193
 msgid "Please provide a phone"
 msgstr "Ole hyvä ja anna puhelinnumero"
 
-#: ./app/pages/pay/pay.html:323
+#: ./app/pages/cart/cart.html:495
+#: ./app/pages/invoice/invoice.html:251
 msgid "Save this card to my account"
 msgstr "Tallenna tämä kortti tililleni"
 
-#: ./app/pages/simple/checkout.html:278
-#: ./app/pages/simple/review.html:158
+#: ./app/pages/cart/cart.html:357
+#: ./app/pages/cart/cart.html:383
+#: ./app/pages/payment/review.html:121
 msgid "Shipping"
 msgstr "Toimitus"
 
@@ -490,7 +545,7 @@ msgstr "Toimitus"
 msgid "Shipping Information"
 msgstr "Toimituksen tiedot"
 
-#: ./app/pages/cart/cart.html:256
+#: ./app/pages/cart/cart.html:265
 msgid "Shipping is same as billing"
 msgstr "Toimitus on sama kuin laskutus"
 
@@ -498,7 +553,7 @@ msgstr "Toimitus on sama kuin laskutus"
 msgid "Sold To"
 msgstr "Myyty henkilölle"
 
-#: ./app/pages/invoice/invoice.html:263
+#: ./app/pages/invoice/invoice.html:267
 msgid "Thank you for your business"
 msgstr "Kiitos, että asioit meillä"
 
@@ -522,11 +577,12 @@ msgstr "Luo tili, jotta saat käsiteltyä tilaustasi netissä."
 msgid "Your Order"
 msgstr "Tilauksesi"
 
-#: ./app/pages/receipt/receipt.html:64
+#: ./app/pages/invoice/invoice.html:45
+#: ./app/pages/receipt/receipt.html:63
 msgid "Your account has been created."
 msgstr "Tilisi on luotu."
 
-#: ./app/pages/cart/cart.html:397
+#: ./app/pages/cart/cart.html:406
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
 msgstr "Loppusummasi sisältää {{data.cart.formatted.tax}} veroa"
 
@@ -566,7 +622,7 @@ msgstr "Tehnyt"
 msgid "Make Another Payment"
 msgstr "Tee uusi maksu"
 
-#: ./app/shared/directives.js:2761
+#: ./dist/js/kit.js:3715
 msgid "Please provide a value"
 msgstr "Ole hyvä ja syötä arvo"
 
@@ -576,7 +632,7 @@ msgstr "Ole hyvä ja syötä määrä"
 
 #: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
-msgid "Review &amp; Finish"
+msgid "Review & Finish"
 msgstr "Tarkastele & vie loppuun"
 
 #: ./app/pages/review/review.html:15
@@ -671,4 +727,8 @@ msgstr "Yhteenveto"
 #: ./app/pages/simple/review.html:132
 msgid "Thank you for your purchase!"
 msgstr "Kiitos ostoksestasi!"
+
+#: ./app/pages/cart/cart.html:65
+msgid "Remove"
+msgstr "Poistaa"
 
