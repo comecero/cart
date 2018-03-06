@@ -69,17 +69,17 @@
                     </thead>
                     <tbody ng-repeat="product in data.addedProducts">
                         <tr>
-                            <td data-label="Name"><strong>{{product.name}}</strong> <i class="fa fa-trash pointer" style="color: #808080;" ng-click="functions.removeProduct(product)" title="Remove"></i></td>
+                            <td data-label="Name"><strong>{{product.name}}</strong> <i class="fa fa-trash pointer" style="color: #808080;" ng-click="functions.changeQuantity(product, null, 0)" title="Remove"></i></td>
                             <td class="has-input" data-label="Quantity">
                                 <div class="input-group quantity-stepper">
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" ng-click="functions.changeQuantity(product, '-')">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </span>
-                                    <input type="tel" name="quantity" ng-model="product.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
+                                    <input type="tel" name="quantity" ng-model="product.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-change="funcdtions.changeQuantity(product, null, item.quantity)" />
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" ng-click="functions.changeQuantity(product, '+')">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </span>

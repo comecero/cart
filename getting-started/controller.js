@@ -85,6 +85,27 @@ app.controller("LinkBuilderController", ['$scope', 'PaymentService', 'SettingsSe
         $scope.data.addedProducts = _.reject($scope.data.addedProducts, function (p) { return p.product_id == product.product_id });
     }
 
+    // Handle quantity changes
+    $scope.functions.changeQuantity = function (item, direction, quantity) {
+
+        if (direction) {
+            // Change the item quantity by one.
+            if (direction == "+") {
+                item.quantity++;
+            } else {
+                item.quantity--;
+            }
+        } else if (quantity !== null) {
+            item.quantity = quantity;
+        }
+
+        // If the quantity is 0, remove the item from the model immediately
+        if (item.quantity == 0) {
+            $scope.data.addedProducts = _.reject($scope.data.addedProducts, function (i) { return i.product_id == item.product_id });
+        }
+
+    }
+
     $scope.functions.getLink = function () {
 
         var base = $scope.data.src + "/#/cart"

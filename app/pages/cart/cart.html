@@ -55,14 +55,14 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </span>
-                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item)" />
+                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '+')">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </span>
                             </div>
-                            <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)">Remove</span>
+                            <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)" translate>Remove</span>
                         </td>
                         <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>
                     </tr>
