@@ -51,18 +51,18 @@
                         <td class="text-center has-input" data-label="{{ 'Quantity' | translate}}" ng-if="!settings.app.hide_quantity">
                             <div class="input-group quantity-stepper">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '-')">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </span>
-                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
+                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item)" />
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '+')">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </span>
                             </div>
-                            <a class="remove-link" href="#">Remove</a>
+                            <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)">Remove</span>
                         </td>
                         <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>
                     </tr>
@@ -80,10 +80,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            <div class="text-right spacer-t15">
-                <button type="button" class="btn btn-info right" update-cart="data.cart" error="data.error" params="data.params" shipping-is-billing="data.shipping_is_billing" translate>Update Cart</button>
-            </div>
 
             <!--  Promo Code -->
             <div class="spacer-t20 promo-code" ng-cloak promo-code cart="data.cart" error="data.error" params="data.params" ng-if="settings.app.show_promo_code">

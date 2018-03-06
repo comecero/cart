@@ -1,4 +1,4 @@
-﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document) {
+﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout) {
 
     // Define a place to hold your data
     $scope.data = {};
@@ -40,12 +40,7 @@
             $scope.data.cart = cart;
 
             // Only display images if all items in the cart have images
-            $scope.showImages = true;
-            _.each(cart.items, function (item) {
-                if (item.product.images.length == 0) {
-                    $scope.showImages = false;
-                }
-            });
+            setShowImages($scope.data.cart);
 
             // If there is a shipping address line 1, set shipping_is_billing to false so the user will see what's provided in the shipping address.
             $scope.data.shipping_is_billing = !HelperService.hasShippingAddress(cart.customer);
@@ -67,6 +62,45 @@
         // Error getting the cart
         $scope.data.error = error;
     });
+
+    // Handle quantity changes
+    var updateBuffer;
+    $scope.changeQuantity = function (item, direction, quantity) {
+
+        // Put the requests in a buffer so that if several successive requests are made only the last one is sent.
+        if (updateBuffer) {
+            $timeout.cancel(updateBuffer);
+        }
+
+        if (direction) {
+            // Change the item quantity by one.
+            if (direction == "+") {
+                item.quantity++;
+            } else {
+                item.quantity--;
+            }
+        } else if (quantity !== null) {
+            item.quantity = quantity;
+        }
+
+        // If the quantity is 0, remove the item from the model immediately
+        if (item.quantity == 0) {
+            $scope.data.cart.items = _.reject($scope.data.cart.items, function (i) { return i.item_id == item.item_id });
+        }
+
+        updateBuffer = $timeout(function () {
+
+            CartService.update($scope.data.cart, $scope.data.params).then(function (cart) {
+                $scope.data.cart = cart;
+                setShowImages($scope.data.cart);
+            }, function (error) {
+                // Error updating the cart
+                $scope.data.error = error;
+            });
+
+        }, 500);
+
+    }
 
     // Handle a successful payment
     $scope.onPaymentSuccess = function (payment) {
@@ -100,6 +134,16 @@
         if (type)
             $scope.data.payment_method.type = type;
 
+    }
+
+    function setShowImages(cart) {
+        // Only display images if all items in the cart have images
+        $scope.showImages = true;
+        _.each(cart.items, function (item) {
+            if (item.product.images.length == 0) {
+                $scope.showImages = false;
+            }
+        });
     }
 
     // Watch for error to be populated, and if so, scroll to it.
