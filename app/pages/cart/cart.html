@@ -49,18 +49,20 @@
                         <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                         <td data-label="{{ 'Name' | translate}}"><strong>{{item.name}}</strong></td>
                         <td class="text-center has-input" data-label="{{ 'Quantity' | translate}}" ng-if="!settings.app.hide_quantity">
-                            <div class="input-group quantity-stepper">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '-')">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </span>
-                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '+')">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </span>
+                            <div class="quantity-stepper-wrapper">
+                                <div class="input-group quantity-stepper">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '-')">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </span>
+                                    <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '+')">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                             <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)" translate>Remove</span>
                         </td>
@@ -484,7 +486,7 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group" show-errors="data.cart.options">
                         <label class="control-label required" for="cvv" translate>Security Code</label>
-                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
+                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id" maxlength="4">
                         <p class="error-block hidden" translate>Please provide a valid security code</p>
                     </div>
                 </div>

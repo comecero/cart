@@ -95,11 +95,15 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
             $scope.data.cart.items = _.reject($scope.data.cart.items, function (i) { return i.item_id == item.item_id });
         }
 
+        // Clear error if no items in the cart
+        if ($scope.data.cart.items.length == 0) {
+            $scope.data.error = null;
+        }
+
         updateBuffer = $timeout(function () {
 
             CartService.update($scope.data.cart, $scope.data.params).then(function (cart) {
                 $scope.data.cart = cart;
-                setShowImages($scope.data.cart);
             }, function (error) {
                 // Error updating the cart
                 $scope.data.error = error;
