@@ -1,4 +1,11 @@
-﻿<a name="1.0.9"></a>
+﻿<a name="1.1.0"></a>
+# 1.0.9
+
+- Add support for the following languages: Czech, German, Greek, Spanish, Finnish, French, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Swedish
+- Add new stepper control for changing the item quantities in the cart
+- Add support for a customer that signs into a cart or invoice to pay with a saved Amazon Pay payment method
+
+<a name="1.0.9"></a>
 # 1.0.9
 
 - Allow customers that sign into the page to pay with an existing PayPal account if saved as a customer payment method
