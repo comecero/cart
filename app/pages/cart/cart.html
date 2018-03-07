@@ -38,18 +38,33 @@
             <table class="cart">
                 <thead>
                     <tr>
-                        <th ng-show="showImages" style="width: 120px;" translate>Item</th>
+                        <th ng-if="showImages" style="width: 120px;" translate>Item</th>
                         <th translate>Name</th>
-                        <th translate ng-if="!settings.app.hide_quantity">Quantity</th>
+                        <th class="text-center" translate ng-if="!settings.app.hide_quantity">Quantity</th>
                         <th class="text-right" translate>Subtotal</th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="item in data.cart.items">
                     <tr>
-                        <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                        <td ng-if="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                         <td data-label="{{ 'Name' | translate}}"><strong>{{item.name}}</strong></td>
-                        <td class="has-input" data-label="{{ 'Quantity' | translate}}" ng-if="!settings.app.hide_quantity">
-                            <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click />
+                        <td class="text-center has-input" data-label="{{ 'Quantity' | translate}}" ng-if="!settings.app.hide_quantity">
+                            <div class="quantity-stepper-wrapper">
+                                <div class="input-group quantity-stepper">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '-')">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </span>
+                                    <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '+')">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)" translate>Remove</span>
                         </td>
                         <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>
                     </tr>
@@ -67,10 +82,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            <div class="text-right spacer-t15">
-                <button type="button" class="btn btn-info right" update-cart="data.cart" error="data.error" params="data.params" shipping-is-billing="data.shipping_is_billing" translate>Update Cart</button>
-            </div>
 
             <!--  Promo Code -->
             <div class="spacer-t20 promo-code" ng-cloak promo-code cart="data.cart" error="data.error" params="data.params" ng-if="settings.app.show_promo_code">
@@ -411,7 +422,7 @@
             <div ng-show="data.cart.customer.payment_methods.data.length > 0">
                 <h4 translate>Choose a Payment Method</h4>
 
-                <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal'">
+                <div class="well clearfix" ng-repeat="method in data.cart.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal' || method.type == 'amazon_pay'">
 
                     <span class="radio-group inline" ng-if="method.type == 'credit_card'">
                         <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
@@ -419,10 +430,14 @@
                         <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
                     </span>
 
-                    <span class="radio-group inline" ng-if="method.type == 'paypal'">
+                    <span class="radio-group inline" ng-if="method.type != 'credit_card'">
                         <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
-                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">PayPal</label>
-                        <span class="pull-right credit-card-image" credit-card-image="'paypal'"></span>
+                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">
+                            <span ng-show="method.type == 'paypal'">PayPal</span>
+                            <span ng-show="method.type == 'amazon_pay'">Amazon Pay</span>
+                        </label>
+                        <span class="pull-right credit-card-image" credit-card-image="'paypal'" ng-show="method.type == 'paypal'"></span>
+                        <span class="pull-right credit-card-image" credit-card-image="'amazon_pay'" ng-show="method.type == 'amazon_pay'"></span>
                     </span>
 
                 </div>
@@ -471,7 +486,7 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group" show-errors="data.cart.options">
                         <label class="control-label required" for="cvv" translate>Security Code</label>
-                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
+                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id" maxlength="4">
                         <p class="error-block hidden" translate>Please provide a valid security code</p>
                     </div>
                 </div>

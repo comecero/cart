@@ -404,10 +404,35 @@ img.product-icon {
     border: 1px solid $product-icon-border-color;
 }
 
-/* Quantity input */
-input.quantity {
-    max-width: 60px;
-    text-align: right;
+/* Quantity */
+.quantity-stepper {
+    width: 125px;
+    padding-top: 28px;
+    margin: 0 auto;
+}
+
+.quantity-stepper .btn {
+    height: 34px;
+}
+
+.quantity-stepper .btn-default {
+    border: 1px solid #cccccc;
+}
+
+.quantity-stepper i.fa {
+    color: #3181aa;
+}
+
+.quantity-stepper input.quantity {
+    text-align: center;
+    border-radius: 0px !important;
+}
+
+.remove-link {
+    padding-top: 8px;
+    font-weight: bold;
+    display: inline-block;
+    color: #3181aa;
 }
 
 /* Promo code */
@@ -800,6 +825,21 @@ table th {
         margin-top: 30px;
     }
 
+    /* Quantity */
+    .quantity-stepper-wrapper {
+        float: right;
+    }
+    .quantity-stepper {
+        padding-top: 6px;
+        margin: 0px;
+    }
+
+    .remove-link {
+        display: block;
+        text-align: right;
+        clear: right;
+        padding-top: 16px;
+    } 
 }
 
 /* Spacers */
