@@ -826,14 +826,19 @@ table th {
     }
 
     /* Quantity */
+    .quantity-stepper-wrapper {
+        float: right;
+    }
     .quantity-stepper {
         padding-top: 6px;
-        margin: 0 0 0 auto;
+        margin: 0px;
     }
 
     .remove-link {
         display: block;
         text-align: right;
+        clear: right;
+        padding-top: 16px;
     } 
 }
 
