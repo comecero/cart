@@ -1,5 +1,5 @@
 ﻿<a name="1.1.0"></a>
-# 1.0.9
+# 1.1.0
 
 - Add support for the following languages: Czech, German, Greek, Spanish, Finnish, French, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Swedish
 - Add new stepper control for changing the item quantities in the cart
