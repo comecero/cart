@@ -486,7 +486,7 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="form-group" show-errors="data.cart.options">
                         <label class="control-label required" for="cvv" translate>Security Code</label>
-                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
+                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id" maxlength="4">
                         <p class="error-block hidden" translate>Please provide a valid security code</p>
                     </div>
                 </div>
