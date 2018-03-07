@@ -38,7 +38,7 @@
             <table class="cart">
                 <thead>
                     <tr>
-                        <th ng-show="showImages" style="width: 120px;" translate>Item</th>
+                        <th ng-if="showImages" style="width: 120px;" translate>Item</th>
                         <th translate>Name</th>
                         <th class="text-center" translate ng-if="!settings.app.hide_quantity">Quantity</th>
                         <th class="text-right" translate>Subtotal</th>
@@ -46,7 +46,7 @@
                 </thead>
                 <tbody ng-repeat="item in data.cart.items">
                     <tr>
-                        <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                        <td ng-if="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                         <td data-label="{{ 'Name' | translate}}"><strong>{{item.name}}</strong></td>
                         <td class="text-center has-input" data-label="{{ 'Quantity' | translate}}" ng-if="!settings.app.hide_quantity">
                             <div class="quantity-stepper-wrapper">

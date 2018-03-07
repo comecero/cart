@@ -104,6 +104,7 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
 
             CartService.update($scope.data.cart, $scope.data.params).then(function (cart) {
                 $scope.data.cart = cart;
+                setShowImages($scope.data.cart);
             }, function (error) {
                 // Error updating the cart
                 $scope.data.error = error;
