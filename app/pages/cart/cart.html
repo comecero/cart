@@ -64,7 +64,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)" translate>Remove</span>
+                            <span class="remove-link faux-link" translate><span ng-click="changeQuantity(item, null, 0)">Remove</span></span>
                         </td>
                         <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>
                     </tr>
