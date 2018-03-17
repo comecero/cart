@@ -98,6 +98,9 @@ $navbar-default-link-active-color: darken($navbar-default-link-color, 6.5%);
 
 $btn-default-border: darken($btn-default-bg, 5%);
 
+$stepper-hover-bg: darken($stepper-bg, 5%);
+$stepper-active-bg: darken($stepper-bg, 10%);
+
 $link-hover-color: darken($link-color, 10%);
 $link-hover-decoration: none;
 

@@ -420,6 +420,14 @@ img.product-icon {
     background-color: $stepper-bg;
 }
 
+.quantity-stepper .btn-default:focus, .quantity-stepper .btn-default:hover {
+    background-color: $stepper-hover-bg;
+}
+
+.quantity-stepper .btn-default:active {
+    background-color: $stepper-active-bg;
+}
+
 .quantity-stepper .input-group-btn:first-child > .btn {
     border-bottom-left-radius: $input-border-radius;
     border-top-left-radius: $input-border-radius;
