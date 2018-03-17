@@ -416,11 +416,22 @@ img.product-icon {
 }
 
 .quantity-stepper .btn-default {
-    border: 1px solid #cccccc;
+    border: 1px solid $input-border;
+    background-color: $stepper-bg;
+}
+
+.quantity-stepper .input-group-btn:first-child > .btn {
+    border-bottom-left-radius: $input-border-radius;
+    border-top-left-radius: $input-border-radius;
+}
+
+.quantity-stepper .input-group-btn:last-child > .btn {
+    border-bottom-right-radius: $input-border-radius;
+    border-top-right-radius: $input-border-radius;
 }
 
 .quantity-stepper i.fa {
-    color: #3181aa;
+    color: $stepper-color;
 }
 
 .quantity-stepper input.quantity {
@@ -432,7 +443,7 @@ img.product-icon {
     padding-top: 8px;
     font-weight: bold;
     display: inline-block;
-    color: #3181aa;
+    color: $link-color;
 }
 
 /* Promo code */
@@ -829,6 +840,7 @@ table th {
     .quantity-stepper-wrapper {
         float: right;
     }
+
     .quantity-stepper {
         padding-top: 6px;
         margin: 0px;
