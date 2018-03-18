@@ -5996,6 +5996,12 @@ img.product-icon {
   border: 1px solid #cccccc;
   background-color: #FF69B4; }
 
+.quantity-stepper .btn-default:focus, .quantity-stepper .btn-default:hover {
+  background-color: #f2f2f2; }
+
+.quantity-stepper .btn-default:active {
+  background-color: #e6e6e6; }
+
 .quantity-stepper .input-group-btn:first-child > .btn {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0; }
