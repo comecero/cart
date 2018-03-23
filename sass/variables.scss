@@ -77,6 +77,10 @@ $input-color: #555555;
 $input-border: #cccccc;
 $placeholder-color: #999999;
 
+/* Quantity stepper */
+$stepper-bg: #ffffff;
+$stepper-color: #3181aa;
+
 /* Product Image Borders */
 $product-icon-border-color: #ececec;
 
@@ -93,6 +97,9 @@ $navbar-default-link-hover-color: lighten($navbar-default-link-color, 6.5%);
 $navbar-default-link-active-color: darken($navbar-default-link-color, 6.5%);
 
 $btn-default-border: darken($btn-default-bg, 5%);
+
+$stepper-hover-bg: darken($stepper-bg, 5%);
+$stepper-active-bg: darken($stepper-bg, 10%);
 
 $link-hover-color: darken($link-color, 10%);
 $link-hover-decoration: none;
