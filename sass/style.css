@@ -14,6 +14,7 @@
 /* Footer */
 /* Table header */
 /* Form elements */
+/* Quantity stepper */
 /* Product Image Borders */
 /* Company Name Color */
 /* NOT USER DEFINED */
@@ -5992,7 +5993,22 @@ img.product-icon {
   height: 34px; }
 
 .quantity-stepper .btn-default {
-  border: 1px solid #cccccc; }
+  border: 1px solid #cccccc;
+  background-color: #ffffff; }
+
+.quantity-stepper .btn-default:focus, .quantity-stepper .btn-default:hover {
+  background-color: #f2f2f2; }
+
+.quantity-stepper .btn-default:active {
+  background-color: #e6e6e6; }
+
+.quantity-stepper .input-group-btn:first-child > .btn {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0; }
+
+.quantity-stepper .input-group-btn:last-child > .btn {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0; }
 
 .quantity-stepper i.fa {
   color: #3181aa; }

@@ -538,5 +538,23 @@
     "section": "Inputs",
     "required": true,
     "default_value": "#cccccc"
+  },
+  {
+    "name": "stepper-bg",
+    "type": "color",
+    "label": "Quantity Stepper Background Color",
+    "description": "The background color for quantity stepper buttons. Generally matches the background color of form inputs.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "stepper-color",
+    "type": "color",
+    "label": "Quantity Stepper Icon Color",
+    "description": "The icon color for quantity stepper buttons. Generally matches the link color of main content.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#3181aa"
   }
 ]

@@ -1,4 +1,10 @@
-﻿<a name="1.1.0"></a>
+﻿<a name="1.1.1"></a>
+# 1.1.1
+
+- Remove third party CDNs and replace with Comecero CDN for static assets
+- Add settings to allow users to set the value of the quantity stepper background and text color
+
+<a name="1.1.0"></a>
 # 1.1.0
 
 - Add support for the following languages: Czech, German, Greek, Spanish, Finnish, French, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Swedish
