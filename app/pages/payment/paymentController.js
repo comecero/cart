@@ -34,7 +34,7 @@
         
         PaymentService.get($scope.data.payment_id, $scope.data.params).then(function (payment) {
             
-            if (payment.status == "completed") {
+            if (payment.status == "completed" || payment.status == "pending") {
                 // The payment was previously completed, redirect to receipt.
                 $location.path("/receipt/" + payment.payment_id);
             }
