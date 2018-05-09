@@ -4610,7 +4610,7 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
         var settings = SettingsService.get();
 
         if (settings.account.account_id && settings.config.development == true) {
-            parameters = { account_id: settings.account.account_id };
+            parameters = _.extend(parameters, { account_id: settings.account.account_id });
         }
 
         // Prepare the url
@@ -5522,7 +5522,7 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
 
 }]);
 
-app.service("InvoiceService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentService', 'SettingsService', 'HelperService', 'StorageService', function ($http, $q, $rootScope, ApiService, PaymentService, SettingsService, HelperService, StorageService) {
+app.service("InvoiceService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentService', 'SettingsService', 'HelperService', 'StorageService', '$location', function ($http, $q, $rootScope, ApiService, PaymentService, SettingsService, HelperService, StorageService, $location) {
 
     // Return public API.
     return {
@@ -5535,13 +5535,19 @@ app.service("InvoiceService", ['$http', '$q', '$rootScope', 'ApiService', 'Payme
 
         var deferred = $q.defer();
         parameters = setDefaultParameters(parameters);
-        var invoice_id = StorageService.get("invoice_id");
+
+        // Get the invoice ID
+        var invoice_id = $location.search().invoice_id;
+        if (!invoice_id) {
+            invoice_id = StorageService.get("invoice_id");
+        }
 
         var url = "/invoices/" + invoice_id;
 
         ApiService.getItem(url, parameters, quiet).then(function (response) {
 
             var invoice = response.data;
+            StorageService.set("invoice_id", invoice.invoice_id);
 
             // In case it changed, sync the currency
             syncCurrency(invoice.currency);
@@ -5550,9 +5556,11 @@ app.service("InvoiceService", ['$http', '$q', '$rootScope', 'ApiService', 'Payme
 
         }, function (error) {
 
-            // If 404, perform a session reset.
+            // If 404, perform a redirect to base entry page. Don't perform a hard reset, just delete the invoice ID from storage and redirect. Also remove from the query string, if provided.
             if (error.status == 404) {
-                HelperService.newSessionRedirect(true, "Performing a session reset due to an invalid invoice_id in the cookie / request. (404 - invoice not found)");
+                $location.search("invoice_id", null);
+                StorageService.remove("invoice_id");
+                HelperService.newSessionRedirect(false, "Performing a redirect due to an invalid invoice_id in the cookie / request. (404 - invoice not found)");
             }
 
             deferred.reject(error);
