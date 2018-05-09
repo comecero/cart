@@ -190,6 +190,7 @@ app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'G
 
     // Build your payment method models
     $scope.data.payment_method = { "type": "credit_card" };
+    $scope.data.amazon_pay = { "type": "amazon_pay" };
     $scope.data.paypal = {
         "type": "paypal",
         data: {
@@ -231,13 +232,17 @@ app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'G
         $scope.data.error = error;
     });
 
-    // Handle a payment
+    // Handle a successful payment
     $scope.onPaymentSuccess = function (payment) {
 
-        // If PayPal and status is initiated, redirect to PayPal for approval.
         if (payment.payment_method.type == "paypal" && payment.status == "initiated") {
+            // If PayPal and status is initiated, redirect to PayPal for approval.
             window.location = payment.response_data.redirect_url;
+        } else if (payment.payment_method.type == "amazon_pay") {
+            // If Amazon Pay, redirect for review
+            $location.path("/payment/review/" + payment.payment_id);
         } else {
+            // A successful card payment. Redirect to the receipt.
             $location.path("/receipt/" + payment.payment_id);
         }
 
