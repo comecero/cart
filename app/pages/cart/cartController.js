@@ -1,6 +1,6 @@
 ﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout) {
 
-    // Define a place to hold your data
+    // Define a place to hold your data and functions
     $scope.data = {};
 
     // Load in some helpers

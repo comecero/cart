@@ -1562,7 +1562,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
     // shippingIsBilling: A flag to indicate if the billing address and shipping address are the same. If so, the shipping address will be removed.
 
     // Amazon Pay
-    // billingAgreementConsent: A flag to indicate if the user has checked the box indicating consent to save and bill the payment method in the future.
+    // getConsentStatus: Pass in a function that allows you get the status of the Amazon Pay consent checkbox. This function you pass in is provided by the amazonPayButton directive.
 
     // Attributes
     // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
@@ -1581,7 +1581,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
             onSuccess: '=?',
             onError: '=?',
             shippingIsBilling: '=?',
-            billingAgreementConsent: '=?'
+            getConsentStatus: '=?'
         },
         link: function (scope, elem, attrs, ctrl) {
 
@@ -1652,7 +1652,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                     case "amazon_pay":
 
                         // If the payment method contains a billing agreement ID or the payment is marked to be saved and the user has not given consent, return an error.
-                        if ((scope.paymentMethod.data.billing_agreement_id || scope.paymentMethod.save) && !scope.billingAgreementConsent) {
+                        if ((scope.paymentMethod.data.billing_agreement_id || scope.paymentMethod.save) && !scope.getConsentStatus()) {
                             error = { type: "bad_request", reference: "nauRcF8", code: "invalid_input", message: gettextCatalog.getString("Please check the box to provide consent to save your payment method for future payments."), status: 400 };
                         }
 
@@ -4278,9 +4278,8 @@ app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
     // onLoaded: A function that will be called when the Amazon Pay button has been loaded.
     // onAddressSelect: A function that will be called when the customer selects an address from their Amazon Pay address book.
     // onPaymentMethodSelect: A function that will be called when the customer selects a payment method from their Amazon Pay wallet.
-    // onConsentLoaded: A function that will be called when tne Amazon Pay consent dialogue is loaded. Returns a parameter true / false that indicates if the state of the checkbox is checked when loaded.
     // onConsentChange: A function that will be called when the user toggles the Amazon Pay consent checkbox. Returns the status of the consent checkbox as a parameter.
-    // billingAgreementConsent: A flag to indicate if the user has checked the box indicating consent to save and bill the payment method in the future.
+    // getConsentStatus: A function that is set by the directive and can be called to get the status of the Amazon Pay consent checkbox.
     // error: The error object to communicate errors.
     // onError: A function that will be called from scope when the payment fails. Will include the (failed) response payment object as a parameter.
 
@@ -4304,9 +4303,8 @@ app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
             onLoaded: '=?',
             onAddressSelect: '=?',
             onPaymentMethodSelect: '=?',
-            onConsentLoaded: '=?',
             onConsentChange: '=?',
-            billingAgreementConsent: '=?',
+            getConsentStatus: '=?',
             error: '=?',
             onError: '=?'
         },
@@ -4314,7 +4312,6 @@ app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
 
             var client_id = null;
             var seller_id = null;
-            scope.billingAgreementConsent = false;
 
             // Watch options and set Amazon Pay parameters if provided.
             scope.$watch("options", function (newValue, oldValue) {
@@ -4353,6 +4350,11 @@ app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
 
             });
 
+            // This function can be used by the user of the directive to get the consent status. It is typically passed into the submit-payment directive so it can error check the status of the checkbox.
+            scope.getConsentStatus = function () {
+                return amazonPay.getConsentStatus();
+            }
+
             function createAmazonPayButton(client_id, seller_id) {
 
                 // Create the button
@@ -4374,19 +4376,7 @@ app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
                     // Show the widgets
                     amazonPay.showWidgets(attrs.amazonPayAddressId, attrs.amazonPayWalletId, attrs.amazonPayConsentId, recurring);
 
-                    // Define our own onConsentChange function, and then invoke the caller's function, if provided. This allows us to keep track of the status for use within the directive.
-                    var onConsentChange = function (status) {
-
-                        scope.$apply(function () {
-                            scope.billingAgreementConsent = status;
-                        });
-
-                        // Fire the user function, if supplied.
-                        if (scope.onPaymentMethodSelect)
-                            scope.onPaymentMethodSelect(status);
-                    }
-
-                    amazonPay.loadWidgets(client_id, seller_id, recurring, attrs.amazonPayAddressId, attrs.amazonPayWalletId, attrs.amazonPayConsentId, scope.onAddressSelect, scope.onPaymentMethodSelect, onConsentChange, attrs.amazonPayDesignMode, "Edit", function (error, data) {
+                    amazonPay.loadWidgets(client_id, seller_id, recurring, attrs.amazonPayAddressId, attrs.amazonPayWalletId, attrs.amazonPayConsentId, scope.onAddressSelect, scope.onPaymentMethodSelect, scope.onConsentChange, attrs.amazonPayDesignMode, "Edit", function (error, data) {
 
                         if (error) {
                             setError("external_server_error", "remote_server_error", error, 502);
@@ -4517,18 +4507,6 @@ app.directive('amazonPayWidgetRefresh', ['gettextCatalog', function (gettextCata
                         var data = paymentError.payment_method.data;
                         var ap = _.findWhere(options.payment_methods, { payment_method_type: "amazon_pay" });
                         var recurring = data.billing_agreement_id != null;
-
-                        // Define our own onConsentChange function, and then invoke the caller's function, if provided. This allows us to keep track of the status for use within the directive.
-                        var onConsentChange = function (status) {
-
-                            scope.$apply(function () {
-                                scope.billingAgreementConsent = status;
-                            });
-
-                            // Fire the user function, if supplied.
-                            if (scope.onPaymentMethodSelect)
-                                scope.onPaymentMethodSelect(status);
-                        }
 
                         amazonPay.reRenderWidgets(ap.amazon_pay_client_id, ap.amazon_pay_seller_id, data.order_reference_id, data.billing_agreement_id, attrs.amazonPayWalletId, scope.onPaymentMethodSelect, attrs.amazonPayDesignMode, function (error, data) {
 

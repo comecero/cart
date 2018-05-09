@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿1.1.1
+Comecero Cart version: ﻿1.2.0
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -7,7 +7,7 @@ Copyright Comecero and other contributors. Released under MIT license. See LICEN
 
 app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout) {
 
-    // Define a place to hold your data
+    // Define a place to hold your data and functions
     $scope.data = {};
 
     // Load in some helpers

@@ -107,7 +107,7 @@
                 <!-- Amazon Pay Button -->
                 <div class="row spacer-t20" ng-show="helpers.supportsPaymentMethod('amazon_pay', data.cart.options)">
                     <div class="col-xs-12 text-right">
-                        <div id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" billing-agreement-consent="data.billing_agreement_consent" amazon-pay-button-size="small"></div>
+                        <div id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small"></div>
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     <div id="apconsent" style="width:100%; height:100px; margin-top:20px; display:none;"></div>
                 </div>
                 <div class="col-xs-12 spacer-b20 spacer-t20 text-right">
-                    <button type="button" class="btn btn-info btn-md right" submit-payment="data.amazon_pay" cart="data.cart" billing-agreement-consent="data.billing_agreement_consent" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
+                    <button type="button" class="btn btn-info btn-md right" submit-payment="data.amazon_pay" cart="data.cart" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
                 </div>
                 <div class="col-xs-12">
                     <div class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" translate>Use another payment method</div>
