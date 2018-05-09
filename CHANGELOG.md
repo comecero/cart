@@ -1,4 +1,10 @@
-﻿<a name="1.1.1"></a>
+﻿<a name="1.2.0"></a>
+# 1.2.0
+
+- Add support for Amazon Pay
+- Integrate kit version 1.0.7 of kit. See kit release notes for details.
+
+<a name="1.1.1"></a>
 # 1.1.1
 
 - Remove third party CDNs and replace with Comecero CDN for static assets

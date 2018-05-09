@@ -1,6 +1,7 @@
 ﻿<div ng-controller="PaymentController">
 
-    <form name="form" customer-fields options="data.sale.options" items="data.sale.items" shipping-is-billing="true" novalidate>
+    <!-- Must be ng-form to prevent Amazon Pay button from generating wallet in new tab when clicked twice. Bug report filed with Amazon Pay team. -->
+    <ng-form name="form" customer-fields options="data.sale.options" items="data.sale.items" shipping-is-billing="true" novalidate>
 
         <div class="dropdown pull-right spacer-r10" uib-dropdown ng-if="settings.app.enable_languages">
             <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
@@ -22,6 +23,16 @@
         <!-- For certain payment error types, present an option to retry the payment -->
         <div class="alert alert-info" ng-show="data.error.meta.payment.payment_method.type == 'paypal'">
             <i class="fa fa-external-link"></i> <a ng-href="{{data.error.meta.payment.response_data.redirect_url}}"><strong translate>Return to PayPal to try your payment again.</strong></a>
+        </div>
+
+        <div id="widgets" amazon-pay-widget-refresh payment-error="data.error.meta.payment" options="data.sale.options" amazon-pay-wallet-id="apwallet" ng-show="data.error.meta.payment.payment_method.type == 'amazon_pay' && data.error">
+            <div class="col-xs-12">
+                <div id="apwallet" style="width:100%; height:230px; margin-top:20px;"></div>
+            </div>
+            <div class="col-xs-12">
+                <a href="#/cart" translate>Use another payment method</a>
+            </div>
+            <div class="row spacer-b20"></div>
         </div>
 
         <div class="col-xs-12 col-sm-6 spacer-b20">
@@ -78,7 +89,7 @@
                     <p class="help-block" translate>If this order is for a business, please provide your VAT Number.</p>
                 </div>
             </div>
-        
+
         </div>
 
         <div class="row"></div>
@@ -182,6 +193,6 @@
         <!--Spacer-->
         <div class="row">&nbsp;</div>
 
-    </form>
+    </ng-form>
 
 </div>

@@ -14,7 +14,7 @@ window.__settings.account = {
         { "code": "USD", "name": "US Dollar" },
         { "code": "JPY", "name": "Yen" }
     ],
-    "payment_method_types": ["credit_card"],
+    "payment_method_types": ["credit_card", "amazon_pay"],
     "card_types": [
         "Visa",
         "MasterCard",
