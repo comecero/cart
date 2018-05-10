@@ -1,42 +1,79 @@
 ﻿<div ng-controller="ProductsController">
 
-    <form name="form" novalidate>
-
-        <div class="dropdown pull-right currency-button spacer-b10" uib-dropdown ng-if="settings.account.currencies.length > 1">
-            <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
-                <span class="pointer">{{currency}}</span> <i class="caret"></i>
-            </button>
-            <ul class="dropdown-menu" currency-select as-dropdown products="data.products" params="data.params" error="data.error"></ul>
+    <!-- Full Header -->
+    <nav class="navbar navbar-default">
+        <div class="navbar-brand">
+            <img ng-if="settings.app.logo" class="logo" ng-src="{{settings.app.logo}}">
+            <span ng-if="!settings.app.logo" class="company-name">{{settings.app.company_name}}</span>
         </div>
+    </nav>
 
-        <div class="dropdown pull-right spacer-r10" uib-dropdown ng-if="settings.app.enable_languages">
-            <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
-                <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
-            </button>
-            <ul class="dropdown-menu" language-select as-dropdown></ul>
-        </div>
+    <!-- Custom Header, if supplied -->
+    <custom-html section="header"></custom-html>
 
-        <div class="row"></div>
+    <div class="container container-content">
+        <form name="form" novalidate>
+            <div class="panel panel-default panel-boxed panel-content">
+                <!-- Boxed Header -->
+                <div class="panel-heading" ng-cloak>
+                    <img ng-src="{{settings.app.logo}}" ng-if="settings.app.logo">
+                    <span ng-if="!settings.app.logo" class="company-name">{{settings.app.company_name}}</span>
+                </div>
+                <div class="localization">
+                    <div class="dropdown pull-right currency-button spacer-b10" uib-dropdown ng-if="settings.account.currencies.length > 1">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                            <span class="pointer">{{currency}}</span> <i class="caret"></i>
+                        </button>
+                        <ul class="dropdown-menu" currency-select as-dropdown products="data.products" params="data.params" error="data.error"></ul>
+                    </div>
 
-        <div class="page-header">
-            <h1 translate>Products</h1>
-        </div>
+                    <div class="dropdown pull-right spacer-r10" uib-dropdown ng-if="settings.app.enable_languages">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                            <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
+                        </button>
+                        <ul class="dropdown-menu" language-select as-dropdown></ul>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <span translate>Products</span>
+                </div>
+                <div class="card-body">
+                    <div class="panel-body">
+                        <div class="alert alert-danger" ng-if="data.error">
+                            {{data.error.message}}
+                        </div>
 
-        <div class="alert alert-danger" ng-if="data.error">
-            {{data.error.message}}
-        </div>
+                        <div class="col-xs-12 col-sm-6 text-center spacer-b40" ng-repeat="product in data.products.data">
+                            <div class="spacer-b20" ng-if="product.images"><img class="product-icon" ng-src="{{settings.app.use_square_images ? product.images[0].link_square : product.images[0].link_small}}" /></div>
+                            <div class="spacer-b10">{{product.name}}</div>
+                            <div class="spacer-b10">{{product.formatted.price}}</div>
+                            <div class="spacer-b10" ng-bind-html="product.description"></div>
+                            <button type="button" class="btn btn-default" add-to-cart="product" quantity="product.quantity" currency="data.currency" error="data.error" on-success="onAddToCart" translate>Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Boxed Footer -->
+                <div class="panel-footer" ng-cloak>
+                    <p ng-bind-html="settings.app.footer_text"></p>
+                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <div class="col-xs-12 col-sm-6 text-center spacer-b40" ng-repeat="product in data.products.data">
-            <div class="spacer-b20" ng-if="product.images"><img class="product-icon" ng-src="{{settings.app.use_square_images ? product.images[0].link_square : product.images[0].link_small}}" /></div>
-            <div class="spacer-b10">{{product.name}}</div>
-            <div class="spacer-b10">{{product.formatted.price}}</div>
-            <div class="spacer-b10" ng-bind-html="product.description"></div>
-            <button type="button" class="btn btn-default" add-to-cart="product" quantity="product.quantity" currency="data.currency" error="data.error" on-success="onAddToCart" translate>Buy Now</button>
-        </div>
+    <!-- Custom Footer, if supplied -->
+    <custom-html section="footer"></custom-html>
 
-        <!--Spacer-->
-        <div class="row">&nbsp;</div>
+    <!-- Full Footer -->
+    <div class="footer" ng-cloak>
+        <p class="security-badges" ng-if="settings.app.show_badges">
+            <img src="images/pci_seal.png" style="margin-right: 5px;" />
+            <img src="images/comodo_ssl.png" />
+        </p>
+        <p ng-bind-html="settings.app.footer_text"></p>
+        <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+    </div>
 
-    </form>
+    <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
 
 </div>
