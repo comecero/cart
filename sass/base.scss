@@ -454,6 +454,139 @@ img.product-icon {
     color: $link-color;
 }
 
+/* Cross-sell */
+.cross-sell .product-icon {
+    display: block;
+}
+
+.cross-sell .cross-sell-item,
+.cross-sell .cart-item {
+    padding: 12px;
+}
+
+.cross-sell.cross-sell-default {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    margin: 8px 0;
+    padding: 12px 0;
+}
+
+.cross-sell.cross-sell-banner {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    margin: 8px 0;
+    padding: 12px;
+}
+
+.cross-sell.cross-sell-banner h4 {
+    display: inline-block;
+}
+
+.cross-sell.cross-sell-interstitial {
+    margin: 8px 0;
+    padding: 12px 0;
+}
+
+.cross-sell.cross-sell-modal .cross-sell-cart,
+.cross-sell.cross-sell-modal .cross-sell-1,
+.cross-sell.cross-sell-modal .cross-sell-2,
+.cross-sell.cross-sell-modal .cross-sell-3,
+.cross-sell.cross-sell-modal .cross-sell-list {
+    padding: 12px;
+}
+
+.cross-sell.cross-sell-modal .cross-sell-1, 
+.cross-sell.cross-sell-modal .cross-sell-2, 
+.cross-sell.cross-sell-modal .cross-sell-3, 
+.cross-sell.cross-sell-modal .cross-sell-list {
+    background-color: #f6f7f8;
+}
+
+.cross-sell.cross-sell-modal .cross-sell-1 h4 {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.cross-sell.cross-sell-pop .cross-sell-1 {
+    padding: 12px;
+}
+
+.cross-sell.cross-sell-pop .cross-sell-1 {
+    background-color: #f6f7f8;
+}
+
+.cross-sell.cross-sell-pop .cross-sell-1 h4 {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.cross-sell.cross-sell-pop .cross-sell-1 .product-icon {
+    max-height: 40px;
+}
+
+.cross-sell.cross-sell-pop .cross-sell-item {
+    padding: 0px;
+}
+
+.cross-sell .cross-sell-list {
+    border-top: 1px solid #eee;
+    margin-top: 8px;
+    padding: 12px 0;
+}
+
+.cross-sell .cross-sell-list .item-cta {
+    padding-top: 24px;
+}
+
+.cross-sell .cross-sell-cart .item-cta,
+.cross-sell .cross-sell-1 .item-cta,
+.cross-sell .cross-sell-list .item-price {
+    text-align: right;
+}
+
+.cross-sell .cross-sell-3 .item-detail {
+    text-align: center;
+}
+
+.cross-sell .cross-sell-3 .product-icon {
+    margin: 0 auto 16px;
+}
+
+/* Up-sell */
+.up-sell a {
+    display: block;
+    margin-top: 12px;
+}
+
+.up-sell h4 {
+    margin-bottom: 20px;
+}
+
+.up-sell .product-icon {
+    display: block;
+    margin: 20px auto 20px;
+}
+
+.up-sell .up-sell-item,
+.up-sell .up-sell-cart {
+    padding: 24px;
+    text-align: center;
+}
+
+.up-sell .row, .up-sell .col-xs-12, .up-sell .col-sm-6 {
+    margin: 0;
+    padding: 0;
+}
+
+.up-sell .up-sell-cart {
+    border-right: 1px solid #eee;
+}
+
+.up-sell .up-sell-item {
+    background-color: #f6f7f8;
+}
+
 /* Promo code */
 .promo-code {
 
@@ -860,6 +993,36 @@ table th {
         clear: right;
         padding-top: 16px;
     } 
+
+    /* Cross-Sell */
+    .cross-sell .product-icon {
+        margin-bottom: 16px;
+    }
+
+    .cross-sell .cross-sell-cart .item-cta, 
+    .cross-sell .cross-sell-1 .item-cta,
+    .cross-sell .cross-sell-list .item-price {
+        text-align: left;
+    }
+
+    .cross-sell .cross-sell-pop .item-cta {
+        text-align: right;
+    }
+
+    .cross-sell .cross-sell-3 .item-detail {
+        text-align: left;
+    }
+
+    .cross-sell .cross-sell-3 .product-icon {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* Up-sell */
+    .up-sell .up-sell-cart {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
 }
 
 /* Spacers */
