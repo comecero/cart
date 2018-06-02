@@ -55,7 +55,7 @@
     "name": "footer_html",
     "type": "text",
     "label": "Custom Footer HTML",
-    "description": "Supply a section of HTML to be used as your global header. If you supply custom HTML, you may want to remove / hide the default footer under the app's style settings (choose 'Remove' under Footer Size).",
+    "description": "Supply a section of HTML to be used as your global footer. If you supply custom HTML, you may want to remove / hide the default footer under the app's style settings (choose 'Remove' under Footer Size).",
     "section": "Design",
     "required": false
   },
