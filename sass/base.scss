@@ -786,6 +786,34 @@ table th {
     display: inline;
 }
 
+/* Wallet buttons */
+ul.payment-methods {
+    list-style-type: none;
+    margin: 12px 0;
+    padding: 0;
+    text-align: right;
+}
+
+ul.payment-methods li {
+    display: inline-block;
+    margin-right: 12px;
+    position: relative;
+}
+
+ul.payment-methods li:last-child {
+    margin-right: 0px;
+}
+
+.amazonpay-button-inner-image {    
+     max-height: none !important;    
+     opacity: 0 !important;    
+     position: absolute;    
+     top: 0;    
+     left: 0;   
+     width: 152px;    
+     height: 52px;
+}
+
 @media screen and (max-width: $screen-sm-min) {
 
     table {
@@ -859,7 +887,16 @@ table th {
         text-align: right;
         clear: right;
         padding-top: 16px;
-    } 
+    }
+
+    /* Wallet buttons */
+    ul.payment-methods li {
+        margin: 0 0 12px 0;
+    }
+
+    ul.payment-methods li:last-child {
+        margin-bottom: 0;
+    }
 }
 
 /* Spacers */
