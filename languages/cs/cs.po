@@ -8,29 +8,29 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ./app/pages/cart/cart.html:199
-#: ./app/pages/cart/cart.html:279
+#: ./app/pages/cart/cart.html:228
+#: ./app/pages/cart/cart.html:308
 msgid "Address"
 msgstr "Adresa"
 
-#: ./app/pages/cart/cart.html:207
-#: ./app/pages/cart/cart.html:287
+#: ./app/pages/cart/cart.html:236
+#: ./app/pages/cart/cart.html:316
 msgid "Address 2"
 msgstr "Adresa 2"
 
-#: ./dist/js/kit.js:4314
+#: ./dist/js/kit.js:5010
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "Při pokusu o zpracování žádosti došlo k chybě. Zkuste prosím svoji žádost znovu. Pokud problém přetrvává, kontaktujte prosím podporu."
 
-#: ./app/pages/cart/cart.html:345
-#: ./app/pages/cart/cart.html:89
-#: ./app/pages/payment/review.html:75
-#: ./app/pages/payment/review.html:76
+#: ./app/pages/cart/cart.html:374
+#: ./app/pages/cart/cart.html:92
+#: ./app/pages/payment/review.html:86
+#: ./app/pages/payment/review.html:87
 msgid "Apply"
 msgstr "Požádat"
 
-#: ./app/pages/cart/cart.html:161
-#: ./app/pages/payment/review.html:28
+#: ./app/pages/cart/cart.html:190
+#: ./app/pages/payment/review.html:39
 msgid "Billing Address"
 msgstr "Fakturační adresa"
 
@@ -38,37 +38,37 @@ msgstr "Fakturační adresa"
 msgid "Buy Now"
 msgstr "Koupit nyní"
 
-#: ./app/pages/cart/cart.html:149
+#: ./app/pages/cart/cart.html:178
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ./app/pages/cart/cart.html:455
-#: ./app/pages/invoice/invoice.html:211
+#: ./app/pages/cart/cart.html:484
+#: ./app/pages/invoice/invoice.html:245
 msgid "Card Number"
 msgstr "Číslo karty"
 
-#: ./app/pages/cart/cart.html:421
-#: ./app/pages/invoice/invoice.html:177
+#: ./app/pages/cart/cart.html:450
+#: ./app/pages/invoice/invoice.html:211
 msgid "Choose a Payment Method"
 msgstr "Zvolte platební metodu"
 
-#: ./app/pages/cart/cart.html:217
-#: ./app/pages/cart/cart.html:297
+#: ./app/pages/cart/cart.html:246
+#: ./app/pages/cart/cart.html:326
 msgid "City"
 msgstr "Město"
 
-#: ./app/pages/cart/cart.html:183
-#: ./app/pages/payment/review.html:56
+#: ./app/pages/cart/cart.html:212
+#: ./app/pages/payment/review.html:67
 msgid "Company Name"
 msgstr "Název společnosti"
 
-#: ./app/pages/cart/cart.html:105
-#: ./app/pages/cart/cart.html:32
+#: ./app/pages/cart/cart.html:134
+#: ./app/pages/cart/cart.html:33
 msgid "Continue Shopping"
 msgstr "Pokračovat v nákupu"
 
-#: ./app/pages/cart/cart.html:249
-#: ./app/pages/cart/cart.html:329
+#: ./app/pages/cart/cart.html:278
+#: ./app/pages/cart/cart.html:358
 msgid "Country"
 msgstr "Země"
 
@@ -76,24 +76,24 @@ msgstr "Země"
 msgid "Currency"
 msgstr "Měna"
 
-#: ./app/pages/cart/cart.html:390
-#: ./app/pages/cart/cart.html:391
-#: ./app/pages/cart/cart.html:78
-#: ./app/pages/cart/cart.html:79
-#: ./app/pages/invoice/invoice.html:138
+#: ./app/pages/cart/cart.html:419
+#: ./app/pages/cart/cart.html:420
+#: ./app/pages/cart/cart.html:81
+#: ./app/pages/cart/cart.html:82
 #: ./app/pages/invoice/invoice.html:139
-#: ./app/pages/payment/review.html:154
-#: ./app/pages/payment/review.html:155
-#: ./app/pages/receipt/receipt.html:159
+#: ./app/pages/invoice/invoice.html:140
+#: ./app/pages/payment/review.html:165
+#: ./app/pages/payment/review.html:166
 #: ./app/pages/receipt/receipt.html:160
+#: ./app/pages/receipt/receipt.html:161
 msgid "Discount"
 msgstr "Sleva"
 
-#: ./app/pages/cart/cart.html:92
+#: ./app/pages/cart/cart.html:95
 msgid "Discount applied."
 msgstr "Sleva aplikována"
 
-#: ./app/pages/cart/cart.html:173
+#: ./app/pages/cart/cart.html:202
 msgid "Email"
 msgstr "E-mail"
 
@@ -101,13 +101,13 @@ msgstr "E-mail"
 msgid "Enter Promo Code"
 msgstr "Vložte promo kód"
 
-#: ./app/pages/cart/cart.html:468
-#: ./app/pages/invoice/invoice.html:224
+#: ./app/pages/cart/cart.html:497
+#: ./app/pages/invoice/invoice.html:258
 msgid "Expiration Month"
 msgstr "Datum vypršení platnosti"
 
-#: ./app/pages/cart/cart.html:477
-#: ./app/pages/invoice/invoice.html:233
+#: ./app/pages/cart/cart.html:506
+#: ./app/pages/invoice/invoice.html:267
 msgid "Expiration Year"
 msgstr "Rok vypršení platnosti"
 
@@ -115,12 +115,12 @@ msgstr "Rok vypršení platnosti"
 msgid "Expires"
 msgstr "Vyprší"
 
-#: ./app/pages/cart/cart.html:123
+#: ./app/pages/cart/cart.html:152
 msgid "Have an account?"
 msgstr "Máte účet?"
 
-#: ./app/pages/cart/cart.html:347
-#: ./app/pages/payment/review.html:78
+#: ./app/pages/cart/cart.html:376
+#: ./app/pages/payment/review.html:89
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr "Pokud je tato objednávka pro firmu, poskytněte prosím vaše DIČ."
 
@@ -128,12 +128,12 @@ msgstr "Pokud je tato objednávka pro firmu, poskytněte prosím vaše DIČ."
 msgid "Language"
 msgstr "Jazyk"
 
-#: ./app/pages/cart/cart.html:42
-#: ./app/pages/cart/cart.html:50
-#: ./app/pages/invoice/invoice.html:86
-#: ./app/pages/invoice/invoice.html:94
-#: ./app/pages/payment/review.html:107
-#: ./app/pages/payment/review.html:99
+#: ./app/pages/cart/cart.html:43
+#: ./app/pages/cart/cart.html:51
+#: ./app/pages/invoice/invoice.html:87
+#: ./app/pages/invoice/invoice.html:95
+#: ./app/pages/payment/review.html:110
+#: ./app/pages/payment/review.html:118
 #: ./app/pages/receipt/receipt.html:107
 #: ./app/pages/receipt/receipt.html:115
 msgid "Name"
@@ -143,18 +143,18 @@ msgstr "Jméno"
 msgid "No"
 msgstr "Číslo"
 
-#: ./app/pages/cart/cart.html:344
-#: ./app/pages/payment/review.html:74
+#: ./app/pages/cart/cart.html:373
+#: ./app/pages/payment/review.html:85
 msgid "Optional"
 msgstr "Volitelné"
 
-#: ./app/pages/cart/cart.html:140
+#: ./app/pages/cart/cart.html:169
 #: ./app/pages/receipt/receipt.html:48
 msgid "Password"
 msgstr "Heslo"
 
-#: ./app/pages/cart/cart.html:446
-#: ./app/pages/invoice/invoice.html:202
+#: ./app/pages/cart/cart.html:475
+#: ./app/pages/invoice/invoice.html:236
 msgid "Pay with a new card"
 msgstr "Zaplatit novou kartou"
 
@@ -166,103 +166,103 @@ msgstr "Platební informace"
 msgid "Payment Method"
 msgstr "Platební metoda"
 
-#: ./app/pages/cart/cart.html:191
-#: ./app/pages/payment/review.html:64
+#: ./app/pages/cart/cart.html:220
+#: ./app/pages/payment/review.html:75
 msgid "Phone"
 msgstr "Telefon"
 
-#: ./dist/js/kit.js:3725
+#: ./dist/js/kit.js:4154
 msgid "Please confirm"
 msgstr "Prosím, potvrďte"
 
-#: ./dist/js/kit.js:3720
-#: ./dist/js/kit.js:3756
+#: ./dist/js/kit.js:4149
+#: ./dist/js/kit.js:4185
 msgid "Please make a selection"
 msgstr "Proveďte prosím výběr"
 
-#: ./app/pages/cart/cart.html:219
-#: ./app/pages/cart/cart.html:299
+#: ./app/pages/cart/cart.html:248
+#: ./app/pages/cart/cart.html:328
 msgid "Please provide a city"
 msgstr "Uveďte prosím město"
 
-#: ./app/pages/cart/cart.html:185
-#: ./app/pages/payment/review.html:58
+#: ./app/pages/cart/cart.html:214
+#: ./app/pages/payment/review.html:69
 msgid "Please provide a company name"
 msgstr "Uveďte prosím název společnosti"
 
-#: ./app/pages/cart/cart.html:251
-#: ./app/pages/cart/cart.html:331
+#: ./app/pages/cart/cart.html:280
+#: ./app/pages/cart/cart.html:360
 msgid "Please provide a country"
 msgstr "Uveďte prosím zemi"
 
-#: ./app/pages/cart/cart.html:167
-#: ./app/pages/cart/cart.html:273
+#: ./app/pages/cart/cart.html:196
+#: ./app/pages/cart/cart.html:302
 msgid "Please provide a name"
 msgstr "Uveďte prosím jméno"
 
-#: ./app/pages/cart/cart.html:233
-#: ./app/pages/cart/cart.html:313
+#: ./app/pages/cart/cart.html:262
+#: ./app/pages/cart/cart.html:342
 msgid "Please provide a region / province"
 msgstr "Uveďte prosím region / provincii"
 
-#: ./app/pages/cart/cart.html:227
-#: ./app/pages/cart/cart.html:307
+#: ./app/pages/cart/cart.html:256
+#: ./app/pages/cart/cart.html:336
 msgid "Please provide a state / province"
 msgstr "Uveďte prosím stát / provincii"
 
-#: ./app/pages/cart/cart.html:460
-#: ./app/pages/invoice/invoice.html:216
+#: ./app/pages/cart/cart.html:489
+#: ./app/pages/invoice/invoice.html:250
 msgid "Please provide a valid card number"
 msgstr "Uveďte prosím platné číslo karty"
 
-#: ./app/pages/cart/cart.html:175
+#: ./app/pages/cart/cart.html:204
 msgid "Please provide a valid email address"
 msgstr "Uveďte prosím platnou e-mailovou adresu"
 
-#: ./app/pages/cart/cart.html:471
-#: ./app/pages/invoice/invoice.html:227
+#: ./app/pages/cart/cart.html:500
+#: ./app/pages/invoice/invoice.html:261
 msgid "Please provide a valid expiration month"
 msgstr "Uveďte prosím platný měsíc vypršení platnosti"
 
-#: ./app/pages/cart/cart.html:480
-#: ./app/pages/invoice/invoice.html:236
+#: ./app/pages/cart/cart.html:509
+#: ./app/pages/invoice/invoice.html:270
 msgid "Please provide a valid expiration year"
 msgstr "Uveďte prosím platný rok vypršení platnosti"
 
-#: ./app/pages/payment/review.html:66
+#: ./app/pages/payment/review.html:77
 msgid "Please provide a valid phone number"
 msgstr "Uveďte prosím platné telefonní číslo"
 
-#: ./app/pages/cart/cart.html:488
-#: ./app/pages/invoice/invoice.html:244
+#: ./app/pages/cart/cart.html:517
+#: ./app/pages/invoice/invoice.html:278
 msgid "Please provide a valid security code"
 msgstr "Uveďte prosím platný bezpečnostní kód"
 
-#: ./app/pages/cart/cart.html:241
-#: ./app/pages/cart/cart.html:321
+#: ./app/pages/cart/cart.html:270
+#: ./app/pages/cart/cart.html:350
 msgid "Please provide a zip / postal code"
 msgstr "Uveďte prosím PSČ"
 
-#: ./app/pages/cart/cart.html:201
-#: ./app/pages/cart/cart.html:209
-#: ./app/pages/cart/cart.html:281
-#: ./app/pages/cart/cart.html:289
+#: ./app/pages/cart/cart.html:230
+#: ./app/pages/cart/cart.html:238
+#: ./app/pages/cart/cart.html:310
+#: ./app/pages/cart/cart.html:318
 msgid "Please provide an address"
 msgstr "Uveďte prosím adresu"
 
-#: ./dist/js/kit.js:1233
+#: ./dist/js/kit.js:1613
 msgid "Please provide an amount for your payment."
 msgstr "Uveďte prosím částku pro vaši platbu."
 
-#: ./dist/js/kit.js:3765
+#: ./dist/js/kit.js:4194
 msgid "Please provide one of the available options"
 msgstr "Uveďte prosím jednu z dostupných možností"
 
-#: ./dist/js/kit.js:3748
+#: ./dist/js/kit.js:4177
 msgid "Please supply a number"
 msgstr "Uveďte prosím číslo"
 
-#: ./dist/js/kit.js:3741
+#: ./dist/js/kit.js:4170
 msgid "Please supply a number without decimals"
 msgstr "Uveďte prosím číslo bez desetinných čárek"
 
@@ -270,12 +270,12 @@ msgstr "Uveďte prosím číslo bez desetinných čárek"
 msgid "Products"
 msgstr "Produkty"
 
-#: ./app/pages/cart/cart.html:43
-#: ./app/pages/cart/cart.html:51
-#: ./app/pages/invoice/invoice.html:87
-#: ./app/pages/invoice/invoice.html:95
-#: ./app/pages/payment/review.html:100
-#: ./app/pages/payment/review.html:108
+#: ./app/pages/cart/cart.html:44
+#: ./app/pages/cart/cart.html:52
+#: ./app/pages/invoice/invoice.html:88
+#: ./app/pages/invoice/invoice.html:96
+#: ./app/pages/payment/review.html:111
+#: ./app/pages/payment/review.html:119
 #: ./app/pages/receipt/receipt.html:108
 #: ./app/pages/receipt/receipt.html:116
 msgid "Quantity"
@@ -285,26 +285,26 @@ msgstr "Počet"
 msgid "Receipt"
 msgstr "Účtenka"
 
-#: ./app/pages/cart/cart.html:231
-#: ./app/pages/cart/cart.html:311
+#: ./app/pages/cart/cart.html:260
+#: ./app/pages/cart/cart.html:340
 msgid "Region / Province"
 msgstr "Region / Provincie"
 
-#: ./app/pages/payment/review.html:24
+#: ./app/pages/payment/review.html:25
 msgid "Return to PayPal to try your payment again."
 msgstr "Vraťte se do služby PayPal a zkuste platbu znovu."
 
-#: ./app/pages/payment/review.html:15
+#: ./app/pages/payment/review.html:16
 msgid "Review Your Order"
 msgstr "Zkontrolujte svoji objednávku"
 
-#: ./app/pages/cart/cart.html:486
-#: ./app/pages/invoice/invoice.html:242
+#: ./app/pages/cart/cart.html:515
+#: ./app/pages/invoice/invoice.html:276
 msgid "Security Code"
 msgstr "Bezpečnostní kód"
 
-#: ./app/pages/cart/cart.html:260
-#: ./app/pages/payment/review.html:41
+#: ./app/pages/cart/cart.html:289
+#: ./app/pages/payment/review.html:52
 msgid "Shipping Address"
 msgstr "Dodací adresa"
 
@@ -312,47 +312,47 @@ msgstr "Dodací adresa"
 msgid "Shopping Cart"
 msgstr "Nákupní košík"
 
-#: ./app/pages/cart/cart.html:124
-#: ./app/pages/cart/cart.html:150
+#: ./app/pages/cart/cart.html:153
+#: ./app/pages/cart/cart.html:179
 msgid "Sign In"
 msgstr "Přihlásit se"
 
-#: ./app/pages/cart/cart.html:156
+#: ./app/pages/cart/cart.html:185
 msgid "Sign out"
 msgstr "Odhlásit se"
 
-#: ./app/pages/cart/cart.html:225
-#: ./app/pages/cart/cart.html:305
+#: ./app/pages/cart/cart.html:254
+#: ./app/pages/cart/cart.html:334
 msgid "State / Province"
 msgstr "Stát / Provincie"
 
-#: ./app/pages/cart/cart.html:377
-#: ./app/pages/cart/cart.html:378
-#: ./app/pages/cart/cart.html:44
-#: ./app/pages/cart/cart.html:67
-#: ./app/pages/invoice/invoice.html:126
+#: ./app/pages/cart/cart.html:406
+#: ./app/pages/cart/cart.html:407
+#: ./app/pages/cart/cart.html:45
+#: ./app/pages/cart/cart.html:70
 #: ./app/pages/invoice/invoice.html:127
-#: ./app/pages/invoice/invoice.html:88
-#: ./app/pages/invoice/invoice.html:96
-#: ./app/pages/payment/review.html:101
-#: ./app/pages/payment/review.html:109
-#: ./app/pages/payment/review.html:142
-#: ./app/pages/payment/review.html:143
+#: ./app/pages/invoice/invoice.html:128
+#: ./app/pages/invoice/invoice.html:89
+#: ./app/pages/invoice/invoice.html:97
+#: ./app/pages/payment/review.html:112
+#: ./app/pages/payment/review.html:120
+#: ./app/pages/payment/review.html:153
+#: ./app/pages/payment/review.html:154
 #: ./app/pages/receipt/receipt.html:109
 #: ./app/pages/receipt/receipt.html:117
-#: ./app/pages/receipt/receipt.html:147
 #: ./app/pages/receipt/receipt.html:148
+#: ./app/pages/receipt/receipt.html:149
 msgid "Subtotal"
 msgstr "Mezisoučet"
 
-#: ./app/pages/cart/cart.html:396
-#: ./app/pages/cart/cart.html:397
-#: ./app/pages/invoice/invoice.html:144
+#: ./app/pages/cart/cart.html:425
+#: ./app/pages/cart/cart.html:426
 #: ./app/pages/invoice/invoice.html:145
-#: ./app/pages/payment/review.html:160
-#: ./app/pages/payment/review.html:161
-#: ./app/pages/receipt/receipt.html:165
+#: ./app/pages/invoice/invoice.html:146
+#: ./app/pages/payment/review.html:171
+#: ./app/pages/payment/review.html:172
 #: ./app/pages/receipt/receipt.html:166
+#: ./app/pages/receipt/receipt.html:167
 msgid "Tax"
 msgstr "Daň"
 
@@ -360,56 +360,56 @@ msgstr "Daň"
 msgid "Thank you! Your order is complete."
 msgstr "Děkujeme vám! Vaše objednávka je dokončena."
 
-#: ./dist/js/kit.js:4308
+#: ./dist/js/kit.js:5004
 msgid "The item you are trying to access could not be found."
 msgstr "Položka, ke které se pokoušíte získat přístup, nebyla nalezena."
 
-#: ./dist/js/kit.js:3791
+#: ./dist/js/kit.js:4220
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "Hodnota musí obsahovat alespoň jeden znak"
 msgstr[1] "Hodnota musí obsahovat alespoň {{$count}} znaky"
 msgstr[2] "Hodnota musí obsahovat alespoň {{$count}} znaků"
 
-#: ./dist/js/kit.js:3797
+#: ./dist/js/kit.js:4226
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "Hodnota musí obsahovat méně než jeden znak"
 msgstr[1] "Hodnota musí obsahovat méně než {{$count}} znaky"
 msgstr[2] "Hodnota musí obsahovat méně než {{$count}} znaků"
 
-#: ./dist/js/kit.js:3774
+#: ./dist/js/kit.js:4203
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "Hodnota, kterou zadáte, musí být větší než {{$count}}"
 msgstr[1] "Hodnota, kterou zadáte, musí být větší než {{$count}}"
 msgstr[2] "Hodnota, kterou zadáte, musí být větší než {{$count}}"
 
-#: ./dist/js/kit.js:3780
+#: ./dist/js/kit.js:4209
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "Hodnota, kterou zadáte, musí být menší než {{$count}}"
 msgstr[1] "Hodnota, kterou zadáte, musí být menší než {{$count}}"
 msgstr[2] "Hodnota, kterou zadáte, musí být menší než {{$count}}"
 
-#: ./app/pages/cart/cart.html:31
+#: ./app/pages/cart/cart.html:32
 msgid "There are no items in your cart"
 msgstr "V košíku nemáte žádné položky"
 
-#: ./dist/js/kit.js:1133
-#: ./dist/js/kit.js:1217
-#: ./dist/js/kit.js:1412
+#: ./dist/js/kit.js:1507
+#: ./dist/js/kit.js:1601
+#: ./dist/js/kit.js:1841
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "Došlo k problému s některými zadanými informacemi. Zkontrolujte prosím chyby a zkuste to znovu."
 
-#: ./app/pages/cart/cart.html:402
-#: ./app/pages/cart/cart.html:403
-#: ./app/pages/invoice/invoice.html:150
+#: ./app/pages/cart/cart.html:431
+#: ./app/pages/cart/cart.html:432
 #: ./app/pages/invoice/invoice.html:151
-#: ./app/pages/payment/review.html:166
-#: ./app/pages/payment/review.html:167
-#: ./app/pages/receipt/receipt.html:171
+#: ./app/pages/invoice/invoice.html:152
+#: ./app/pages/payment/review.html:177
+#: ./app/pages/payment/review.html:178
 #: ./app/pages/receipt/receipt.html:172
+#: ./app/pages/receipt/receipt.html:173
 msgid "Total"
 msgstr "Celkem"
 
@@ -417,13 +417,13 @@ msgstr "Celkem"
 msgid "Update Cart"
 msgstr "Aktualizovat košík"
 
-#: ./app/pages/cart/cart.html:130
+#: ./app/pages/cart/cart.html:159
 #: ./app/pages/receipt/receipt.html:38
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: ./app/pages/cart/cart.html:342
-#: ./app/pages/payment/review.html:72
+#: ./app/pages/cart/cart.html:371
+#: ./app/pages/payment/review.html:83
 msgid "VAT Number"
 msgstr "DIČ"
 
@@ -431,12 +431,12 @@ msgstr "DIČ"
 msgid "Yes"
 msgstr "Ano"
 
-#: ./app/pages/cart/cart.html:116
+#: ./app/pages/cart/cart.html:145
 msgid "Your Information"
 msgstr "Vaše údaje"
 
-#: ./app/pages/cart/cart.html:239
-#: ./app/pages/cart/cart.html:319
+#: ./app/pages/cart/cart.html:268
+#: ./app/pages/cart/cart.html:348
 msgid "Zip / Postal Code"
 msgstr "PSČ"
 
@@ -444,16 +444,16 @@ msgstr "PSČ"
 msgid "expiration"
 msgstr "vypršení platnosti"
 
-#: ./app/pages/invoice/invoice.html:51
+#: ./app/pages/invoice/invoice.html:52
 msgid "Billing Information"
 msgstr "Fakturační údaje"
 
-#: ./app/pages/cart/cart.html:502
-#: ./app/pages/payment/review.html:179
+#: ./app/pages/cart/cart.html:531
+#: ./app/pages/payment/review.html:190
 msgid "Complete Order"
 msgstr "Dokončit objednávku"
 
-#: ./app/pages/invoice/invoice.html:258
+#: ./app/pages/invoice/invoice.html:292
 msgid "Complete Payment"
 msgstr "Dokončit platbu"
 
@@ -470,86 +470,86 @@ msgstr "Vytvořit účet"
 msgid "Date"
 msgstr "Datum"
 
-#: ./app/pages/invoice/invoice.html:103
+#: ./app/pages/invoice/invoice.html:104
 #: ./app/pages/receipt/receipt.html:124
 msgid "Download Now"
 msgstr "Stáhnout nyní"
 
-#: ./app/pages/invoice/invoice.html:39
+#: ./app/pages/invoice/invoice.html:40
 msgid "Due Date"
 msgstr "Datum splatnosti"
 
-#: ./app/pages/cart/cart.html:86
+#: ./app/pages/cart/cart.html:89
 msgid "Enter"
 msgstr "Vložit"
 
-#: ./app/pages/cart/cart.html:165
-#: ./app/pages/cart/cart.html:271
+#: ./app/pages/cart/cart.html:194
+#: ./app/pages/cart/cart.html:300
 msgid "Full Name"
 msgstr "Celé jméno"
 
-#: ./app/pages/invoice/invoice.html:22
+#: ./app/pages/invoice/invoice.html:23
 msgid "Invoice"
 msgstr "Faktura"
 
-#: ./app/pages/invoice/invoice.html:79
+#: ./app/pages/invoice/invoice.html:80
 msgid "Invoice Details"
 msgstr "Podrobnosti faktury"
 
-#: ./app/pages/invoice/invoice.html:120
+#: ./app/pages/invoice/invoice.html:121
 msgid "Invoice Summary"
 msgstr "Souhrn faktury"
 
-#: ./app/pages/cart/cart.html:41
-#: ./app/pages/invoice/invoice.html:85
-#: ./app/pages/payment/review.html:98
+#: ./app/pages/cart/cart.html:42
+#: ./app/pages/invoice/invoice.html:86
+#: ./app/pages/payment/review.html:109
 #: ./app/pages/receipt/receipt.html:106
 msgid "Item"
 msgstr "Položka"
 
-#: ./app/pages/payment/review.html:92
+#: ./app/pages/payment/review.html:103
 #: ./app/pages/receipt/receipt.html:95
 msgid "Order Details"
 msgstr "Údaje o objednávce"
 
-#: ./app/pages/cart/cart.html:371
+#: ./app/pages/cart/cart.html:400
 msgid "Order Summary"
 msgstr "Souhrn objednávky"
 
-#: ./app/pages/invoice/invoice.html:30
+#: ./app/pages/invoice/invoice.html:31
 msgid "Paid"
 msgstr "Zaplaceno"
 
-#: ./app/pages/cart/cart.html:416
-#: ./app/pages/invoice/invoice.html:165
+#: ./app/pages/cart/cart.html:445
+#: ./app/pages/invoice/invoice.html:166
 msgid "Payment Details"
 msgstr "Údaje o objednávce"
 
-#: ./app/pages/payment/review.html:136
-#: ./app/pages/receipt/receipt.html:141
+#: ./app/pages/payment/review.html:147
+#: ./app/pages/receipt/receipt.html:142
 msgid "Payment Summary"
 msgstr "Souhrn objednávky"
 
-#: ./app/pages/cart/cart.html:193
+#: ./app/pages/cart/cart.html:222
 msgid "Please provide a phone"
 msgstr "Uveďte prosím telefon"
 
-#: ./app/pages/cart/cart.html:495
-#: ./app/pages/invoice/invoice.html:251
+#: ./app/pages/cart/cart.html:524
+#: ./app/pages/invoice/invoice.html:285
 msgid "Save this card to my account"
 msgstr "Uložit tuto kartu na mém účtu"
 
-#: ./app/pages/cart/cart.html:357
-#: ./app/pages/cart/cart.html:383
-#: ./app/pages/payment/review.html:121
+#: ./app/pages/cart/cart.html:386
+#: ./app/pages/cart/cart.html:412
+#: ./app/pages/payment/review.html:132
 msgid "Shipping"
 msgstr "Doprava"
 
-#: ./app/pages/invoice/invoice.html:64
+#: ./app/pages/invoice/invoice.html:65
 msgid "Shipping Information"
 msgstr "Informace o dopravě"
 
-#: ./app/pages/cart/cart.html:265
+#: ./app/pages/cart/cart.html:294
 msgid "Shipping is same as billing"
 msgstr "Dodací stejná jako fakturační"
 
@@ -557,11 +557,11 @@ msgstr "Dodací stejná jako fakturační"
 msgid "Sold To"
 msgstr "Prodáno"
 
-#: ./app/pages/invoice/invoice.html:267
+#: ./app/pages/invoice/invoice.html:303
 msgid "Thank you for your business"
 msgstr "Děkujeme za váš obchod"
 
-#: ./app/pages/receipt/receipt.html:184
+#: ./app/pages/receipt/receipt.html:185
 msgid "Thank you for your order"
 msgstr "Děkujeme za vaši objednávku"
 
@@ -569,7 +569,7 @@ msgstr "Děkujeme za vaši objednávku"
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
 msgstr "Děkujeme! Vaše objednávka byla odeslána ke zpracování. Brzy obdržíte e-mail s dalšími informacemi ohledně stavu vaší objednávky."
 
-#: ./app/pages/invoice/invoice.html:34
+#: ./app/pages/invoice/invoice.html:35
 msgid "This invoice is closed"
 msgstr "Tato faktura byla uzavřena"
 
@@ -577,28 +577,28 @@ msgstr "Tato faktura byla uzavřena"
 msgid "To manage your order online, create an account."
 msgstr "Pro správu vašich objednávek online si vytvořte účet."
 
-#: ./app/pages/cart/cart.html:22
+#: ./app/pages/cart/cart.html:23
 msgid "Your Order"
 msgstr "Vaše objednávka"
 
-#: ./app/pages/invoice/invoice.html:45
+#: ./app/pages/invoice/invoice.html:46
 #: ./app/pages/receipt/receipt.html:63
 msgid "Your account has been created."
 msgstr "Váš účet byl vytvořen."
 
-#: ./app/pages/cart/cart.html:406
+#: ./app/pages/cart/cart.html:435
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
 msgstr "Váš součet zahrnuje daň ve výši {{data.cart.formatted.tax}}"
 
-#: ./app/pages/invoice/invoice.html:154
+#: ./app/pages/invoice/invoice.html:155
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
 msgstr "Váš součet zahrnuje daň ve výši {{data.invoice.formatted.tax}}"
 
-#: ./app/pages/receipt/receipt.html:175
+#: ./app/pages/receipt/receipt.html:176
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
 msgstr "Váš součet zahrnuje daň ve výši {{data.payment.order.formatted.tax}}"
 
-#: ./app/pages/payment/review.html:170
+#: ./app/pages/payment/review.html:181
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
 msgstr "Váš součet zahrnuje daň ve výši {{data.sale.formatted.tax}}"
 
@@ -626,7 +626,7 @@ msgstr "Vytvořil/a"
 msgid "Make Another Payment"
 msgstr "Provést další platbu"
 
-#: ./dist/js/kit.js:3715
+#: ./dist/js/kit.js:4144
 msgid "Please provide a value"
 msgstr "Uveďte prosím hodnotu"
 
@@ -677,8 +677,8 @@ msgstr "Zavřít"
 msgid "Confirm Payment"
 msgstr "Potvrdit platbu"
 
-#: ./app/pages/simple/checkout.html:303
-#: ./app/pages/simple/review.html:183
+#: ./app/pages/cart/cart.html:125
+#: ./app/pages/invoice/invoice.html:200
 msgid "Continue"
 msgstr "Pokračovat"
 
@@ -732,7 +732,17 @@ msgstr "Souhrn"
 msgid "Thank you for your purchase!"
 msgstr "Děkujeme za váš nákup!"
 
-#: ./app/pages/cart/cart.html:65
+#: ./app/pages/cart/cart.html:68
 msgid "Remove"
 msgstr "Odstranit"
+
+#: ./dist/js/kit.js:1656
+msgid "Please check the box to provide consent to save your payment method for future payments."
+msgstr "Prosím, zkontrolujte kolonku pro poskytnutí souhlasu za účelem uložení Vašeho způsobu platby pro budoucí platby."
+
+#: ./app/pages/cart/cart.html:128
+#: ./app/pages/invoice/invoice.html:203
+#: ./app/pages/payment/review.html:33
+msgid "Use another payment method"
+msgstr "Použít jiný způsob platby."
 
