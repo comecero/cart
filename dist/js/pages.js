@@ -276,41 +276,6 @@ app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService'
         $scope.currency = CurrencyService.getCurrencyName();
 
     }]);
-app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
-        
-        // Define a place to hold your data
-        $scope.data = {};
-        
-        // Load the geo service for countries, states, provinces (used for dropdowns).
-        $scope.geo = GeoService.getData();
-        $scope.settings = SettingsService.get();
-        
-        $scope.data.params = {};
-        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
-        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
-        $scope.data.params.currency = CurrencyService.getCurrency();
-        $scope.data.params.formatted = true;
-        $scope.data.params.limit = 50;
-        
-        // Load the products
-        ProductService.getList($scope.data.params).then(function (products) {
-            $scope.data.products = products;
-        }, function (error) {
-            $scope.data.error = error;
-        });
-        
-        $scope.onAddToCart = function (item) {
-            $location.path("/cart");
-        }
-        
-        // Watch for error to be populated, and if so, scroll to it.
-        $scope.$watch("data.error", function (newVal, oldVal) {
-            if ($scope.data.error) {
-                $document.scrollTop(0, 500);
-            }
-        });
-
-    }]);
 app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'CartService', 'PaymentService', 'SettingsService', 'HelperService', 'GeoService', '$document', function ($scope, $location, $routeParams, CartService, PaymentService, SettingsService, HelperService, GeoService, $document) {
         
         // Define a place to hold your data
@@ -412,6 +377,41 @@ app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'Car
 
     }]);
 
+app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load the geo service for countries, states, provinces (used for dropdowns).
+        $scope.geo = GeoService.getData();
+        $scope.settings = SettingsService.get();
+        
+        $scope.data.params = {};
+        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
+        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
+        $scope.data.params.currency = CurrencyService.getCurrency();
+        $scope.data.params.formatted = true;
+        $scope.data.params.limit = 50;
+        
+        // Load the products
+        ProductService.getList($scope.data.params).then(function (products) {
+            $scope.data.products = products;
+        }, function (error) {
+            $scope.data.error = error;
+        });
+        
+        $scope.onAddToCart = function (item) {
+            $location.path("/cart");
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
 app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'OrderService', 'SettingsService', 'HelperService', '$document', function ($scope, $routeParams, PaymentService, OrderService, SettingsService, HelperService, $document) {
 
     // Define a place to hold your data
@@ -426,7 +426,7 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.data.params.expand += ",order.items.download,order.items.license";
-        $scope.data.params.show += ",order.items.item_id,order.items.license.html,order.items.license.label,order.items.download.link";
+        $scope.data.params.show += ",order.items.item_id,order.items.license.html,order.items.license.label,order.items.license.instructions,order.items.download.link";
     }
 
     $scope.data.params.options = true;

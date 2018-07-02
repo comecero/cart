@@ -65,7 +65,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <span class="remove-link faux-link" translate><span ng-click="changeQuantity(item, null, 0)">Remove</span></span>
+                            <span class="remove-link faux-link" ng-click="changeQuantity(item, null, 0)"><span translate>Remove</span></span>
                         </td>
                         <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>
                     </tr>
@@ -97,20 +97,18 @@
             </div>
 
             <!-- Wallet Buttons -->
-            <div ng-show="!data.amazon_pay.data">
+            <ul class="payment-methods" ng-show="!data.amazon_pay.data">
                 <!-- PayPal -->
-                <div class="row spacer-t20" ng-show="helpers.supportsPaymentMethod('paypal', data.cart.options)">
-                    <div class="col-xs-12 text-right">
-                        <img submit-payment="data.paypal" class="pointer" cart="data.cart" on-success="onPaymentSuccess" error="data.error" src="images/pp_checkout.png" />
-                    </div>
-                </div>
+                <li ng-show="helpers.supportsPaymentMethod('paypal', data.cart.options)">
+                    <img submit-payment="data.paypal" class="pointer" cart="data.cart" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
+                </li>
                 <!-- Amazon Pay Button -->
-                <div class="row spacer-t20" ng-show="helpers.supportsPaymentMethod('amazon_pay', data.cart.options)">
-                    <div class="col-xs-12 text-right">
-                        <div id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small"></div>
-                    </div>
-                </div>
-            </div>
+                <li ng-show="helpers.supportsPaymentMethod('amazon_pay', data.cart.options)">
+                    <a id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
+                        <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
+                    </a>
+                </li>
+            </ul>
 
             <!-- Amazon Pay Widgets -->
             <div id="widgets" ng-show="helpers.supportsPaymentMethod('amazon_pay', data.cart.options) && data.amazon_pay.data">
