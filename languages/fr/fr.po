@@ -734,11 +734,11 @@ msgstr "Retirer"
 
 #: ./dist/js/kit.js:1656
 msgid "Please check the box to provide consent to save your payment method for future payments."
-msgstr ""
+msgstr "Veuillez cocher la case pour fournir le consentement pour enregistrer votre mode de paiement pour les paiements futurs."
 
 #: ./app/pages/cart/cart.html:128
 #: ./app/pages/invoice/invoice.html:203
 #: ./app/pages/payment/review.html:33
 msgid "Use another payment method"
-msgstr ""
+msgstr "Utiliser un autre mode de paiement"
 
