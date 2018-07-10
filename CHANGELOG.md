@@ -2,7 +2,9 @@
 # 1.2.0
 
 - Add support for Amazon Pay
-- Integrate kit version 1.0.7 of kit. See kit release notes for details.
+- Add support for Chinese (simplified) language
+- Ouput license code instructions if provided with the license
+- Integrate kit version 1.0.8 of kit. See kit release notes for details.
 
 <a name="1.1.1"></a>
 # 1.1.1
