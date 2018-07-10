@@ -12,7 +12,7 @@
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.data.params.expand += ",order.items.download,order.items.license";
-        $scope.data.params.show += ",order.items.item_id,order.items.license.html,order.items.license.label,order.items.download.link";
+        $scope.data.params.show += ",order.items.item_id,order.items.license.html,order.items.license.label,order.items.license.instructions,order.items.download.link";
     }
 
     $scope.data.params.options = true;

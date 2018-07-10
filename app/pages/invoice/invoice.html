@@ -1,6 +1,7 @@
 ﻿<div ng-controller="InvoiceController">
-
-    <form name="form" shipping-is-billing="data.shipping_is_billing" customer-background-save="data.cart" params="data.params" novalidate>
+    
+    <!-- Must be ng-form to prevent Amazon Pay button from generating wallet in new tab when clicked twice. Bug report filed with Amazon Pay team. -->
+    <ng-form name="form" shipping-is-billing="data.shipping_is_billing" customer-background-save="data.cart" params="data.params" novalidate>
 
         <div class="dropdown pull-right currency-button spacer-b10" uib-dropdown ng-if="settings.account.currencies.length > 1 && data.invoice.open">
             <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
@@ -166,96 +167,131 @@
             </div>
 
             <!-- PayPal -->
-            <div class="form-group" ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
-                <div class="col-xs-12 text-right">
-                    <img class="pointer" submit-payment="data.paypal" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/pp_checkout.png" />
-                </div>
-            </div>
-
-            <!-- If a logged in customer -->
-            <div ng-show="data.invoice.customer.payment_methods.data.length > 0">
-                <h4 translate>Choose a Payment Method</h4>
-
-                <div class="well clearfix" ng-repeat="method in data.invoice.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal' || method.type == 'amazon_pay'">
-
-                    <span class="radio-group inline" ng-if="method.type == 'credit_card'">
-                        <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
-                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">{{method.data.label}} (<span>exp.</span> {{method.data.exp_month}}/{{method.data.exp_year}})</label>
-                        <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
-                    </span>
-
-                    <span class="radio-group inline" ng-if="method.type != 'credit_card'">
-                        <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
-                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">
-                            <span ng-show="method.type == 'paypal'">PayPal</span>
-                            <span ng-show="method.type == 'amazon_pay'">Amazon Pay</span>
-                        </label>
-                        <span class="pull-right credit-card-image" credit-card-image="'paypal'" ng-show="method.type == 'paypal'"></span>
-                        <span class="pull-right credit-card-image" credit-card-image="'amazon_pay'" ng-show="method.type == 'amazon_pay'"></span>
-                    </span>
-
-                </div>
-
-                <div class="well clearfix">
-                    <span class="radio-group inline">
-                        <input type="radio" class="radio" name="payment_method" id="payment_method-new" ng-model="data.payment_method.payment_method_id" ng-checked="data.payment_method.payment_method_id == null" ng-click="setPaymentMethod(null, 'credit_card')" />
-                        <label for="payment_method-new" class="radio-label strong" translate>Pay with a new card</label>
-                    </span>
-                </div>
-
-            </div>
-
-            <div ng-show="!data.payment_method.payment_method_id">
-                <div class="col-xs-12">
-                    <div class="form-group" show-errors="data.invoice.options">
-                        <label class="control-label required" for="card_number" translate>Card Number</label>
-                        <div class="inner-addon left-addon">
-                            <i class="fa fa-credit-card"></i>
-                            <input class="form-control" name="card_number" type="tel" ng-model="data.payment_method.data.number" validate-card ng-required="!data.payment_method.payment_method_id">
+            <div ng-show="!data.amazon_pay.data">
+                <div class="row spacer-t10" ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-right">
+                            <img class="pointer" submit-payment="data.paypal" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/pp_checkout.png" />
                         </div>
-                        <p class="error-block hidden" translate>Please provide a valid card number</p>
                     </div>
                 </div>
-
-                <div class="col-xs-12 credit-cards" credit-cards="data.invoice.options.card_types"></div>
-
-                <div class="col-xs-6 col-sm-4">
-                    <div class="form-group" show-errors="data.invoice.options">
-                        <label class="control-label required" for="exp_month" translate>Expiration Month</label>
-                        <input ng-if="!settings.app.exp_select" class="form-control" name="exp_month" type="tel" ng-model="data.payment_method.data.exp_month" placeholder="MM" validate-exp-month ng-required="!data.payment_method.payment_method_id">
-                        <select ng-if="settings.app.exp_select" name="exp_month" class="form-control" ng-model="data.payment_method.data.exp_month" ng-options="n for n in [] | range:1:12:true" validate-exp-month ng-required="!data.payment_method.payment_method_id"></select>
-                        <p class="error-block hidden" translate>Please provide a valid expiration month</p>
+                <!-- Amazon Pay Button -->
+                <div class="row spacer-t10" " ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options)">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-right">
+                            <div id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.invoice.options" items="data.invoice.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small"></div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-xs-6 col-sm-4">
-                    <div class="form-group" show-errors="data.invoice.options">
-                        <label class="control-label required" for="exp_year" translate>Expiration Year</label>
-                        <input ng-if="!settings.app.exp_select" class="form-control" name="exp_year" type="tel" ng-model="data.payment_method.data.exp_year" placeholder="YY" validate-exp-year ng-required="!data.payment_method.payment_method_id">
-                        <select ng-if="settings.app.exp_select" name="exp_year" class="form-control" ng-model="data.payment_method.data.exp_year" ng-options="n for n in [] | range:settings.account.year:(settings.account.year + 15)" validate-exp-year ng-required="!data.payment_method.payment_method_id"></select>
-                        <p class="error-block hidden" translate>Please provide a valid expiration year</p>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-4">
-                    <div class="form-group" show-errors="data.invoice.options">
-                        <label class="control-label required" for="cvv" translate>Security Code</label>
-                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
-                        <p class="error-block hidden" translate>Please provide a valid security code</p>
-                    </div>
-                </div>
-
-                <div class="col-xs-12" ng-show="helpers.hasSubscription(data.invoice.items) == false && settings.account.allow_save_cards == true && settings.app.ask_save_cards == true">
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="save-card" class="checkbox" name="save-card" ng-model="data.payment_method.save">
-                        <label for="save-card" class="checkbox-label" translate>Save this card to my account</label>
-                    </div>
-                </div>
-
             </div>
 
-            <div class="col-xs-12 spacer-b20 spacer-t20 text-right">
-                <button type="button" class="btn btn-success btn-lg right" validate-on-submit submit-payment="data.payment_method" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" translate>Complete Payment</button>
+            <!-- Amazon Pay Widgets -->
+            <div class="row spacer-t20 spacer-b20" id="widgets" ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options) && data.amazon_pay.data">
+                <div class="col-md-6 col-xs-12">
+                    <div id="apaddress" style="width:100%; height:230px; margin-top:20px; display:none;"></div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div id="apwallet" style="width:100%; height:230px; margin-top:20px; display:none;"></div>
+                </div>
+                <div class="col-xs-12">
+                    <div id="apconsent" style="width:100%; height:100px; margin-top:20px; display:none;"></div>
+                </div>
+                <div class="col-xs-12 spacer-b20 spacer-t20 text-right">
+                    <button type="button" class="btn btn-info btn-md right" submit-payment="data.amazon_pay" invoice="data.invoice" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
+                </div>
+                <div class="col-xs-12">
+                    <div class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" translate>Use another payment method</div>
+                </div>
+            </div>
+
+            <div ng-show="!data.amazon_pay.data">
+
+                <!-- If a logged in customer -->
+                <div ng-show="data.invoice.customer.payment_methods.data.length > 0">
+                    <h4 translate>Choose a Payment Method</h4>
+
+                    <div class="well clearfix" ng-repeat="method in data.invoice.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal' || method.type == 'amazon_pay'">
+
+                        <span class="radio-group inline" ng-if="method.type == 'credit_card'">
+                            <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
+                            <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">{{method.data.label}} (<span>exp.</span> {{method.data.exp_month}}/{{method.data.exp_year}})</label>
+                            <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
+                        </span>
+
+                        <span class="radio-group inline" ng-if="method.type != 'credit_card'">
+                            <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
+                            <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">
+                                <span ng-show="method.type == 'paypal'">PayPal</span>
+                                <span ng-show="method.type == 'amazon_pay'">Amazon Pay</span>
+                            </label>
+                            <span class="pull-right credit-card-image" credit-card-image="'paypal'" ng-show="method.type == 'paypal'"></span>
+                            <span class="pull-right credit-card-image" credit-card-image="'amazon_pay'" ng-show="method.type == 'amazon_pay'"></span>
+                        </span>
+
+                    </div>
+
+                    <div class="well clearfix">
+                        <span class="radio-group inline">
+                            <input type="radio" class="radio" name="payment_method" id="payment_method-new" ng-model="data.payment_method.payment_method_id" ng-checked="data.payment_method.payment_method_id == null" ng-click="setPaymentMethod(null, 'credit_card')" />
+                            <label for="payment_method-new" class="radio-label strong" translate>Pay with a new card</label>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div ng-show="!data.payment_method.payment_method_id">
+                    <div class="col-xs-12">
+                        <div class="form-group" show-errors="data.invoice.options">
+                            <label class="control-label required" for="card_number" translate>Card Number</label>
+                            <div class="inner-addon left-addon">
+                                <i class="fa fa-credit-card"></i>
+                                <input class="form-control" name="card_number" type="tel" ng-model="data.payment_method.data.number" validate-card ng-required="!data.payment_method.payment_method_id">
+                            </div>
+                            <p class="error-block hidden" translate>Please provide a valid card number</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 credit-cards" credit-cards="data.invoice.options.card_types"></div>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="form-group" show-errors="data.invoice.options">
+                            <label class="control-label required" for="exp_month" translate>Expiration Month</label>
+                            <input ng-if="!settings.app.exp_select" class="form-control" name="exp_month" type="tel" ng-model="data.payment_method.data.exp_month" placeholder="MM" validate-exp-month ng-required="!data.payment_method.payment_method_id">
+                            <select ng-if="settings.app.exp_select" name="exp_month" class="form-control" ng-model="data.payment_method.data.exp_month" ng-options="n for n in [] | range:1:12:true" validate-exp-month ng-required="!data.payment_method.payment_method_id"></select>
+                            <p class="error-block hidden" translate>Please provide a valid expiration month</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="form-group" show-errors="data.invoice.options">
+                            <label class="control-label required" for="exp_year" translate>Expiration Year</label>
+                            <input ng-if="!settings.app.exp_select" class="form-control" name="exp_year" type="tel" ng-model="data.payment_method.data.exp_year" placeholder="YY" validate-exp-year ng-required="!data.payment_method.payment_method_id">
+                            <select ng-if="settings.app.exp_select" name="exp_year" class="form-control" ng-model="data.payment_method.data.exp_year" ng-options="n for n in [] | range:settings.account.year:(settings.account.year + 15)" validate-exp-year ng-required="!data.payment_method.payment_method_id"></select>
+                            <p class="error-block hidden" translate>Please provide a valid expiration year</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" show-errors="data.invoice.options">
+                            <label class="control-label required" for="cvv" translate>Security Code</label>
+                            <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
+                            <p class="error-block hidden" translate>Please provide a valid security code</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12" ng-show="helpers.hasSubscription(data.invoice.items) == false && settings.account.allow_save_cards == true && settings.app.ask_save_cards == true">
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="save-card" class="checkbox" name="save-card" ng-model="data.payment_method.save">
+                            <label for="save-card" class="checkbox-label" translate>Save this card to my account</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 spacer-b20 spacer-t20 text-right">
+                    <button type="button" class="btn btn-success btn-lg right" validate-on-submit submit-payment="data.payment_method" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" translate>Complete Payment</button>
+                </div>
+
             </div>
 
         </div>
@@ -270,6 +306,6 @@
         <!--Spacer-->
         <div class="row">&nbsp;</div>
 
-    </form>
+    </ng-form>
 
 </div>

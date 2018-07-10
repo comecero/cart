@@ -114,6 +114,10 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
             {
                 code: "sv",
                 name: "svenska"
+            },
+            {
+                code: "zh",
+                name: "中文"
             }
         ]
     }

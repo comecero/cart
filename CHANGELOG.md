@@ -1,4 +1,12 @@
-﻿<a name="1.1.1"></a>
+﻿<a name="1.2.0"></a>
+# 1.2.0
+
+- Add support for Amazon Pay
+- Add support for Chinese (simplified) language
+- Ouput license code instructions if provided with the license
+- Integrate kit version 1.0.8 of kit. See kit release notes for details.
+
+<a name="1.1.1"></a>
 # 1.1.1
 
 - Remove third party CDNs and replace with Comecero CDN for static assets
