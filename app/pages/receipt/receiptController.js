@@ -5,6 +5,7 @@
 
     // Load in some helpers
     $scope.helpers = HelperService;
+    $scope.settings = SettingsService.get();
 
     $scope.data.params = {};
     $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options";

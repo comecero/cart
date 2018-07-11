@@ -1,4 +1,4 @@
-﻿app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, $document) {
+﻿app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', 'SettingsService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, SettingsService, $document) {
 
     // Define a place to hold your data
     $scope.data = {};
@@ -6,6 +6,7 @@
     // Load in some helpers
     $scope.geoService = GeoService;
     $scope.helpers = HelperService;
+    $scope.settings = SettingsService.get();
 
     // Set the invoice parameters
     $scope.data.params = {};
