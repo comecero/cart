@@ -3,7 +3,7 @@ window.__settings.account = {
     "account_id": "KO0000",
     "test": true,
     "allow_save_cards": true,
-    "global_footer_html": null,
+    "global_footer_html": "<a href='https://comecero.com' target='_blank'>Comecero, LLC</a> is the authorized reseller of the products and services in your order.",
     "currencies": [
         { "code": "AUD", "name": "Australian Dollar" },
         { "code": "CAD", "name": "Canadian Dollar" },
