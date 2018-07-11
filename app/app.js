@@ -2,12 +2,18 @@ var app = angular.module("checkout", ['ngRoute', 'ngSanitize', 'ui.bootstrap', '
 
 app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 'cfpLoadingBarProvider', function ($httpProvider, $routeProvider, $locationProvider, $provide, cfpLoadingBarProvider) {
 
+    // Determine the theme
+    var theme = "single-column";
+    if (window.__settings && window.__settings.app && window.__settings.app.theme) {
+        theme = window.__settings.app.theme;
+    }
+
     // Define routes
-    $routeProvider.when("/cart", { templateUrl: "app/pages/cart/cart.html", reloadOnSearch: false });
-    $routeProvider.when("/invoice", { templateUrl: "app/pages/invoice/invoice.html", reloadOnSearch: false });
-    $routeProvider.when("/review/:id", { templateUrl: "app/pages/review/review.html" });
-    $routeProvider.when("/receipt/:id", { templateUrl: "app/pages/receipt/receipt.html" });
-    $routeProvider.when("/", { templateUrl: "app/pages/products/products.html" });
+    $routeProvider.when("/cart", { templateUrl: "app/pages/cart/cart-" + theme + ".html", reloadOnSearch: false });
+    $routeProvider.when("/invoice", { templateUrl: "app/pages/invoice/invoice-" + theme + ".html", reloadOnSearch: false });
+    $routeProvider.when("/review/:id", { templateUrl: "app/pages/review/review-" + theme + ".html" });
+    $routeProvider.when("/receipt/:id", { templateUrl: "app/pages/receipt/receipt-" + theme + ".html" });
+    $routeProvider.when("/", { templateUrl: "app/pages/products/products-" + theme + ".html" });
 
     // Non-handled routes.
     var notFoundUrl = window.__settings.app.not_found_url;

@@ -22,5 +22,6 @@ window.__settings.app = {
     "favicon_square": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/sq_favicon.ico",
     "favicon_full": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/favicon.ico",
     "favicon": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/sm_favicon.ico",
-    "web_font_import": "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+    "web_font_import": "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800",
+    "theme": "single-column"
 }
