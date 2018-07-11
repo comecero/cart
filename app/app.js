@@ -5,7 +5,7 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
     // Define routes
     $routeProvider.when("/cart", { templateUrl: "app/pages/cart/cart.html", reloadOnSearch: false });
     $routeProvider.when("/invoice", { templateUrl: "app/pages/invoice/invoice.html", reloadOnSearch: false });
-    $routeProvider.when("/payment/review/:id", { templateUrl: "app/pages/payment/review.html" });
+    $routeProvider.when("/review/:id", { templateUrl: "app/pages/review/review.html" });
     $routeProvider.when("/receipt/:id", { templateUrl: "app/pages/receipt/receipt.html" });
     $routeProvider.when("/", { templateUrl: "app/pages/products/products.html" });
 
@@ -128,44 +128,6 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
             window.__pageview.recordPageLoad();
         }
     });
-
-}]);
-
-// Custom HTML directive
-app.directive('customHtml', ['SettingsService', function (SettingsService) {
-
-    return {
-        restrict: 'AE',
-        link: function (scope, elem, attrs, ctrl) {
-
-            var settings = SettingsService.get();
-
-            // Set the element's contents as the custom header html, if supplied
-
-            if (attrs.section == "header" && settings.app != null) {
-                var customHtml = settings.app.header_html;
-                if (customHtml) {
-                    elem.html(customHtml);
-                }
-            }
-
-            if (attrs.section == "footer" && settings.app != null) {
-                var customHtml = settings.app.footer_html;
-                if (customHtml) {
-                    elem.html(customHtml);
-                }
-            }
-
-        }
-    }
-
-}]);
-
-// Custom title controller
-app.controller("TitleController", ['$scope', 'SettingsService', function ($scope, SettingsService) {
-
-    var settings = SettingsService.get().app;
-    $scope.title = settings.page_title || "Checkout";
 
 }]);
 
