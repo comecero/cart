@@ -1,32 +1,9 @@
 ﻿[
   {
-    "name": "layout",
+    "name": "panel-header-size",
     "type": "string",
-    "label": "Layout Mode",
-    "description": "The general layout structure. Full provides a navigation bar that spans the entire width of the page with a content area that touches the navigation bar. Boxed provides a content section that includes the navigation bar (that therefore does not span the entire page). Hybrid provides a boxed area that is disconnected from the main navigation bar.",
-    "section": "Layout",
-    "required": true,
-    "default_value": "boxed",
-    "options": [
-      {
-        "display": "Hybrid",
-        "value": "hybrid"
-      },
-      {
-        "display": "Boxed",
-        "value": "boxed"
-      },
-      {
-        "display": "Full",
-        "value": "full"
-      }
-    ]
-  },
-  {
-    "name": "navbar-size",
-    "type": "string",
-    "label": "Navbar Size",
-    "description": "The size of the main page navbar / header.",
+    "label": "Panel Header Size",
+    "description": "The size of the main panel header.",
     "section": "Layout",
     "required": true,
     "default_value": "medium",
@@ -44,25 +21,16 @@
         "value": "large"
       },
       {
-        "display": "Remove / Hide (don't display the default navbar)",
+        "display": "Remove / Hide (don't display the panel header)",
         "value": "hide"
       }
     ]
   },
   {
-    "name": "navbar-fixed",
-    "type": "boolean",
-    "label": "Fixed main page navbar / header",
-    "description": "Indicates if the main navigation bar should stay in a fixed position as the page scrolls.",
-    "section": "Layout",
-    "required": true,
-    "default_value": false
-  },
-  {
-    "name": "navbar-brand-align",
+    "name": "panel-header-brand-align",
     "type": "string",
-    "label": "Navbar Logo / Company Name Alignment",
-    "description": "How the logo or company name should be aligned in the main page navbar / header.",
+    "label": "Panel Header Logo / Company Name Alignment",
+    "description": "How the logo or company name should be aligned in the main page panel header.",
     "section": "Layout",
     "required": true,
     "default_value": "center",
@@ -107,7 +75,7 @@
     "max_length": 100
   },
   {
-    "name": "navbar-brand-font-size",
+    "name": "panel-header-brand-font-size",
     "type": "string",
     "label": "Company Name Font Size",
     "description": "The size of the company name. This does not apply if you have uploaded a logo under the app settings.",

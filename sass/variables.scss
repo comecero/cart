@@ -33,15 +33,14 @@ $body-bg: #f6f6f6;
 /* Defines the layout mode: full, boxed, hybrid */
 $layout: boxed;
 
-/* Defines if shadows on the main container and navbar */
+/* Defines if shadows on the main container */
 $main-shadows: true;
 
-/* Navbar */
-$navbar-size: medium;
-$navbar-brand-font-size: 22px;
-$navbar-fixed: false;
-$navbar-default-color: #ffffff;
-$navbar-brand-align: center;
+/* Panel Header */
+$panel-header-size: medium;
+$panel-header-brand-font-size: 22px;
+$panel-header-default-color: #ffffff;
+$panel-header-brand-align: center;
 
 /* Main content area background color */
 $main-content-color: #686868;
@@ -89,12 +88,12 @@ $company-name-color: #ffffff;
 
 /* NOT USER DEFINED */
 
-$navbar-default-brand-hover-color: $navbar-default-color;
-$navbar-default-bg:  $brand-primary;
+$panel-header-default-brand-hover-color: $panel-header-default-color;
+$panel-header-default-bg:  $brand-primary;
 
-$navbar-default-link-color: $navbar-default-color;
-$navbar-default-link-hover-color: lighten($navbar-default-link-color, 6.5%);
-$navbar-default-link-active-color: darken($navbar-default-link-color, 6.5%);
+$panel-header-default-link-color: $panel-header-default-color;
+$panel-header-default-link-hover-color: lighten($panel-header-default-link-color, 6.5%);
+$panel-header-default-link-active-color: darken($panel-header-default-link-color, 6.5%);
 
 $btn-default-border: darken($btn-default-bg, 5%);
 
@@ -107,7 +106,7 @@ $link-hover-decoration: none;
 $footer-link-hover-color: darken($footer-link-color, 10%);
 $header-link-hover-color: darken($header-link-color, 10%);
 
-$navbar-border-radius: 0;
+$panel-header-border-radius: 0;
 $grid-gutter-width: 30px;
 
 /* Navbar vs. Boxed Layout */

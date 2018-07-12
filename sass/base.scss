@@ -1,120 +1,5 @@
-﻿/* Boxed layout */
-@if $layout == boxed {
-
-    .navbar {
-        display: none;
-    }
-
-    .footer {
-        display: none;
-    }
-
-    // Push the panel away from the navbar
-    .panel.panel-boxed {
-        @if $navbar-fixed == false {
-            margin-top: 40px;
-        }
-
-        else {
-            @if $navbar-size == medium {
-                margin-top: 54px;
-            }
-
-            @if $navbar-size == large {
-                margin-top: 70px;
-            }
-        }
-    }
-}
-
-/* Full layout */
-@if $layout == full {
-
-    .panel-boxed .panel-heading {
-        display: none;
-    }
-
-    .panel-boxed .panel-footer {
-        display: none;
-    }
-
-    // Slide the panel to the navbar, remove the borders
-    .panel.panel-boxed {
-        margin-top: 0;
-        border: 0;
-        box-shadow: none;
-
-        @if $navbar-fixed == true {
-
-            @if $navbar-size == small {
-                margin-top: 60px;
-            }
-
-            @if $navbar-size == medium {
-                margin-top: 75px;
-            }
-
-            @if $navbar-size == large {
-                margin-top: 90px;
-            }
-        }
-    }
-}
-
-/* Hybrid layout */
-@if $layout == hybrid {
-
-    .panel-boxed .panel-heading {
-        display: none;
-    }
-
-    .panel-boxed .panel-footer {
-        display: none;
-    }
-
-    // Push the panel away from the navbar
-    .panel.panel-boxed {
-
-        $panel-boxed-based-margin: 30px;
-        $panel-boxed-fixed-adjustment: 0px;
-
-        @if $navbar-size == medium or $navbar-size == large {
-            $panel-boxed-fixed-adjustment: 10px;
-        }
-
-        @if $navbar-fixed == true {
-
-            @if $navbar-size == small {
-                $panel-boxed-fixed-adjustment: $panel-boxed-fixed-adjustment + 50px;
-            }
-
-            @if $navbar-size == medium {
-                $panel-boxed-fixed-adjustment: $panel-boxed-fixed-adjustment + 60px;
-            }
-
-            @if $navbar-size == large {
-                $panel-boxed-fixed-adjustment: $panel-boxed-fixed-adjustment + 75px;
-            }
-        }
-
-        margin-top: $panel-boxed-based-margin + $panel-boxed-fixed-adjustment;
-
-        @media (min-width: $screen-sm-min) {
-            margin-top: 15px + $panel-boxed-based-margin + $panel-boxed-fixed-adjustment;
-        }
-
-        @media (min-width: $screen-md-min) {
-            margin-top: 25px + $panel-boxed-based-margin + $panel-boxed-fixed-adjustment;
-        }
-
-        @media (min-width: $screen-lg-min) {
-            margin-top: 30px + $panel-boxed-based-margin + $panel-boxed-fixed-adjustment;
-        }
-    }
-}
-
-/* Boxed Layout Panel */
-.panel.panel-boxed {
+﻿.panel.panel-boxed {
+    margin-top: 40px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
@@ -123,16 +8,8 @@
     }
 }
 
-.navbar-brand {
-    padding: 1px;
-}
-
-/* Hide the navbar, if requested */
-@if $navbar-size == hide {
-
-    .navbar {
-        display: none;
-    }
+/* Hide the panel header, if requested */
+@if $panel-header-size == hide {
 
     .panel-boxed .panel-heading {
         display: none;
@@ -152,9 +29,9 @@
 }
 
 .panel.panel-boxed .panel-heading {
-    background-color: $navbar-default-bg;
-    color: $navbar-default-color;
-    font-size: $navbar-brand-font-size;
+    background-color: $panel-header-default-bg;
+    color: $panel-header-default-color;
+    font-size: $panel-header-brand-font-size;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
@@ -162,40 +39,40 @@
         box-shadow: 1px 1px 4px 0px rgba(165, 165, 165, 0.4);
     }
 
-        @if $navbar-size == small {
+        @if $panel-header-size == small {
         padding-top: 7px;
         padding-bottom: 7px;
     }
 
-    @if $navbar-size == medium {
+    @if $panel-header-size == medium {
         padding-top: 12px;
         padding-bottom: 12px;
     }
 
-    @if $navbar-size == large {
+    @if $panel-header-size == large {
         padding-top: 15px;
         padding-bottom: 15px;
     }
 
-    @if $navbar-brand-align == center {
+    @if $panel-header-brand-align == center {
         text-align: center;
     }
 
-    @if $navbar-brand-align == right {
+    @if $panel-header-brand-align == right {
         text-align: right;
     }
 }
 
 .panel.panel-boxed .panel-heading a {
-    color: $navbar-default-link-color;
+    color: $panel-header-default-link-color;
 }
 
 .panel.panel-boxed .panel-heading a:hover {
-    color: $navbar-default-link-hover-color;
+    color: $panel-header-default-link-hover-color;
 }
 
 .panel.panel-boxed .panel-heading a:active {
-    color: $navbar-default-link-active-color;
+    color: $panel-header-default-link-active-color;
 }
 
 /* Text */
@@ -207,100 +84,46 @@
     font-size: 11px !important;
 }
 
-/* Full Layout Navbar */
-.navbar-brand {
-    font-size: $navbar-brand-font-size;
-    height: auto;
-    min-height: 50px;
-
-    @if $navbar-brand-align == center {
-        float: none;
-    }
-
-    @if $navbar-brand-align == right {
-        float: right;
-    }
-}
-
-.navbar-brand img, .panel.panel-boxed .panel-heading img {
+.panel.panel-boxed .panel-heading img {
     display: inline;
 
-    @if $navbar-size == small {
+    @if $panel-header-size == small {
         max-height: 52px;
     }
 
-    @if $navbar-size == medium {
+    @if $panel-header-size == medium {
         max-height: 67px;
     }
 
-    @if $navbar-size == large {
+    @if $panel-header-size == large {
         max-height: 82px;
     }
 }
 
-.navbar-brand {
-    min-height: unset;
-}
-
-.navbar-brand .company-name, .panel.panel-boxed .panel-heading .company-name {
+.panel.panel-boxed .panel-heading .company-name {
     display: inline;
     font-family: $font-family-company-name;
     color: $company-name-color;
 
-    @if $navbar-size == small {
+    @if $panel-header-size == small {
         height: 30px;
         line-height: 30px;
-        font-size: $navbar-brand-font-size;
+        font-size: $panel-header-brand-font-size;
         vertical-align: middle;
     }
 
-    @if $navbar-size == medium {
+    @if $panel-header-size == medium {
         height: 50px;
         line-height: 50px;
-        font-size: $navbar-brand-font-size;
+        font-size: $panel-header-brand-font-size;
         vertical-align: middle;
     }
 
-    @if $navbar-size == large {
+    @if $panel-header-size == large {
         height: 70px;
         line-height: 70px;
-        font-size: $navbar-brand-font-size;
+        font-size: $panel-header-brand-font-size;
         vertical-align: middle;
-    }
-}
-
-.navbar {
-    margin-bottom: 0;
-
-    @if $navbar-size == small {
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-
-    @if $navbar-size == medium {
-        padding-top: 7px;
-        padding-bottom: 7px;
-    }
-
-    @if $navbar-size == large {
-        padding-top: 9px;
-        padding-bottom: 9px;
-    }
-
-    @if $main-shadows {
-        box-shadow: 4px 4px 9px 0px rgba(165, 165, 165, 0.4);
-    }
-
-    @if $navbar-fixed {
-        position: fixed;
-        right: 0;
-        left: 0;
-        z-index: 1030;
-        top: 0;
-    }
-
-    @if $navbar-brand-align == center {
-        text-align: center;
     }
 }
 
@@ -337,10 +160,6 @@
     }
 }
 
-
-.footer {
-    margin-top: 50px;
-}
 
 /* Page header */
 .page-header {

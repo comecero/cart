@@ -1,13 +1,5 @@
 ﻿<div ng-controller="ReceiptController">
 
-    <!-- Full Header -->
-    <nav class="navbar navbar-default">
-        <div class="navbar-brand">
-            <img ng-if="settings.app.logo" class="logo" ng-src="{{settings.app.logo}}">
-            <span ng-if="!settings.app.logo" class="company-name">{{settings.app.company_name}}</span>
-        </div>
-    </nav>
-
     <!-- Custom Header, if supplied -->
     <custom-html html="settings.app.header_html"></custom-html>
 
@@ -225,16 +217,6 @@
 
     <!-- Custom Footer, if supplied -->
     <custom-html html="settings.app.footer_html"></custom-html>
-
-    <!-- Full Footer -->
-    <div class="footer" ng-cloak>
-        <p class="security-badges" ng-if="settings.app.show_badges">
-            <img src="images/pci_seal.png" style="margin-right: 5px;" />
-            <img src="images/comodo_ssl.png" />
-        </p>
-        <p ng-bind-html="settings.app.footer_text"></p>
-        <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
-    </div>
 
     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
 
