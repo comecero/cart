@@ -1,5 +1,24 @@
 ﻿[
   {
+    "name": "theme",
+    "type": "string",
+    "label": "Cart Theme",
+    "description": "The basic theme / layout design of the cart.",
+    "section": "Layout",
+    "required": true,
+    "default_value": "single-column",
+    "options": [
+      {
+        "display": "Single Column",
+        "value": "single-column"
+      },
+      {
+        "display": "Double Column",
+        "value": "double-column"
+      }
+    ]
+  },
+  {
     "name": "panel-header-size",
     "type": "string",
     "label": "Panel Header Size",
@@ -444,7 +463,7 @@
     "section": "Inputs",
     "required": true,
     "default_value": 0,
-    "options":  [
+    "options": [
       {
         "display": "Square corners",
         "value": "0"
