@@ -1,7 +1,7 @@
 ﻿<div ng-controller="ProductsController">
 
     <!-- Custom Header, if supplied -->
-    <custom-html html="settings.app.header_html"></custom-html>
+    <custom-html html="settings.style.header_html"></custom-html>
 
     <div class="container container-content">
 
@@ -9,8 +9,8 @@
 
             <!-- Boxed Header -->
             <div class="panel-heading" ng-cloak>
-                <img ng-src="{{settings.app.logo}}" ng-if="settings.app.logo">
-                <span ng-if="!settings.app.logo" class="company-name">{{settings.app.company_name}}</span>
+                <img ng-src="{{settings.style.logo}}" ng-if="settings.style.logo">
+                <span ng-if="!settings.style.logo" class="company-name">{{settings.app.company_name}}</span>
             </div>
 
             <div class="panel-body">
@@ -67,7 +67,7 @@
     </div>
 
     <!-- Custom Footer, if supplied -->
-    <custom-html html="settings.app.footer_html"></custom-html>
+    <custom-html html="settings.style.footer_html"></custom-html>
 
     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
 

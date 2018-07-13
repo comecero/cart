@@ -3,9 +3,9 @@ var app = angular.module("checkout", ['ngRoute', 'ngSanitize', 'ui.bootstrap', '
 app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 'cfpLoadingBarProvider', function ($httpProvider, $routeProvider, $locationProvider, $provide, cfpLoadingBarProvider) {
 
     // Determine the theme
-    var theme = "single-column";
-    if (window.__settings && window.__settings.app && window.__settings.app.theme) {
-        theme = window.__settings.app.theme;
+    var theme = "one-column";
+    if (window.__settings && window.__settings.style && window.__settings.style.theme) {
+        theme = window.__settings.style.theme;
     }
 
     // Define routes
@@ -42,8 +42,8 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
     favicon.setAttribute("rel", "icon");
     favicon.setAttribute("type", "image/x-icon");
 
-    if (window.__settings.app.favicon_full) {
-        favicon.setAttribute("href", window.__settings.app.favicon_full);
+    if (window.__settings.style.favicon_full) {
+        favicon.setAttribute("href", window.__settings.style.favicon_full);
     } else {
         favicon.setAttribute("href", "images/default_favicon.png");
     }

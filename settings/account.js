@@ -1,4 +1,5 @@
-﻿window.__settings = window.__settings || {};
+﻿// This is a shim for the account settings. When the app is run in the hosted environment, the values in this file will reflect the values from the account in which the app is running.
+window.__settings = window.__settings || {};
 window.__settings.account = {
     "account_id": "KO0000",
     "test": true,

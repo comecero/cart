@@ -11,22 +11,6 @@
     "max_length": 25
   },
   {
-    "name": "logo",
-    "type": "image",
-    "label": "Company Logo",
-    "description": "The main company logo. We recommend an image with a transparent background or one that blends well with the main navigation bar color.",
-    "section": "Design",
-    "required": false
-  },
-  {
-    "name": "favicon",
-    "type": "image",
-    "label": "Favicon",
-    "description": "The page favicon image. Providing a square image is highly recommended; images that are not square will automatically be cropped square. For maximum compatibility, the image you provide should be no larger than 196 x 196 pixels.",
-    "section": "Design",
-    "required": false
-  },
-  {
     "name": "use_square_images",
     "type": "boolean",
     "label": "Use Square Product Images?",
@@ -44,38 +28,12 @@
     "required": false
   },
   {
-    "name": "header_html",
-    "type": "text",
-    "label": "Custom Header HTML",
-    "description": "Supply a section of HTML to be used as your global header. If you supply custom HTML, you may want to remove / hide the default navbar under the app's style settings (choose 'Remove' under Navbar Size).",
-    "section": "Design",
-    "required": false
-  },
-  {
-    "name": "footer_html",
-    "type": "text",
-    "label": "Custom Footer HTML",
-    "description": "Supply a section of HTML to be used as your global footer. If you supply custom HTML, you may want to remove / hide the default footer under the app's style settings (choose 'Remove' under Footer Size).",
-    "section": "Design",
-    "required": false
-  },
-  {
     "name": "footer_text",
     "type": "text",
     "label": "Footer Text",
     "description": "Text that you would like to include within the default footer. Allows basic HTML tags (formatting, links, etc.).",
     "section": "Design",
     "required": false
-  },
-  {
-    "name": "web_font_import",
-    "type": "string",
-    "label": "Web Font Import",
-    "description": "If you would like to use external web fonts (such as Google Web Fonts) in your application, provide the URL for the font or fonts here. If you are using Google Web Fonts, go to the Google Web Fonts site, select and customize the font or fonts you want to use, and paste the font URL here. The font URL can be found within the 'href' value of the font link HTML provided by Google Web Fonts. You can then use these fonts in your font definitions under the app Style settings.",
-    "section": "Fonts",
-    "required": false,
-    "min_length": 40,
-    "max_length": 200
   },
   {
     "name": "error_notifications",

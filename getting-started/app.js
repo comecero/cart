@@ -11,8 +11,8 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
 
     // Set the favicon
     var faviconUrl = "images/favicon.ico";
-    if (window.__settings.app.favicon_full) {
-        faviconUrl = window.__settings.app.favicon_full;
+    if (window.__settings.style.favicon_full) {
+        faviconUrl = window.__settings.style.favicon_full;
     }
 
     var favicon = document.createElement("link");

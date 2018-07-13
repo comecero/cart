@@ -31,7 +31,7 @@
 .panel.panel-boxed .panel-heading {
     background-color: $panel-header-default-bg;
     color: $panel-header-default-color;
-    font-size: $panel-header-brand-font-size;
+    font-size: $panel-header-font-size;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
@@ -108,21 +108,21 @@
     @if $panel-header-size == small {
         height: 30px;
         line-height: 30px;
-        font-size: $panel-header-brand-font-size;
+        font-size: $panel-header-font-size;
         vertical-align: middle;
     }
 
     @if $panel-header-size == medium {
         height: 50px;
         line-height: 50px;
-        font-size: $panel-header-brand-font-size;
+        font-size: $panel-header-font-size;
         vertical-align: middle;
     }
 
     @if $panel-header-size == large {
         height: 70px;
         line-height: 70px;
-        font-size: $panel-header-brand-font-size;
+        font-size: $panel-header-font-size;
         vertical-align: middle;
     }
 }
