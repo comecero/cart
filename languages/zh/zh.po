@@ -117,7 +117,7 @@ msgstr "到期"
 
 #: ./app/pages/cart/cart.html:152
 msgid "Have an account?"
-msgstr "有帐户？"
+msgstr "已有帐户？"
 
 #: ./app/pages/cart/cart.html:376
 #: ./app/pages/payment/review.html:89
@@ -236,7 +236,7 @@ msgstr "请提供有效的电话号码"
 #: ./app/pages/cart/cart.html:517
 #: ./app/pages/invoice/invoice.html:278
 msgid "Please provide a valid security code"
-msgstr "请提供有效的安全代码"
+msgstr "请提供有效的安全码"
 
 #: ./app/pages/cart/cart.html:270
 #: ./app/pages/cart/cart.html:350
@@ -296,7 +296,7 @@ msgstr "返回 PayPal 再次尝试付款。"
 
 #: ./app/pages/payment/review.html:16
 msgid "Review Your Order"
-msgstr "审查您的订单"
+msgstr "检查您的订单"
 
 #: ./app/pages/cart/cart.html:515
 #: ./app/pages/invoice/invoice.html:276
@@ -306,7 +306,7 @@ msgstr "安全码"
 #: ./app/pages/cart/cart.html:289
 #: ./app/pages/payment/review.html:52
 msgid "Shipping Address"
-msgstr "寄送地址"
+msgstr "配送地址"
 
 #: ./app/pages/cart/cart.html:25
 msgid "Shopping Cart"
@@ -367,22 +367,26 @@ msgstr "找不到您要访问的商品。"
 #: ./dist/js/kit.js:4220
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
-msgstr[0] "该值必须至少为一个字符"
+msgstr[0] "该值必须至少为一个字符\n"
+"该值必须至少为{{$count}}个字符"
 
 #: ./dist/js/kit.js:4226
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
-msgstr[0] "该值必须小于一个字符"
+msgstr[0] "该值必须小于一个字符\n"
+"该值必须小于{{$count}}个字符"
 
 #: ./dist/js/kit.js:4203
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
-msgstr[0] "您提供的值必须大于{{$count}}"
+msgstr[0] "您提供的值必须大于{{$count}}\n"
+"您提供的值必须大于{{$count}}"
 
 #: ./dist/js/kit.js:4209
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
-msgstr[0] "您提供的值必须小于{{$count}}"
+msgstr[0] "您提供的值必须小于{{$count}}\n"
+"您提供的值必须小于{{$count}}"
 
 #: ./app/pages/cart/cart.html:32
 msgid "There are no items in your cart"
@@ -392,7 +396,7 @@ msgstr "您的购物车中没有商品"
 #: ./dist/js/kit.js:1601
 #: ./dist/js/kit.js:1841
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
-msgstr "您提供的部分信息存在问题。请检查错误并重试。"
+msgstr "您提供的信息有部分存在问题。请检查错误并重试。"
 
 #: ./app/pages/cart/cart.html:431
 #: ./app/pages/cart/cart.html:432
@@ -452,7 +456,7 @@ msgstr "完成付款"
 #: ./index.html:59
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
-msgstr "版权 & 复制; {{settings.account.year}} {{settings.app.company_name}}。版权所有。"
+msgstr "版权所有 &copy; {{settings.account.year}} {{settings.app.company_name}}。保留所有权利。"
 
 #: ./app/pages/receipt/receipt.html:57
 msgid "Create Account"
@@ -529,21 +533,21 @@ msgstr "请提供一个电话号码"
 #: ./app/pages/cart/cart.html:524
 #: ./app/pages/invoice/invoice.html:285
 msgid "Save this card to my account"
-msgstr "在我的账号中保存此卡"
+msgstr "在我的账号中保存此卡信息"
 
 #: ./app/pages/cart/cart.html:386
 #: ./app/pages/cart/cart.html:412
 #: ./app/pages/payment/review.html:132
 msgid "Shipping"
-msgstr "快递"
+msgstr "配送"
 
 #: ./app/pages/invoice/invoice.html:65
 msgid "Shipping Information"
-msgstr "快递信息"
+msgstr "配送信息"
 
 #: ./app/pages/cart/cart.html:294
 msgid "Shipping is same as billing"
-msgstr "快递地址与账单地址相同"
+msgstr "配送地址与账单地址相同"
 
 #: ./app/pages/receipt/receipt.html:69
 msgid "Sold To"
@@ -559,7 +563,7 @@ msgstr "感谢您的订单"
 
 #: ./app/pages/receipt/receipt.html:22
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
-msgstr "谢谢！ 您的订单已提交处理。 您很快就会收到一封包含订单状态电子邮件。"
+msgstr "谢谢！ 您的订单已提交处理。 您很快就会收到一封包含订单状态的电子邮件。"
 
 #: ./app/pages/invoice/invoice.html:35
 msgid "This invoice is closed"
@@ -580,19 +584,19 @@ msgstr "您的账号已创建"
 
 #: ./app/pages/cart/cart.html:435
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data.cart.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data.cart.formatted.tax}}"
 
 #: ./app/pages/invoice/invoice.html:155
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data..invoice.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data..invoice.formatted.tax}}"
 
 #: ./app/pages/receipt/receipt.html:176
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data.payment.order.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data.payment.order.formatted.tax}}"
 
 #: ./app/pages/payment/review.html:181
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data.sale.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data.sale.formatted.tax}}"
 
 #: ./app/pages/pay/pay.html:34
 #: ./app/pages/pay/pay.html:56
@@ -722,7 +726,7 @@ msgstr "摘要"
 #: ./app/pages/simple/checkout.html:252
 #: ./app/pages/simple/review.html:132
 msgid "Thank you for your purchase!"
-msgstr "感谢您的消费！"
+msgstr "感谢您的购买！"
 
 #: ./app/pages/cart/cart.html:68
 msgid "Remove"
@@ -730,7 +734,7 @@ msgstr "移除"
 
 #: ./dist/js/kit.js:1656
 msgid "Please check the box to provide consent to save your payment method for future payments."
-msgstr "请选中相应的复选框，以同意我们保存您的付款方式，以便日后使用。"
+msgstr "请选中相应的复选框来同意我们保存您的付款方式，方便您日后支付使用。"
 
 #: ./app/pages/cart/cart.html:128
 #: ./app/pages/invoice/invoice.html:203

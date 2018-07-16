@@ -439,21 +439,6 @@ var utils = (function () {
         return (RightTrimIf(LeftTrimIf(str, char), char));
     }
     
-    function getLocale(language) {
-        
-        // Array of supported locales
-        var locales = [];
-        locales.push("af-na", "af-za", "af", "ar-ae", "ar-bh", "ar-dj", "ar-dz", "ar-eg", "ar-eh", "ar-er", "ar-il", "ar-iq", "ar-jo", "ar-km", "ar-kw", "ar-lb", "ar-ly", "ar-ma", "ar-mr", "ar-om", "ar-ps", "ar-qa", "ar-sa", "ar-sd", "ar-so", "ar-ss", "ar-sy", "ar-td", "ar-tn", "ar-ye", "ar", "az-cyrl-az", "az-cyrl", "az-latn-az", "az-latn", "az", "bg-bg", "bg", "bo-cn", "bo-in", "bo", "cs-cz", "cs", "da-dk", "da-gl", "da", "dav-ke", "dav", "de-at", "de-be", "de-ch", "de-de", "de-li", "de-lu", "de", "el-cy", "el-gr", "el", "en-ag", "en-ai", "en-as", "en-au", "en-bb", "en-be", "en-bm", "en-bs", "en-bw", "en-bz", "en-ca", "en-cc", "en-ck", "en-cm", "en-cx", "en-dg", "en-dm", "en-dsrt-us", "en-dsrt", "en-er", "en-fj", "en-fk", "en-fm", "en-gb", "en-gd", "en-gg", "en-gh", "en-gi", "en-gm", "en-gu", "en-gy", "en-hk", "en-ie", "en-im", "en-in", "en-io", "en-iso", "en-je", "en-jm", "en-ke", "en-ki", "en-kn", "en-ky", "en-lc", "en-lr", "en-ls", "en-mg", "en-mh", "en-mo", "en-mp", "en-ms", "en-mt", "en-mu", "en-mw", "en-na", "en-nf", "en-ng", "en-nr", "en-nu", "en-nz", "en-pg", "en-ph", "en-pk", "en-pn", "en-pr", "en-pw", "en-rw", "en-sb", "en-sc", "en-sd", "en-sg", "en-sh", "en-sl", "en-ss", "en-sx", "en-sz", "en-tc", "en-tk", "en-to", "en-tt", "en-tv", "en-tz", "en-ug", "en-um", "en-us", "en-vc", "en-vg", "en-vi", "en-vu", "en-ws", "en-za", "en-zm", "en-zw", "en", "es-ar", "es-bo", "es-cl", "es-co", "es-cr", "es-cu", "es-do", "es-ea", "es-ec", "es-es", "es-gq", "es-gt", "es-hn", "es-ic", "es-mx", "es-ni", "es-pa", "es-pe", "es-ph", "es-pr", "es-py", "es-sv", "es-us", "es-uy", "es-ve", "es", "et-ee", "et", "eu-es", "eu", "fa-af", "fa-ir", "fa", "fi-fi", "fi", "fil-ph", "fil", "fr-be", "fr-bf", "fr-bi", "fr-bj", "fr-bl", "fr-ca", "fr-cd", "fr-cf", "fr-cg", "fr-ch", "fr-ci", "fr-cm", "fr-dj", "fr-dz", "fr-fr", "fr-ga", "fr-gf", "fr-gn", "fr-gp", "fr-gq", "fr-ht", "fr-km", "fr-lu", "fr-ma", "fr-mc", "fr-mf", "fr-mg", "fr-ml", "fr-mq", "fr-mr", "fr-mu", "fr-nc", "fr-ne", "fr-pf", "fr-pm", "fr-re", "fr-rw", "fr-sc", "fr-sn", "fr-sy", "fr-td", "fr-tg", "fr-tn", "fr-vu", "fr-wf", "fr-yt", "fr", "hi-in", "hi", "hr-ba", "hr-hr", "hr", "hu-hu", "hu", "hy-am", "hy", "is-is", "is", "it-ch", "it-it", "it-sm", "it", "ja-jp", "ja", "ka-ge", "ka", "kab-dz", "kab", "kam-ke", "kam", "kk-cyrl-kz", "kk-cyrl", "kk", "kkj-cm", "kkj", "kl-gl", "kl", "kln-ke", "kln", "km-kh", "km", "ko-kp", "ko-kr", "ko", "kok-in", "kok", "lo-la", "lo", "lt-lt", "lt", "mg-mg", "mg", "mgh-mz", "mgh", "mgo-cm", "mgo", "mk-mk", "mk", "mn-cyrl-mn", "mn-cyrl", "mn", "ms-bn", "ms-latn-bn", "ms-latn-my", "ms-latn-sg", "ms-latn", "ms-my", "ms", "mt-mt", "mt", "ne-in", "ne-np", "ne", "nl-aw", "nl-be", "nl-bq", "nl-cw", "nl-nl", "nl-sr", "nl-sx", "nl", "no-no", "no", "pl-pl", "pl", "pt-ao", "pt-br", "pt-cv", "pt-gw", "pt-mo", "pt-mz", "pt-pt", "pt-st", "pt-tl", "pt", "ro-md", "ro-ro", "ro", "rof-tz", "rof", "ru-by", "ru-kg", "ru-kz", "ru-md", "ru-ru", "ru-ua", "ru", "shi-latn-ma", "shi-latn", "shi-tfng-ma", "shi-tfng", "shi", "sk-sk", "sk", "sl-si", "sl", "sq-al", "sq-mk", "sq-xk", "sq", "sr-cyrl-ba", "sr-cyrl-me", "sr-cyrl-rs", "sr-cyrl-xk", "sr-cyrl", "sr-latn-ba", "sr-latn-me", "sr-latn-rs", "sr-latn-xk", "sr-latn", "sr", "sv-ax", "sv-fi", "sv-se", "sv", "th-th", "th", "tl", "to-to", "to", "tr-cy", "tr-tr", "tr", "uk-ua", "uk", "uz-arab-af", "uz-arab", "uz-cyrl-uz", "uz-cyrl", "uz-latn-uz", "uz-latn", "uz", "vi-vn", "vi", "zh-cn", "zh-hans-cn", "zh-hans-hk", "zh-hans-mo", "zh-hans-sg", "zh-hans", "zh-hant-hk", "zh-hant-mo", "zh-hant-tw", "zh-hant", "zh-hk", "zh-tw", "zh");
-        
-        // If their locale exists in the locale list, use it. Otherwise, use the locale from their selected language.
-        if (locales.indexOf(localStorage.getItem("locale")) >= 0) {
-            return localStorage.getItem("locale");
-        } else {
-            return language;
-        }
-
-    }
-
     function cleanPrice(price) {
         // Strip everything except numbers and decimals
 
@@ -505,7 +490,6 @@ var utils = (function () {
         repeat: repeat,
         mergeParams: mergeParams,
         deDuplicateCsv: deDuplicateCsv,
-        getLocale: getLocale,
         cleanPrice: cleanPrice
     };
 
@@ -4564,7 +4548,7 @@ app.filter('range', function () {
         return input;
     };
 });
-app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'HelperService', 'StorageService', '$rootScope', 'gettextCatalog', function ($http, $q, $location, SettingsService, HelperService, StorageService, $rootScope, gettextCatalog) {
+app.service("ApiService", ['$http', '$q', 'SettingsService', 'HelperService', 'StorageService', 'LanguageService', 'gettextCatalog', function ($http, $q, SettingsService, HelperService, StorageService, LanguageService, gettextCatalog) {
 
     // Return public API.
     return {
@@ -4574,8 +4558,6 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
         update: update,
         remove: remove,
         getItemPdf: getItemPdf,
-        getToken: getToken,
-        getTokenExpiration: getTokenExpiration
     };
 
     function getTokenExpiration(expiresInSeconds) {
@@ -4606,8 +4588,11 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
         }
 
         // The account_id is only needed in development environments. The hosted environment can call this endpoint without the account_id and it will be determined on the api side from the hostname.
-        var parameters = { browser_info: true };
         var settings = SettingsService.get();
+        var parameters = {};
+
+        // Pass in the user's language selection.
+        parameters.user_locale = LanguageService.getLocale();
 
         if (settings.account.account_id && settings.config.development == true) {
             parameters = _.extend(parameters, { account_id: settings.account.account_id });
@@ -4631,8 +4616,6 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
         request.then(function (response) {
 
             StorageService.set("token", response.data.token, response.headers("X-Token-Expires-In-Seconds"));
-            StorageService.set("locale", response.data.browser_info.locale);
-            StorageService.set("language", response.data.browser_info.language);
 
             // If you got a new token, delete any cart_id or invoice_id cookie. The new token won't be bound to them and letting them remain will cause a conflict when the new token tries to access a cart_id that it's not associated with.
             StorageService.remove("cart_id");
@@ -4640,7 +4623,7 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
 
             deferred.resolve(response.data.token);
         }, function (error) {
-            deferred.reject({ type: "internal_server_error", reference: "6lnOOW1", code: "unspecified_error", message: "There was a problem obtaining authorization for this session. Please reload the page to try your request again.", status: error.status });
+            deferred.reject({ type: "internal_server_error", reference: "6lnOOW1", code: "unspecified_error", message: gettextCatalog.getString("There was a problem obtaining authorization for this session. Please reload the page to try your request again."), status: error.status });
         });
 
         return deferred.promise;
@@ -4649,6 +4632,10 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
     function create(data, url, parameters, quiet) {
 
         var deferred = $q.defer();
+
+        // Pass in the user's language selection.
+        parameters = parameters || {};
+        parameters.user_locale = LanguageService.getLocale();
 
         getToken().then(function (token) {
 
@@ -4690,6 +4677,10 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
 
         var deferred = $q.defer();
 
+        // Pass in the user's language selection.
+        parameters = parameters || {};
+        parameters.user_locale = LanguageService.getLocale();
+
         getToken().then(function (token) {
 
             // Get the settings
@@ -4723,6 +4714,10 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
     function getList(url, parameters, quiet) {
 
         var deferred = $q.defer();
+
+        // Pass in the user's language selection.
+        parameters = parameters || {};
+        parameters.user_locale = LanguageService.getLocale();
 
         getToken().then(function (token) {
 
@@ -4776,6 +4771,10 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
 
         var deferred = $q.defer();
 
+        // Pass in the user's language selection.
+        parameters = parameters || {};
+        parameters.user_locale = LanguageService.getLocale();
+
         getToken().then(function (token) {
 
             // Get the settings
@@ -4815,6 +4814,10 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
 
         var deferred = $q.defer();
 
+        // Pass in the user's language selection.
+        parameters = parameters || {};
+        parameters.user_locale = LanguageService.getLocale();
+
         getToken().then(function (token) {
 
             // Get the settings
@@ -4848,6 +4851,10 @@ app.service("ApiService", ['$http', '$q', '$location', 'SettingsService', 'Helpe
     function getItemPdf(url, parameters, quiet) {
 
         var deferred = $q.defer();
+
+        // Pass in the user's language selection.
+        parameters = parameters || {};
+        parameters.user_locale = LanguageService.getLocale();
 
         getToken().then(function (token) {
 
@@ -6200,7 +6207,7 @@ app.service("CurrencyService", ['$q', '$rootScope', 'SettingsService', 'CartServ
 
 }]);
 
-app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageService', 'gettextCatalog', 'ApiService', function ($q, $rootScope, SettingsService, StorageService, gettextCatalog, ApiService) {
+app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageService', 'gettextCatalog', function ($q, $rootScope, SettingsService, StorageService, gettextCatalog) {
 
     // Angular gettext https://angular-gettext.rocketeer.be/ Used to provide application translations. Translation files are located in the languages folder.
 
@@ -6209,7 +6216,8 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
         getSelectedLanguage: getSelectedLanguage,
         getLanguages: getLanguages,
         setLanguage: setLanguage,
-        establishLanguage: establishLanguage
+        establishLanguage: establishLanguage,
+        getLocale: getLocale
     };
 
     function getLanguages() {
@@ -6254,74 +6262,69 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
             return;
         }
 
-        if (language != null) {
-            StorageService.set("language", language);
-            gettextCatalog.setCurrentLanguage(language);
+        StorageService.set("language", language);
+        gettextCatalog.setCurrentLanguage(language);
 
-            // Emit the change
-            $rootScope.$emit("languageChanged", language);
+        // Emit the change
+        $rootScope.$emit("languageChanged", language);
 
-            // English does not need to be loaded since it's embedded in the HTML.
-            if (language != "en") {
-                // Load the language configuration file.
-                gettextCatalog.loadRemote((languagesPath || "languages/") + language + "/" + language + ".json");
-            }
+        // English does not need to be loaded since it's embedded in the HTML.
+        if (language != "en") {
+            // Load the language configuration file.
+            gettextCatalog.loadRemote((languagesPath || "languages/") + language + "/" + language + ".json");
         }
-
-    }
-
-    function getUserLanguage() {
-
-        var deferred = $q.defer();
-
-        // Check if languages are provided. If not, just return english and don't bother fetching the user's language from the server.
-        if (!$rootScope.languages) {
-            deferred.resolve("en");
-            return deferred.promise;
-        }
-
-        // If a language is already set and it's valid, just return that language.
-        var language = getSelectedLanguage();
-
-        if (language.code) {
-
-            // We already have a language set, return it.
-            deferred.resolve(language.code);
-
-        } else {
-
-            // Determine the user's language from the server, which is the most reliable way to get browser language settings into JavaScript.
-            var settings = SettingsService.get();
-            ApiService.getItem("/browser_info", null, true).then(function (response) {
-
-                // The value returned in language will either be a valid two-character language code or null.
-                deferred.resolve(response.data.language);
-
-            }, function (error) {
-                // We always resolve the promise, just with null in the case of error.
-                deferred.resolve(null);
-            });
-
-        }
-
-        return deferred.promise;
 
     }
 
     function establishLanguage(languagesPath) {
 
-        // This called when the app is intially bootstrapped and sets the language according to the user's preference, auto-detected language or default language.
-        getUserLanguage().then(function (language) {
+        var language = getSelectedLanguage();
 
-            // If null, set the default
-            if (language == null) {
-                language = "en";
+        // Determine the browser default language if we don't have a language already set.
+        if (!language.code) {
+
+            // If the full locale is supported (i.e. fr-CA), then use it. Otherwise, try for the language only.
+            var locale = null;
+            if (SettingsService.get().account.browser_info) {
+                locale = SettingsService.get().account.browser_info.locale;
             }
 
-            // Set the language
-            setLanguage(language, languagesPath);
+            var language = "en";
+            if (SettingsService.get().account.browser_info) {
+                language = SettingsService.get().account.browser_info.language;
+            }
 
-        });
+            if (isSupportedLanguage(locale)) {
+                setLanguage(locale, languagesPath);
+            } else {
+                setLanguage(language, languagesPath);
+            }
+
+        }
+    }
+
+    function getLocale() {
+
+        // If the language portion of the user's locale (for example: fr-ca, es-MX) is the same as the selected app language (for example: fr, es), use the full locale.
+        // Otherwise, if there is a mismatch between the language portion of the user's locale and the selected app language (for example: en-US, es), use the language code as the locale.
+
+        // The locale determines things such as number formatting, so if it important to send in the full locale, if possible. Otherwise the user will end up with default number formatting for the language, rather than for the specific locale.
+        // However, if the selected app language conflicts with the user locale, you can't send it or the API response text will be returned in the locale's language.
+
+        var locale = null;
+        if (SettingsService.get().account.browser_info) {
+            locale = SettingsService.get().account.browser_info.locale;
+        }
+
+        var language = getSelectedLanguage().code;
+
+        if (locale && locale.length >= 2 && language && language.length >= 2) {
+            if (locale.substring(0, 2).toLowerCase() == language.substring(0, 2).toLowerCase()) {
+                return locale;
+            }
+        }
+
+        return language;
 
     }
 

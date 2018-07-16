@@ -24,6 +24,13 @@ window.__settings.account = {
         "Diners Club",
         "Discover"
     ],
-    "date_utc": "2016-02-15T00:00:00Z"
+    "date_utc": "2018-02-15T00:00:00Z",
+    "browser_info": {
+        "accept_language": "en-US,en;q=0.9,es-MX;q=0.8,es;q=0.7,fr-CA;q=0.6,fr;q=0.5",
+        "locale": "en-US",
+        "language": "en",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
+    }
 }
 
