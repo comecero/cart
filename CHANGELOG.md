@@ -1,4 +1,9 @@
-﻿<a name="1.2.0"></a>
+﻿<a name="1.2.1"></a>
+# 1.2.1
+
+- Integrate kit version 1.0.9 of kit. See kit release notes for details.
+
+<a name="1.2.0"></a>
 # 1.2.0
 
 - Add support for Amazon Pay
