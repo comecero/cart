@@ -6278,29 +6278,40 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
 
     function establishLanguage(languagesPath) {
 
-        var language = getSelectedLanguage();
+        // If a language has already been selected, use it.
+        var selectedLanguage = getSelectedLanguage();
+        if (selectedLanguage.code && isSupportedLanguage(selectedLanguage.code)) {
+            setLanguage(selectedLanguage.code, languagesPath);
+            return;
+        }
 
-        // Determine the browser default language if we don't have a language already set.
-        if (!language.code) {
+        var locale = null, language = null;
+        if (SettingsService.get().account.browser_info) {
 
-            // If the full locale is supported (i.e. fr-CA), then use it. Otherwise, try for the language only.
-            var locale = null;
-            if (SettingsService.get().account.browser_info) {
-                locale = SettingsService.get().account.browser_info.locale;
-            }
-
-            var language = "en";
-            if (SettingsService.get().account.browser_info) {
-                language = SettingsService.get().account.browser_info.language;
-            }
-
+            // Check for an exact match on the locale, such as fr-CA.
+            locale = SettingsService.get().account.browser_info.locale;
             if (isSupportedLanguage(locale)) {
                 setLanguage(locale, languagesPath);
-            } else {
+                return;
+            }
+
+            // Check for an exact match on the langauge, such as fr.
+            language = SettingsService.get().account.browser_info.language;
+            if (isSupportedLanguage(language)) {
                 setLanguage(language, languagesPath);
+                return;
+            }
+
+            // Check for a language that starts with the same language as the user language
+            // This is helpful in cases where the user's language is zh and we don't have zh but we do have zh-CN.
+            var result = _.find(getLanguages(), function (i) { return i.code.substring(0, 2) == language });
+            if (result) {
+                setLanguage(result.code, languagesPath);
+                return;
             }
 
         }
+
     }
 
     function getLocale() {
