@@ -394,7 +394,7 @@
     "description": "The background color for notifications and alerts that indicate an error. Generally a light red is used.",
     "section": "Alerts & Notifications",
     "required": true,
-    "default_value": "#dff0d8"
+    "default_value": "#f2dede"
   },
   {
     "name": "state-danger-text",
