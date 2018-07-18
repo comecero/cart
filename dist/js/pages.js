@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿1.2.0
+Comecero Cart version: ﻿1.2.1
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -271,12 +271,6 @@ app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'G
     });
 
 }]);
-app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
- 
-        $scope.settings = SettingsService.get();
-        $scope.currency = CurrencyService.getCurrencyName();
-
-    }]);
 app.controller("PaymentController", ['$scope', '$location', '$routeParams', 'CartService', 'PaymentService', 'SettingsService', 'HelperService', 'GeoService', '$document', function ($scope, $location, $routeParams, CartService, PaymentService, SettingsService, HelperService, GeoService, $document) {
         
         // Define a place to hold your data
@@ -536,4 +530,10 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
     });
 
 }]);
+app.controller("MainController", ['$scope', 'SettingsService', 'CurrencyService', function ($scope, SettingsService, CurrencyService) {
+ 
+        $scope.settings = SettingsService.get();
+        $scope.currency = CurrencyService.getCurrencyName();
+
+    }]);
 //# sourceMappingURL=pages.js.map
