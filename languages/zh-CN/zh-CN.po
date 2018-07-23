@@ -5,70 +5,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: Comecero Public Storefront Apps\n"
-"Language: zh\n"
+"Language: zh-CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ./app/pages/cart/cart.html:228
-#: ./app/pages/cart/cart.html:308
+#: ./app/pages/cart/cart.html:186
+#: ./app/pages/cart/cart.html:261
 msgid "Address"
 msgstr "地址"
 
-#: ./app/pages/cart/cart.html:236
-#: ./app/pages/cart/cart.html:316
+#: ./app/pages/cart/cart.html:194
+#: ./app/pages/cart/cart.html:269
 msgid "Address 2"
 msgstr "地址 2"
 
-#: ./dist/js/kit.js:5010
+#: ./app/shared/services.js:467
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "尝试处理您的请求时发生错误。请重试您的请求。如果问题仍然存在，请与支持团队联系。"
 
-#: ./app/pages/cart/cart.html:374
-#: ./app/pages/cart/cart.html:92
-#: ./app/pages/payment/review.html:86
-#: ./app/pages/payment/review.html:87
+#: ./app/pages/cart/cart.html:323
+#: ./app/pages/cart/cart.html:88
+#: ./app/pages/payment/review.html:72
+#: ./app/pages/payment/review.html:73
 msgid "Apply"
 msgstr "应用"
 
-#: ./app/pages/cart/cart.html:190
-#: ./app/pages/payment/review.html:39
+#: ./app/pages/cart/cart.html:150
+#: ./app/pages/payment/review.html:27
 msgid "Billing Address"
 msgstr "帐单地址"
 
-#: ./app/pages/products/products.html:34
+#: ./app/pages/products/products.html:29
 msgid "Buy Now"
 msgstr "马上购买"
 
-#: ./app/pages/cart/cart.html:178
+#: ./app/pages/cart/cart.html:137
 msgid "Cancel"
 msgstr "取消"
 
-#: ./app/pages/cart/cart.html:484
-#: ./app/pages/invoice/invoice.html:245
+#: ./app/pages/cart/cart.html:356
 msgid "Card Number"
 msgstr "卡号"
 
-#: ./app/pages/cart/cart.html:450
-#: ./app/pages/invoice/invoice.html:211
+#: ./app/pages/cart/cart.html:339
 msgid "Choose a Payment Method"
 msgstr "选择付款方式"
 
-#: ./app/pages/cart/cart.html:246
-#: ./app/pages/cart/cart.html:326
+#: ./app/pages/cart/cart.html:202
+#: ./app/pages/cart/cart.html:277
 msgid "City"
 msgstr "城市"
 
-#: ./app/pages/cart/cart.html:212
-#: ./app/pages/payment/review.html:67
+#: ./app/pages/cart/cart.html:154
+#: ./app/pages/payment/review.html:53
 msgid "Company Name"
 msgstr "公司名称"
 
-#: ./app/pages/cart/cart.html:134
-#: ./app/pages/cart/cart.html:33
+#: ./app/pages/cart/cart.html:75
 msgid "Continue Shopping"
 msgstr "继续购物"
 
-#: ./app/pages/cart/cart.html:278
-#: ./app/pages/cart/cart.html:358
+#: ./app/pages/cart/cart.html:232
+#: ./app/pages/cart/cart.html:307
 msgid "Country"
 msgstr "国家"
 
@@ -76,24 +73,15 @@ msgstr "国家"
 msgid "Currency"
 msgstr "货币"
 
-#: ./app/pages/cart/cart.html:419
-#: ./app/pages/cart/cart.html:420
-#: ./app/pages/cart/cart.html:81
-#: ./app/pages/cart/cart.html:82
-#: ./app/pages/invoice/invoice.html:139
-#: ./app/pages/invoice/invoice.html:140
-#: ./app/pages/payment/review.html:165
-#: ./app/pages/payment/review.html:166
-#: ./app/pages/receipt/receipt.html:160
-#: ./app/pages/receipt/receipt.html:161
+#: ./app/pages/cart/cart.html:63
 msgid "Discount"
 msgstr "折扣"
 
-#: ./app/pages/cart/cart.html:95
+#: ./app/pages/cart/cart.html:91
 msgid "Discount applied."
 msgstr "折扣已应用。"
 
-#: ./app/pages/cart/cart.html:202
+#: ./app/pages/cart/cart.html:170
 msgid "Email"
 msgstr "电子邮件"
 
@@ -101,26 +89,24 @@ msgstr "电子邮件"
 msgid "Enter Promo Code"
 msgstr "输入促销代码"
 
-#: ./app/pages/cart/cart.html:497
-#: ./app/pages/invoice/invoice.html:258
+#: ./app/pages/cart/cart.html:364
 msgid "Expiration Month"
 msgstr "到期月份"
 
-#: ./app/pages/cart/cart.html:506
-#: ./app/pages/invoice/invoice.html:267
+#: ./app/pages/cart/cart.html:372
 msgid "Expiration Year"
 msgstr "到期年份"
 
-#: ./app/pages/receipt/receipt.html:85
+#: ./app/pages/receipt/receipt.html:37
 msgid "Expires"
 msgstr "到期"
 
-#: ./app/pages/cart/cart.html:152
+#: ./app/pages/cart/cart.html:117
 msgid "Have an account?"
-msgstr "有帐户？"
+msgstr "已有帐户？"
 
-#: ./app/pages/cart/cart.html:376
-#: ./app/pages/payment/review.html:89
+#: ./app/pages/cart/cart.html:325
+#: ./app/pages/payment/review.html:75
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr "如果此订单为企业订单，请提供您的增值税号。"
 
@@ -128,14 +114,11 @@ msgstr "如果此订单为企业订单，请提供您的增值税号。"
 msgid "Language"
 msgstr "语言"
 
-#: ./app/pages/cart/cart.html:43
-#: ./app/pages/cart/cart.html:51
-#: ./app/pages/invoice/invoice.html:87
-#: ./app/pages/invoice/invoice.html:95
-#: ./app/pages/payment/review.html:110
-#: ./app/pages/payment/review.html:118
-#: ./app/pages/receipt/receipt.html:107
-#: ./app/pages/receipt/receipt.html:115
+#: ./app/pages/cart/cart.html:162
+#: ./app/pages/cart/cart.html:253
+#: ./app/pages/cart/cart.html:35
+#: ./app/pages/payment/review.html:92
+#: ./app/pages/receipt/receipt.html:51
 msgid "Name"
 msgstr "名称"
 
@@ -143,18 +126,16 @@ msgstr "名称"
 msgid "No"
 msgstr "不"
 
-#: ./app/pages/cart/cart.html:373
-#: ./app/pages/payment/review.html:85
+#: ./app/pages/cart/cart.html:322
+#: ./app/pages/payment/review.html:71
 msgid "Optional"
 msgstr "可选"
 
-#: ./app/pages/cart/cart.html:169
-#: ./app/pages/receipt/receipt.html:48
+#: ./app/pages/cart/cart.html:131
 msgid "Password"
 msgstr "密码"
 
-#: ./app/pages/cart/cart.html:475
-#: ./app/pages/invoice/invoice.html:236
+#: ./app/pages/cart/cart.html:347
 msgid "Pay with a new card"
 msgstr "使用新卡支付"
 
@@ -162,246 +143,218 @@ msgstr "使用新卡支付"
 msgid "Payment Information"
 msgstr "付款信息"
 
-#: ./app/pages/receipt/receipt.html:82
+#: ./app/pages/receipt/receipt.html:34
 msgid "Payment Method"
 msgstr "付款方式"
 
-#: ./app/pages/cart/cart.html:220
-#: ./app/pages/payment/review.html:75
+#: ./app/pages/cart/cart.html:178
+#: ./app/pages/payment/review.html:61
 msgid "Phone"
 msgstr "电话"
 
-#: ./dist/js/kit.js:4154
+#: ./app/shared/directives.js:2826
 msgid "Please confirm"
 msgstr "请确认"
 
-#: ./dist/js/kit.js:4149
-#: ./dist/js/kit.js:4185
+#: ./app/shared/directives.js:2821
+#: ./app/shared/directives.js:2857
 msgid "Please make a selection"
 msgstr "请选择"
 
-#: ./app/pages/cart/cart.html:248
-#: ./app/pages/cart/cart.html:328
+#: ./app/pages/cart/cart.html:204
+#: ./app/pages/cart/cart.html:279
 msgid "Please provide a city"
 msgstr "请提供城市"
 
-#: ./app/pages/cart/cart.html:214
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/cart/cart.html:156
+#: ./app/pages/payment/review.html:55
 msgid "Please provide a company name"
 msgstr "请提高公司名"
 
-#: ./app/pages/cart/cart.html:280
-#: ./app/pages/cart/cart.html:360
+#: ./app/pages/cart/cart.html:234
+#: ./app/pages/cart/cart.html:309
 msgid "Please provide a country"
 msgstr "请提供国家"
 
-#: ./app/pages/cart/cart.html:196
-#: ./app/pages/cart/cart.html:302
+#: ./app/pages/cart/cart.html:164
+#: ./app/pages/cart/cart.html:255
 msgid "Please provide a name"
 msgstr "请提供名称"
 
-#: ./app/pages/cart/cart.html:262
-#: ./app/pages/cart/cart.html:342
+#: ./app/pages/cart/cart.html:218
+#: ./app/pages/cart/cart.html:293
 msgid "Please provide a region / province"
 msgstr "请提供地区/省份"
 
-#: ./app/pages/cart/cart.html:256
-#: ./app/pages/cart/cart.html:336
+#: ./app/pages/cart/cart.html:212
+#: ./app/pages/cart/cart.html:287
 msgid "Please provide a state / province"
 msgstr "请提供州/省"
 
-#: ./app/pages/cart/cart.html:489
-#: ./app/pages/invoice/invoice.html:250
+#: ./app/pages/cart/cart.html:358
 msgid "Please provide a valid card number"
 msgstr "请提供有效的卡号"
 
-#: ./app/pages/cart/cart.html:204
+#: ./app/pages/cart/cart.html:172
 msgid "Please provide a valid email address"
 msgstr "请提供有效的电子邮件地址"
 
-#: ./app/pages/cart/cart.html:500
-#: ./app/pages/invoice/invoice.html:261
+#: ./app/pages/cart/cart.html:366
 msgid "Please provide a valid expiration month"
 msgstr "请提供有效的到期月份"
 
-#: ./app/pages/cart/cart.html:509
-#: ./app/pages/invoice/invoice.html:270
+#: ./app/pages/cart/cart.html:374
 msgid "Please provide a valid expiration year"
 msgstr "请提供有效的到期年份"
 
-#: ./app/pages/payment/review.html:77
+#: ./app/pages/cart/cart.html:180
+#: ./app/pages/payment/review.html:63
 msgid "Please provide a valid phone number"
 msgstr "请提供有效的电话号码"
 
-#: ./app/pages/cart/cart.html:517
-#: ./app/pages/invoice/invoice.html:278
+#: ./app/pages/cart/cart.html:382
 msgid "Please provide a valid security code"
-msgstr "请提供有效的安全代码"
+msgstr "请提供有效的安全码"
 
-#: ./app/pages/cart/cart.html:270
-#: ./app/pages/cart/cart.html:350
+#: ./app/pages/cart/cart.html:226
+#: ./app/pages/cart/cart.html:301
 msgid "Please provide a zip / postal code"
 msgstr "请提供邮政编码"
 
-#: ./app/pages/cart/cart.html:230
-#: ./app/pages/cart/cart.html:238
-#: ./app/pages/cart/cart.html:310
-#: ./app/pages/cart/cart.html:318
+#: ./app/pages/cart/cart.html:188
+#: ./app/pages/cart/cart.html:196
+#: ./app/pages/cart/cart.html:263
+#: ./app/pages/cart/cart.html:271
 msgid "Please provide an address"
 msgstr "请提供地址"
 
-#: ./dist/js/kit.js:1613
+#: ./app/shared/directives.js:285
 msgid "Please provide an amount for your payment."
 msgstr "请提供您的付款金额。"
 
-#: ./dist/js/kit.js:4194
+#: ./app/shared/directives.js:2866
 msgid "Please provide one of the available options"
 msgstr "请提供一个可用选项"
 
-#: ./dist/js/kit.js:4177
+#: ./app/shared/directives.js:2849
 msgid "Please supply a number"
 msgstr "请提供一个号码"
 
-#: ./dist/js/kit.js:4170
+#: ./app/shared/directives.js:2842
 msgid "Please supply a number without decimals"
 msgstr "请提供一个不带小数的数字"
 
-#: ./app/pages/products/products.html:22
+#: ./app/pages/products/products.html:17
 msgid "Products"
 msgstr "产品"
 
-#: ./app/pages/cart/cart.html:44
-#: ./app/pages/cart/cart.html:52
-#: ./app/pages/invoice/invoice.html:88
-#: ./app/pages/invoice/invoice.html:96
-#: ./app/pages/payment/review.html:111
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:108
-#: ./app/pages/receipt/receipt.html:116
+#: ./app/pages/cart/cart.html:34
+#: ./app/pages/payment/review.html:91
+#: ./app/pages/receipt/receipt.html:50
 msgid "Quantity"
 msgstr "数量"
 
-#: ./app/pages/receipt/receipt.html:13
+#: ./app/pages/receipt/receipt.html:9
 msgid "Receipt"
 msgstr "收据"
 
-#: ./app/pages/cart/cart.html:260
-#: ./app/pages/cart/cart.html:340
+#: ./app/pages/cart/cart.html:216
+#: ./app/pages/cart/cart.html:291
 msgid "Region / Province"
 msgstr "地区/省份"
 
-#: ./app/pages/payment/review.html:25
+#: ./app/pages/payment/review.html:21
 msgid "Return to PayPal to try your payment again."
 msgstr "返回 PayPal 再次尝试付款。"
 
-#: ./app/pages/payment/review.html:16
+#: ./app/pages/payment/review.html:11
 msgid "Review Your Order"
-msgstr "审查您的订单"
+msgstr "检查您的订单"
 
-#: ./app/pages/cart/cart.html:515
-#: ./app/pages/invoice/invoice.html:276
+#: ./app/pages/cart/cart.html:380
 msgid "Security Code"
 msgstr "安全码"
 
-#: ./app/pages/cart/cart.html:289
-#: ./app/pages/payment/review.html:52
+#: ./app/pages/cart/cart.html:243
+#: ./app/pages/payment/review.html:38
 msgid "Shipping Address"
-msgstr "寄送地址"
+msgstr "配送地址"
 
 #: ./app/pages/cart/cart.html:25
 msgid "Shopping Cart"
 msgstr "购物车"
 
-#: ./app/pages/cart/cart.html:153
-#: ./app/pages/cart/cart.html:179
+#: ./app/pages/cart/cart.html:118
+#: ./app/pages/cart/cart.html:138
 msgid "Sign In"
 msgstr "登录"
 
-#: ./app/pages/cart/cart.html:185
+#: ./app/pages/cart/cart.html:144
 msgid "Sign out"
 msgstr "登出"
 
-#: ./app/pages/cart/cart.html:254
-#: ./app/pages/cart/cart.html:334
+#: ./app/pages/cart/cart.html:210
+#: ./app/pages/cart/cart.html:285
 msgid "State / Province"
 msgstr "州/省"
 
-#: ./app/pages/cart/cart.html:406
-#: ./app/pages/cart/cart.html:407
-#: ./app/pages/cart/cart.html:45
-#: ./app/pages/cart/cart.html:70
-#: ./app/pages/invoice/invoice.html:127
-#: ./app/pages/invoice/invoice.html:128
-#: ./app/pages/invoice/invoice.html:89
-#: ./app/pages/invoice/invoice.html:97
-#: ./app/pages/payment/review.html:112
-#: ./app/pages/payment/review.html:120
-#: ./app/pages/payment/review.html:153
-#: ./app/pages/payment/review.html:154
-#: ./app/pages/receipt/receipt.html:109
-#: ./app/pages/receipt/receipt.html:117
-#: ./app/pages/receipt/receipt.html:148
-#: ./app/pages/receipt/receipt.html:149
+#: ./app/pages/cart/cart.html:36
+#: ./app/pages/payment/review.html:93
+#: ./app/pages/receipt/receipt.html:52
 msgid "Subtotal"
 msgstr "小计"
 
-#: ./app/pages/cart/cart.html:425
-#: ./app/pages/cart/cart.html:426
-#: ./app/pages/invoice/invoice.html:145
-#: ./app/pages/invoice/invoice.html:146
-#: ./app/pages/payment/review.html:171
-#: ./app/pages/payment/review.html:172
-#: ./app/pages/receipt/receipt.html:166
-#: ./app/pages/receipt/receipt.html:167
+#: ./app/pages/cart/cart.html:57
+#: ./app/pages/payment/review.html:113
+#: ./app/pages/receipt/receipt.html:72
 msgid "Tax"
 msgstr "税"
 
-#: ./app/pages/receipt/receipt.html:20
+#: ./app/pages/receipt/receipt.html:17
 msgid "Thank you! Your order is complete."
 msgstr "谢谢！您的订单已完成。"
 
-#: ./dist/js/kit.js:5004
+#: ./app/shared/services.js:461
 msgid "The item you are trying to access could not be found."
 msgstr "找不到您要访问的商品。"
 
-#: ./dist/js/kit.js:4220
+#: ./app/shared/directives.js:2892
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
-msgstr[0] "该值必须至少为一个字符"
+msgstr[0] "该值必须至少为一个字符\n"
+"该值必须至少为{{$count}}个字符"
 
-#: ./dist/js/kit.js:4226
+#: ./app/shared/directives.js:2898
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
-msgstr[0] "该值必须小于一个字符"
+msgstr[0] "该值必须小于一个字符\n"
+"该值必须小于{{$count}}个字符"
 
-#: ./dist/js/kit.js:4203
+#: ./app/shared/directives.js:2875
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
-msgstr[0] "您提供的值必须大于{{$count}}"
+msgstr[0] "您提供的值必须大于{{$count}}\n"
+"您提供的值必须大于{{$count}}"
 
-#: ./dist/js/kit.js:4209
+#: ./app/shared/directives.js:2881
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
-msgstr[0] "您提供的值必须小于{{$count}}"
+msgstr[0] "您提供的值必须小于{{$count}}\n"
+"您提供的值必须小于{{$count}}"
 
-#: ./app/pages/cart/cart.html:32
+#: ./app/pages/cart/cart.html:74
 msgid "There are no items in your cart"
 msgstr "您的购物车中没有商品"
 
-#: ./dist/js/kit.js:1507
-#: ./dist/js/kit.js:1601
-#: ./dist/js/kit.js:1841
+#: ./app/shared/directives.js:179
+#: ./app/shared/directives.js:273
+#: ./app/shared/directives.js:513
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
-msgstr "您提供的部分信息存在问题。请检查错误并重试。"
+msgstr "您提供的信息有部分存在问题。请检查错误并重试。"
 
-#: ./app/pages/cart/cart.html:431
-#: ./app/pages/cart/cart.html:432
-#: ./app/pages/invoice/invoice.html:151
-#: ./app/pages/invoice/invoice.html:152
-#: ./app/pages/payment/review.html:177
-#: ./app/pages/payment/review.html:178
-#: ./app/pages/receipt/receipt.html:172
-#: ./app/pages/receipt/receipt.html:173
+#: ./app/pages/cart/cart.html:68
+#: ./app/pages/payment/review.html:119
+#: ./app/pages/receipt/receipt.html:78
 msgid "Total"
 msgstr "总计"
 
@@ -409,13 +362,12 @@ msgstr "总计"
 msgid "Update Cart"
 msgstr "更新购物车"
 
-#: ./app/pages/cart/cart.html:159
-#: ./app/pages/receipt/receipt.html:38
+#: ./app/pages/cart/cart.html:124
 msgid "Username"
 msgstr "用户名"
 
-#: ./app/pages/cart/cart.html:371
-#: ./app/pages/payment/review.html:83
+#: ./app/pages/cart/cart.html:320
+#: ./app/pages/payment/review.html:69
 msgid "VAT Number"
 msgstr "增值税号码"
 
@@ -423,12 +375,12 @@ msgstr "增值税号码"
 msgid "Yes"
 msgstr "是"
 
-#: ./app/pages/cart/cart.html:145
+#: ./app/pages/cart/cart.html:110
 msgid "Your Information"
 msgstr "您的信息"
 
-#: ./app/pages/cart/cart.html:268
-#: ./app/pages/cart/cart.html:348
+#: ./app/pages/cart/cart.html:224
+#: ./app/pages/cart/cart.html:299
 msgid "Zip / Postal Code"
 msgstr "邮政编码"
 
@@ -445,20 +397,21 @@ msgstr "账单信息"
 msgid "Complete Order"
 msgstr "完成订单"
 
-#: ./app/pages/invoice/invoice.html:292
+#: ./app/pages/pay/pay.html:351
+#: ./app/pages/review/review.html:137
 msgid "Complete Payment"
 msgstr "完成付款"
 
 #: ./index.html:59
 #: ./index.html:76
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
-msgstr "版权 & 复制; {{settings.account.year}} {{settings.app.company_name}}。版权所有。"
+msgstr "版权所有 &copy; {{settings.account.year}} {{settings.app.company_name}}。保留所有权利。"
 
-#: ./app/pages/receipt/receipt.html:57
+#: ./app/pages/receipt/receipt.html:58
 msgid "Create Account"
 msgstr "创建账号"
 
-#: ./app/pages/receipt/receipt.html:28
+#: ./app/pages/receipt/receipt.html:29
 msgid "Date"
 msgstr "日期"
 
@@ -475,8 +428,7 @@ msgstr "截止日期"
 msgid "Enter"
 msgstr "输入"
 
-#: ./app/pages/cart/cart.html:194
-#: ./app/pages/cart/cart.html:300
+#: ./app/pages/pay/pay.html:151
 msgid "Full Name"
 msgstr "全名"
 
@@ -512,8 +464,8 @@ msgstr "订单摘要"
 msgid "Paid"
 msgstr "已付款"
 
-#: ./app/pages/cart/cart.html:445
-#: ./app/pages/invoice/invoice.html:166
+#: ./app/pages/pay/pay.html:248
+#: ./app/pages/receipt/receipt.html:96
 msgid "Payment Details"
 msgstr "付款详情"
 
@@ -522,34 +474,36 @@ msgstr "付款详情"
 msgid "Payment Summary"
 msgstr "付款摘要"
 
-#: ./app/pages/cart/cart.html:222
+#: ./app/pages/pay/pay.html:179
 msgid "Please provide a phone"
 msgstr "请提供一个电话号码"
 
-#: ./app/pages/cart/cart.html:524
-#: ./app/pages/invoice/invoice.html:285
+#: ./app/pages/pay/pay.html:327
 msgid "Save this card to my account"
-msgstr "在我的账号中保存此卡"
+msgstr "在我的账号中保存此卡信息"
 
-#: ./app/pages/cart/cart.html:386
-#: ./app/pages/cart/cart.html:412
-#: ./app/pages/payment/review.html:132
+#: ./app/pages/pay/pay.html:75
+#: ./app/pages/pay/pay.html:76
+#: ./app/pages/receipt/receipt.html:127
+#: ./app/pages/receipt/receipt.html:128
+#: ./app/pages/review/review.html:118
+#: ./app/pages/review/review.html:119
 msgid "Shipping"
-msgstr "快递"
+msgstr "配送"
 
 #: ./app/pages/invoice/invoice.html:65
 msgid "Shipping Information"
-msgstr "快递信息"
+msgstr "配送信息"
 
 #: ./app/pages/cart/cart.html:294
 msgid "Shipping is same as billing"
-msgstr "快递地址与账单地址相同"
+msgstr "配送地址与账单地址相同"
 
 #: ./app/pages/receipt/receipt.html:69
 msgid "Sold To"
 msgstr "卖往"
 
-#: ./app/pages/invoice/invoice.html:303
+#: ./app/pages/invoice/invoice.html:298
 msgid "Thank you for your business"
 msgstr "感谢您的业务"
 
@@ -559,7 +513,7 @@ msgstr "感谢您的订单"
 
 #: ./app/pages/receipt/receipt.html:22
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
-msgstr "谢谢！ 您的订单已提交处理。 您很快就会收到一封包含订单状态电子邮件。"
+msgstr "谢谢！ 您的订单已提交处理。 您很快就会收到一封包含订单状态的电子邮件。"
 
 #: ./app/pages/invoice/invoice.html:35
 msgid "This invoice is closed"
@@ -573,26 +527,25 @@ msgstr "请创建一个帐户来在线管理您的订单。"
 msgid "Your Order"
 msgstr "您的订单"
 
-#: ./app/pages/invoice/invoice.html:46
-#: ./app/pages/receipt/receipt.html:63
+#: ./app/pages/receipt/receipt.html:64
 msgid "Your account has been created."
 msgstr "您的账号已创建"
 
 #: ./app/pages/cart/cart.html:435
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data.cart.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data.cart.formatted.tax}}"
 
 #: ./app/pages/invoice/invoice.html:155
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data..invoice.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data..invoice.formatted.tax}}"
 
 #: ./app/pages/receipt/receipt.html:176
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data.payment.order.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data.payment.order.formatted.tax}}"
 
 #: ./app/pages/payment/review.html:181
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
-msgstr "您的总金额包括有{{data.sale.formatted.tax}}税"
+msgstr "您的总金额包括税款{{data.sale.formatted.tax}}"
 
 #: ./app/pages/pay/pay.html:34
 #: ./app/pages/pay/pay.html:56
@@ -618,7 +571,7 @@ msgstr "由……制成"
 msgid "Make Another Payment"
 msgstr "支付另一笔款项"
 
-#: ./dist/js/kit.js:4144
+#: ./app/shared/directives.js:2816
 msgid "Please provide a value"
 msgstr "请提供一个值"
 
@@ -626,7 +579,6 @@ msgstr "请提供一个值"
 msgid "Please provide an amount"
 msgstr "请提供一个数量"
 
-#: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
 msgid "Review & Finish"
 msgstr "检查 & 完成"
@@ -652,7 +604,7 @@ msgid "Your Payment"
 msgstr "您的付款"
 
 #: ./app/pages/simple/checkout.html:295
-#: ./app/pages/simple/review.html:175
+#: ./app/pages/simple/review.html:176
 msgid "An email has been sent to {{data.payment.order.customer.email}}."
 msgstr "已向{{data.payment.order.customer.email}}发送了一封电子邮件。"
 
@@ -661,7 +613,7 @@ msgid "Choose other payment method"
 msgstr "选择其他付款方式"
 
 #: ./app/pages/simple/checkout.html:305
-#: ./app/pages/simple/review.html:185
+#: ./app/pages/simple/review.html:186
 msgid "Close"
 msgstr "关闭"
 
@@ -669,8 +621,8 @@ msgstr "关闭"
 msgid "Confirm Payment"
 msgstr "确认付款"
 
-#: ./app/pages/cart/cart.html:125
-#: ./app/pages/invoice/invoice.html:200
+#: ./app/pages/simple/checkout.html:303
+#: ./app/pages/simple/review.html:184
 msgid "Continue"
 msgstr "继续"
 
@@ -684,7 +636,7 @@ msgid "Enter VAT Number"
 msgstr "输入 VAT 号"
 
 #: ./app/pages/simple/checkout.html:306
-#: ./app/pages/simple/review.html:186
+#: ./app/pages/simple/review.html:187
 msgid "Finish"
 msgstr "完成"
 
@@ -697,7 +649,7 @@ msgid "Postal Code"
 msgstr "邮箱编码"
 
 #: ./app/pages/simple/checkout.html:313
-#: ./app/pages/simple/review.html:193
+#: ./app/pages/simple/review.html:194
 msgid "Print receipt"
 msgstr "打印收据"
 
@@ -706,7 +658,7 @@ msgid "Region"
 msgstr "地区"
 
 #: ./app/pages/simple/checkout.html:304
-#: ./app/pages/simple/review.html:184
+#: ./app/pages/simple/review.html:185
 msgid "Return"
 msgstr "返回"
 
@@ -715,26 +667,43 @@ msgid "Submit Order"
 msgstr "提交订单"
 
 #: ./app/pages/simple/checkout.html:262
-#: ./app/pages/simple/review.html:142
+#: ./app/pages/simple/review.html:143
 msgid "Summary"
 msgstr "摘要"
 
 #: ./app/pages/simple/checkout.html:252
-#: ./app/pages/simple/review.html:132
+#: ./app/pages/simple/review.html:133
 msgid "Thank you for your purchase!"
-msgstr "感谢您的消费！"
+msgstr "感谢您的购买！"
 
 #: ./app/pages/cart/cart.html:68
 msgid "Remove"
 msgstr "移除"
 
-#: ./dist/js/kit.js:1656
+#: ./app/shared/directives.js:328
 msgid "Please check the box to provide consent to save your payment method for future payments."
-msgstr "请选中相应的复选框，以同意我们保存您的付款方式，以便日后使用。"
+msgstr "请选中相应的复选框来同意我们保存您的付款方式，方便您日后支付使用。"
 
 #: ./app/pages/cart/cart.html:128
-#: ./app/pages/invoice/invoice.html:203
+#: ./app/pages/invoice/invoice.html:198
 #: ./app/pages/payment/review.html:33
 msgid "Use another payment method"
 msgstr "使用另一种付款方式"
+
+#: ./dist/js/kit.js:3715
+msgid "Please provide a value."
+msgstr "请提供一个值。"
+
+#: ./app/pages/pay/pay.html:338
+msgid "Review &amp; Finish"
+msgstr "检查 &amp; 完成"
+
+#: ./app/shared/services.js:76
+msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
+msgstr "获取此会话的授权存在问题。请重新加载页面以再次尝试您的请求。"
+
+#: ./app/pages/pay/pay.html:32
+#: ./app/pages/review/review.html:30
+msgid "Reference"
+msgstr "参考"
 

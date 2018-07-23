@@ -8,67 +8,64 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ./app/pages/cart/cart.html:228
-#: ./app/pages/cart/cart.html:308
+#: ./app/pages/cart/cart.html:186
+#: ./app/pages/cart/cart.html:261
 msgid "Address"
 msgstr "Adress"
 
-#: ./app/pages/cart/cart.html:236
-#: ./app/pages/cart/cart.html:316
+#: ./app/pages/cart/cart.html:194
+#: ./app/pages/cart/cart.html:269
 msgid "Address 2"
 msgstr "Adress 2"
 
-#: ./dist/js/kit.js:5010
+#: ./app/shared/services.js:467
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "Ett fel uppstod när din begäran behandlades. Vänligen försök att skicka din begäran igen. Om felet kvarstår, kontakta support."
 
-#: ./app/pages/cart/cart.html:374
-#: ./app/pages/cart/cart.html:92
-#: ./app/pages/payment/review.html:86
-#: ./app/pages/payment/review.html:87
+#: ./app/pages/cart/cart.html:323
+#: ./app/pages/cart/cart.html:88
+#: ./app/pages/payment/review.html:72
+#: ./app/pages/payment/review.html:73
 msgid "Apply"
 msgstr "Tillämpa"
 
-#: ./app/pages/cart/cart.html:190
-#: ./app/pages/payment/review.html:39
+#: ./app/pages/cart/cart.html:150
+#: ./app/pages/payment/review.html:27
 msgid "Billing Address"
 msgstr "Faktureringsadress"
 
-#: ./app/pages/products/products.html:34
+#: ./app/pages/products/products.html:29
 msgid "Buy Now"
 msgstr "Köp nu"
 
-#: ./app/pages/cart/cart.html:178
+#: ./app/pages/cart/cart.html:137
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ./app/pages/cart/cart.html:484
-#: ./app/pages/invoice/invoice.html:245
+#: ./app/pages/cart/cart.html:356
 msgid "Card Number"
 msgstr "Kortnummer"
 
-#: ./app/pages/cart/cart.html:450
-#: ./app/pages/invoice/invoice.html:211
+#: ./app/pages/cart/cart.html:339
 msgid "Choose a Payment Method"
 msgstr "Välj betalningsmetod"
 
-#: ./app/pages/cart/cart.html:246
-#: ./app/pages/cart/cart.html:326
+#: ./app/pages/cart/cart.html:202
+#: ./app/pages/cart/cart.html:277
 msgid "City"
 msgstr "Stad"
 
-#: ./app/pages/cart/cart.html:212
-#: ./app/pages/payment/review.html:67
+#: ./app/pages/cart/cart.html:154
+#: ./app/pages/payment/review.html:53
 msgid "Company Name"
 msgstr "Företagsnamn"
 
-#: ./app/pages/cart/cart.html:134
-#: ./app/pages/cart/cart.html:33
+#: ./app/pages/cart/cart.html:75
 msgid "Continue Shopping"
 msgstr "Fortsätt handla"
 
-#: ./app/pages/cart/cart.html:278
-#: ./app/pages/cart/cart.html:358
+#: ./app/pages/cart/cart.html:232
+#: ./app/pages/cart/cart.html:307
 msgid "Country"
 msgstr "Land"
 
@@ -76,24 +73,15 @@ msgstr "Land"
 msgid "Currency"
 msgstr "Valuta"
 
-#: ./app/pages/cart/cart.html:419
-#: ./app/pages/cart/cart.html:420
-#: ./app/pages/cart/cart.html:81
-#: ./app/pages/cart/cart.html:82
-#: ./app/pages/invoice/invoice.html:139
-#: ./app/pages/invoice/invoice.html:140
-#: ./app/pages/payment/review.html:165
-#: ./app/pages/payment/review.html:166
-#: ./app/pages/receipt/receipt.html:160
-#: ./app/pages/receipt/receipt.html:161
+#: ./app/pages/cart/cart.html:63
 msgid "Discount"
 msgstr "Rabatt"
 
-#: ./app/pages/cart/cart.html:95
+#: ./app/pages/cart/cart.html:91
 msgid "Discount applied."
 msgstr "Rabatt aktiverad."
 
-#: ./app/pages/cart/cart.html:202
+#: ./app/pages/cart/cart.html:170
 msgid "Email"
 msgstr "E-postadress"
 
@@ -101,26 +89,24 @@ msgstr "E-postadress"
 msgid "Enter Promo Code"
 msgstr "Ange rabattkod"
 
-#: ./app/pages/cart/cart.html:497
-#: ./app/pages/invoice/invoice.html:258
+#: ./app/pages/cart/cart.html:364
 msgid "Expiration Month"
 msgstr "Utgångsmånad"
 
-#: ./app/pages/cart/cart.html:506
-#: ./app/pages/invoice/invoice.html:267
+#: ./app/pages/cart/cart.html:372
 msgid "Expiration Year"
 msgstr "Utgångsår"
 
-#: ./app/pages/receipt/receipt.html:85
+#: ./app/pages/receipt/receipt.html:37
 msgid "Expires"
 msgstr "Utgår"
 
-#: ./app/pages/cart/cart.html:152
+#: ./app/pages/cart/cart.html:117
 msgid "Have an account?"
 msgstr "Har du ett konto?"
 
-#: ./app/pages/cart/cart.html:376
-#: ./app/pages/payment/review.html:89
+#: ./app/pages/cart/cart.html:325
+#: ./app/pages/payment/review.html:75
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr "Om beställningen är för ett företag, vänligen uppge ditt momsregistreringsnummer."
 
@@ -128,14 +114,11 @@ msgstr "Om beställningen är för ett företag, vänligen uppge ditt momsregist
 msgid "Language"
 msgstr "Språk"
 
-#: ./app/pages/cart/cart.html:43
-#: ./app/pages/cart/cart.html:51
-#: ./app/pages/invoice/invoice.html:87
-#: ./app/pages/invoice/invoice.html:95
-#: ./app/pages/payment/review.html:110
-#: ./app/pages/payment/review.html:118
-#: ./app/pages/receipt/receipt.html:107
-#: ./app/pages/receipt/receipt.html:115
+#: ./app/pages/cart/cart.html:162
+#: ./app/pages/cart/cart.html:253
+#: ./app/pages/cart/cart.html:35
+#: ./app/pages/payment/review.html:92
+#: ./app/pages/receipt/receipt.html:51
 msgid "Name"
 msgstr "Namn"
 
@@ -143,18 +126,16 @@ msgstr "Namn"
 msgid "No"
 msgstr "Nej"
 
-#: ./app/pages/cart/cart.html:373
-#: ./app/pages/payment/review.html:85
+#: ./app/pages/cart/cart.html:322
+#: ./app/pages/payment/review.html:71
 msgid "Optional"
 msgstr "Valfritt"
 
-#: ./app/pages/cart/cart.html:169
-#: ./app/pages/receipt/receipt.html:48
+#: ./app/pages/cart/cart.html:131
 msgid "Password"
 msgstr "Lösenord"
 
-#: ./app/pages/cart/cart.html:475
-#: ./app/pages/invoice/invoice.html:236
+#: ./app/pages/cart/cart.html:347
 msgid "Pay with a new card"
 msgstr "Betala med nytt kort"
 
@@ -162,149 +143,140 @@ msgstr "Betala med nytt kort"
 msgid "Payment Information"
 msgstr "Betalningsinformation"
 
-#: ./app/pages/receipt/receipt.html:82
+#: ./app/pages/receipt/receipt.html:34
 msgid "Payment Method"
 msgstr "Betalningsmetod"
 
-#: ./app/pages/cart/cart.html:220
-#: ./app/pages/payment/review.html:75
+#: ./app/pages/cart/cart.html:178
+#: ./app/pages/payment/review.html:61
 msgid "Phone"
 msgstr "Telefon"
 
-#: ./dist/js/kit.js:4154
+#: ./app/shared/directives.js:2826
 msgid "Please confirm"
 msgstr "Bekräfta"
 
-#: ./dist/js/kit.js:4149
-#: ./dist/js/kit.js:4185
+#: ./app/shared/directives.js:2821
+#: ./app/shared/directives.js:2857
 msgid "Please make a selection"
 msgstr "Gör ett val"
 
-#: ./app/pages/cart/cart.html:248
-#: ./app/pages/cart/cart.html:328
+#: ./app/pages/cart/cart.html:204
+#: ./app/pages/cart/cart.html:279
 msgid "Please provide a city"
 msgstr "Uppge stad"
 
-#: ./app/pages/cart/cart.html:214
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/cart/cart.html:156
+#: ./app/pages/payment/review.html:55
 msgid "Please provide a company name"
 msgstr "Uppge företagsnamn"
 
-#: ./app/pages/cart/cart.html:280
-#: ./app/pages/cart/cart.html:360
+#: ./app/pages/cart/cart.html:234
+#: ./app/pages/cart/cart.html:309
 msgid "Please provide a country"
 msgstr "Uppge land"
 
-#: ./app/pages/cart/cart.html:196
-#: ./app/pages/cart/cart.html:302
+#: ./app/pages/cart/cart.html:164
+#: ./app/pages/cart/cart.html:255
 msgid "Please provide a name"
 msgstr "Uppge namn"
 
-#: ./app/pages/cart/cart.html:262
-#: ./app/pages/cart/cart.html:342
+#: ./app/pages/cart/cart.html:218
+#: ./app/pages/cart/cart.html:293
 msgid "Please provide a region / province"
 msgstr "Uppge region/provins"
 
-#: ./app/pages/cart/cart.html:256
-#: ./app/pages/cart/cart.html:336
+#: ./app/pages/cart/cart.html:212
+#: ./app/pages/cart/cart.html:287
 msgid "Please provide a state / province"
 msgstr "Uppge stat/provins"
 
-#: ./app/pages/cart/cart.html:489
-#: ./app/pages/invoice/invoice.html:250
+#: ./app/pages/cart/cart.html:358
 msgid "Please provide a valid card number"
 msgstr "Uppge ett giltigt kortnummer"
 
-#: ./app/pages/cart/cart.html:204
+#: ./app/pages/cart/cart.html:172
 msgid "Please provide a valid email address"
 msgstr "Uppge en giltig e-postadress"
 
-#: ./app/pages/cart/cart.html:500
-#: ./app/pages/invoice/invoice.html:261
+#: ./app/pages/cart/cart.html:366
 msgid "Please provide a valid expiration month"
 msgstr "Uppge en giltig utgångsmånad"
 
-#: ./app/pages/cart/cart.html:509
-#: ./app/pages/invoice/invoice.html:270
+#: ./app/pages/cart/cart.html:374
 msgid "Please provide a valid expiration year"
 msgstr "Uppge ett giltigt utgångsår"
 
-#: ./app/pages/payment/review.html:77
+#: ./app/pages/cart/cart.html:180
+#: ./app/pages/payment/review.html:63
 msgid "Please provide a valid phone number"
 msgstr "Uppge ett giltigt telefonnummer"
 
-#: ./app/pages/cart/cart.html:517
-#: ./app/pages/invoice/invoice.html:278
+#: ./app/pages/cart/cart.html:382
 msgid "Please provide a valid security code"
 msgstr "Uppge en giltig säkerhetskod"
 
-#: ./app/pages/cart/cart.html:270
-#: ./app/pages/cart/cart.html:350
+#: ./app/pages/cart/cart.html:226
+#: ./app/pages/cart/cart.html:301
 msgid "Please provide a zip / postal code"
 msgstr "Uppge postnummer"
 
-#: ./app/pages/cart/cart.html:230
-#: ./app/pages/cart/cart.html:238
-#: ./app/pages/cart/cart.html:310
-#: ./app/pages/cart/cart.html:318
+#: ./app/pages/cart/cart.html:188
+#: ./app/pages/cart/cart.html:196
+#: ./app/pages/cart/cart.html:263
+#: ./app/pages/cart/cart.html:271
 msgid "Please provide an address"
 msgstr "Uppge adress"
 
-#: ./dist/js/kit.js:1613
+#: ./app/shared/directives.js:285
 msgid "Please provide an amount for your payment."
 msgstr "Uppge en betalsumma."
 
-#: ./dist/js/kit.js:4194
+#: ./app/shared/directives.js:2866
 msgid "Please provide one of the available options"
 msgstr "Ange ett av de tillgängliga alternativen"
 
-#: ./dist/js/kit.js:4177
+#: ./app/shared/directives.js:2849
 msgid "Please supply a number"
 msgstr "Uppge ett nummer"
 
-#: ./dist/js/kit.js:4170
+#: ./app/shared/directives.js:2842
 msgid "Please supply a number without decimals"
 msgstr "Uppge ett nummer utan decimaler"
 
-#: ./app/pages/products/products.html:22
+#: ./app/pages/products/products.html:17
 msgid "Products"
 msgstr "Produkter"
 
-#: ./app/pages/cart/cart.html:44
-#: ./app/pages/cart/cart.html:52
-#: ./app/pages/invoice/invoice.html:88
-#: ./app/pages/invoice/invoice.html:96
-#: ./app/pages/payment/review.html:111
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:108
-#: ./app/pages/receipt/receipt.html:116
+#: ./app/pages/cart/cart.html:34
+#: ./app/pages/payment/review.html:91
+#: ./app/pages/receipt/receipt.html:50
 msgid "Quantity"
 msgstr "Antal"
 
-#: ./app/pages/receipt/receipt.html:13
+#: ./app/pages/receipt/receipt.html:9
 msgid "Receipt"
 msgstr "Kvitto"
 
-#: ./app/pages/cart/cart.html:260
-#: ./app/pages/cart/cart.html:340
+#: ./app/pages/cart/cart.html:216
+#: ./app/pages/cart/cart.html:291
 msgid "Region / Province"
 msgstr "Region/provins"
 
-#: ./app/pages/payment/review.html:25
+#: ./app/pages/payment/review.html:21
 msgid "Return to PayPal to try your payment again."
 msgstr "Gå tillbaka till PayPal för att försöka genomföra betalningen igen."
 
-#: ./app/pages/payment/review.html:16
+#: ./app/pages/payment/review.html:11
 msgid "Review Your Order"
 msgstr "Granska din beställning"
 
-#: ./app/pages/cart/cart.html:515
-#: ./app/pages/invoice/invoice.html:276
+#: ./app/pages/cart/cart.html:380
 msgid "Security Code"
 msgstr "Säkerhetskod"
 
-#: ./app/pages/cart/cart.html:289
-#: ./app/pages/payment/review.html:52
+#: ./app/pages/cart/cart.html:243
+#: ./app/pages/payment/review.html:38
 msgid "Shipping Address"
 msgstr "Leveransadress"
 
@@ -312,100 +284,77 @@ msgstr "Leveransadress"
 msgid "Shopping Cart"
 msgstr "Varukorg"
 
-#: ./app/pages/cart/cart.html:153
-#: ./app/pages/cart/cart.html:179
+#: ./app/pages/cart/cart.html:118
+#: ./app/pages/cart/cart.html:138
 msgid "Sign In"
 msgstr "Logga in"
 
-#: ./app/pages/cart/cart.html:185
+#: ./app/pages/cart/cart.html:144
 msgid "Sign out"
 msgstr "Logga ut"
 
-#: ./app/pages/cart/cart.html:254
-#: ./app/pages/cart/cart.html:334
+#: ./app/pages/cart/cart.html:210
+#: ./app/pages/cart/cart.html:285
 msgid "State / Province"
 msgstr "Stat/provins"
 
-#: ./app/pages/cart/cart.html:406
-#: ./app/pages/cart/cart.html:407
-#: ./app/pages/cart/cart.html:45
-#: ./app/pages/cart/cart.html:70
-#: ./app/pages/invoice/invoice.html:127
-#: ./app/pages/invoice/invoice.html:128
-#: ./app/pages/invoice/invoice.html:89
-#: ./app/pages/invoice/invoice.html:97
-#: ./app/pages/payment/review.html:112
-#: ./app/pages/payment/review.html:120
-#: ./app/pages/payment/review.html:153
-#: ./app/pages/payment/review.html:154
-#: ./app/pages/receipt/receipt.html:109
-#: ./app/pages/receipt/receipt.html:117
-#: ./app/pages/receipt/receipt.html:148
-#: ./app/pages/receipt/receipt.html:149
+#: ./app/pages/cart/cart.html:36
+#: ./app/pages/payment/review.html:93
+#: ./app/pages/receipt/receipt.html:52
 msgid "Subtotal"
 msgstr "Delsumma"
 
-#: ./app/pages/cart/cart.html:425
-#: ./app/pages/cart/cart.html:426
-#: ./app/pages/invoice/invoice.html:145
-#: ./app/pages/invoice/invoice.html:146
-#: ./app/pages/payment/review.html:171
-#: ./app/pages/payment/review.html:172
-#: ./app/pages/receipt/receipt.html:166
-#: ./app/pages/receipt/receipt.html:167
+#: ./app/pages/cart/cart.html:57
+#: ./app/pages/payment/review.html:113
+#: ./app/pages/receipt/receipt.html:72
 msgid "Tax"
 msgstr "Moms"
 
-#: ./app/pages/receipt/receipt.html:20
+#: ./app/pages/receipt/receipt.html:17
 msgid "Thank you! Your order is complete."
 msgstr "Tack! Din beställning är klar."
 
-#: ./dist/js/kit.js:5004
+#: ./app/shared/services.js:461
 msgid "The item you are trying to access could not be found."
 msgstr "Artikeln som du letar efter kunde inte hittas."
 
-#: ./dist/js/kit.js:4220
+#: ./app/shared/directives.js:2892
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "Värdet måste bestå av minst ett tecken"
 msgstr[1] "Värdet måste bestå av minst {{$count}} tecken"
 
-#: ./dist/js/kit.js:4226
+#: ./app/shared/directives.js:2898
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "Värdet måste bestå av mindre än ett tecken"
 msgstr[1] "Värdet måste bestå av mindre än {{$count}} tecken"
 
-#: ./dist/js/kit.js:4203
+#: ./app/shared/directives.js:2875
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "Värdet som du anger måste vara större än {{$count}}"
 msgstr[1] "Värdet som du anger måste vara större än {{$count}}"
 
-#: ./dist/js/kit.js:4209
+#: ./app/shared/directives.js:2881
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "Värdet som du anger måste vara mindre än {{$count}}"
 msgstr[1] "Värdet som du anger måste vara mindre än {{$count}}"
 
-#: ./app/pages/cart/cart.html:32
+#: ./app/pages/cart/cart.html:74
 msgid "There are no items in your cart"
 msgstr "Du har inga artiklar i din varukorg"
 
-#: ./dist/js/kit.js:1507
-#: ./dist/js/kit.js:1601
-#: ./dist/js/kit.js:1841
+#: ./app/shared/directives.js:179
+#: ./app/shared/directives.js:273
+#: ./app/shared/directives.js:513
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "Det uppstod ett problem med informationen du angav. Vänligen kontrollera efter fel och försök igen."
 
-#: ./app/pages/cart/cart.html:431
-#: ./app/pages/cart/cart.html:432
-#: ./app/pages/invoice/invoice.html:151
-#: ./app/pages/invoice/invoice.html:152
-#: ./app/pages/payment/review.html:177
-#: ./app/pages/payment/review.html:178
-#: ./app/pages/receipt/receipt.html:172
-#: ./app/pages/receipt/receipt.html:173
+#: ./app/pages/cart/cart.html:68
+#: ./app/pages/payment/review.html:119
+#: ./app/pages/receipt/receipt.html:78
 msgid "Total"
 msgstr "Totalt"
 
@@ -413,13 +362,12 @@ msgstr "Totalt"
 msgid "Update Cart"
 msgstr "Uppdatera varukorg"
 
-#: ./app/pages/cart/cart.html:159
-#: ./app/pages/receipt/receipt.html:38
+#: ./app/pages/cart/cart.html:124
 msgid "Username"
 msgstr "Användarnamn"
 
-#: ./app/pages/cart/cart.html:371
-#: ./app/pages/payment/review.html:83
+#: ./app/pages/cart/cart.html:320
+#: ./app/pages/payment/review.html:69
 msgid "VAT Number"
 msgstr "VAT-nummer"
 
@@ -427,12 +375,12 @@ msgstr "VAT-nummer"
 msgid "Yes"
 msgstr "Ja"
 
-#: ./app/pages/cart/cart.html:145
+#: ./app/pages/cart/cart.html:110
 msgid "Your Information"
 msgstr "Din information"
 
-#: ./app/pages/cart/cart.html:268
-#: ./app/pages/cart/cart.html:348
+#: ./app/pages/cart/cart.html:224
+#: ./app/pages/cart/cart.html:299
 msgid "Zip / Postal Code"
 msgstr "Postkod"
 
@@ -449,7 +397,8 @@ msgstr "Faktureringsinformation"
 msgid "Complete Order"
 msgstr "Färdigställ beställning"
 
-#: ./app/pages/invoice/invoice.html:292
+#: ./app/pages/pay/pay.html:351
+#: ./app/pages/review/review.html:137
 msgid "Complete Payment"
 msgstr "Färdigställ betalning"
 
@@ -458,11 +407,11 @@ msgstr "Färdigställ betalning"
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
 msgstr "Copyright & kopia;{{settings.account.year}} {{settings.app.company_name}}. Alla rättigheter reserverade."
 
-#: ./app/pages/receipt/receipt.html:57
+#: ./app/pages/receipt/receipt.html:58
 msgid "Create Account"
 msgstr "Skapa konto"
 
-#: ./app/pages/receipt/receipt.html:28
+#: ./app/pages/receipt/receipt.html:29
 msgid "Date"
 msgstr "Datum"
 
@@ -479,8 +428,7 @@ msgstr "Datum"
 msgid "Enter"
 msgstr "Skriv in"
 
-#: ./app/pages/cart/cart.html:194
-#: ./app/pages/cart/cart.html:300
+#: ./app/pages/pay/pay.html:151
 msgid "Full Name"
 msgstr "Fullständigt namn"
 
@@ -516,8 +464,8 @@ msgstr "Ordersammanfattning"
 msgid "Paid"
 msgstr "Betalad"
 
-#: ./app/pages/cart/cart.html:445
-#: ./app/pages/invoice/invoice.html:166
+#: ./app/pages/pay/pay.html:248
+#: ./app/pages/receipt/receipt.html:96
 msgid "Payment Details"
 msgstr "Betalningsdetaljer"
 
@@ -526,18 +474,20 @@ msgstr "Betalningsdetaljer"
 msgid "Payment Summary"
 msgstr "Betalningssammanfattning"
 
-#: ./app/pages/cart/cart.html:222
+#: ./app/pages/pay/pay.html:179
 msgid "Please provide a phone"
 msgstr "Vänligen ange ett telefonnummer"
 
-#: ./app/pages/cart/cart.html:524
-#: ./app/pages/invoice/invoice.html:285
+#: ./app/pages/pay/pay.html:327
 msgid "Save this card to my account"
 msgstr "Spara detta kort till mitt konto"
 
-#: ./app/pages/cart/cart.html:386
-#: ./app/pages/cart/cart.html:412
-#: ./app/pages/payment/review.html:132
+#: ./app/pages/pay/pay.html:75
+#: ./app/pages/pay/pay.html:76
+#: ./app/pages/receipt/receipt.html:127
+#: ./app/pages/receipt/receipt.html:128
+#: ./app/pages/review/review.html:118
+#: ./app/pages/review/review.html:119
 msgid "Shipping"
 msgstr "Frakt"
 
@@ -553,7 +503,7 @@ msgstr "Leveransadressen är densamma som faktureringsadressen"
 msgid "Sold To"
 msgstr "Såld till"
 
-#: ./app/pages/invoice/invoice.html:303
+#: ./app/pages/invoice/invoice.html:298
 msgid "Thank you for your business"
 msgstr "Tack för din affär"
 
@@ -577,8 +527,7 @@ msgstr "Skapa ett konto för att hantera din order online."
 msgid "Your Order"
 msgstr "Din order"
 
-#: ./app/pages/invoice/invoice.html:46
-#: ./app/pages/receipt/receipt.html:63
+#: ./app/pages/receipt/receipt.html:64
 msgid "Your account has been created."
 msgstr "Ditt konto har skapats."
 
@@ -622,7 +571,7 @@ msgstr "Tillverkad av"
 msgid "Make Another Payment"
 msgstr "Gör en annan betalning"
 
-#: ./dist/js/kit.js:4144
+#: ./app/shared/directives.js:2816
 msgid "Please provide a value"
 msgstr "Vänligen ange ett värde"
 
@@ -630,7 +579,6 @@ msgstr "Vänligen ange ett värde"
 msgid "Please provide an amount"
 msgstr "Vänligen ange en mängd"
 
-#: ./app/pages/pay/pay.html:334
 #: ./app/pages/review/review.html:87
 msgid "Review & Finish"
 msgstr "Kontrollera & avsluta"
@@ -656,7 +604,7 @@ msgid "Your Payment"
 msgstr "Din betalning"
 
 #: ./app/pages/simple/checkout.html:295
-#: ./app/pages/simple/review.html:175
+#: ./app/pages/simple/review.html:176
 msgid "An email has been sent to {{data.payment.order.customer.email}}."
 msgstr "Ett mail har skickats till {{data.payment.order.customer.email}}."
 
@@ -665,7 +613,7 @@ msgid "Choose other payment method"
 msgstr "Välj ett annat betalningssätt"
 
 #: ./app/pages/simple/checkout.html:305
-#: ./app/pages/simple/review.html:185
+#: ./app/pages/simple/review.html:186
 msgid "Close"
 msgstr "Stäng"
 
@@ -673,8 +621,8 @@ msgstr "Stäng"
 msgid "Confirm Payment"
 msgstr "Bekräfta betalning"
 
-#: ./app/pages/cart/cart.html:125
-#: ./app/pages/invoice/invoice.html:200
+#: ./app/pages/simple/checkout.html:303
+#: ./app/pages/simple/review.html:184
 msgid "Continue"
 msgstr "Fortsätt"
 
@@ -688,7 +636,7 @@ msgid "Enter VAT Number"
 msgstr "Skriv in VAT-nummer"
 
 #: ./app/pages/simple/checkout.html:306
-#: ./app/pages/simple/review.html:186
+#: ./app/pages/simple/review.html:187
 msgid "Finish"
 msgstr "Avsluta"
 
@@ -701,7 +649,7 @@ msgid "Postal Code"
 msgstr "Postnummer"
 
 #: ./app/pages/simple/checkout.html:313
-#: ./app/pages/simple/review.html:193
+#: ./app/pages/simple/review.html:194
 msgid "Print receipt"
 msgstr "Skriv ut kvitto"
 
@@ -710,7 +658,7 @@ msgid "Region"
 msgstr "Region"
 
 #: ./app/pages/simple/checkout.html:304
-#: ./app/pages/simple/review.html:184
+#: ./app/pages/simple/review.html:185
 msgid "Return"
 msgstr "Gå tillbaka"
 
@@ -719,12 +667,12 @@ msgid "Submit Order"
 msgstr "Skicka in order"
 
 #: ./app/pages/simple/checkout.html:262
-#: ./app/pages/simple/review.html:142
+#: ./app/pages/simple/review.html:143
 msgid "Summary"
 msgstr "Sammanfattning"
 
 #: ./app/pages/simple/checkout.html:252
-#: ./app/pages/simple/review.html:132
+#: ./app/pages/simple/review.html:133
 msgid "Thank you for your purchase!"
 msgstr "Tack för ditt köp!"
 
@@ -732,13 +680,30 @@ msgstr "Tack för ditt köp!"
 msgid "Remove"
 msgstr "Avlägsna"
 
-#: ./dist/js/kit.js:1656
+#: ./app/shared/directives.js:328
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr "Markera rutan för att ge ditt medgivande till att spara betalningsmetoden till kommande betalningar."
 
 #: ./app/pages/cart/cart.html:128
-#: ./app/pages/invoice/invoice.html:203
+#: ./app/pages/invoice/invoice.html:198
 #: ./app/pages/payment/review.html:33
 msgid "Use another payment method"
 msgstr "Använd en annan betalningsmetod"
+
+#: ./dist/js/kit.js:3715
+msgid "Please provide a value."
+msgstr "Ange ett värde."
+
+#: ./app/pages/pay/pay.html:338
+msgid "Review &amp; Finish"
+msgstr "Granska &amp; Avsluta"
+
+#: ./app/shared/services.js:76
+msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
+msgstr "Det gick inte att få godkännande för den här sessionen. Vänligen ladda om sidan för att försöka igen."
+
+#: ./app/pages/pay/pay.html:32
+#: ./app/pages/review/review.html:30
+msgid "Reference"
+msgstr "Referens"
 
