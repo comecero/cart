@@ -14,7 +14,7 @@ msgstr ""
 msgid "Address 2"
 msgstr ""
 
-#: ./dist/js/kit.js:5010
+#: ./dist/js/kit.js:5017
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr ""
 
@@ -43,12 +43,12 @@ msgid "Cancel"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:484
-#: ./app/pages/invoice/invoice.html:245
+#: ./app/pages/invoice/invoice.html:240
 msgid "Card Number"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:450
-#: ./app/pages/invoice/invoice.html:211
+#: ./app/pages/invoice/invoice.html:206
 msgid "Choose a Payment Method"
 msgstr ""
 
@@ -67,12 +67,12 @@ msgstr ""
 msgid "Complete Order"
 msgstr ""
 
-#: ./app/pages/invoice/invoice.html:292
+#: ./app/pages/invoice/invoice.html:287
 msgid "Complete Payment"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:125
-#: ./app/pages/invoice/invoice.html:200
+#: ./app/pages/invoice/invoice.html:195
 msgid "Continue"
 msgstr ""
 
@@ -134,12 +134,12 @@ msgid "Enter"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:497
-#: ./app/pages/invoice/invoice.html:258
+#: ./app/pages/invoice/invoice.html:253
 msgid "Expiration Month"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:506
-#: ./app/pages/invoice/invoice.html:267
+#: ./app/pages/invoice/invoice.html:262
 msgid "Expiration Year"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgid "Password"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:475
-#: ./app/pages/invoice/invoice.html:236
+#: ./app/pages/invoice/invoice.html:231
 msgid "Pay with a new card"
 msgstr ""
 
@@ -242,16 +242,16 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: ./dist/js/kit.js:1656
+#: ./dist/js/kit.js:1640
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr ""
 
-#: ./dist/js/kit.js:4154
+#: ./dist/js/kit.js:4138
 msgid "Please confirm"
 msgstr ""
 
-#: ./dist/js/kit.js:4149
-#: ./dist/js/kit.js:4185
+#: ./dist/js/kit.js:4133
+#: ./dist/js/kit.js:4169
 msgid "Please make a selection"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgid "Please provide a state / province"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:489
-#: ./app/pages/invoice/invoice.html:250
+#: ./app/pages/invoice/invoice.html:245
 msgid "Please provide a valid card number"
 msgstr ""
 
@@ -299,12 +299,12 @@ msgid "Please provide a valid email address"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:500
-#: ./app/pages/invoice/invoice.html:261
+#: ./app/pages/invoice/invoice.html:256
 msgid "Please provide a valid expiration month"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:509
-#: ./app/pages/invoice/invoice.html:270
+#: ./app/pages/invoice/invoice.html:265
 msgid "Please provide a valid expiration year"
 msgstr ""
 
@@ -313,11 +313,11 @@ msgid "Please provide a valid phone number"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:517
-#: ./app/pages/invoice/invoice.html:278
+#: ./app/pages/invoice/invoice.html:273
 msgid "Please provide a valid security code"
 msgstr ""
 
-#: ./dist/js/kit.js:4144
+#: ./dist/js/kit.js:4128
 msgid "Please provide a value"
 msgstr ""
 
@@ -333,19 +333,19 @@ msgstr ""
 msgid "Please provide an address"
 msgstr ""
 
-#: ./dist/js/kit.js:1613
+#: ./dist/js/kit.js:1597
 msgid "Please provide an amount for your payment."
 msgstr ""
 
-#: ./dist/js/kit.js:4194
+#: ./dist/js/kit.js:4178
 msgid "Please provide one of the available options"
 msgstr ""
 
-#: ./dist/js/kit.js:4177
+#: ./dist/js/kit.js:4161
 msgid "Please supply a number"
 msgstr ""
 
-#: ./dist/js/kit.js:4170
+#: ./dist/js/kit.js:4154
 msgid "Please supply a number without decimals"
 msgstr ""
 
@@ -386,12 +386,12 @@ msgid "Review Your Order"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:524
-#: ./app/pages/invoice/invoice.html:285
+#: ./app/pages/invoice/invoice.html:280
 msgid "Save this card to my account"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:515
-#: ./app/pages/invoice/invoice.html:276
+#: ./app/pages/invoice/invoice.html:271
 msgid "Security Code"
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Tax"
 msgstr ""
 
-#: ./app/pages/invoice/invoice.html:303
+#: ./app/pages/invoice/invoice.html:298
 msgid "Thank you for your business"
 msgstr ""
 
@@ -478,29 +478,29 @@ msgstr ""
 msgid "Thank you! Your order is complete."
 msgstr ""
 
-#: ./dist/js/kit.js:5004
+#: ./dist/js/kit.js:5011
 msgid "The item you are trying to access could not be found."
 msgstr ""
 
-#: ./dist/js/kit.js:4220
+#: ./dist/js/kit.js:4204
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4226
+#: ./dist/js/kit.js:4210
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4203
+#: ./dist/js/kit.js:4187
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4209
+#: ./dist/js/kit.js:4193
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] ""
@@ -510,9 +510,13 @@ msgstr[1] ""
 msgid "There are no items in your cart"
 msgstr ""
 
-#: ./dist/js/kit.js:1507
-#: ./dist/js/kit.js:1601
-#: ./dist/js/kit.js:1841
+#: ./dist/js/kit.js:4626
+msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
+msgstr ""
+
+#: ./dist/js/kit.js:1491
+#: ./dist/js/kit.js:1585
+#: ./dist/js/kit.js:1825
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr ""
 
@@ -536,7 +540,7 @@ msgid "Total"
 msgstr ""
 
 #: ./app/pages/cart/cart.html:128
-#: ./app/pages/invoice/invoice.html:203
+#: ./app/pages/invoice/invoice.html:198
 #: ./app/pages/payment/review.html:33
 msgid "Use another payment method"
 msgstr ""

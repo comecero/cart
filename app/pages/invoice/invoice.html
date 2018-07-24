@@ -166,24 +166,19 @@
                 <span translate>Payment Details</span>
             </div>
 
-            <!-- PayPal -->
-            <div ng-show="!data.amazon_pay.data">
-                <div class="row spacer-t10" ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
-                    <div class="form-group">
-                        <div class="col-xs-12 text-right">
-                            <img class="pointer" submit-payment="data.paypal" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/pp_checkout.png" />
-                        </div>
-                    </div>
-                </div>
+            <!-- Wallet Buttons -->
+            <ul class="payment-methods" ng-show="!data.amazon_pay.data">
+                <!-- PayPal -->
+                <li ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
+                    <img submit-payment="data.paypal" class="pointer" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
+                </li>
                 <!-- Amazon Pay Button -->
-                <div class="row spacer-t10" " ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options)">
-                    <div class="form-group">
-                        <div class="col-xs-12 text-right">
-                            <div id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.invoice.options" items="data.invoice.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <li ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options)">
+                    <a id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.invoice.options" items="data.invoice.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
+                        <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
+                    </a>
+                </li>
+            </ul>
 
             <!-- Amazon Pay Widgets -->
             <div class="row spacer-t20 spacer-b20" id="widgets" ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options) && data.amazon_pay.data">

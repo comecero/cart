@@ -205,7 +205,7 @@
     "description": "The color for header text within the main content area. Will be placed directly on the main content background color.",
     "section": "Main Content Area",
     "required": true,
-    "default_value": "#3181aa"
+    "default_value": "#686868"
   },
   {
     "name": "brand-success",
@@ -214,7 +214,7 @@
     "description": "'Success' color, used for primary 'call to action' text and buttons. Generally a green color is used.",
     "section": "Primary Colors",
     "required": true,
-    "default_value": "#41a41e"
+    "default_value": "#36ab0c"
   },
   {
     "name": "brand-info",
@@ -241,7 +241,7 @@
     "description": "The background color for header blocks of tables and other main sections.",
     "section": "Headers",
     "required": true,
-    "default_value": "#dfdfdf"
+    "default_value": "#f9f9f9"
   },
   {
     "name": "header-color",
@@ -250,7 +250,7 @@
     "description": "The text color for the page footer. Should have sharp contrast to the Table / Section Header Background Color.",
     "section": "Headers",
     "required": true,
-    "default_value": "#5f5f5f"
+    "default_value": "#818181"
   },
   {
     "name": "footer-bg",
@@ -277,7 +277,7 @@
     "description": "The link color for the page footer.",
     "section": "Footer",
     "required": true,
-    "default_value": "#8b8b8b"
+    "default_value": "#3181aa"
   },
   {
     "name": "footer-size",
@@ -313,7 +313,7 @@
     "description": "The color of the divider bar the separates the main page sections.",
     "section": "Dividers",
     "required": true,
-    "default_value": "#3181aa"
+    "default_value": "#eeeeee"
   },
   {
     "name": "divider-bar-width",
@@ -394,7 +394,7 @@
     "description": "The background color for notifications and alerts that indicate an error. Generally a light red is used.",
     "section": "Alerts & Notifications",
     "required": true,
-    "default_value": "#dff0d8"
+    "default_value": "#f2dede"
   },
   {
     "name": "state-danger-text",
@@ -403,7 +403,7 @@
     "description": "The text color for notifications and alerts that indicate an error. Generally a dark red is used that is clearly legible on the Error Alert Background Color.",
     "section": "Alerts & Notifications",
     "required": true,
-    "default_value": "#3c763d"
+    "default_value": "#a94442"
   },
   {
     "name": "btn-default-bg",
@@ -466,7 +466,7 @@
     "description": "The border color for product icons / images. Set to the Main Content Background Color if you don't want a product icon border.",
     "section": "Images",
     "required": true,
-    "default_value": "#5f5f5f"
+    "default_value": "#ececec"
   },
   {
     "name": "input-border-radius",
@@ -529,15 +529,6 @@
     "section": "Inputs",
     "required": true,
     "default_value": "#999999"
-  },
-  {
-    "name": "input-border-color",
-    "type": "color",
-    "label": "Input Border Color",
-    "description": "The border color for input elements.",
-    "section": "Inputs",
-    "required": true,
-    "default_value": "#cccccc"
   },
   {
     "name": "stepper-bg",
