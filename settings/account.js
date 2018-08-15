@@ -1,7 +1,7 @@
 ﻿// This is a shim for the account settings. When the app is run in the hosted environment, the values in this file will reflect the values from the account in which the app is running.
 window.__settings = window.__settings || {};
 window.__settings.account = {
-    "account_id": "KO0000",
+    "account_id": "BX4362",
     "test": true,
     "allow_save_cards": true,
     "global_footer_html": "<a href='https://comecero.com' target='_blank'>Comecero, LLC</a> is the authorized reseller of the products and services in your order.",

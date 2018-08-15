@@ -1,12 +1,12 @@
 ﻿[
   {
-    "name": "theme",
+    "name": "layout",
     "type": "string",
-    "label": "Cart Theme",
-    "description": "The basic theme / layout design of the cart.",
-    "section": "Layout",
+    "label": "Layout",
+    "description": "The basic layout design of the cart.",
+    "section": "Page",
     "required": true,
-    "default_value": "one-column",
+    "default_value": "two-column",
     "options": [
       {
         "display": "One Column",
@@ -19,11 +19,40 @@
     ]
   },
   {
+    "name": "body-bg",
+    "type": "color",
+    "label": "Page Background Color",
+    "description": "The background color of the page. Note that text is not placed directly on this color; all text is included within the main content area, which has its own color definition.",
+    "section": "Page",
+    "required": true,
+    "default_value": "#f6f7f8"
+  },
+  {
+    "name": "brand-primary",
+    "type": "color",
+    "label": "Primary Brand Color",
+    "description": "The main color of your brand and website. Used for the panel background color and primary buttons.",
+    "section": "Branding",
+    "required": true,
+    "default_value": "#3181aa"
+  },
+  {
+    "name": "company-name-color",
+    "type": "color",
+    "label": "Company Name Text Color",
+    "description": "The color of the company name in the header. Note that if you upload a company logo, then the company name text is not displayed.",
+    "section": "Branding",
+    "required": true,
+    "default_value": "#686868",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
     "name": "logo",
     "type": "image",
     "label": "Company Logo",
-    "description": "The main company logo. We recommend an image with a transparent background or one that blends well with the main navigation bar color.",
-    "section": "Images",
+    "description": "The main company logo. We recommend an image with a transparent background or one that blends well with the header background color.",
+    "section": "Branding",
     "required": false
   },
   {
@@ -31,14 +60,14 @@
     "type": "image",
     "label": "Favicon",
     "description": "The page favicon image. Providing a square image is highly recommended; images that are not square will automatically be cropped square. For maximum compatibility, the image you provide should be no larger than 196 x 196 pixels.",
-    "section": "Images",
+    "section": "Branding",
     "required": false
   },
   {
-    "name": "panel-header-size",
+    "name": "header-size",
     "type": "string",
-    "label": "Panel Header Size",
-    "description": "The size of the main panel header.",
+    "label": "Header Size",
+    "description": "The size of the header.",
     "section": "Header",
     "required": true,
     "default_value": "medium",
@@ -56,19 +85,37 @@
         "value": "large"
       },
       {
-        "display": "Remove / Hide (don't display the panel header)",
+        "display": "Remove / Hide (don't display the header)",
         "value": "hide"
       }
     ]
   },
   {
-    "name": "panel-header-brand-align",
-    "type": "string",
-    "label": "Panel Header Logo / Company Name Alignment",
-    "description": "How the logo or company name should be aligned in the main page panel header.",
+    "name": "header-bg",
+    "type": "color",
+    "label": "Header Background Color",
+    "description": "The background color for the header.",
     "section": "Header",
     "required": true,
-    "default_value": "center",
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "header-divider-bar-color",
+    "type": "color",
+    "label": "Header Divider Bar Color",
+    "description": "The color of the divider bar the separates the header and main page sections.",
+    "section": "Header",
+    "required": true,
+    "default_value": "#e6e7e8"
+  },
+  {
+    "name": "header-brand-align",
+    "type": "string",
+    "label": "Header Logo / Company Name Alignment",
+    "description": "How the logo or company name should be aligned in the header.",
+    "section": "Header",
+    "required": true,
+    "default_value": "left",
     "options": [
       {
         "display": "Center",
@@ -81,65 +128,13 @@
     ]
   },
   {
-    "name": "company-name-color",
-    "type": "color",
-    "label": "Company Name Text Color",
-    "description": "The color of the company name in the main page navigation / header. Note that if you upload a company logo, then the company name text is not displayed.",
-    "section": "Header",
-    "required": true,
-    "default_value": "#ffffff",
-    "min_length": 5,
-    "max_length": 100
-  },
-  {
-    "name": "panel-header-font-size",
-    "type": "string",
-    "label": "Company Name Font Size",
-    "description": "The size of the company name. This does not apply if you have uploaded a logo under the app settings.",
-    "section": "Header",
-    "required": true,
-    "default_value": "22px",
-    "options": [
-      {
-        "display": "Small",
-        "value": "16px"
-      },
-      {
-        "display": "Medium",
-        "value": "22px"
-      },
-      {
-        "display": "Large",
-        "value": "30px"
-      }
-    ]
-  },
-  {
-    "name": "brand-primary",
-    "type": "color",
-    "label": "Primary Brand Color",
-    "description": "The main color of your brand and website. Used for the panel background color and primary buttons.",
-    "section": "Header",
-    "required": true,
-    "default_value": "#3181aa"
-  },
-  {
-    "name": "body-bg",
-    "type": "color",
-    "label": "Main Page Background Color",
-    "description": "The background color of the page. Note that text is not placed directly on this color; all text is included within the main content area, which has its own color definition.",
-    "section": "Miscellaneous",
-    "required": true,
-    "default_value": "#f6f6f6"
-  },
-  {
     "name": "main-shadows",
     "type": "boolean",
     "label": "Use Shadows",
     "description": "Indicates if the main navigation bar and the main content area should have a shadow applied. The shadows are subtle. Disable to maintain a flat look.",
     "section": "Miscellaneous",
     "required": true,
-    "default_value": true
+    "default_value": false
   },
   {
     "name": "web_font_import",
@@ -158,7 +153,7 @@
     "description": "The font or fonts used in the company name in the main page navigation / header. Note that if you upload a company logo, then the company name text is not displayed.",
     "section": "Fonts",
     "required": true,
-    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "default_value": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
     "min_length": 5,
     "max_length": 100
   },
@@ -169,7 +164,7 @@
     "description": "The primary font or fonts used throughout the app.",
     "section": "Fonts",
     "required": true,
-    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "default_value": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
     "min_length": 5,
     "max_length": 100
   },
@@ -180,7 +175,7 @@
     "description": "The font used in the page footer.",
     "section": "Fonts",
     "required": true,
-    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "default_value": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
     "min_length": 5,
     "max_length": 100
   },
@@ -194,6 +189,15 @@
     "default_value": "#ffffff"
   },
   {
+    "name": "main-content-shaded-bg",
+    "type": "color",
+    "label": "Main Content Shaded Background Color",
+    "description": "The background color of the credit card form in the main content area. Text will be placed in this section and therefore this color should have sharp contrast to the main text color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#fbfbfb"
+  },
+  {
     "name": "main-content-color",
     "type": "color",
     "label": "Main Content Text Color",
@@ -201,6 +205,50 @@
     "section": "Main Content Area",
     "required": true,
     "default_value": "#686868"
+  },
+  {
+    "name": "panel-border-radius",
+    "type": "string",
+    "label": "Panel Border Radius",
+    "description": "Allows you to set a curve to the border of panels.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "4px",
+    "options": [
+      {
+        "display": "Square corners",
+        "value": "0"
+      },
+      {
+        "display": "1 pixel",
+        "value": "1px"
+      },
+      {
+        "display": "2 pixels",
+        "value": "2px"
+      },
+      {
+        "display": "3 pixels",
+        "value": "3px"
+      },
+      {
+        "display": "4 pixels",
+        "value": "4px"
+      },
+      {
+        "display": "5 pixels",
+        "value": "5px"
+      }
+    ]
+  },
+  {
+    "name": "panel-border-color",
+    "type": "color",
+    "label": "Panel Border Color",
+    "description": "The border color for panels. Set to the Main Content Background Color if you don't want a panel border.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#e6e7e8"
   },
   {
     "name": "link-color",
@@ -221,7 +269,7 @@
     "default_value": "#686868"
   },
   {
-    "name": "header-bg",
+    "name": "table-header-bg",
     "type": "color",
     "label": "Table / Section Header Background Color",
     "description": "The background color for header blocks of tables and other main sections.",
@@ -230,7 +278,7 @@
     "default_value": "#f9f9f9"
   },
   {
-    "name": "header-color",
+    "name": "table-header-color",
     "type": "color",
     "label": "Table / Section Header Text Color",
     "description": "The text color for the page footer. Should have sharp contrast to the Table / Section Header Background Color.",
@@ -245,7 +293,7 @@
     "description": "The background color for the page footer.",
     "section": "Footer",
     "required": true,
-    "default_value": "#dfdfdf"
+    "default_value": "#f6f7f8"
   },
   {
     "name": "footer-color",
@@ -254,7 +302,7 @@
     "description": "The text color for the page footer. Should have sharp contrast to the Footer Background Color.",
     "section": "Footer",
     "required": true,
-    "default_value": "#5f5f5f"
+    "default_value": "#686868"
   },
   {
     "name": "footer-link-color",
@@ -263,7 +311,7 @@
     "description": "The link color for the page footer.",
     "section": "Footer",
     "required": true,
-    "default_value": "#3181aa"
+    "default_value": "#00A8FF"
   },
   {
     "name": "footer-size",
@@ -291,51 +339,6 @@
         "value": "hide"
       }
     ]
-  },
-  {
-    "name": "divider-bar-color",
-    "type": "color",
-    "label": "Page Divider Bar Color",
-    "description": "The color of the divider bar the separates the main page sections.",
-    "section": "Dividers",
-    "required": true,
-    "default_value": "#eeeeee"
-  },
-  {
-    "name": "divider-bar-width",
-    "type": "string",
-    "label": "Page Divider Width",
-    "description": "The width of the divider bar that separates page sections. Set to 0 if you don't want a divider bar.",
-    "section": "Dividers",
-    "required": true,
-    "default_value": "1px",
-    "options": [
-      {
-        "display": "No divider bar",
-        "value": "0"
-      },
-      {
-        "display": "1 pixel",
-        "value": "1px"
-      },
-      {
-        "display": "2 pixels",
-        "value": "2px"
-      },
-      {
-        "display": "3 pixels",
-        "value": "3px"
-      }
-    ]
-  },
-  {
-    "name": "divider-bar-text-color",
-    "type": "color",
-    "label": "Page Divider Text Color",
-    "description": "The color of the text embedded within the divider bar the separates the main page sections.",
-    "section": "Dividers",
-    "required": true,
-    "default_value": "#3181aa"
   },
   {
     "name": "state-success-bg",
@@ -479,7 +482,7 @@
     "description": "The border color for product icons / images. Set to the Main Content Background Color if you don't want a product icon border.",
     "section": "Images",
     "required": true,
-    "default_value": "#ececec"
+    "default_value": "#e6e7e8"
   },
   {
     "name": "input-border-radius",
@@ -550,7 +553,7 @@
     "description": "The background color for quantity stepper buttons. Generally matches the background color of form inputs.",
     "section": "Inputs",
     "required": true,
-    "default_value": "#ffffff"
+    "default_value": "#fbfbf"
   },
   {
     "name": "stepper-color",
@@ -559,7 +562,7 @@
     "description": "The icon color for quantity stepper buttons. Generally matches the link color of main content.",
     "section": "Inputs",
     "required": true,
-    "default_value": "#3181aa"
+    "default_value": "#00A8FF"
   },
   {
     "name": "header_html",
