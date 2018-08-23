@@ -3,336 +3,454 @@
     <!-- Custom Header, if supplied -->
     <custom-html html="settings.style.header_html"></custom-html>
 
-    <div class="container container-content">
-
-        <div class="panel panel-default panel-boxed panel-content">
-
-            <!-- Boxed Header -->
-            <div class="panel-heading" ng-cloak>
-                <img ng-src="{{settings.style.logo}}" ng-if="settings.style.logo">
-                <span ng-if="!settings.style.logo" class="company-name">{{settings.app.company_name}}</span>
+    <nav class="navbar navbar-default" ng-cloak>
+        <div class="container">
+            <div class="brand">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img ng-src="{{settings.style.logo}}" ng-if="settings.style.logo">
+                        <span ng-if="!settings.style.logo" class="company-name">{{settings.app.company_name}}</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </nav>
 
-            <div class="panel-body">
-
-                <!-- Must be ng-form to prevent Amazon Pay button from generating wallet in new tab when clicked twice. Bug report filed with Amazon Pay team. -->
-                <ng-form name="form" shipping-is-billing="data.shipping_is_billing" customer-background-save="data.cart" params="data.params" novalidate>
-
-                    <div class="dropdown pull-right currency-button spacer-b10" uib-dropdown ng-if="settings.account.currencies.length > 1 && data.invoice.open">
-                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
-                            <span class="pointer">{{currency}}</span> <i class="caret"></i>
-                        </button>
-                        <ul class="dropdown-menu" currency-select as-dropdown invoice="data.invoice" error="data.error" params="data.params"></ul>
+    <div class="container container-content">
+        <!-- Must be ng-form to prevent Amazon Pay button from generating wallet in new tab when clicked twice. Bug report filed with Amazon Pay team. -->
+        <ng-form name="form" shipping-is-billing="data.shipping_is_billing" customer-background-save="data.cart" params="data.params" novalidate>
+            <div class="row spacer-t12">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <h3 translate>Invoice</h3>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="dropdown pull-right currency-button" uib-dropdown ng-if="settings.account.currencies.length > 1">
+                                <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                                    <span class="pointer">{{currency}}</span> <i class="caret"></i>
+                                </button>
+                                <ul class="dropdown-menu" currency-select as-dropdown cart="data.cart" error="data.error" params="data.params"></ul>
+                            </div>
+                            <div class="dropdown pull-right spacer-r12" uib-dropdown ng-if="settings.app.enable_languages">
+                                <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                                    <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
+                                </button>
+                                <ul class="dropdown-menu" language-select as-dropdown></ul>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="dropdown pull-right spacer-r10" uib-dropdown ng-if="settings.app.enable_languages">
-                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
-                            <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
-                        </button>
-                        <ul class="dropdown-menu" language-select as-dropdown></ul>
-                    </div>
-
-                    <div class="row"></div>
-
-                    <div class="page-header">
-                        <h1 translate>Invoice</h1>
-                    </div>
-
-                    <div class="alert alert-danger" ng-if="data.error">
+                </div>
+            </div>
+            <div class="row spacer-t12" ng-if="data.error">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="alert alert-danger">
                         {{data.error.message}}
                     </div>
-
-                    <div class="alert alert-success text-lg" ng-show="data.invoice && data.invoice.payment_status == 'completed'" ng-cloak>
+                </div>
+            </div>
+            <div class="row spacer-t12" ng-show="data.invoice && data.invoice.payment_status == 'completed'" ng-cloak>
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="alert alert-success text-lg">
                         <i class="fa fa-check-circle"></i> <span translate>Paid</span>
                     </div>
-
-                    <div class="alert alert-warning text-lg" ng-if="data.invoice && data.invoice.payment_status != 'completed' && !data.invoice.open" ng-cloak>
+                </div>
+            </div>
+            <div class="row spacer-t12" ng-if="data.invoice && data.invoice.payment_status != 'completed' && !data.invoice.open" ng-cloak>
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="alert alert-warning text-lg">
                         <i class="fa fa-minus-circle"></i> <span translate>This invoice is closed</span>
                     </div>
-
-                    <div class="well header">
-                        <div class="spacer-b10"><strong><span>Invoice ID</span><span class="pull-right">{{data.invoice.invoice_id}}</span></strong><br /></div>
-                        <span translate>Due Date</span><span class="pull-right">{{data.invoice.date_due  | date:'shortDate'}}</span>
-                    </div>
-
-                    <div create-account customer="data.invoice.customer" options="data.invoice.options" error="data.error">
-
-                        <div class="alert alert-success account-created">
-                            <i class="fa fa-check-square-o fa-lg"></i> <span translate>Your account has been created.</span>
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 spacer-b20">
-                        <span><strong translate>Billing Information</strong><br /></span>
-                        <span ng-if="data.invoice.customer.company_name">{{data.invoice.customer.company_name}}<br /></span>
-                        <span ng-if="data.invoice.customer.name">{{data.invoice.customer.billing_address.name || data.invoice.customer.name}}<br /></span>
-                        <span ng-if="data.invoice.customer.billing_address.address_1">{{data.invoice.customer.billing_address.address_1}}<br /></span>
-                        <span ng-if="data.invoice.customer.billing_address.address_2">{{data.invoice.customer.billing_address.address_2}}<br /></span>
-                        <span ng-if="data.invoice.customer.billing_address.city">{{data.invoice.customer.billing_address.city}}</span>
-                        <span ng-if="data.invoice.customer.billing_address.state_prov">{{data.invoice.customer.billing_address.state_prov}}</span>
-                        <span ng-if="data.invoice.customer.billing_address.postal_code">{{data.invoice.customer.billing_address.postal_code}}</span><br />
-                        <span ng-if="data.invoice.customer.billing_address.country">{{data.invoice.customer.billing_address.formatted.country}}<br /></span>
-                        <span ng-if="data.invoice.customer.email">{{data.invoice.customer.email}}</span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 spacer-b20" ng-if="data.invoice.customer.shipping_address.address_1">
-                        <span><strong translate>Shipping Information</strong><br /></span>
-                        <span ng-if="data.invoice.customer.company_name">{{data.invoice.customer.company_name}}<br /></span>
-                        <span ng-if="data.invoice.customer.name">{{data.invoice.customer.shipping_address.name || data.invoice.customer.name}}<br /></span>
-                        <span ng-if="data.invoice.customer.shipping_address.address_1">{{data.invoice.customer.shipping_address.address_1}}<br /></span>
-                        <span ng-if="data.invoice.customer.shipping_address.address_2">{{data.invoice.customer.shipping_address.address_2}}<br /></span>
-                        <span ng-if="data.invoice.customer.shipping_address.city">{{data.invoice.customer.shipping_address.city}}</span>
-                        <span ng-if="data.invoice.customer.shipping_address.state_prov">{{data.invoice.customer.shipping_address.state_prov}}</span>
-                        <span ng-if="data.invoice.customer.shipping_address.postal_code">{{data.invoice.customer.shipping_address.postal_code}}</span><br />
-                        <span ng-if="data.invoice.customer.shipping_address.country">{{data.invoice.customer.shipping_address.formatted.country}}<br /></span>
-                        <span ng-if="data.invoice.customer.email">{{data.invoice.customer.email}}</span>
-                    </div>
-
-                    <div class="row"></div>
-
-                    <div class="section-header">
-                        <span translate>Invoice Details</span>
-                    </div>
-
-                    <table class="cart">
-                        <thead>
-                            <tr>
-                                <th ng-show="showImages" style="width: 120px;" translate>Item</th>
-                                <th translate>Name</th>
-                                <th translate>Quantity</th>
-                                <th class="text-right" translate>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody ng-repeat="item in data.invoice.items">
-                            <tr>
-                                <td ng-show="showImages" class="text-left"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
-                                <td data-label="{{ 'Name' | translate}}"><strong>{{item.name}}</strong></td>
-                                <td data-label="{{ 'Quantity' | translate}}"><span>{{item.quantity}}</span></td>
-                                <td class="text-right has-price" data-label="{{ 'Subtotal' | translate}}"><span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.invoice.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.invoice.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}</td>
-                            </tr>
-                            <tr ng-if="item.subscription_terms">
-                                <td colspan="4" class="text-left"><span><em>{{item.subscription_terms.description}}</em></span></td>
-                            </tr>
-                            <tr ng-if="item.download">
-                                <td colspan="4" class="text-left">
-                                    <a class="btn btn-info" ng-href="{{item.download.link}}" translate>Download Now</a>
-                                </td>
-                            </tr>
-                            <tr ng-if="item.license">
-                                <td colspan="4" class="text-left">
-                                    <div class="alert alert-info">
-                                        <strong>{{item.license.label}}:</strong>&nbsp;<span ng-bind-html="item.license.html"></span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!--Spacer-->
-                    <div class="row">&nbsp;</div>
-
-                    <div class="section-header">
-                        <span translate>Invoice Summary</span>
-                    </div>
-
-                    <table class="tight cart">
-                        <tbody ng-if="!data.invoice.tax_inclusive">
-                            <tr>
-                                <td class="text-left hidden-xs" translate>Subtotal</td>
-                                <td class="text-right" data-label="{{ 'Subtotal' | translate}}"><span class="has-price">{{data.invoice.formatted.subtotal}}</span></td>
-                            </tr>
-                        </tbody>
-                        <tbody ng-show="data.invoice.shipping_item">
-                            <tr>
-                                <td class="text-left hidden-xs">{{data.invoice.shipping_item.name}}</td>
-                                <td class="text-right" data-label="{{data.invoice.shipping_item.name}}"><span ng-show="data.invoice.shipping_item.price_original > data.invoice.shipping_item.price"><del class="discount text-danger">{{data.invoice.tax_inclusive ? data.invoice.shipping_item.formatted.total_original : data.invoice.shipping_item.formatted.subtotal_original}}</del>&nbsp;</span><span class="has-price">{{data.invoice.tax_inclusive ? data.invoice.shipping_item.formatted.total : data.invoice.shipping_item.formatted.subtotal}}</span></td>
-                            </tr>
-                        </tbody>
-                        <tbody ng-show="data.invoice.discount > 0">
-                            <tr>
-                                <td class="text-left hidden-xs" translate>Discount</td>
-                                <td class="text-right text-danger" data-label="{{ 'Discount' | translate}}"><span class="has-price">-{{data.invoice.formatted.discount}}</span></td>
-                            </tr>
-                        </tbody>
-                        <tbody ng-show="data.invoice.tax > 0 && !data.invoice.tax_inclusive">
-                            <tr>
-                                <td class="text-left hidden-xs" translate>Tax</td>
-                                <td class="text-right" data-label="{{ 'Tax' | translate}}"><span class="has-price">{{data.invoice.formatted.tax}}</span></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td class="text-left text-lg hidden-xs"><strong translate>Total</strong></td>
-                                <td class="text-right text-lg" data-label="{{ 'Total' | translate}}"><span class="text-lg has-price">{{data.invoice.formatted.total}} {{data.invoice.currency}}</span></td>
-                            </tr>
-                            <tr ng-if="data.invoice.tax_inclusive">
-                                <td class="text-right text-sm" colspan="2" translate>Your total includes {{data.invoice.formatted.tax}} tax</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="row"></div>
-
-                    <div ng-show="data.invoice.open">
-
-                        <!--Payment Info-->
-                        <div class="section-header">
-                            <span translate>Payment Details</span>
-                        </div>
-
-                        <!-- Wallet Buttons -->
-                        <ul class="payment-methods" ng-show="!data.amazon_pay.data">
-                            <!-- PayPal -->
-                            <li ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
-                                <img submit-payment="data.paypal" class="pointer" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
-                            </li>
-                            <!-- Amazon Pay Button -->
-                            <li ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options)">
-                                <a id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.invoice.options" items="data.invoice.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
-                                    <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
-                                </a>
-                            </li>
-                        </ul>
-
-                        <!-- Amazon Pay Widgets -->
-                        <div class="row spacer-t20 spacer-b20" id="widgets" ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options) && data.amazon_pay.data">
-                            <div class="col-md-6 col-xs-12">
-                                <div id="apaddress" style="width:100%; height:230px; margin-top:20px; display:none;"></div>
-                            </div>
-                            <div class="col-md-6 col-xs-12">
-                                <div id="apwallet" style="width:100%; height:230px; margin-top:20px; display:none;"></div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div id="apconsent" style="width:100%; height:100px; margin-top:20px; display:none;"></div>
-                            </div>
-                            <div class="col-xs-12 spacer-b20 spacer-t20 text-right">
-                                <button type="button" class="btn btn-info btn-md right" submit-payment="data.amazon_pay" invoice="data.invoice" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" translate>Use another payment method</div>
-                            </div>
-                        </div>
-
-                        <div ng-show="!data.amazon_pay.data">
-
-                            <!-- If a logged in customer -->
-                            <div ng-show="data.invoice.customer.payment_methods.data.length > 0">
-                                <h4 translate>Choose a Payment Method</h4>
-
-                                <div class="well clearfix" ng-repeat="method in data.invoice.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal' || method.type == 'amazon_pay'">
-
-                                    <span class="radio-group inline" ng-if="method.type == 'credit_card'">
-                                        <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
-                                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">{{method.data.label}} (<span>exp.</span> {{method.data.exp_month}}/{{method.data.exp_year}})</label>
-                                        <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
-                                    </span>
-
-                                    <span class="radio-group inline" ng-if="method.type != 'credit_card'">
-                                        <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
-                                        <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">
-                                            <span ng-show="method.type == 'paypal'">PayPal</span>
-                                            <span ng-show="method.type == 'amazon_pay'">Amazon Pay</span>
-                                        </label>
-                                        <span class="pull-right credit-card-image" credit-card-image="'paypal'" ng-show="method.type == 'paypal'"></span>
-                                        <span class="pull-right credit-card-image" credit-card-image="'amazon_pay'" ng-show="method.type == 'amazon_pay'"></span>
-                                    </span>
-
-                                </div>
-
-                                <div class="well clearfix">
-                                    <span class="radio-group inline">
-                                        <input type="radio" class="radio" name="payment_method" id="payment_method-new" ng-model="data.payment_method.payment_method_id" ng-checked="data.payment_method.payment_method_id == null" ng-click="setPaymentMethod(null, 'credit_card')" />
-                                        <label for="payment_method-new" class="radio-label strong" translate>Pay with a new card</label>
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <div ng-show="!data.payment_method.payment_method_id">
-                                <div class="col-xs-12">
-                                    <div class="form-group" show-errors="data.invoice.options">
-                                        <label class="control-label required" for="card_number" translate>Card Number</label>
-                                        <div class="inner-addon left-addon">
-                                            <i class="fa fa-credit-card"></i>
-                                            <input class="form-control" name="card_number" type="tel" ng-model="data.payment_method.data.number" validate-card ng-required="!data.payment_method.payment_method_id">
+                </div>
+            </div>
+            <div class="row spacer-t12">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="panel panel-default panel-content">
+                        <div class="panel-body">
+                            <div class="section">
+                                <div class="section-header">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-7">
+                                            <h4><span translate>Invoice ID</span>: {{data.invoice.invoice_id}}</h4>
                                         </div>
-                                        <p class="error-block hidden" translate>Please provide a valid card number</p>
+                                        <div class="col-xs-12 col-sm-5 invoice-date">
+                                            <p><span translate>Due Date</span>: <span>{{data.invoice.date_due  | date:'shortDate'}}</span></p>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-12 credit-cards" credit-cards="data.invoice.options.card_types"></div>
-
-                                <div class="col-xs-6 col-sm-4">
-                                    <div class="form-group" show-errors="data.invoice.options">
-                                        <label class="control-label required" for="exp_month" translate>Expiration Month</label>
-                                        <input ng-if="!settings.app.exp_select" class="form-control" name="exp_month" type="tel" ng-model="data.payment_method.data.exp_month" placeholder="MM" validate-exp-month ng-required="!data.payment_method.payment_method_id">
-                                        <select ng-if="settings.app.exp_select" name="exp_month" class="form-control" ng-model="data.payment_method.data.exp_month" ng-options="n for n in [] | range:1:12:true" validate-exp-month ng-required="!data.payment_method.payment_method_id"></select>
-                                        <p class="error-block hidden" translate>Please provide a valid expiration month</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-4">
-                                    <div class="form-group" show-errors="data.invoice.options">
-                                        <label class="control-label required" for="exp_year" translate>Expiration Year</label>
-                                        <input ng-if="!settings.app.exp_select" class="form-control" name="exp_year" type="tel" ng-model="data.payment_method.data.exp_year" placeholder="YY" validate-exp-year ng-required="!data.payment_method.payment_method_id">
-                                        <select ng-if="settings.app.exp_select" name="exp_year" class="form-control" ng-model="data.payment_method.data.exp_year" ng-options="n for n in [] | range:settings.account.year:(settings.account.year + 15)" validate-exp-year ng-required="!data.payment_method.payment_method_id"></select>
-                                        <p class="error-block hidden" translate>Please provide a valid expiration year</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-4">
-                                    <div class="form-group" show-errors="data.invoice.options">
-                                        <label class="control-label required" for="cvv" translate>Security Code</label>
-                                        <input class="form-control" name="cvv" type="tel" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
-                                        <p class="error-block hidden" translate>Please provide a valid security code</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12" ng-show="helpers.hasSubscription(data.invoice.items) == false && settings.account.allow_save_cards == true && settings.app.ask_save_cards == true">
-                                    <div class="form-group checkbox-group">
-                                        <input type="checkbox" id="save-card" class="checkbox" name="save-card" ng-model="data.payment_method.save">
-                                        <label for="save-card" class="checkbox-label" translate>Save this card to my account</label>
-                                    </div>
-                                </div>
-
                             </div>
-
-                            <div class="col-xs-12 spacer-b20 spacer-t20 text-right">
-                                <button type="button" class="btn btn-success btn-lg right" validate-on-submit submit-payment="data.payment_method" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" translate>Complete Payment</button>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="section">
+                                        <div class="section-header">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h4 translate>Billing Information</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section-body">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <span ng-if="data.invoice.customer.company_name">{{data.invoice.customer.company_name}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.name">{{data.invoice.customer.billing_address.name || data.invoice.customer.name}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.billing_address.address_1">{{data.invoice.customer.billing_address.address_1}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.billing_address.address_2">{{data.invoice.customer.billing_address.address_2}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.billing_address.city">{{data.invoice.customer.billing_address.city}}</span>
+                                                    <span ng-if="data.invoice.customer.billing_address.state_prov">{{data.invoice.customer.billing_address.state_prov}}</span>
+                                                    <span ng-if="data.invoice.customer.billing_address.postal_code">{{data.invoice.customer.billing_address.postal_code}}</span><br />
+                                                    <span ng-if="data.invoice.customer.billing_address.country">{{data.invoice.customer.billing_address.formatted.country}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.email">{{data.invoice.customer.email}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6" ng-if="data.invoice.customer.shipping_address.address_1">
+                                    <div class="section">
+                                        <div class="section-header">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h4 translate>Shipping Information</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section-body">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <span ng-if="data.invoice.customer.company_name">{{data.invoice.customer.company_name}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.name">{{data.invoice.customer.shipping_address.name || data.invoice.customer.name}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.shipping_address.address_1">{{data.invoice.customer.shipping_address.address_1}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.shipping_address.address_2">{{data.invoice.customer.shipping_address.address_2}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.shipping_address.city">{{data.invoice.customer.shipping_address.city}}</span>
+                                                    <span ng-if="data.invoice.customer.shipping_address.state_prov">{{data.invoice.customer.shipping_address.state_prov}}</span>
+                                                    <span ng-if="data.invoice.customer.shipping_address.postal_code">{{data.invoice.customer.shipping_address.postal_code}}</span><br />
+                                                    <span ng-if="data.invoice.customer.shipping_address.country">{{data.invoice.customer.shipping_address.formatted.country}}<br /></span>
+                                                    <span ng-if="data.invoice.customer.email">{{data.invoice.customer.email}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
+                            <div class="section">
+                                <div class="section-header">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h4 translate>Invoice Details</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section-body section-top-border" ng-repeat="item in data.invoice.items">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3" ng-if="showImages" class="text-left has-product-icon visible-xs padding-b12"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td ng-show="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                                                <td>
+                                                    <strong>{{item.name}}</strong>
+                                                    <p>
+                                                        <span translate>Quantity</span>: <span>{{item.quantity}}</span>
+                                                    </p>
+                                                </td>
+                                                <td class="text-right has-price">
+                                                    <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.invoice.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.invoice.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="item.subscription_terms">
+                                                <td colspan="3" class="text-light text-left padding-t12">{{item.subscription_terms.description}}</td>
+                                            </tr>
+                                            <tr ng-if="item.download">
+                                                <td colspan="3" class="text-left">
+                                                    <a class="btn btn-info" ng-href="{{item.download.link}}" translate>Download Now</a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="item.license">
+                                                <td colspan="3" class="text-left">
+                                                    <div class="alert alert-info">
+                                                        <strong>{{item.license.label}}:</strong>&nbsp;<span ng-bind-html="item.license.html"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="section" ng-show="options.payment_method == 'credit_card'">
+                                <div class="section-body section-top-border">
+                                    <div class="row" ng-if="!data.invoice.tax_inclusive">
+                                        <div class="col-xs-6">
+                                            <span translate>Subtotal</span>
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <span class="has-price">{{data.invoice.formatted.subtotal}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="data.invoice.shipping_item">
+                                        <div class="col-xs-6">
+                                            <span>{{data.invoice.shipping_item.name}}</span>
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <span ng-show="data.invoice.shipping_item.price_original > data.invoice.shipping_item.price"><del class="discount text-danger">{{data.invoice.tax_inclusive ? data.invoice.shipping_item.formatted.total_original : data.invoice.shipping_item.formatted.subtotal_original}}</del>&nbsp;</span><span class="has-price">{{data.invoice.tax_inclusive ? data.invoice.shipping_item.formatted.total : data.invoice.shipping_item.formatted.subtotal}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="data.invoice.discount > 0">
+                                        <div class="col-xs-6">
+                                            <span translate>Discount</span>
+                                        </div>
+                                        <div class="col-xs-6 text-right text-danger">
+                                            <span class="has-price">-{{data.invoice.formatted.discount}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="data.invoice.tax > 0 && !data.invoice.tax_inclusive">
+                                        <div class="col-xs-6">
+                                            <span translate>Tax</span>
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <span class="has-price">{{data.invoice.formatted.tax}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row spacer-t24">
+                                        <div class="col-xs-6">
+                                            <strong class="text-lg" translate>Total</strong>
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <span class="text-lg has-price">{{data.invoice.formatted.total}} {{data.invoice.currency}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="data.invoice.tax_inclusive">
+                                        <div class="col-xs-12 text-right text-sm">
+                                            <span class="text-sm" translate>Your total includes {{data.invoice.formatted.tax}} tax</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="panel-body panel-top-border" ng-show="data.invoice.open">
+                            <div class="section" ng-show="!data.amazon_pay.data">
+                                <div class="section-header">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h4 translate>Payment Options</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <ul class="payment-methods">
+                                                    <li>
+                                                        <input type="radio" id="payment_method_credit_card" class="radio" name="payment_methods" ng-model="options.payment_method" value="credit_card" required>
+                                                        <label for="payment_method_credit_card" class="radio-label"><span translate>Credit Card</span></label>
+                                                    </li>
+                                                    <li ng-show="helpers.supportsPaymentMethod('paypal', data.invoice.options)">
+                                                        <input type="radio" id="payment_method_paypal" class="radio" name="payment_methods" ng-model="options.payment_method" value="paypal" required>
+                                                        <label for="payment_method_paypal" class="radio-label"><img src="images/paypal_logo.png" alt="PayPal" /></label>
+                                                    </li>
+                                                    <li ng-show="helpers.supportsPaymentMethod('amazon_pay', data.invoice.options)">
+                                                        <input type="radio" id="payment_method_amazon_pay" class="radio" name="payment_methods" ng-model="options.payment_method" value="amazon_pay" required>
+                                                        <label for="payment_method_amazon_pay" class="radio-label"><img src="images/amazonpay_logo.png" alt="Amazon Pay" /></label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section" ng-show="options.payment_method == 'paypal'">
+                                <div class="section-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <p>Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{settings.app.company_name}}, you can complete your order.</p>
+                                            <div class="payment-button">
+                                                <img submit-payment="data.paypal" class="pointer" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
+                                            </div>
+                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate>Your PayPal account payment information is never shared with</span> {{settings.app.company_name}}.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section" ng-show="options.payment_method == 'amazon_pay'">
+                                <div class="section-header" ng-show="data.amazon_pay.data">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h4>Amazon Pay</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section-body">
+                                    <div class="row" ng-show="!data.amazon_pay.data">
+                                        <div class="col-xs-12">
+                                            <p translate>Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password.</p>
+                                            <div class="payment-button">
+                                                <a id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.invoice.options" items="data.invoice.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
+                                                    <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
+                                                </a>
+                                            </div>
+                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate>Your Amazon account payment information is never shared wit</span>h {{settings.app.company_name}}.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row spacer-t12" ng-show="data.amazon_pay.data">
+                                        <div class="col-xs-12">
+                                            <div id="widgets">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-6">
+                                                        <div id="apaddress" style="width:100%; height:230px; margin-top:20px; display:none;"></div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-6">
+                                                        <div id="apwallet" style="width:100%; height:230px; margin-top:20px; display:none;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div id="apconsent" style="width:100%; height:100px; margin-top:20px; display:none;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 spacer-t24">
+                                                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.amazon_pay" invoice="data.invoice" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 text-center spacer-t12">
+                                                        <div class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" translate>Use another payment method</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section" ng-show="data.invoice.open && options.payment_method == 'credit_card' && data.invoice.customer.payment_methods.data.length > 0">
+                                <div class="section-header">
+                                    <h4 translate>Choose a Payment Method</h4>
+                                </div>
+                                <div class="section-body">
+                                    <div class="well clearfix spacer-b12" ng-repeat="method in data.invoice.customer.payment_methods.data" ng-show="method.type == 'credit_card' || method.type == 'paypal' || method.type == 'amazon_pay'">
 
+                                        <span class="radio-group inline" ng-if="method.type == 'credit_card'">
+                                            <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
+                                            <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">{{method.data.label}} (<span>exp.</span> {{method.data.exp_month}}/{{method.data.exp_year}})</label>
+                                            <span class="pull-right credit-card-image" credit-card-image="method.data.type"></span>
+                                        </span>
+
+                                        <span class="radio-group inline" ng-if="method.type != 'credit_card'">
+                                            <input type="radio" class="radio" name="payment_method" id="payment_method-{{method.payment_method_id}}" ng-model="data.payment_method.payment_method_id" value="{{method.payment_method_id}}" ng-checked="data.payment_method.payment_method_id == method.payment_method_id" ng-click="setPaymentMethod(method.payment_method_id, method.type)" />
+                                            <label for="payment_method-{{method.payment_method_id}}" class="radio-label strong">
+                                                <span ng-show="method.type == 'paypal'">PayPal</span>
+                                                <span ng-show="method.type == 'amazon_pay'">Amazon Pay</span>
+                                            </label>
+                                            <span class="pull-right credit-card-image" credit-card-image="'paypal'" ng-show="method.type == 'paypal'"></span>
+                                            <span class="pull-right credit-card-image" credit-card-image="'amazon_pay'" ng-show="method.type == 'amazon_pay'"></span>
+                                        </span>
+
+                                    </div>
+
+                                    <div class="well clearfix">
+                                        <span class="radio-group inline">
+                                            <input type="radio" class="radio" name="payment_method" id="payment_method-new" ng-model="data.payment_method.payment_method_id" ng-checked="data.payment_method.payment_method_id == null" ng-click="setPaymentMethod(null, 'credit_card')" />
+                                            <label for="payment_method-new" class="radio-label strong" translate>Pay with a new card</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body panel-body-shaded" ng-show="data.invoice.open && options.payment_method == 'credit_card' && !data.payment_method.payment_method_id">
+                            <div class="section">
+                                <div class="section-header">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h4 class="text-inline spacer-r12"><i class="fa fa-lock"></i> <span translate>Payment Details</span></h4>
+                                            <span class="credit-cards" credit-cards="data.invoice.options.card_types"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row spacer-t6">
+                                        <div class="col-xs-12">
+                                            <p class="spacer-b0" translate>This is a secure 256-bit SSL encrypted payment.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group" show-errors="data.invoice.options">
+                                                <label class="control-label required" for="card_number" ng-show="settings.app.form_label_position == 'top'" translate>Card Number</label>
+                                                <div class="inner-addon left-addon">
+                                                    <i class="fa fa-credit-card"></i>
+                                                    <input class="form-control" name="card_number" type="tel" placeholder="{{ (settings.app.form_label_position == 'inside' ? 'Card Number' : '') | translate }}" ng-model="data.payment_method.data.number" validate-card ng-required="!data.payment_method.payment_method_id">
+                                                </div>
+                                                <p class="error-block hidden" translate>Please provide a valid card number</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-4">
+                                            <div class="form-group" show-errors="data.invoice.options">
+                                                <label class="control-label required" for="exp_month" ng-show="settings.app.form_label_position == 'top'" translate>Expiration Month</label>
+                                                <input ng-if="!settings.app.exp_select" class="form-control" name="exp_month" type="tel" placeholder="{{ (settings.app.form_label_position == 'inside' ? 'Expiration Month (MM)' : 'MM') | translate }}" ng-model="data.payment_method.data.exp_month" validate-exp-month ng-required="!data.payment_method.payment_method_id">
+                                                <select ng-if="settings.app.exp_select" name="exp_month" class="form-control" ng-model="data.payment_method.data.exp_month" ng-options="n for n in [] | range:1:12:true" validate-exp-month ng-required="!data.payment_method.payment_method_id"></select>
+                                                <p class="error-block hidden" translate>Please provide a valid expiration month</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-sm-4">
+                                            <div class="form-group" show-errors="data.invoice.options">
+                                                <label class="control-label required" for="exp_year" ng-show="settings.app.form_label_position == 'top'" translate>Expiration Year</label>
+                                                <input ng-if="!settings.app.exp_select" class="form-control" name="exp_year" type="tel" placeholder="{{ (settings.app.form_label_position == 'inside' ? 'Expiration Year (YY)' : 'YY') | translate }}" ng-model="data.payment_method.data.exp_year" validate-exp-year ng-required="!data.payment_method.payment_method_id">
+                                                <select ng-if="settings.app.exp_select" name="exp_year" class="form-control" ng-model="data.payment_method.data.exp_year" ng-options="n for n in [] | range:settings.account.year:(settings.account.year + 15)" validate-exp-year ng-required="!data.payment_method.payment_method_id"></select>
+                                                <p class="error-block hidden" translate>Please provide a valid expiration year</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="form-group" show-errors="data.invoice.options">
+                                                <label class="control-label required" for="cvv" ng-show="settings.app.form_label_position == 'top'" translate>Security Code</label>
+                                                <input class="form-control" name="cvv" type="tel" placeholder="{{ (settings.app.form_label_position == 'inside' ? 'Security Code' : '') | translate }}" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id">
+                                                <p class="error-block hidden" translate>Please provide a valid security code</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12" ng-show="helpers.hasSubscription(data.invoice.items) == false && settings.account.allow_save_cards == true && settings.app.ask_save_cards == true">
+                                            <div class="form-group checkbox-group">
+                                                <input type="checkbox" id="save-card" class="checkbox" name="save-card" ng-model="data.payment_method.save">
+                                                <label for="save-card" class="checkbox-label" translate>Save this card to my account</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body" ng-show="data.invoice.open && options.payment_method == 'credit_card'">
+                            <div class="section">
+                                <div class="section-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.payment_method" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span translate>Complete Payment</span> <span class="hidden-xs">&middot; {{data.invoice.formatted.total}} {{data.invoice.currency}}</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <!--Spacer-->
-                    <div class="row">&nbsp;</div>
-
-                    <div class="row">
-                        <div class="col-xs-12 text-center"><h4 translate>Thank you for your business</h4></div>
-                    </div>
-
-                    <!--Spacer-->
-                    <div class="row">&nbsp;</div>
-
-                </ng-form>
-
+                </div>
             </div>
-
-            <!-- Boxed Footer -->
-            <div class="panel-footer" ng-cloak>
-                <p ng-bind-html="settings.app.footer_text"></p>
-                <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+        </ng-form>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="footer" ng-cloak>
+                    <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
+                    <p ng-bind-html="settings.app.footer_text"></p>
+                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                </div>
             </div>
-
         </div>
-
     </div>
 
     <!-- Custom Footer, if supplied -->
     <custom-html html="settings.style.footer_html"></custom-html>
-
-    <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
 
 </div>

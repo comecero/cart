@@ -9,7 +9,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .form-group {
-    margin-bottom: 12px;
+    margin-top: 12px;
+    margin-bottom: 0px;
 }
 
 .form-control {
@@ -18,7 +19,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .alert {
     margin-bottom: 0;
-    padding: 24px;
+    padding: 16px 24px;
 }
 
 .well {
@@ -42,7 +43,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .navbar {
     border-radius: 0;
     border: 0;
-    margin-bottom: 12px;
+    margin-bottom: 0;
 
     @if $header-size == small {
         min-height: 44px;
@@ -57,9 +58,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     }
 
     @if $header-size == hide {
-
-        display: none;
-        
+        display: none;       
     }
 
     @if $main-shadows {
@@ -139,21 +138,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     }
 }
 
-/************************  Where can a company name span get set as a link?  *************************/
-/*
-.navbar .brand a {
-    color: $header-default-link-color;
-}
-
-.navbar .brand a:hover {
-    color: $header-default-link-hover-color;
-}
-
-.navbar .brand a:active {
-    color: $header-default-link-active-color;
-}
-*/
-
 /* Footer */
 @if $footer-size == hide {
 
@@ -219,7 +203,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .panel-body {
-    padding: 24px 24px 0;
+    padding: 0px 24px 24px;
 }
 
 .panel-body.panel-body-shaded {
@@ -228,22 +212,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     border-bottom: 1px solid $panel-border-color;
 }
 
-/***** Refactor after doing one-column *****/
-.section-header, .section-content {
-    margin-bottom: 16px;
-}
-
-.section-form {
-    margin-bottom: 12px;
-}
-
-.section-cart {
+.panel-top-border {
     border-top: 1px solid $panel-border-color;
-    padding: 16px 0;
 }
 
-.section-cart:last-child {
-    padding-bottom: 24px;
+.section {
+    margin-top: 24px;
+}
+
+.section-top-border {
+    border-top: 1px solid $panel-border-color;
+    padding-top: 24px;
+    margin-top: 8px;
 }
 
 /* Text */
@@ -339,7 +319,7 @@ img.product-icon {
 .remove-button {
     font-size: 18px;
     display: block;
-    color: $main-content-color;
+    color: $main-content-color !important;
 }
 
 .remove-link {
@@ -347,6 +327,10 @@ img.product-icon {
     font-weight: bold;
     display: inline-block;
     color: $link-color;
+}
+
+.continue-shopping-link, .have-account-link {
+    text-align: right;
 }
 
 /* Promo code */
@@ -383,7 +367,7 @@ del.discount {
 }
 
 .faux-link {
-    /*color: $link-color;*/
+    color: $link-color;
     cursor: pointer;
 }
 
@@ -580,27 +564,6 @@ a.btn-danger {
     border-bottom-color: $state-danger-bg;
 }
 
-.header, thead {
-    background-color: $table-header-bg;
-    color: $table-header-color;
-}
-
-.header a, a:link, a:visited {
-    color: $table-header-link-color;
-}
-
-.header a:hover, a:active {
-    color: $table-header-link-hover-color;
-}
-
-thead a, a:link, a:visited {
-    color: $table-header-link-color;
-}
-
-thead a:hover, a:active {
-    color: $table-header-link-hover-color;
-}
-
 /* Credit card icons */
 .credit-cards {
     white-space: nowrap;
@@ -628,10 +591,6 @@ table {
     border-spacing: 0;
 }
 
-table tr {
-    /*padding: 5px;*/
-}
-
 table th, table td {
     text-align: left;
     vertical-align: top;
@@ -642,11 +601,6 @@ table th:last-child, table td:last-child {
     padding-right: 0;
 }
 
-table th {
-    /*font-size: 12px;
-    letter-spacing: 1px;*/
-}
-
 table td.has-product-icon {
     width: 88px;
 }
@@ -655,22 +609,29 @@ table td.has-product-icon {
     display: inline;
 }
 
-/* Wallet buttons */
 ul.payment-methods {
     list-style-type: none;
-    margin: 12px 0;
     padding: 0;
-    text-align: left;
 }
 
 ul.payment-methods li {
-    display: inline-block;
-    margin-right: 12px;
-    position: relative;
+    float: left;
+    margin-right: 24px;
+    font-size: 16px;
+    color: $main-content-color;
 }
 
 ul.payment-methods li:last-child {
-    margin-right: 0px;
+    margin-right:0;
+}
+
+ul.payment-methods li label {
+    margin-bottom: 0;
+}
+
+.payment-button {
+    position: relative;
+    margin: 16px 0;
 }
 
 .amazonpay-button-inner-image {    
@@ -683,75 +644,11 @@ ul.payment-methods li:last-child {
      height: 52px;
 }
 
+.receipt-date, .invoice-date {
+    text-align: right;
+}
+
 @media screen and (max-width: $screen-sm-min) {
-
-    table {
-        border: 0;
-    }
-
-    /*table thead {
-        display: none;
-    }
-
-    table tr {
-        margin-bottom: 10px;
-        display: block;
-        border-bottom: none;
-    }
-
-    table.tight tr {
-        margin-bottom: 0;
-        padding: 0;
-        border-bottom: none;
-    }
-
-    table.tight td {
-        padding: 5px;
-    }
-
-    table td {
-        display: block;
-        text-align: right;
-        font-size: 13px;
-        border-bottom: none;
-    }*/
-
-    table td .form-control, table td img {
-        display: inline-block;
-    }
-
-    table td:last-child {
-        border-bottom: 0;
-    }
-
-    table td:before {
-        content: attr(data-label);
-        float: left;
-    }
-
-    /* Vertically align labels for cells with an input element */
-    table td.has-input:before {
-        display: inline-block;
-        margin-top: 9px;
-    }
-
-    /* Vertically align labels for cells with an input element */
-    table td.has-image:before {
-        display: inline-block;
-        margin-top: 30px;
-    }
-
-    /* Quantity */
-    /* .quantity-stepper-wrapper {
-        float: right;
-    }
-    
-    .quantity-stepper {
-        padding-top: 6px;
-        margin: 0px;
-    }
-           */
-
     .remove-link {
         display: block;
         text-align: right;
@@ -759,13 +656,17 @@ ul.payment-methods li:last-child {
         padding-top: 16px;
     }
 
-    /* Wallet buttons */
-    ul.payment-methods li {
-        margin: 0 0 12px 0;
+    .continue-shopping-link, .have-account-link {
+        text-align: left;
+        margin-top: 6px;
     }
 
-    ul.payment-methods li:last-child {
-        margin-bottom: 0;
+    ul.payment-methods li {
+        margin-top: 12px;
+    }
+
+    .receipt-date, .invoice-date {
+        text-align: left;
     }
 }
 

@@ -28,6 +28,25 @@
     "required": false
   },
   {
+    "name": "form_label_position",
+    "type": "string",
+    "label": "Form Label Position",
+    "description": "Determines where form labels appear for an input. Top places the label on top of the input. Inside sets the label as a placeholder inside the input.",
+    "section": "Design",
+    "required": true,
+    "default_value": "top",
+    "options": [
+      {
+        "display": "Top",
+        "value": "top"
+      },
+      {
+        "display": "Inside",
+        "value": "inside"
+      }
+    ]
+  },
+  {
     "name": "footer_text",
     "type": "text",
     "label": "Footer Text",

@@ -3,6 +3,9 @@
     // Define a place to hold your data
     $scope.data = {};
 
+    // Load in the default payment method
+    $scope.options = { "payment_method": "credit_card" };
+
     // Load in some helpers
     $scope.geoService = GeoService;
     $scope.helpers = HelperService;

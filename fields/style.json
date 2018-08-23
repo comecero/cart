@@ -28,15 +28,6 @@
     "default_value": "#f6f7f8"
   },
   {
-    "name": "brand-primary",
-    "type": "color",
-    "label": "Primary Brand Color",
-    "description": "The main color of your brand and website. Used for the panel background color and primary buttons.",
-    "section": "Branding",
-    "required": true,
-    "default_value": "#3181aa"
-  },
-  {
     "name": "company-name-color",
     "type": "color",
     "label": "Company Name Text Color",
@@ -269,24 +260,6 @@
     "default_value": "#686868"
   },
   {
-    "name": "table-header-bg",
-    "type": "color",
-    "label": "Table / Section Header Background Color",
-    "description": "The background color for header blocks of tables and other main sections.",
-    "section": "Main Content Area",
-    "required": true,
-    "default_value": "#f9f9f9"
-  },
-  {
-    "name": "table-header-color",
-    "type": "color",
-    "label": "Table / Section Header Text Color",
-    "description": "The text color for the page footer. Should have sharp contrast to the Table / Section Header Background Color.",
-    "section": "Main Content Area",
-    "required": true,
-    "default_value": "#818181"
-  },
-  {
     "name": "footer-bg",
     "type": "color",
     "label": "Footer Background Color",
@@ -395,10 +368,19 @@
     "default_value": "#a94442"
   },
   {
+    "name": "brand-primary",
+    "type": "color",
+    "label": "Primary Color",
+    "description": "'Primary' color, used for 'call to action' text and buttons. Generally your brand color is used.",
+    "section": "Primary Colors",
+    "required": true,
+    "default_value": "#0099E6"
+  },
+  {
     "name": "brand-success",
     "type": "color",
     "label": "Success Color",
-    "description": "'Success' color, used for primary 'call to action' text and buttons. Generally a green color is used.",
+    "description": "'Success' color, used for 'call to action' text and buttons. Generally a green color is used.",
     "section": "Primary Colors",
     "required": true,
     "default_value": "#36ab0c"

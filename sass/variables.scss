@@ -2,7 +2,7 @@
 
 /* Main Colors */
 $brand-primary: #0099E6;
-$brand-success: #EF663B;
+$brand-success: #36ab0c;
 $brand-info: #5bc0de;
 $brand-danger: #d9534f;
 
@@ -33,10 +33,6 @@ $font-family-footer: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Robot
 /* Main page */
 $body-bg: #f6f7f8;
 
-/************************  Layout means something else now, don't think we need this since its used for setting panel width  *************************/
-/* Defines the layout mode: full, boxed, hybrid */
-//$layout: boxed;
-
 /* Defines if shadows on the main container */
 $main-shadows: false;
 
@@ -46,7 +42,6 @@ $panel-border-color: #e6e7e8;
 
 /* Header */
 $header-size: medium;
-/************************  Do I need a default color?  *************************/
 $header-default-color: #ffffff;
 $header-bg: #0099E6;
 $header-divider-bar-color: #0099E6;
@@ -68,11 +63,6 @@ $footer-size: small;
 $footer-color: #686868;
 $footer-bg: #f6f7f8;
 $footer-link-color: #00A8FF;
-
-/* Table header */
-$table-header-color: #818181;
-$table-header-bg: #f9f9f9;
-$table-header-link-color: #00A8FF;
 
 /* Form elements */
 $input-border-radius: 2px;
@@ -108,21 +98,7 @@ $link-hover-color: darken($link-color, 10%);
 $link-hover-decoration: none;
 
 $footer-link-hover-color: darken($footer-link-color, 10%);
-$table-header-link-hover-color: darken($table-header-link-color, 10%);
 
 /************************  Header is flush to top so no rounding  *************************/
 //$panel-header-border-radius: 0;
 $grid-gutter-width: 30px;
-
-/************************  Removing these to apply bootstrap defaults. Using col-sm and md to handle widths  *************************/
-/* Navbar vs. Boxed Layout */
-//$container-tablet: (720px + $grid-gutter-width);
-//$container-desktop: (720px + $grid-gutter-width);
-//$container-large-desktop: (720px + $grid-gutter-width);
-
-/* Otherwise, hide the boxed elements */
-//@if $layout == full {
-//    $container-tablet: (720px + $grid-gutter-width);
-//    $container-desktop: (940px + $grid-gutter-width);
-//    $container-large-desktop: (940px + $grid-gutter-width);
-//}

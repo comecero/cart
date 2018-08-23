@@ -6,8 +6,6 @@
 /* Button Text Colors */
 /* Fonts */
 /* Main page */
-/************************  Layout means something else now, don't think we need this since its used for setting panel width  *************************/
-/* Defines the layout mode: full, boxed, hybrid */
 /* Defines if shadows on the main container */
 /* Panel */
 /* Header */
@@ -15,15 +13,11 @@
 /* Main content area background color */
 /* Default button */
 /* Footer */
-/* Table header */
 /* Form elements */
 /* Quantity stepper */
 /* Product Image Borders */
 /* NOT USER DEFINED */
 /************************  Header is flush to top so no rounding  *************************/
-/************************  Removing these to apply bootstrap defaults. Using col-sm and md to handle widths  *************************/
-/* Navbar vs. Boxed Layout */
-/* Otherwise, hide the boxed elements */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -2930,28 +2924,28 @@ fieldset[disabled] a.btn {
 
 .btn-success {
   color: #ffffff;
-  background-color: #EF663B;
-  border-color: #ed5423; }
+  background-color: #36ab0c;
+  border-color: #2e930a; }
   .btn-success:focus, .btn-success.focus {
     color: #ffffff;
-    background-color: #e44513;
-    border-color: #86280b; }
+    background-color: #277b09;
+    border-color: #091c02; }
   .btn-success:hover {
     color: #ffffff;
-    background-color: #e44513;
-    border-color: #c33b10; }
+    background-color: #277b09;
+    border-color: #1c5a06; }
   .btn-success:active, .btn-success.active,
   .open > .btn-success.dropdown-toggle {
     color: #ffffff;
-    background-color: #e44513;
-    border-color: #c33b10; }
+    background-color: #277b09;
+    border-color: #1c5a06; }
     .btn-success:active:hover, .btn-success:active:focus, .btn-success:active.focus, .btn-success.active:hover, .btn-success.active:focus, .btn-success.active.focus,
     .open > .btn-success.dropdown-toggle:hover,
     .open > .btn-success.dropdown-toggle:focus,
     .open > .btn-success.dropdown-toggle.focus {
       color: #ffffff;
-      background-color: #c33b10;
-      border-color: #86280b; }
+      background-color: #1c5a06;
+      border-color: #091c02; }
   .btn-success:active, .btn-success.active,
   .open > .btn-success.dropdown-toggle {
     background-image: none; }
@@ -2959,10 +2953,10 @@ fieldset[disabled] a.btn {
   fieldset[disabled] .btn-success:hover,
   fieldset[disabled] .btn-success:focus,
   fieldset[disabled] .btn-success.focus {
-    background-color: #EF663B;
-    border-color: #ed5423; }
+    background-color: #36ab0c;
+    border-color: #2e930a; }
   .btn-success .badge {
-    color: #EF663B;
+    color: #36ab0c;
     background-color: #ffffff; }
 
 .btn-info {
@@ -4251,9 +4245,9 @@ a.label:hover, a.label:focus {
     background-color: #0077b3; }
 
 .label-success {
-  background-color: #EF663B; }
+  background-color: #36ab0c; }
   .label-success[href]:hover, .label-success[href]:focus {
-    background-color: #e44513; }
+    background-color: #277b09; }
 
 .label-info {
   background-color: #5bc0de; }
@@ -4481,7 +4475,7 @@ a.thumbnail.active {
   animation: progress-bar-stripes 2s linear infinite; }
 
 .progress-bar-success {
-  background-color: #EF663B; }
+  background-color: #36ab0c; }
   .progress-striped .progress-bar-success {
     background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -5851,14 +5845,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin: 0; }
 
 .form-group {
-  margin-bottom: 12px; }
+  margin-top: 12px;
+  margin-bottom: 0px; }
 
 .form-control {
   box-shadow: none; }
 
 .alert {
   margin-bottom: 0;
-  padding: 24px; }
+  padding: 16px 24px; }
 
 .well {
   box-shadow: none;
@@ -5877,7 +5872,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .navbar {
   border-radius: 0;
   border: 0;
-  margin-bottom: 12px;
+  margin-bottom: 0;
   min-height: 64px; }
 
 .navbar.navbar-default {
@@ -5903,20 +5898,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   vertical-align: middle;
   max-height: 44px; }
 
-/************************  Where can a company name span get set as a link?  *************************/
-/*
-.navbar .brand a {
-    color: $header-default-link-color;
-}
-
-.navbar .brand a:hover {
-    color: $header-default-link-hover-color;
-}
-
-.navbar .brand a:active {
-    color: $header-default-link-active-color;
-}
-*/
 /* Footer */
 .footer {
   color: #686868;
@@ -5951,26 +5932,23 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   border-color: #e6e7e8; }
 
 .panel-body {
-  padding: 24px 24px 0; }
+  padding: 0px 24px 24px; }
 
 .panel-body.panel-body-shaded {
   background-color: #fbfbfb;
   border-top: 1px solid #e6e7e8;
   border-bottom: 1px solid #e6e7e8; }
 
-/***** Refactor after doing one-column *****/
-.section-header, .section-content {
-  margin-bottom: 16px; }
+.panel-top-border {
+  border-top: 1px solid #e6e7e8; }
 
-.section-form {
-  margin-bottom: 12px; }
+.section {
+  margin-top: 24px; }
 
-.section-cart {
+.section-top-border {
   border-top: 1px solid #e6e7e8;
-  padding: 16px 0; }
-
-.section-cart:last-child {
-  padding-bottom: 24px; }
+  padding-top: 24px;
+  margin-top: 8px; }
 
 /* Text */
 .text-lg {
@@ -6040,13 +6018,16 @@ img.product-icon {
 .remove-button {
   font-size: 18px;
   display: block;
-  color: #686868; }
+  color: #686868 !important; }
 
 .remove-link {
   padding-top: 8px;
   font-weight: bold;
   display: inline-block;
   color: #00A8FF; }
+
+.continue-shopping-link, .have-account-link {
+  text-align: right; }
 
 /* Promo code */
 .promo-code input {
@@ -6072,7 +6053,7 @@ del.discount {
   font-weight: normal; }
 
 .faux-link {
-  /*color: $link-color;*/
+  color: #00A8FF;
   cursor: pointer; }
 
 /* No exit animations */
@@ -6262,22 +6243,6 @@ a.btn-danger {
 .has-error .error-block:after {
   border-bottom-color: #f2dede; }
 
-.header, thead {
-  background-color: #f9f9f9;
-  color: #818181; }
-
-.header a, a:link, a:visited {
-  color: #00A8FF; }
-
-.header a:hover, a:active {
-  color: #0086cc; }
-
-thead a, a:link, a:visited {
-  color: #00A8FF; }
-
-thead a:hover, a:active {
-  color: #0086cc; }
-
 /* Credit card icons */
 .credit-cards {
   white-space: nowrap;
@@ -6301,9 +6266,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-table tr {
-  /*padding: 5px;*/ }
-
 table th, table td {
   text-align: left;
   vertical-align: top;
@@ -6312,30 +6274,31 @@ table th, table td {
 table th:last-child, table td:last-child {
   padding-right: 0; }
 
-table th {
-  /*font-size: 12px;
-    letter-spacing: 1px;*/ }
-
 table td.has-product-icon {
   width: 88px; }
 
 .radio-group.inline label, .checkbox-group.inline label {
   display: inline; }
 
-/* Wallet buttons */
 ul.payment-methods {
   list-style-type: none;
-  margin: 12px 0;
-  padding: 0;
-  text-align: left; }
+  padding: 0; }
 
 ul.payment-methods li {
-  display: inline-block;
-  margin-right: 12px;
-  position: relative; }
+  float: left;
+  margin-right: 24px;
+  font-size: 16px;
+  color: #686868; }
 
 ul.payment-methods li:last-child {
-  margin-right: 0px; }
+  margin-right: 0; }
+
+ul.payment-methods li label {
+  margin-bottom: 0; }
+
+.payment-button {
+  position: relative;
+  margin: 16px 0; }
 
 .amazonpay-button-inner-image {
   max-height: none !important;
@@ -6346,70 +6309,22 @@ ul.payment-methods li:last-child {
   width: 152px;
   height: 52px; }
 
+.receipt-date, .invoice-date {
+  text-align: right; }
+
 @media screen and (max-width: 768px) {
-  table {
-    border: 0; }
-  /*table thead {
-        display: none;
-    }
-
-    table tr {
-        margin-bottom: 10px;
-        display: block;
-        border-bottom: none;
-    }
-
-    table.tight tr {
-        margin-bottom: 0;
-        padding: 0;
-        border-bottom: none;
-    }
-
-    table.tight td {
-        padding: 5px;
-    }
-
-    table td {
-        display: block;
-        text-align: right;
-        font-size: 13px;
-        border-bottom: none;
-    }*/
-  table td .form-control, table td img {
-    display: inline-block; }
-  table td:last-child {
-    border-bottom: 0; }
-  table td:before {
-    content: attr(data-label);
-    float: left; }
-  /* Vertically align labels for cells with an input element */
-  table td.has-input:before {
-    display: inline-block;
-    margin-top: 9px; }
-  /* Vertically align labels for cells with an input element */
-  table td.has-image:before {
-    display: inline-block;
-    margin-top: 30px; }
-  /* Quantity */
-  /* .quantity-stepper-wrapper {
-        float: right;
-    }
-    
-    .quantity-stepper {
-        padding-top: 6px;
-        margin: 0px;
-    }
-           */
   .remove-link {
     display: block;
     text-align: right;
     clear: right;
     padding-top: 16px; }
-  /* Wallet buttons */
+  .continue-shopping-link, .have-account-link {
+    text-align: left;
+    margin-top: 6px; }
   ul.payment-methods li {
-    margin: 0 0 12px 0; }
-  ul.payment-methods li:last-child {
-    margin-bottom: 0; } }
+    margin-top: 12px; }
+  .receipt-date, .invoice-date {
+    text-align: left; } }
 
 /* Spacers */
 .spacer-l0 {

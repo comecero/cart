@@ -14,7 +14,7 @@ window.__settings.app = {
     "show_continue_shopping": true,
     "hide_quantity": false,
     "enable_languages": true,
-    "header_brand_align": "left",
+    "form_label_position": "top",
     "header_html": null,
     "footer_html": null,
     "footer_text": null,
@@ -27,5 +27,5 @@ window.__settings.app = {
     "favicon_full": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/favicon.ico",
     "favicon": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/sm_favicon.ico",
     "web_font_import": "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800",
-    "fields": null,
+    "fields": null
 }
