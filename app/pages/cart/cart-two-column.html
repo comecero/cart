@@ -436,8 +436,8 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[country]" ng-show="settings.app.form_label_position == 'top'" translate>Country</label>
-                                                <select select-state-prov class="form-control customer-background-save" ng-class="{'select-placeholder': !data.cart.customer.billing_address.state_prov}" name="billing_address[state_prov]" ng-model="data.cart.customer.billing_address.state_prov" country="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.state_prov', data.cart.options) && geoService.getStatesProvs(data.cart.customer.billing_address.country) != null">
-                                                    <option class="select-placeholder" value="" ng-if="settings.app.form_label_position == 'inside'" translate>State / Province</option>
+                                                <select class="form-control customer-background-save" ng-class="{'select-placeholder': !data.cart.customer.billing_address.country}" name="billing_address[country]" customer-countries="data.cart.options.allowed_customer_countries" placeholder-name="{{ 'Country' | translate }}" ng-model="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.country', data.cart.options)">
+                                                    <option class="select-placeholder" value="" ng-if="settings.app.form_label_position == 'inside'" translate>Country</option>
                                                 </select>
                                                 <p class="error-block hidden" translate>Please provide a country</p>
                                             </div>
@@ -519,7 +519,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('shipping_address.country', data.cart.options, data.shipping_is_billing)">
-                                            <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
+                                            <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="shipping_address[country]" ng-show="settings.app.form_label_position == 'top'" translate>Country</label>
                                                 <select class="form-control customer-background-save" ng-class="{'select-placeholder': !data.cart.customer.shipping_address.country}" name="shipping_address[country]" customer-countries="data.cart.options.allowed_customer_countries" placeholder-name="{{ 'Country' | translate }}" ng-model="data.cart.customer.shipping_address.country" ng-required="helpers.isRequiredCustomerField('shipping_address.country', data.cart.options, data.shipping_is_billing)">
                                                     <option class="select-placeholder" value="" ng-if="settings.app.form_label_position == 'inside'" translate>Country</option>
