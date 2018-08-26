@@ -433,9 +433,7 @@
                                                 <p class="error-block hidden" translate>Please provide a zip / postal code</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
+                                        <div ng-class="{'col-xs-12': helpers.isCustomerField('billing_address.state_prov', data.cart.options), 'col-xs-6': !helpers.isCustomerField('billing_address.state_prov', data.cart.options)}" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[country]" ng-show="settings.app.form_label_position == 'top'" translate>Country</label>
                                                 <select class="form-control customer-background-save" ng-class="{'select-placeholder': !data.cart.customer.billing_address.country}" name="billing_address[country]" customer-countries="data.cart.options.allowed_customer_countries" placeholder-name="{{ 'Country' | translate }}" ng-model="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.country', data.cart.options)">
@@ -520,8 +518,6 @@
                                                 <p class="error-block hidden" translate>Please provide a zip / postal code</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('shipping_address.country', data.cart.options, data.shipping_is_billing)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="shipping_address[country]" ng-show="settings.app.form_label_position == 'top'" translate>Country</label>

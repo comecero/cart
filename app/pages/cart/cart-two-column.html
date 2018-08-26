@@ -320,13 +320,13 @@
                                                             <div class="col-xs-12 col-md-6" id="un">
                                                                 <div class="form-group">
                                                                     <label class="control-label" ng-show="settings.app.form_label_position == 'top'" for="un" translate>Username</label>
-                                                                    <input class="form-control signin-username" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Username' | translate }}" name="un" type="text">
+                                                                    <input class="form-control signin-username" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Username' | translate }}" name="un" type="text">
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-12 col-md-6" id="pw">
                                                                 <div class="form-group">
                                                                     <label class="control-label" ng-show="settings.app.form_label_position == 'top'" for="pw" translate>Password</label>
-                                                                    <input class="form-control signin-password" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Password' | translate }}" name="pw" type="password">
+                                                                    <input class="form-control signin-password" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Password' | translate }}" name="pw" type="password">
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-12 text-right spacer-t12">
@@ -354,7 +354,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('name', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="name" ng-show="settings.app.form_label_position == 'top'" translate>Full Name</label>
-                                                <input class="form-control customer-background-save" name="name" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Full Name' | translate }}" type="text" ng-model="data.cart.customer.name" ng-required="helpers.isRequiredCustomerField('name', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="name" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Full Name' | translate }}" type="text" ng-model="data.cart.customer.name" ng-required="helpers.isRequiredCustomerField('name', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide a name</p>
                                             </div>
                                         </div>
@@ -363,7 +363,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('email', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="email" ng-show="settings.app.form_label_position == 'top'" translate>Email</label>
-                                                <input class="form-control customer-background-save" name="email" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Email' | translate }}" type="email" ng-model="data.cart.customer.email" ng-required="helpers.isRequiredCustomerField('email', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="email" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Email' | translate }}" type="email" ng-model="data.cart.customer.email" ng-required="helpers.isRequiredCustomerField('email', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide a valid email address</p>
                                             </div>
                                         </div>
@@ -372,7 +372,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('company_name', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="company_name" ng-show="settings.app.form_label_position == 'top'" translate>Company Name</label>
-                                                <input class="form-control customer-background-save" name="company_name" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Company Name' | translate }}" type="text" ng-model="data.cart.customer.company_name" ng-required="helpers.isRequiredCustomerField('company_name', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="company_name" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Company Name' | translate }}" type="text" ng-model="data.cart.customer.company_name" ng-required="helpers.isRequiredCustomerField('company_name', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide a company name</p>
                                             </div>
                                         </div>
@@ -381,7 +381,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('phone', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="phone" ng-show="settings.app.form_label_position == 'top'" translate>Phone</label>
-                                                <input class="form-control customer-background-save" name="phone" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Phone' | translate }}" type="text" ng-model="data.cart.customer.phone" ng-required="helpers.isRequiredCustomerField('phone', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="phone" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Phone' | translate }}" type="text" ng-model="data.cart.customer.phone" ng-required="helpers.isRequiredCustomerField('phone', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide a phone</p>
                                             </div>
                                         </div>
@@ -390,14 +390,14 @@
                                         <div class="col-xs-12 col-md-6" ng-show="helpers.isCustomerField('billing_address.address_1', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[address_1]" ng-show="settings.app.form_label_position == 'top'" translate>Address</label>
-                                                <input class="form-control customer-background-save" name="billing_address[address_1]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Address' | translate }}" type="text" ng-model="data.cart.customer.billing_address.address_1" ng-required="helpers.isRequiredCustomerField('billing_address.address_1', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="billing_address[address_1]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Address' | translate }}" type="text" ng-model="data.cart.customer.billing_address.address_1" ng-required="helpers.isRequiredCustomerField('billing_address.address_1', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide an address</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-6" ng-show="helpers.isCustomerField('billing_address.address_2', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[address_2]" ng-show="settings.app.form_label_position == 'top'" translate>Address 2</label>
-                                                <input class="form-control customer-background-save" name="billing_address[address_2]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Address 2' | translate }}" type="text" ng-model="data.cart.customer.billing_address.address_2" ng-required="helpers.isRequiredCustomerField('billing_address.address_2', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="billing_address[address_2]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Address 2' | translate }}" type="text" ng-model="data.cart.customer.billing_address.address_2" ng-required="helpers.isRequiredCustomerField('billing_address.address_2', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide an address</p>
                                             </div>
                                         </div>
@@ -406,7 +406,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('billing_address.city', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[city]" ng-show="settings.app.form_label_position == 'top'" translate>City</label>
-                                                <input class="form-control customer-background-save" name="billing_address[city]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'City' | translate }}" type="text" ng-model="data.cart.customer.billing_address.city" ng-required="helpers.isRequiredCustomerField('billing_address.city', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="billing_address[city]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'City' | translate }}" type="text" ng-model="data.cart.customer.billing_address.city" ng-required="helpers.isRequiredCustomerField('billing_address.city', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide a city</p>
                                             </div>
                                         </div>
@@ -420,20 +420,18 @@
                                             </div>
                                             <div class="form-group" ng-if="geoService.getStatesProvs(data.cart.customer.billing_address.country) == null" show-errors refresh-on-change="helpers.isRequiredCustomerField('billing_address.state_prov', data.cart.options)">
                                                 <label class="control-label" for="billing_address[state_prov]" ng-show="settings.app.form_label_position == 'top'" translate>Region / Province</label>
-                                                <input type="text" class="form-control customer-background-save" name="billing_address[state_prov]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Region / Province' | translate }}" ng-model="data.cart.customer.billing_address.state_prov" country="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.state_prov', data.cart.options) && geoService.getStatesProvs(data.cart.customer.billing_address.country) != null">
+                                                <input type="text" class="form-control customer-background-save" name="billing_address[state_prov]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Region / Province' | translate }}" ng-model="data.cart.customer.billing_address.state_prov" country="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.state_prov', data.cart.options) && geoService.getStatesProvs(data.cart.customer.billing_address.country) != null">
                                                 <p class="error-block hidden" translate>Please provide a region / province</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-6" ng-show="helpers.isCustomerField('billing_address.postal_code', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[postal_code]" ng-show="settings.app.form_label_position == 'top'" translate>Zip / Postal Code</label>
-                                                <input class="form-control customer-background-save" name="billing_address[postal_code]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Zip / Postal Code' | translate }}" type="text" ng-model="data.cart.customer.billing_address.postal_code" ng-required="helpers.isRequiredCustomerField('billing_address.postal_code', data.cart.options)">
+                                                <input class="form-control customer-background-save" name="billing_address[postal_code]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Zip / Postal Code' | translate }}" type="text" ng-model="data.cart.customer.billing_address.postal_code" ng-required="helpers.isRequiredCustomerField('billing_address.postal_code', data.cart.options)">
                                                 <p class="error-block hidden" translate>Please provide a zip / postal code</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
+                                        <div ng-class="{'col-xs-12': helpers.isCustomerField('billing_address.state_prov', data.cart.options), 'col-xs-6': !helpers.isCustomerField('billing_address.state_prov', data.cart.options)}" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label" for="billing_address[country]" ng-show="settings.app.form_label_position == 'top'" translate>Country</label>
                                                 <select class="form-control customer-background-save" ng-class="{'select-placeholder': !data.cart.customer.billing_address.country}" name="billing_address[country]" customer-countries="data.cart.options.allowed_customer_countries" placeholder-name="{{ 'Country' | translate }}" ng-model="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.country', data.cart.options)">
@@ -466,7 +464,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('shipping_address.name', data.cart.options, data.shipping_is_billing)">
                                             <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
                                                 <label class="control-label" for="shipping_address[name]" ng-show="settings.app.form_label_position == 'top'" translate>Full Name</label>
-                                                <input class="form-control customer-background-save" name="shipping_address[name]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Full Name' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.name" ng-required="helpers.isRequiredCustomerField('shipping_address.name', data.cart.options, data.shipping_is_billing)">
+                                                <input class="form-control customer-background-save" name="shipping_address[name]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Full Name' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.name" ng-required="helpers.isRequiredCustomerField('shipping_address.name', data.cart.options, data.shipping_is_billing)">
                                                 <p class="error-block hidden" translate>Please provide a name</p>
                                             </div>
                                         </div>
@@ -475,14 +473,14 @@
                                         <div class="col-xs-12 col-md-6" ng-show="helpers.isCustomerField('shipping_address.address_1', data.cart.options, data.shipping_is_billing)">
                                             <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
                                                 <label class="control-label" for="shipping_address[address_1]" ng-show="settings.app.form_label_position == 'top'" translate>Address</label>
-                                                <input class="form-control customer-background-save" name="shipping_address[address_1]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Address'  | translate }}" type="text" ng-model="data.cart.customer.shipping_address.address_1" ng-required="helpers.isRequiredCustomerField('shipping_address.address_1', data.cart.options, data.shipping_is_billing)">
+                                                <input class="form-control customer-background-save" name="shipping_address[address_1]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Address'  | translate }}" type="text" ng-model="data.cart.customer.shipping_address.address_1" ng-required="helpers.isRequiredCustomerField('shipping_address.address_1', data.cart.options, data.shipping_is_billing)">
                                                 <p class="error-block hidden" translate>Please provide an address</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-6" ng-show="helpers.isCustomerField('shipping_address.address_2', data.cart.options, data.shipping_is_billing)">
                                             <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
                                                 <label class="control-label" for="shipping_address[address_2]" ng-show="settings.app.form_label_position == 'top'" translate>Address 2</label>
-                                                <input class="form-control customer-background-save" name="shipping_address[address_2]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Address 2' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.address_2" ng-required="helpers.isRequiredCustomerField('shipping_address.address_2', data.cart.options, data.shipping_is_billing)">
+                                                <input class="form-control customer-background-save" name="shipping_address[address_2]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Address 2' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.address_2" ng-required="helpers.isRequiredCustomerField('shipping_address.address_2', data.cart.options, data.shipping_is_billing)">
                                                 <p class="error-block hidden" translate>Please provide an address</p>
                                             </div>
                                         </div>
@@ -491,7 +489,7 @@
                                         <div class="col-xs-12" ng-show="helpers.isCustomerField('shipping_address.city', data.cart.options, data.shipping_is_billing)">
                                             <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
                                                 <label class="control-label" for="shipping_address[city]" ng-show="settings.app.form_label_position == 'top'" translate>City</label>
-                                                <input class="form-control customer-background-save" name="shipping_address[city]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'City' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.city" ng-required="helpers.isRequiredCustomerField('shipping_address.city', data.cart.options, data.shipping_is_billing)">
+                                                <input class="form-control customer-background-save" name="shipping_address[city]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'City' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.city" ng-required="helpers.isRequiredCustomerField('shipping_address.city', data.cart.options, data.shipping_is_billing)">
                                                 <p class="error-block hidden" translate>Please provide a city</p>
                                             </div>
                                         </div>
@@ -505,14 +503,14 @@
                                             </div>
                                             <div class="form-group" ng-if="geoService.getStatesProvs(data.cart.customer.shipping_address.country) == null" show-errors refresh-on-change="helpers.isRequiredCustomerField('shipping_address.state_prov', data.cart.options)">
                                                 <label class="control-label" for="shipping_address[state_prov]" ng-show="settings.app.form_label_position == 'top'" translate>Region / Province</label>
-                                                <input type="text" class="form-control customer-background-save" name="shipping_address[state_prov]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Region / Province' | translate }}" ng-model="data.cart.customer.shipping_address.state_prov" country="data.cart.customer.shipping_address.country" ng-required="helpers.isRequiredCustomerField('shipping_address.state_prov', data.cart.options, data.shipping_is_billing) && geoService.getStatesProvs(data.cart.customer.shipping_address.country) != null">
+                                                <input type="text" class="form-control customer-background-save" name="shipping_address[state_prov]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Region / Province' | translate }}" ng-model="data.cart.customer.shipping_address.state_prov" country="data.cart.customer.shipping_address.country" ng-required="helpers.isRequiredCustomerField('shipping_address.state_prov', data.cart.options, data.shipping_is_billing) && geoService.getStatesProvs(data.cart.customer.shipping_address.country) != null">
                                                 <p class="error-block hidden" translate>Please provide a region / province</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-6" ng-show="helpers.isCustomerField('shipping_address.postal_code', data.cart.options, data.shipping_is_billing)">
                                             <div class="form-group" show-errors refresh-on-change="data.shipping_is_billing">
                                                 <label class="control-label" for="shipping_address[postal_code]" ng-show="settings.app.form_label_position == 'top'" translate>Zip / Postal Code</label>
-                                                <input class="form-control customer-background-save" name="shipping_address[postal_code]" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Zip / Postal Code' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.postal_code" ng-required="helpers.isRequiredCustomerField('shipping_address.postal_code', data.cart.options, data.shipping_is_billing)">
+                                                <input class="form-control customer-background-save" name="shipping_address[postal_code]" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Zip / Postal Code' | translate }}" type="text" ng-model="data.cart.customer.shipping_address.postal_code" ng-required="helpers.isRequiredCustomerField('shipping_address.postal_code', data.cart.options, data.shipping_is_billing)">
                                                 <p class="error-block hidden" translate>Please provide a zip / postal code</p>
                                             </div>
                                         </div>
@@ -537,7 +535,7 @@
                                             <div class="form-group" show-errors>
                                                 <label class="control-label" for="tax_number" ng-show="settings.app.form_label_position == 'top'" translate>VAT Number</label>
                                                 <div class="form-inline">
-                                                    <input class="form-control" name="tax_number" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'VAT Number' | translate }}" type="text" ng-model="data.cart.customer.tax_number">
+                                                    <input class="form-control" name="tax_number" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'VAT Number' | translate }}" type="text" ng-model="data.cart.customer.tax_number">
                                                     <button type="button" class="btn btn-info right" update-cart="data.cart" error="data.error" params="data.params" translate>Apply</button>
                                                 </div>
                                                 <p class="help-block" translate>If this order is for a business, please provide your VAT Number.</p>
@@ -627,7 +625,7 @@
                                                 <label class="control-label required" for="card_number" ng-show="settings.app.form_label_position == 'top'" translate>Card Number</label>
                                                 <div class="inner-addon left-addon">
                                                     <i class="fa fa-credit-card"></i>
-                                                    <input class="form-control" name="card_number" type="tel" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Card Number' | translate }}" ng-model="data.payment_method.data.number" validate-card ng-required="!data.payment_method.payment_method_id">
+                                                    <input class="form-control" name="card_number" type="tel" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Card Number' | translate }}" ng-model="data.payment_method.data.number" validate-card ng-required="!data.payment_method.payment_method_id">
                                                 </div>
                                                 <p class="error-block hidden" translate>Please provide a valid card number</p>
                                             </div>
@@ -655,7 +653,7 @@
                                         <div class="col-xs-12 col-sm-4">
                                             <div class="form-group" show-errors="data.cart.options">
                                                 <label class="control-label required" for="cvv" ng-show="settings.app.form_label_position == 'top'" translate>Security Code</label>
-                                                <input class="form-control" name="cvv" type="tel" hide-placeholder="!settings.app.form_label_position == 'inside'" placeholder="{{ 'Security Code' | translate }}" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id" maxlength="4">
+                                                <input class="form-control" name="cvv" type="tel" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Security Code' | translate }}" ng-model="data.payment_method.data.cvv" validate-cvv ng-required="!data.payment_method.payment_method_id" maxlength="4">
                                                 <p class="error-block hidden" translate>Please provide a valid security code</p>
                                             </div>
                                         </div>
