@@ -399,11 +399,41 @@ a.btn-danger {
     color: $btn-danger-color !important;
 }
 
+/*Set the placeholder color */
 .form-control::-webkit-input-placeholder { color: $placeholder-color; }
 .form-control:-moz-placeholder { color: $placeholder-color; }
 .form-control::-moz-placeholder { color: $placeholder-color; }
 .form-control:-ms-input-placeholder { color: $placeholder-color; }
 
+/* "Faux" placeholders on select controls */
+.select-placeholder { color: $placeholder-color; }
+.select-options-color { color: $input-color; }
+
+/* A class that allows placeholders to be marked as transparent. See kit.js hidePlaceholder directive for more info */
+/* WebKit, Blink, Edge */
+.hide-placeholder::-webkit-input-placeholder { color: transparent; opacity: 0 }
+
+/* Mozilla Firefox 4 to 18 */
+.hide-placeholder:-moz-placeholder { color: transparent; opacity: 0; }
+
+/* Mozilla Firefox 19+ */
+.hide-placeholder::-moz-placeholder { color: transparent; opacity: 0; }
+
+/* Internet Explorer 10-11 */
+.hide-placeholder:-ms-input-placeholder { color: transparent; opacity: 0 }
+
+/* Microsoft Edge */
+.hide-placeholder::-ms-input-placeholder { color: transparent; opacity: 0 }
+
+/* Most modern browsers */
+.hide-placeholder::placeholder { color: transparent; opacity: 0 }
+
+/* Loading bar, top of page when ajax requests are processing / waiting */
+#loading-bar .bar {
+    background: $loading-bar-bg-color;
+}
+
+/* Radio buttons / groups */
 .radio-group-label,
 .checkbox-group-label {
   clear: both;

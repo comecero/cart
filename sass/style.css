@@ -9,13 +9,13 @@
 /* Defines if shadows on the main container */
 /* Panel */
 /* Header */
-/************************  Do I need a default color?  *************************/
 /* Main content area background color */
 /* Default button */
 /* Footer */
 /* Form elements */
 /* Quantity stepper */
 /* Product Image Borders */
+/* Loading bar color */
 /* NOT USER DEFINED */
 /************************  Header is flush to top so no rounding  *************************/
 /*!
@@ -6078,6 +6078,7 @@ a.btn-info {
 a.btn-danger {
   color: #ffffff !important; }
 
+/*Set the placeholder color */
 .form-control::-webkit-input-placeholder {
   color: #999999; }
 
@@ -6090,6 +6091,49 @@ a.btn-danger {
 .form-control:-ms-input-placeholder {
   color: #999999; }
 
+/* "Faux" placeholders on select controls */
+.select-placeholder {
+  color: #999999; }
+
+.select-options-color {
+  color: #555555; }
+
+/* A class that allows placeholders to be marked as transparent. See kit.js hidePlaceholder directive for more info */
+/* WebKit, Blink, Edge */
+.hide-placeholder::-webkit-input-placeholder {
+  color: transparent;
+  opacity: 0; }
+
+/* Mozilla Firefox 4 to 18 */
+.hide-placeholder:-moz-placeholder {
+  color: transparent;
+  opacity: 0; }
+
+/* Mozilla Firefox 19+ */
+.hide-placeholder::-moz-placeholder {
+  color: transparent;
+  opacity: 0; }
+
+/* Internet Explorer 10-11 */
+.hide-placeholder:-ms-input-placeholder {
+  color: transparent;
+  opacity: 0; }
+
+/* Microsoft Edge */
+.hide-placeholder::-ms-input-placeholder {
+  color: transparent;
+  opacity: 0; }
+
+/* Most modern browsers */
+.hide-placeholder::placeholder {
+  color: transparent;
+  opacity: 0; }
+
+/* Loading bar, top of page when ajax requests are processing / waiting */
+#loading-bar .bar {
+  background: #95dafd; }
+
+/* Radio buttons / groups */
 .radio-group-label,
 .checkbox-group-label {
   clear: both;

@@ -1,27 +1,29 @@
-﻿// This is a shim for the app style. When the app is run in the hosted environment, the values in this file will reflect the values provided by the app user.
-// Note that the values that the user provides for style are also compiled into a css file if you use the conventions provided for sass or less in the hosted environment. See the documentation for more details.
-window.__settings = window.__settings || {};
-window.__settings.style = {
+﻿// Make a copy of this file and name it style.js, which can be used by the app to customize app styles.
+// Note that the style values provided by the user are compiled into a css stylesheet (located in sass/style.css). This file gives you access to the raw user style input values.
+// At runtime, the user's style settings will be automatically injected, providing the user's selections to the app.
+window.__settings = window.__settings || {}; window.__settings.style = {
     "layout": "two-column",
+    "body-bg": "#f6f7f8",
+    "company-name-color": "#686868",
     "logo": null,
     "favicon": null,
     "header-size": "medium",
-    "header-bg": "#0099E6",
-    "header-divider-bar-color": "#0099E6",
+    "header-bg": "#ffffff",
+    "header-divider-bar-color": "#e6e7e8",
     "header-brand-align": "left",
-    "company-name-color": "#ffffff",
-    "body-bg": "#f6f7f8",
     "main-shadows": false,
+    "loading-bar-bg-color": "#95dafd",
     "web_font_import": null,
     "font-family-company-name": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
     "font-family-base": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
     "font-family-footer": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
     "main-content-bg": "#ffffff",
+    "main-content-shaded-bg": "#fbfbfb",
     "main-content-color": "#686868",
     "panel-border-radius": "4px",
     "panel-border-color": "#e6e7e8",
-    "link-color": "#00A8FF",
-    "h-color": "#4A4A4A",
+    "link-color": "#3181aa",
+    "h-color": "#686868",
     "footer-bg": "#f6f7f8",
     "footer-color": "#686868",
     "footer-link-color": "#00A8FF",
@@ -43,7 +45,7 @@ window.__settings.style = {
     "btn-default-bg": "#ffffff",
     "btn-default-color": "#686868",
     "product-icon-border-color": "#e6e7e8",
-    "input-border-radius": "2px",
+    "input-border-radius": 0,
     "input-bg": "#ffffff",
     "input-color": "#555555",
     "placeholder-color": "#999999",
@@ -58,5 +60,5 @@ window.__settings.style = {
     "favicon_medium": null,
     "favicon_large": null,
     "favicon_square": null,
-    "favicon_full": null,
-}
+    "favicon_full": null
+};

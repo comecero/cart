@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section" ng-show="helpers.isCustomerField('username', data.cart.options)">
+                        <div class="section" ng-show="helpers.isCustomerField('username', data.payment.cart.options)">
                             <div class="section-body">
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -88,7 +88,7 @@
                                                             <label class="control-label" for="un" ng-show="settings.app.form_label_position == 'top'" translate>Username</label>
                                                             <div class="inner-addon left-addon">
                                                                 <i class="fa fa-user"></i>
-                                                                <input class="form-control create-account-username" name="un" type="text" placeholder="{{ (settings.app.form_label_position == 'inside' ? 'Username' : '') | translate }}" value="{{data.payment.order.customer.email}}">
+                                                                <input class="form-control create-account-username" name="un" type="text" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Username' | translate }}" value="{{data.payment.order.customer.email}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -98,7 +98,7 @@
                                                             <label class="control-label" for="pw" ng-show="settings.app.form_label_position == 'top'" translate>Password</label>
                                                             <div class="inner-addon left-addon">
                                                                 <i class="fa fa-lock"></i>
-                                                                <input class="form-control create-account-password" name="pw" placeholder="{{ (settings.app.form_label_position == 'inside' ? 'Password' : '') | translate }}" type="password">
+                                                                <input class="form-control create-account-password" name="pw" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Password' | translate }}" type="password">
                                                             </div>
                                                         </div>
                                                     </div>
