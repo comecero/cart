@@ -3,12 +3,10 @@
     "name": "company_name",
     "type": "string",
     "label": "Company Name",
-    "description": "The company name that will appear on your cart pages",
+    "description": "The company name that will appear on your cart pages. If blank, the 'Doing Business As' name in your account settings will be used.",
     "section": "Design",
-    "required": true,
-    "default_value": "Your Company Name",
-    "min_length": 1,
-    "max_length": 25
+    "required": false,
+    "max_length": 50
   },
   {
     "name": "use_square_images",

@@ -128,6 +128,11 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
         ]
     }
 
+    // If the company name in app settings is null, replace with the company name in account.
+    if (!settings.app.company_name) {
+        settings.app.company_name = settings.account.company_name;
+    }
+
     // Analytics. Watch for route changes and load analytics accordingly.
     $rootScope.$on('$locationChangeSuccess', function () {
         if (window.__pageview && window.__pageview.recordPageLoad) {
