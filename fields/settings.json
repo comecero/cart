@@ -141,14 +141,6 @@
     "default_value": true
   },
   {
-    "name": "main_shopping_url",
-    "type": "string",
-    "label": "Main Shopping URL",
-    "description": "The page you want to direct users to when they are invited to 'Continue Shopping'. Also used to direct users who arrive with invalid cart or session values (such as an expired shopping session or cart).",
-    "section": "Routing",
-    "required": false
-  },
-  {
     "name": "show_continue_shopping",
     "type": "boolean",
     "label": "Show 'Continue Shopping' Button",
@@ -156,6 +148,94 @@
     "section": "Features",
     "required": false,
     "default_value": false
+  },
+  {
+    "name": "receipt_button_position",
+    "type": "string",
+    "label": "Receipt Button Position",
+    "description": "Indicate the position of the receipt button, which can direct the user back to your site upon completion of an order.",
+    "section": "Features",
+    "required": true,
+    "default_value": "false",
+    "options": [
+      {
+        "display": "Top",
+        "value": "top"
+      },
+      {
+        "display": "Bottom",
+        "value": "bottom"
+      },
+      {
+        "display": "Do not display the receipt button",
+        "value": "false"
+      }
+    ]
+  },
+  {
+    "name": "receipt_button_text",
+    "type": "string",
+    "label": "Receipt Button Text",
+    "description": "The text to display on the receipt button.",
+    "section": "Features",
+    "required": true,
+    "default_value": "false",
+    "options": [
+      {
+        "display": "Continue Shopping",
+        "value": "continue_shopping"
+      },
+      {
+        "display": "Continue",
+        "value": "continue"
+      },
+      {
+        "display": "Return",
+        "value": "return"
+      },
+      {
+        "display": "Finish",
+        "value": "finish"
+      },
+      {
+        "display": "Return to {{Your Company Name}}",
+        "value": "return_to_company_name"
+      },
+      {
+        "display": "A custom value (provide below)",
+        "value": "custom"
+      }
+    ]
+  },
+  {
+    "name": "receipt_button_text_custom",
+    "type": "string",
+    "label": "Custom Receipt Button Text",
+    "description": "If you selected custom text for your receipt button text, enter the text you would like to display.",
+    "section": "Features",
+    "required": false,
+    "default_value": null,
+    "min_length": 1,
+    "max_length": 75
+  },
+  {
+    "name": "receipt_button_url",
+    "type": "string",
+    "label": "Receipt Button URL",
+    "description": "The destination URL when a user clicks the Receipt Button. You can use the following dynamic values in your URL: order, payment. For example, https://example.com?order_id={{order.order_id}}&payment_id={{payment.payment_id}}",
+    "section": "Features",
+    "required": false,
+    "default_value": null,
+    "min_length": 2,
+    "max_length": 512
+  },
+  {
+    "name": "main_shopping_url",
+    "type": "string",
+    "label": "Main Shopping URL",
+    "description": "The page you want to direct users to when they are invited to 'Continue Shopping'. Also used to direct users who arrive with invalid cart or session values (such as an expired shopping session or cart).",
+    "section": "Routing",
+    "required": false
   },
   {
     "name": "not_found_url",

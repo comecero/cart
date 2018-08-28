@@ -1,4 +1,4 @@
-﻿app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'OrderService', 'SettingsService', 'HelperService', '$document', function ($scope, $routeParams, PaymentService, OrderService, SettingsService, HelperService, $document) {
+﻿app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'OrderService', 'SettingsService', 'HelperService', '$document', '$interpolate', function ($scope, $routeParams, PaymentService, OrderService, SettingsService, HelperService, $document, $interpolate) {
 
     // Define a place to hold your data
     $scope.data = {};
@@ -9,11 +9,9 @@
 
     $scope.data.params = {};
     $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription_terms,order.options,cart.options,invoice.options";
-    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription_terms.description,order.items.type,order.items.license_pending,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.items.product.images.link_small,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.data.params.expand += ",order.items.download,order.items.license";
-        $scope.data.params.show += ",order.items.item_id,order.items.license.html,order.items.license.label,order.items.license.instructions,order.items.download.link";
     }
 
     $scope.data.params.options = true;
@@ -111,6 +109,26 @@
             }, 3500)
 
         });
+    }
+
+    $scope.getReceiptButtonUrl = function(url) {
+
+        if ($scope.data && $scope.data.payment) {
+
+            var scp = {
+                payment: $scope.data.payment,
+                order: $scope.data.payment.order
+            }
+
+            if (url) {
+                return $interpolate(url)(scp);
+            } else {
+                // Return the main shopping URL or the main app URL, if not present.
+                return $scope.settings.app.main_shopping_url || window.location.href.substring(0, window.location.href.indexOf("#")) + "#/";
+            }
+
+        }
+
     }
 
     // Watch for error to be populated, and if so, scroll to it.
