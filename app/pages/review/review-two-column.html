@@ -69,11 +69,11 @@
                                                 <td ng-show="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                                                 <td>
                                                     <strong>{{item.name}}</strong>
-                                                    <p class="text-light" ng-if="data.cart.shipping_item.name">
-                                                        <span translate>Delivery Method: </span> <span translate>{{data.cart.shipping_item.name}}</span>
+                                                    <p class="text-light" ng-if="showPhysicalDelivery(data.sale, item)">
+                                                        <span translate>Delivery Method: </span> <span translate>{{data.sale.shipping_item.name}}</span>
                                                     </p>
-                                                    <p class="text-light" ng-if="!data.cart.shipping_item && item.product.type == 'digital'">
-                                                        <span translate>Electronic Delivery</span><span ng-if="item.product.has_file || item.product.has_license_service"><span>: </span><span translate>Immediate Download</span></span>
+                                                    <p class="text-light" ng-if="showElectronicDelivery(data.sale, item)">
+                                                        <span translate>Electronic Delivery</span><span ng-if="item.product.has_file">: <span translate>Immediate Download</span></span><span ng-if="item.product.has_license_service">: <span translate>Immediate Access</span></span>
                                                     </p>
                                                     <p>
                                                         <span translate>Quantity</span>: <span>{{item.quantity}}</span>

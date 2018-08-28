@@ -159,6 +159,36 @@
         });
     }
 
+    $scope.showElectronicDelivery = function(cart, item) {
+
+        // If there's only one item in the cart and there's a shipping item, we'll show the delivery method, regardless of any other setting.
+        if (cart.items.length == 1 && cart.shipping_item) {
+            return false;
+        }
+
+        if (item.product.type == "digital") {
+            return true;
+        }
+
+        if (item.product.type == "service" && (item.product.has_file || item.product.has_license_service)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    $scope.showPhysicalDelivery = function (cart, item) {
+
+        // If a physical product and a shipping item, show.
+        if (item.product.type == "physical" && cart.shipping_item) {
+            return true;
+        }
+
+        return false;
+    }
+
+
     // Watch for error to be populated, and if so, scroll to it.
     $scope.$watch("data.error", function (newVal, oldVal) {
         if ($scope.data.error) {
