@@ -162,18 +162,6 @@
                                             <tr ng-if="item.subscription_terms">
                                                 <td colspan="3" class="text-light text-left padding-t12">{{item.subscription_terms.description}}</td>
                                             </tr>
-                                            <tr ng-if="item.download">
-                                                <td colspan="3" class="text-left">
-                                                    <a class="btn btn-info" ng-href="{{item.download.link}}" translate>Download Now</a>
-                                                </td>
-                                            </tr>
-                                            <tr ng-if="item.license">
-                                                <td colspan="3" class="text-left">
-                                                    <div class="alert alert-info">
-                                                        <strong>{{item.license.label}}:</strong>&nbsp;<span ng-bind-html="item.license.html"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

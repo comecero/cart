@@ -70,7 +70,7 @@
                                                 <td>
                                                     <strong>{{item.name}}</strong>
                                                     <p class="text-light" ng-if="item.product.type == 'digital'">
-                                                        <span translate>Electronic Delivery: </span> <span translate>Immediate Download</span>
+                                                        <span translate>Electronic Delivery</span><span ng-if="item.product.has_file || item.product.has_license_service"><span>: </span><span translate>Immediate Download</span></span>
                                                     </p>
                                                     <p class="text-light" ng-if="item.product.type == 'physical'">
                                                         <span translate>Delivery Method: </span> <span translate>{{data.sale.shipping_item.name}}</span>
