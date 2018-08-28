@@ -51,25 +51,44 @@ gulp.task('dist', function (done) {
 
 gulp.task('copy-settings', function (done) {
 
-    gulp.src("./settings/account-SAMPLE.js").pipe(rename("account.js")).pipe(gulp.dest("./settings/"));
-    gulp.src("./settings/app-SAMPLE.js").pipe(rename("app.js")).pipe(gulp.dest("./settings/"));
-    gulp.src("./settings/style-SAMPLE.js").pipe(rename("style.js")).pipe(gulp.dest("./settings/"));
-    gulp.src("./settings/script-SAMPLE.js").pipe(rename("script.js")).pipe(gulp.dest("./settings/"));
-    gulp.src("./settings/style-SAMPLE.css").pipe(rename("style.css")).pipe(gulp.dest("./settings/"));
+    // Copy the settings files from the samples to valid files for testing. If you provide an account_id, it will update the files with the supplied account_id
+    // gulp copy-settings --account_id AA1111
 
-    var account = fs.readFileSync("./settings/account.js", "utf8");
-    var accountJs = "var window = {}" + account;
-    accountJs = eval(accountJs);
-    accountJs.account_id = "KO0000";
+    // Get the account_id, if supplied.
+    var account_id = "AA0000", i = process.argv.indexOf("--account_id");
+    if (i > -1) {
+        account_id = process.argv[i + 1];
+    }
 
-    fs.writeFile("./settings/account.js", accountJs, 'utf8', function (err) {
-        if (err) {
-            return console.log(err);
-        }
-
-        console.log("The file was saved!");
+    fs.readFile("./settings/account-SAMPLE.js", "utf-8", function (err, data) {
+        data = data.replace("AA0000", account_id);
+        fs.writeFile("./settings/account.js", data, 'utf8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
     });
 
+    fs.readFile("./settings/app-SAMPLE.js", "utf-8", function (err, data) {
+        data = data.replace("AA0000", account_id);
+        fs.writeFile("./settings/app.js", data, 'utf8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
+    });
+
+    fs.readFile("./settings/style-SAMPLE.js", "utf-8", function (err, data) {
+        data = data.replace("AA0000", account_id);
+        fs.writeFile("./settings/style.js", data, 'utf8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
+    });
+
+    gulp.src("./settings/script-SAMPLE.js").pipe(rename("script.js")).pipe(gulp.dest("./settings/"));
+    gulp.src("./settings/style-SAMPLE.css").pipe(rename("style.css")).pipe(gulp.dest("./settings/"));
 
 });
 

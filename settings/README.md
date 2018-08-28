@@ -8,6 +8,10 @@ There are three settings files: account, app and style. Account settings give â€
 
 The app source code provides sample account, app and style settings for use in local development. Rename the sample files to account.js, app.js and style.js in your local development to change and test app behavior. **The app will not run correctly in your local development environment unless you rename the sample files.**
 
+We have included a gulp task to create local copies of your settings files easy. Just run the command below, replacing `{account_id}` with the account_id of the account you are using for testing.
+
+`gulp copy-settings --account_id {account_id}`
+
 The settings files are provided in both JavaScript and JSON formats. Both formats contain the same data.
 
 #### Account Settings
