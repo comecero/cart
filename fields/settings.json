@@ -117,7 +117,7 @@
     "name": "ask_save_cards",
     "type": "boolean",
     "label": "Ask to Save Cards",
-    "description": "Indicates if customers can select to save their credit card to their account for future purchases. If enabled, it is recommended that you turn on the optional field 'Credentials' (under Settings> Payment) so customers have the option to create a username and password after they complete an order. This settings only applies if your account is configured to allow saving cards. Orders that contain subscriptions will not display this field as those orders always save the card for future rebills.",
+    "description": "Indicates if customers can select to save their credit card to their account for future purchases. If enabled, it is recommended that you turn on the optional field 'Credentials' (under Settings > Payment) so customers have the option to create a username and password after they complete an order. This setting only applies if your account is configured to allow saving cards. Orders that contain subscriptions will not display this field as those orders always save the card for future rebills.",
     "section": "Features",
     "required": true,
     "default_value": false
@@ -152,7 +152,7 @@
     "name": "show_continue_shopping",
     "type": "boolean",
     "label": "Show 'Continue Shopping' Button",
-    "description": "Indicates if you want to show a 'Continue Shopping' button below the cart summary.",
+    "description": "Indicates if you want to show a 'Continue Shopping' button on the cart summary.",
     "section": "Features",
     "required": false,
     "default_value": false

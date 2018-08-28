@@ -132,7 +132,7 @@
     "name": "font-family-company-name",
     "type": "string",
     "label": "Company Name Font",
-    "description": "The font or fonts used in the company name in the main page navigation / header. Note that if you upload a company logo, then the company name text is not displayed.",
+    "description": "The font or fonts used in the company name in the header. Note that if you upload a company logo, then the company name text is not displayed.",
     "section": "Fonts",
     "required": true,
     "default_value": "-apple-system,system-ui,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,sans-serif",
@@ -239,7 +239,7 @@
     "description": "The main link color of the main content area.",
     "section": "Main Content Area",
     "required": true,
-    "default_value": "#3181aa"
+    "default_value": "#00A8FF"
   },
   {
     "name": "h-color",
@@ -464,7 +464,7 @@
     "description": "Allows you to set a curve to the border of form input elements.",
     "section": "Inputs",
     "required": true,
-    "default_value": 0,
+    "default_value": "2px",
     "options": [
       {
         "display": "Square corners",
@@ -523,7 +523,7 @@
     "name": "stepper-bg",
     "type": "color",
     "label": "Quantity Stepper Background Color",
-    "description": "The background color for quantity stepper buttons. Generally matches the background color of form inputs.",
+    "description": "The background color for quantity stepper buttons.",
     "section": "Inputs",
     "required": true,
     "default_value": "#fbfbfb"
@@ -541,7 +541,7 @@
     "name": "header_html",
     "type": "text",
     "label": "Custom Header HTML",
-    "description": "Supply a section of HTML to be used as your global header. If you supply custom HTML, you may want to remove / hide the default navbar under the app's style settings (choose 'Remove' under Navbar Size).",
+    "description": "Supply a section of HTML to be used as your global header. If you supply custom HTML, you may want to remove / hide the default header under the app's style settings (choose 'Remove' under Header Size).",
     "section": "Custom HTML",
     "required": false
   },
@@ -557,7 +557,7 @@
     "name": "main-shadows",
     "type": "boolean",
     "label": "Use Shadows",
-    "description": "Indicates if the main navigation bar and the main content area should have a shadow applied. The shadows are subtle. Disable to maintain a flat look.",
+    "description": "Indicates if the header and the main content area should have a shadow applied. The shadows are subtle. Disable to maintain a flat look.",
     "section": "Miscellaneous",
     "required": true,
     "default_value": false
@@ -566,7 +566,7 @@
     "name": "loading-bar-bg-color",
     "type": "color",
     "label": "Loading Bar Color",
-    "description": "The color or the small loading bar at the top of the page that indicates progress when background requests are processing. Should be a in contrast to your navbar color.",
+    "description": "The color of the small loading bar at the top of the page that indicates progress when background requests are processing. Should be in contrast to your header background color.",
     "section": "Miscellaneous",
     "required": true,
     "default_value": "#95dafd"
