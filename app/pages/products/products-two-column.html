@@ -71,7 +71,7 @@
                 <div class="footer" ng-cloak>
                     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
                     <p ng-bind-html="settings.app.footer_text"></p>
-                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                    <p translate translate-params-symbol="'&copy;'" translate-params-year="settings.account.year" translate-params-company-name="settings.app.company_name">Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

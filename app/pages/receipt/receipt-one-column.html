@@ -181,7 +181,7 @@
                                                 <span ng-show="settings.app.receipt_button_text == 'return'" translate>Return</span>
                                                 <span ng-show="settings.app.receipt_button_text == 'return_to_company_name'" translate translate-params-company-name="settings.app.company_name">Return to {{companyName}}</span>
                                                 <span ng-show="settings.app.receipt_button_text == 'finish'" translate>Finish</span>
-                                                <span ng-show="settings.app.receipt_button_text == 'custom'" translate>{{settings.app.receipt_button_text_custom}}</span>
+                                                <span ng-show="settings.app.receipt_button_text == 'custom'">{{settings.app.receipt_button_text_custom}}</span>
                                             </a>
                                         </div>
                                     </div>
@@ -289,7 +289,7 @@
                                 </div>
                                 <div class="row" ng-if="data.payment.order.tax_inclusive">
                                     <div class="col-xs-12 text-right text-sm">
-                                        <span class="text-sm" translate>Your total includes {{data.payment.order.formatted.tax}} tax</span>
+                                        <span class="text-sm" translate translate-params-tax="data.payment.order.formatted.tax">Your total includes {{tax}} tax</span>
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +311,7 @@
                                             <span ng-show="settings.app.receipt_button_text == 'return'" translate>Return</span>
                                             <span ng-show="settings.app.receipt_button_text == 'return_to_company_name'" translate translate-params-company-name="settings.app.company_name">Return to {{companyName}}</span>
                                             <span ng-show="settings.app.receipt_button_text == 'finish'" translate>Finish</span>
-                                            <span ng-show="settings.app.receipt_button_text == 'custom'" translate>{{settings.app.receipt_button_text_custom}}</span>
+                                            <span ng-show="settings.app.receipt_button_text == 'custom'">{{settings.app.receipt_button_text_custom}}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -326,7 +326,7 @@
                 <div class="footer" ng-cloak>
                     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
                     <p ng-bind-html="settings.app.footer_text"></p>
-                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                    <p translate translate-params-symbol="'&copy;'" translate-params-year="settings.account.year" translate-params-company-name="settings.app.company_name">Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

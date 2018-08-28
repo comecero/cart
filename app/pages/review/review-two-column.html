@@ -70,7 +70,7 @@
                                                 <td>
                                                     <strong>{{item.name}}</strong>
                                                     <p class="text-light" ng-if="showPhysicalDelivery(data.sale, item)">
-                                                        <span translate>Delivery Method: </span> <span translate>{{data.sale.shipping_item.name}}</span>
+                                                        <span translate>Delivery Method: </span> <span>{{data.sale.shipping_item.name}}</span>
                                                     </p>
                                                     <p class="text-light" ng-if="showElectronicDelivery(data.sale, item)">
                                                         <span translate>Electronic Delivery</span><span ng-if="item.product.has_file">: <span translate>Immediate Download</span></span><span ng-if="item.product.has_license_service">: <span translate>Immediate Access</span></span>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="row" ng-if="data.sale.tax_inclusive">
                                         <div class="col-xs-12 text-right">
-                                            <span class="text-sm" translate>Your total includes {{data.sale.formatted.tax}} tax</span>
+                                            <span class="text-sm" translate translate-params-tax="data.sale.formatted.tax">Your total includes {{tax}} tax</span>
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +267,7 @@
                                 <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit commit-payment="data.payment_id" sale="data.sale" sale-type="{{data.sale.object}}" on-success="onPaymentSuccess" error="data.error" translate><i class="fa fa-lock"></i> <span translate>Complete Order</span> <span class="hidden-xs">&middot; {{data.sale.formatted.total}} {{data.sale.currency}}</span></button>
+                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit commit-payment="data.payment_id" sale="data.sale" sale-type="{{data.sale.object}}" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span translate>Complete Order</span> <span class="hidden-xs">&middot; {{data.sale.formatted.total}} {{data.sale.currency}}</span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                 <div class="footer" ng-cloak>
                     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
                     <p ng-bind-html="settings.app.footer_text"></p>
-                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                    <p translate translate-params-symbol="'&copy;'" translate-params-year="settings.account.year" translate-params-company-name="settings.app.company_name">Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

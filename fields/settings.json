@@ -177,7 +177,7 @@
     "description": "The text to display on the receipt button.",
     "section": "Features",
     "required": true,
-    "default_value": "false",
+    "default_value": "return_to_company_name",
     "options": [
       {
         "display": "Continue Shopping",

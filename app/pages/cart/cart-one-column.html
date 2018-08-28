@@ -75,7 +75,7 @@
                                 <div class="section-header">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-7">
-                                            <h4><span translate>Shopping Cart</span> (<span translate translate-n="data.cart.items.length" translate-plural="{{data.cart.items.length}} items">{{data.cart.items.length}} item</span>)</h4>
+                                            <h4><span translate>Shopping Cart</span> (<span translate translate-n="data.cart.items.length" translate-params-count="data.cart.items.length" translate-plural="{{count}} items">{{count}} item</span>)</h4>
                                         </div>
                                         <div class="col-xs-12 col-sm-5 continue-shopping-link" ng-show="settings.app.show_continue_shopping">
                                             <a href="{{helpers.getShoppingUrl()}}" translate>Continue Shopping</a>
@@ -93,7 +93,7 @@
                                                 <td>
                                                     <strong>{{item.name}}</strong>
                                                     <p class="text-light" ng-if="showPhysicalDelivery(data.cart, item)">
-                                                        <span translate>Delivery Method: </span> <span translate>{{data.cart.shipping_item.name}}</span>
+                                                        <span translate>Delivery Method: </span> <span>{{data.cart.shipping_item.name}}</span>
                                                     </p>
                                                     <p class="text-light" ng-if="showElectronicDelivery(data.cart, item)">
                                                         <span translate>Electronic Delivery</span><span ng-if="item.product.has_file">: <span translate>Immediate Download</span></span><span ng-if="item.product.has_license_service">: <span translate>Immediate Access</span></span>
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="row" ng-if="data.cart.tax_inclusive">
                                         <div class="col-xs-12 text-right">
-                                            <span class="text-sm" translate>Your total includes {{data.cart.formatted.tax}} tax</span>
+                                            <span class="text-sm" translate translate-params-tax="data.cart.formatted.tax">Your total includes {{tax}} tax</span>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +240,7 @@
                                             <div class="payment-button">
                                                 <img submit-payment="data.paypal" class="pointer" cart="data.cart" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
                                             </div>
-                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate>Your PayPal account payment information is never shared with</span> {{settings.app.company_name}}.</p>
+                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@
                                                     <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
                                                 </a>
                                             </div>
-                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate>Your Amazon account payment information is never shared with</span> {{settings.app.company_name}}.</p>
+                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your Amazon payment information is never shared with {{companyName}}.</span></p>
                                         </div>
                                     </div>
                                     <div class="row spacer-t12" ng-show="data.amazon_pay.data">
@@ -689,7 +689,7 @@
                 <div class="footer" ng-cloak>
                     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
                     <p ng-bind-html="settings.app.footer_text"></p>
-                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                    <p translate translate-params-symbol="'&copy;'" translate-params-year="settings.account.year" translate-params-company-name="settings.app.company_name">Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

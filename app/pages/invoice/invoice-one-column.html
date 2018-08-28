@@ -210,7 +210,7 @@
                                     </div>
                                     <div class="row" ng-if="data.invoice.tax_inclusive">
                                         <div class="col-xs-12 text-right text-sm">
-                                            <span class="text-sm" translate>Your total includes {{data.invoice.formatted.tax}} tax</span>
+                                            <span class="text-sm" translate translate-params-tax="data.invoice.formatted.tax">Your total includes {{tax}} tax</span>
                                         </div>
                                     </div>
                                 </div>
@@ -256,7 +256,7 @@
                                             <div class="payment-button">
                                                 <img submit-payment="data.paypal" class="pointer" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
                                             </div>
-                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate>Your PayPal account payment information is never shared with</span> {{settings.app.company_name}}.</p>
+                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                                     <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
                                                 </a>
                                             </div>
-                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate>Your Amazon account payment information is never shared wit</span>h {{settings.app.company_name}}.</p>
+                                            <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your Amazon payment information is never shared with {{companyName}}.</span></p>
                                         </div>
                                     </div>
                                     <div class="row spacer-t12" ng-show="data.amazon_pay.data">
@@ -432,7 +432,7 @@
                 <div class="footer" ng-cloak>
                     <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
                     <p ng-bind-html="settings.app.footer_text"></p>
-                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                    <p translate translate-params-symbol="'&copy;'" translate-params-year="settings.account.year" translate-params-company-name="settings.app.company_name">Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

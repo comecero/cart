@@ -4,30 +4,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: ./app/pages/review/review-one-column.html:270
-#: ./app/pages/review/review-two-column.html:270
-msgid "<i class=\"fa fa-lock\"></i> <span translate=\"\">Complete Order</span> <span class=\"hidden-xs\">&middot; {{data.sale.formatted.total}} {{data.sale.currency}}</span>"
-msgstr ""
-
 #: ./app/pages/cart/cart-one-column.html:392
 #: ./app/pages/cart/cart-one-column.html:393
-#: ./app/pages/cart/cart-one-column.html:479
-#: ./app/pages/cart/cart-one-column.html:480
+#: ./app/pages/cart/cart-one-column.html:477
+#: ./app/pages/cart/cart-one-column.html:478
 #: ./app/pages/cart/cart-two-column.html:392
 #: ./app/pages/cart/cart-two-column.html:393
-#: ./app/pages/cart/cart-two-column.html:477
-#: ./app/pages/cart/cart-two-column.html:478
+#: ./app/pages/cart/cart-two-column.html:475
+#: ./app/pages/cart/cart-two-column.html:476
 msgid "Address"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:399
 #: ./app/pages/cart/cart-one-column.html:400
-#: ./app/pages/cart/cart-one-column.html:486
-#: ./app/pages/cart/cart-one-column.html:487
+#: ./app/pages/cart/cart-one-column.html:484
+#: ./app/pages/cart/cart-one-column.html:485
 #: ./app/pages/cart/cart-two-column.html:399
 #: ./app/pages/cart/cart-two-column.html:400
-#: ./app/pages/cart/cart-two-column.html:484
-#: ./app/pages/cart/cart-two-column.html:485
+#: ./app/pages/cart/cart-two-column.html:482
+#: ./app/pages/cart/cart-two-column.html:483
 msgid "Address 2"
 msgstr ""
 
@@ -36,9 +31,9 @@ msgid "An error occured while attempting to process your request. Please try you
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:140
-#: ./app/pages/cart/cart-one-column.html:545
+#: ./app/pages/cart/cart-one-column.html:541
 #: ./app/pages/cart/cart-two-column.html:136
-#: ./app/pages/cart/cart-two-column.html:541
+#: ./app/pages/cart/cart-two-column.html:539
 #: ./app/pages/review/review-one-column.html:232
 #: ./app/pages/review/review-one-column.html:233
 #: ./app/pages/review/review-two-column.html:232
@@ -54,7 +49,7 @@ msgid "Billing Address"
 msgstr ""
 
 #: ./app/pages/invoice/invoice-one-column.html:88
-#: ./app/pages/invoice/invoice-two-column.html:182
+#: ./app/pages/invoice/invoice-two-column.html:170
 msgid "Billing Information"
 msgstr ""
 
@@ -68,39 +63,39 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:631
-#: ./app/pages/cart/cart-one-column.html:634
-#: ./app/pages/cart/cart-two-column.html:627
-#: ./app/pages/cart/cart-two-column.html:630
-#: ./app/pages/invoice/invoice-one-column.html:380
-#: ./app/pages/invoice/invoice-one-column.html:383
-#: ./app/pages/invoice/invoice-two-column.html:374
-#: ./app/pages/invoice/invoice-two-column.html:377
+#: ./app/pages/cart/cart-one-column.html:627
+#: ./app/pages/cart/cart-one-column.html:630
+#: ./app/pages/cart/cart-two-column.html:625
+#: ./app/pages/cart/cart-two-column.html:628
+#: ./app/pages/invoice/invoice-one-column.html:368
+#: ./app/pages/invoice/invoice-one-column.html:371
+#: ./app/pages/invoice/invoice-two-column.html:362
+#: ./app/pages/invoice/invoice-two-column.html:365
 msgid "Card Number"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:582
-#: ./app/pages/cart/cart-two-column.html:578
-#: ./app/pages/invoice/invoice-one-column.html:329
-#: ./app/pages/invoice/invoice-two-column.html:323
+#: ./app/pages/cart/cart-one-column.html:578
+#: ./app/pages/cart/cart-two-column.html:576
+#: ./app/pages/invoice/invoice-one-column.html:317
+#: ./app/pages/invoice/invoice-two-column.html:311
 msgid "Choose a Payment Method"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:408
 #: ./app/pages/cart/cart-one-column.html:409
-#: ./app/pages/cart/cart-one-column.html:495
-#: ./app/pages/cart/cart-one-column.html:496
+#: ./app/pages/cart/cart-one-column.html:493
+#: ./app/pages/cart/cart-one-column.html:494
 #: ./app/pages/cart/cart-two-column.html:408
 #: ./app/pages/cart/cart-two-column.html:409
-#: ./app/pages/cart/cart-two-column.html:493
-#: ./app/pages/cart/cart-two-column.html:494
+#: ./app/pages/cart/cart-two-column.html:491
+#: ./app/pages/cart/cart-two-column.html:492
 msgid "City"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:259
 #: ./app/pages/cart/cart-two-column.html:259
-#: ./app/pages/invoice/invoice-one-column.html:287
-#: ./app/pages/invoice/invoice-two-column.html:281
+#: ./app/pages/invoice/invoice-one-column.html:275
+#: ./app/pages/invoice/invoice-two-column.html:269
 msgid "Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password."
 msgstr ""
 
@@ -115,22 +110,26 @@ msgstr ""
 msgid "Company Name"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:681
-#: ./app/pages/cart/cart-two-column.html:677
+#: ./app/pages/cart/cart-one-column.html:677
+#: ./app/pages/cart/cart-two-column.html:675
 #: ./app/pages/review/review-one-column.html:270
 #: ./app/pages/review/review-two-column.html:270
 msgid "Complete Order"
 msgstr ""
 
-#: ./app/pages/invoice/invoice-one-column.html:432
-#: ./app/pages/invoice/invoice-two-column.html:426
+#: ./app/pages/invoice/invoice-one-column.html:420
+#: ./app/pages/invoice/invoice-two-column.html:414
 msgid "Complete Payment"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:286
 #: ./app/pages/cart/cart-two-column.html:286
-#: ./app/pages/invoice/invoice-one-column.html:314
-#: ./app/pages/invoice/invoice-two-column.html:308
+#: ./app/pages/invoice/invoice-one-column.html:302
+#: ./app/pages/invoice/invoice-two-column.html:296
+#: ./app/pages/receipt/receipt-one-column.html:180
+#: ./app/pages/receipt/receipt-one-column.html:310
+#: ./app/pages/receipt/receipt-two-column.html:169
+#: ./app/pages/receipt/receipt-two-column.html:302
 msgid "Continue"
 msgstr ""
 
@@ -138,32 +137,38 @@ msgstr ""
 #: ./app/pages/cart/cart-one-column.html:81
 #: ./app/pages/cart/cart-two-column.html:57
 #: ./app/pages/cart/cart-two-column.html:77
+#: ./app/pages/receipt/receipt-one-column.html:179
+#: ./app/pages/receipt/receipt-one-column.html:309
+#: ./app/pages/receipt/receipt-two-column.html:168
+#: ./app/pages/receipt/receipt-two-column.html:301
 msgid "Continue Shopping"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:696
-#: ./app/pages/cart/cart-two-column.html:692
-#: ./app/pages/invoice/invoice-one-column.html:447
-#: ./app/pages/invoice/invoice-two-column.html:441
+#: ./app/pages/cart/cart-one-column.html:692
+#: ./app/pages/cart/cart-two-column.html:690
+#: ./app/pages/invoice/invoice-one-column.html:435
+#: ./app/pages/invoice/invoice-two-column.html:429
 #: ./app/pages/products/products-one-column.html:78
 #: ./app/pages/products/products-two-column.html:74
-#: ./app/pages/receipt/receipt-one-column.html:295
-#: ./app/pages/receipt/receipt-two-column.html:289
+#: ./app/pages/receipt/receipt-one-column.html:329
+#: ./app/pages/receipt/receipt-two-column.html:321
 #: ./app/pages/review/review-one-column.html:285
 #: ./app/pages/review/review-two-column.html:285
-msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
+msgid "Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved."
 msgstr ""
 
+#: ./app/pages/cart/cart-one-column.html:438
+#: ./app/pages/cart/cart-one-column.html:439
 #: ./app/pages/cart/cart-one-column.html:440
-#: ./app/pages/cart/cart-one-column.html:441
-#: ./app/pages/cart/cart-one-column.html:442
-#: ./app/pages/cart/cart-one-column.html:527
-#: ./app/pages/cart/cart-one-column.html:528
-#: ./app/pages/cart/cart-one-column.html:529
+#: ./app/pages/cart/cart-one-column.html:523
+#: ./app/pages/cart/cart-one-column.html:524
+#: ./app/pages/cart/cart-one-column.html:525
+#: ./app/pages/cart/cart-two-column.html:436
+#: ./app/pages/cart/cart-two-column.html:437
 #: ./app/pages/cart/cart-two-column.html:438
+#: ./app/pages/cart/cart-two-column.html:521
+#: ./app/pages/cart/cart-two-column.html:522
 #: ./app/pages/cart/cart-two-column.html:523
-#: ./app/pages/cart/cart-two-column.html:524
-#: ./app/pages/cart/cart-two-column.html:525
 msgid "Country"
 msgstr ""
 
@@ -174,8 +179,8 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:219
 #: ./app/pages/cart/cart-two-column.html:219
-#: ./app/pages/invoice/invoice-one-column.html:247
-#: ./app/pages/invoice/invoice-two-column.html:241
+#: ./app/pages/invoice/invoice-one-column.html:235
+#: ./app/pages/invoice/invoice-two-column.html:229
 msgid "Credit Card"
 msgstr ""
 
@@ -184,19 +189,19 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:99
-#: ./app/pages/cart/cart-two-column.html:95
-#: ./app/pages/review/review-one-column.html:80
-#: ./app/pages/review/review-two-column.html:76
+#: ./app/pages/cart/cart-one-column.html:96
+#: ./app/pages/cart/cart-two-column.html:92
+#: ./app/pages/review/review-one-column.html:77
+#: ./app/pages/review/review-two-column.html:73
 msgid "Delivery Method:"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:173
 #: ./app/pages/cart/cart-two-column.html:169
-#: ./app/pages/invoice/invoice-one-column.html:201
-#: ./app/pages/invoice/invoice-two-column.html:131
-#: ./app/pages/receipt/receipt-one-column.html:250
-#: ./app/pages/receipt/receipt-two-column.html:244
+#: ./app/pages/invoice/invoice-one-column.html:189
+#: ./app/pages/invoice/invoice-two-column.html:119
+#: ./app/pages/receipt/receipt-one-column.html:268
+#: ./app/pages/receipt/receipt-two-column.html:260
 #: ./app/pages/review/review-one-column.html:117
 #: ./app/pages/review/review-two-column.html:113
 msgid "Discount"
@@ -207,23 +212,21 @@ msgstr ""
 msgid "Discount applied."
 msgstr ""
 
-#: ./app/pages/invoice/invoice-one-column.html:167
-#: ./app/pages/invoice/invoice-two-column.html:97
-#: ./app/pages/receipt/receipt-one-column.html:214
-#: ./app/pages/receipt/receipt-two-column.html:208
+#: ./app/pages/receipt/receipt-one-column.html:232
+#: ./app/pages/receipt/receipt-two-column.html:224
 msgid "Download Now"
 msgstr ""
 
 #: ./app/pages/invoice/invoice-one-column.html:77
-#: ./app/pages/invoice/invoice-two-column.html:173
+#: ./app/pages/invoice/invoice-two-column.html:161
 msgid "Due Date"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:96
-#: ./app/pages/cart/cart-two-column.html:92
-#: ./app/pages/review/review-one-column.html:77
-#: ./app/pages/review/review-two-column.html:73
-msgid "Electronic Delivery:"
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Electronic Delivery"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:365
@@ -238,31 +241,31 @@ msgstr ""
 msgid "Enter"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:642
-#: ./app/pages/cart/cart-two-column.html:638
-#: ./app/pages/invoice/invoice-one-column.html:393
-#: ./app/pages/invoice/invoice-two-column.html:387
+#: ./app/pages/cart/cart-one-column.html:638
+#: ./app/pages/cart/cart-two-column.html:636
+#: ./app/pages/invoice/invoice-one-column.html:381
+#: ./app/pages/invoice/invoice-two-column.html:375
 msgid "Exp Month (MM)"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:652
-#: ./app/pages/cart/cart-two-column.html:648
-#: ./app/pages/invoice/invoice-one-column.html:402
-#: ./app/pages/invoice/invoice-two-column.html:396
+#: ./app/pages/cart/cart-one-column.html:648
+#: ./app/pages/cart/cart-two-column.html:646
+#: ./app/pages/invoice/invoice-one-column.html:390
+#: ./app/pages/invoice/invoice-two-column.html:384
 msgid "Exp Year (YY)"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:641
-#: ./app/pages/cart/cart-two-column.html:637
-#: ./app/pages/invoice/invoice-one-column.html:392
-#: ./app/pages/invoice/invoice-two-column.html:386
+#: ./app/pages/cart/cart-one-column.html:637
+#: ./app/pages/cart/cart-two-column.html:635
+#: ./app/pages/invoice/invoice-one-column.html:380
+#: ./app/pages/invoice/invoice-two-column.html:374
 msgid "Expiration Month"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:651
-#: ./app/pages/cart/cart-two-column.html:647
-#: ./app/pages/invoice/invoice-one-column.html:401
-#: ./app/pages/invoice/invoice-two-column.html:395
+#: ./app/pages/cart/cart-one-column.html:647
+#: ./app/pages/cart/cart-two-column.html:645
+#: ./app/pages/invoice/invoice-one-column.html:389
+#: ./app/pages/invoice/invoice-two-column.html:383
 msgid "Expiration Year"
 msgstr ""
 
@@ -271,14 +274,21 @@ msgstr ""
 msgid "Expires"
 msgstr ""
 
+#: ./app/pages/receipt/receipt-one-column.html:183
+#: ./app/pages/receipt/receipt-one-column.html:313
+#: ./app/pages/receipt/receipt-two-column.html:172
+#: ./app/pages/receipt/receipt-two-column.html:305
+msgid "Finish"
+msgstr ""
+
 #: ./app/pages/cart/cart-one-column.html:356
 #: ./app/pages/cart/cart-one-column.html:357
-#: ./app/pages/cart/cart-one-column.html:470
-#: ./app/pages/cart/cart-one-column.html:471
+#: ./app/pages/cart/cart-one-column.html:468
+#: ./app/pages/cart/cart-one-column.html:469
 #: ./app/pages/cart/cart-two-column.html:356
 #: ./app/pages/cart/cart-two-column.html:357
-#: ./app/pages/cart/cart-two-column.html:468
-#: ./app/pages/cart/cart-two-column.html:469
+#: ./app/pages/cart/cart-two-column.html:466
+#: ./app/pages/cart/cart-two-column.html:467
 msgid "Full Name"
 msgstr ""
 
@@ -287,17 +297,24 @@ msgstr ""
 msgid "Have an account?"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:547
-#: ./app/pages/cart/cart-two-column.html:543
+#: ./app/pages/cart/cart-one-column.html:543
+#: ./app/pages/cart/cart-two-column.html:541
 #: ./app/pages/review/review-one-column.html:235
 #: ./app/pages/review/review-two-column.html:235
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:96
-#: ./app/pages/cart/cart-two-column.html:92
-#: ./app/pages/review/review-one-column.html:77
-#: ./app/pages/review/review-two-column.html:73
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Access"
+msgstr ""
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
 msgid "Immediate Download"
 msgstr ""
 
@@ -312,12 +329,12 @@ msgid "Invoice Details"
 msgstr ""
 
 #: ./app/pages/invoice/invoice-one-column.html:74
-#: ./app/pages/invoice/invoice-two-column.html:170
+#: ./app/pages/invoice/invoice-two-column.html:158
 msgid "Invoice ID"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:644
-#: ./app/pages/cart/cart-two-column.html:640
+#: ./app/pages/cart/cart-one-column.html:640
+#: ./app/pages/cart/cart-two-column.html:638
 msgid "Month"
 msgstr ""
 
@@ -325,8 +342,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ./app/pages/receipt/receipt-one-column.html:179
-#: ./app/pages/receipt/receipt-two-column.html:173
+#: ./app/pages/receipt/receipt-one-column.html:197
+#: ./app/pages/receipt/receipt-two-column.html:189
 #: ./app/pages/review/review-one-column.html:62
 #: ./app/pages/review/review-two-column.html:58
 msgid "Order Details"
@@ -353,17 +370,17 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:606
-#: ./app/pages/cart/cart-two-column.html:602
-#: ./app/pages/invoice/invoice-one-column.html:355
-#: ./app/pages/invoice/invoice-two-column.html:349
+#: ./app/pages/cart/cart-one-column.html:602
+#: ./app/pages/cart/cart-two-column.html:600
+#: ./app/pages/invoice/invoice-one-column.html:343
+#: ./app/pages/invoice/invoice-two-column.html:337
 msgid "Pay with a new card"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:617
-#: ./app/pages/cart/cart-two-column.html:613
-#: ./app/pages/invoice/invoice-one-column.html:366
-#: ./app/pages/invoice/invoice-two-column.html:360
+#: ./app/pages/cart/cart-one-column.html:613
+#: ./app/pages/cart/cart-two-column.html:611
+#: ./app/pages/invoice/invoice-one-column.html:354
+#: ./app/pages/invoice/invoice-two-column.html:348
 msgid "Payment Details"
 msgstr ""
 
@@ -374,8 +391,8 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:208
 #: ./app/pages/cart/cart-two-column.html:208
-#: ./app/pages/invoice/invoice-one-column.html:236
-#: ./app/pages/invoice/invoice-two-column.html:230
+#: ./app/pages/invoice/invoice-one-column.html:224
+#: ./app/pages/invoice/invoice-two-column.html:218
 msgid "Payment Options"
 msgstr ""
 
@@ -404,9 +421,9 @@ msgid "Please make a selection"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:410
-#: ./app/pages/cart/cart-one-column.html:497
+#: ./app/pages/cart/cart-one-column.html:495
 #: ./app/pages/cart/cart-two-column.html:410
-#: ./app/pages/cart/cart-two-column.html:495
+#: ./app/pages/cart/cart-two-column.html:493
 msgid "Please provide a city"
 msgstr ""
 
@@ -417,17 +434,17 @@ msgstr ""
 msgid "Please provide a company name"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:444
-#: ./app/pages/cart/cart-one-column.html:531
-#: ./app/pages/cart/cart-two-column.html:442
-#: ./app/pages/cart/cart-two-column.html:527
+#: ./app/pages/cart/cart-one-column.html:442
+#: ./app/pages/cart/cart-one-column.html:527
+#: ./app/pages/cart/cart-two-column.html:440
+#: ./app/pages/cart/cart-two-column.html:525
 msgid "Please provide a country"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:358
-#: ./app/pages/cart/cart-one-column.html:472
+#: ./app/pages/cart/cart-one-column.html:470
 #: ./app/pages/cart/cart-two-column.html:358
-#: ./app/pages/cart/cart-two-column.html:470
+#: ./app/pages/cart/cart-two-column.html:468
 msgid "Please provide a name"
 msgstr ""
 
@@ -437,23 +454,23 @@ msgid "Please provide a phone"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:426
-#: ./app/pages/cart/cart-one-column.html:513
+#: ./app/pages/cart/cart-one-column.html:511
 #: ./app/pages/cart/cart-two-column.html:424
-#: ./app/pages/cart/cart-two-column.html:509
+#: ./app/pages/cart/cart-two-column.html:507
 msgid "Please provide a region / province"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:421
-#: ./app/pages/cart/cart-one-column.html:508
+#: ./app/pages/cart/cart-one-column.html:506
 #: ./app/pages/cart/cart-two-column.html:419
-#: ./app/pages/cart/cart-two-column.html:504
+#: ./app/pages/cart/cart-two-column.html:502
 msgid "Please provide a state / province"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:636
-#: ./app/pages/cart/cart-two-column.html:632
-#: ./app/pages/invoice/invoice-one-column.html:385
-#: ./app/pages/invoice/invoice-two-column.html:379
+#: ./app/pages/cart/cart-one-column.html:632
+#: ./app/pages/cart/cart-two-column.html:630
+#: ./app/pages/invoice/invoice-one-column.html:373
+#: ./app/pages/invoice/invoice-two-column.html:367
 msgid "Please provide a valid card number"
 msgstr ""
 
@@ -462,17 +479,17 @@ msgstr ""
 msgid "Please provide a valid email address"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:646
-#: ./app/pages/cart/cart-two-column.html:642
-#: ./app/pages/invoice/invoice-one-column.html:395
-#: ./app/pages/invoice/invoice-two-column.html:389
+#: ./app/pages/cart/cart-one-column.html:642
+#: ./app/pages/cart/cart-two-column.html:640
+#: ./app/pages/invoice/invoice-one-column.html:383
+#: ./app/pages/invoice/invoice-two-column.html:377
 msgid "Please provide a valid expiration month"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:656
-#: ./app/pages/cart/cart-two-column.html:652
-#: ./app/pages/invoice/invoice-one-column.html:404
-#: ./app/pages/invoice/invoice-two-column.html:398
+#: ./app/pages/cart/cart-one-column.html:652
+#: ./app/pages/cart/cart-two-column.html:650
+#: ./app/pages/invoice/invoice-one-column.html:392
+#: ./app/pages/invoice/invoice-two-column.html:386
 msgid "Please provide a valid expiration year"
 msgstr ""
 
@@ -481,10 +498,10 @@ msgstr ""
 msgid "Please provide a valid phone number"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:663
-#: ./app/pages/cart/cart-two-column.html:659
-#: ./app/pages/invoice/invoice-one-column.html:412
-#: ./app/pages/invoice/invoice-two-column.html:406
+#: ./app/pages/cart/cart-one-column.html:659
+#: ./app/pages/cart/cart-two-column.html:657
+#: ./app/pages/invoice/invoice-one-column.html:400
+#: ./app/pages/invoice/invoice-two-column.html:394
 msgid "Please provide a valid security code"
 msgstr ""
 
@@ -493,20 +510,20 @@ msgid "Please provide a value"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:433
-#: ./app/pages/cart/cart-one-column.html:520
+#: ./app/pages/cart/cart-one-column.html:518
 #: ./app/pages/cart/cart-two-column.html:431
-#: ./app/pages/cart/cart-two-column.html:516
+#: ./app/pages/cart/cart-two-column.html:514
 msgid "Please provide a zip / postal code"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:394
 #: ./app/pages/cart/cart-one-column.html:401
-#: ./app/pages/cart/cart-one-column.html:481
-#: ./app/pages/cart/cart-one-column.html:488
+#: ./app/pages/cart/cart-one-column.html:479
+#: ./app/pages/cart/cart-one-column.html:486
 #: ./app/pages/cart/cart-two-column.html:394
 #: ./app/pages/cart/cart-two-column.html:401
-#: ./app/pages/cart/cart-two-column.html:479
-#: ./app/pages/cart/cart-two-column.html:486
+#: ./app/pages/cart/cart-two-column.html:477
+#: ./app/pages/cart/cart-two-column.html:484
 msgid "Please provide an address"
 msgstr ""
 
@@ -533,8 +550,8 @@ msgstr ""
 
 #: ./app/pages/invoice/invoice-one-column.html:155
 #: ./app/pages/invoice/invoice-two-column.html:85
-#: ./app/pages/receipt/receipt-one-column.html:202
-#: ./app/pages/receipt/receipt-two-column.html:196
+#: ./app/pages/receipt/receipt-one-column.html:220
+#: ./app/pages/receipt/receipt-two-column.html:212
 #: ./app/pages/review/review-one-column.html:83
 #: ./app/pages/review/review-two-column.html:79
 msgid "Quantity"
@@ -547,13 +564,20 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:424
 #: ./app/pages/cart/cart-one-column.html:425
-#: ./app/pages/cart/cart-one-column.html:511
-#: ./app/pages/cart/cart-one-column.html:512
+#: ./app/pages/cart/cart-one-column.html:509
+#: ./app/pages/cart/cart-one-column.html:510
 #: ./app/pages/cart/cart-two-column.html:422
 #: ./app/pages/cart/cart-two-column.html:423
-#: ./app/pages/cart/cart-two-column.html:507
-#: ./app/pages/cart/cart-two-column.html:508
+#: ./app/pages/cart/cart-two-column.html:505
+#: ./app/pages/cart/cart-two-column.html:506
 msgid "Region / Province"
+msgstr ""
+
+#: ./app/pages/receipt/receipt-one-column.html:181
+#: ./app/pages/receipt/receipt-one-column.html:311
+#: ./app/pages/receipt/receipt-two-column.html:170
+#: ./app/pages/receipt/receipt-two-column.html:303
+msgid "Return"
 msgstr ""
 
 #: ./app/pages/review/review-one-column.html:50
@@ -561,52 +585,59 @@ msgstr ""
 msgid "Return to PayPal to try your payment again."
 msgstr ""
 
+#: ./app/pages/receipt/receipt-one-column.html:182
+#: ./app/pages/receipt/receipt-one-column.html:312
+#: ./app/pages/receipt/receipt-two-column.html:171
+#: ./app/pages/receipt/receipt-two-column.html:304
+msgid "Return to {{companyName}}"
+msgstr ""
+
 #: ./app/pages/review/review-one-column.html:26
 #: ./app/pages/review/review-two-column.html:24
 msgid "Review Your Order"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:669
-#: ./app/pages/cart/cart-two-column.html:665
-#: ./app/pages/invoice/invoice-one-column.html:420
-#: ./app/pages/invoice/invoice-two-column.html:414
+#: ./app/pages/cart/cart-one-column.html:665
+#: ./app/pages/cart/cart-two-column.html:663
+#: ./app/pages/invoice/invoice-one-column.html:408
+#: ./app/pages/invoice/invoice-two-column.html:402
 msgid "Save this card to my account"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:661
-#: ./app/pages/cart/cart-one-column.html:662
-#: ./app/pages/cart/cart-two-column.html:657
-#: ./app/pages/cart/cart-two-column.html:658
-#: ./app/pages/invoice/invoice-one-column.html:410
-#: ./app/pages/invoice/invoice-one-column.html:411
-#: ./app/pages/invoice/invoice-two-column.html:404
-#: ./app/pages/invoice/invoice-two-column.html:405
+#: ./app/pages/cart/cart-one-column.html:657
+#: ./app/pages/cart/cart-one-column.html:658
+#: ./app/pages/cart/cart-two-column.html:655
+#: ./app/pages/cart/cart-two-column.html:656
+#: ./app/pages/invoice/invoice-one-column.html:398
+#: ./app/pages/invoice/invoice-one-column.html:399
+#: ./app/pages/invoice/invoice-two-column.html:392
+#: ./app/pages/invoice/invoice-two-column.html:393
 msgid "Security Code"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:162
-#: ./app/pages/cart/cart-one-column.html:557
+#: ./app/pages/cart/cart-one-column.html:553
 #: ./app/pages/cart/cart-two-column.html:158
-#: ./app/pages/cart/cart-two-column.html:553
+#: ./app/pages/cart/cart-two-column.html:551
 #: ./app/pages/review/review-one-column.html:250
 #: ./app/pages/review/review-two-column.html:250
 msgid "Shipping"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:454
-#: ./app/pages/cart/cart-two-column.html:452
+#: ./app/pages/cart/cart-one-column.html:452
+#: ./app/pages/cart/cart-two-column.html:450
 #: ./app/pages/review/review-one-column.html:196
 #: ./app/pages/review/review-two-column.html:196
 msgid "Shipping Address"
 msgstr ""
 
 #: ./app/pages/invoice/invoice-one-column.html:114
-#: ./app/pages/invoice/invoice-two-column.html:206
+#: ./app/pages/invoice/invoice-two-column.html:194
 msgid "Shipping Information"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:463
-#: ./app/pages/cart/cart-two-column.html:461
+#: ./app/pages/cart/cart-one-column.html:461
+#: ./app/pages/cart/cart-two-column.html:459
 msgid "Shipping is same as billing"
 msgstr ""
 
@@ -634,20 +665,19 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:417
 #: ./app/pages/cart/cart-one-column.html:419
+#: ./app/pages/cart/cart-one-column.html:502
 #: ./app/pages/cart/cart-one-column.html:504
-#: ./app/pages/cart/cart-one-column.html:506
 #: ./app/pages/cart/cart-two-column.html:417
-#: ./app/pages/cart/cart-two-column.html:440
-#: ./app/pages/cart/cart-two-column.html:502
+#: ./app/pages/cart/cart-two-column.html:500
 msgid "State / Province"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:154
 #: ./app/pages/cart/cart-two-column.html:150
-#: ./app/pages/invoice/invoice-one-column.html:185
-#: ./app/pages/invoice/invoice-two-column.html:115
-#: ./app/pages/receipt/receipt-one-column.html:234
-#: ./app/pages/receipt/receipt-two-column.html:228
+#: ./app/pages/invoice/invoice-one-column.html:173
+#: ./app/pages/invoice/invoice-two-column.html:103
+#: ./app/pages/receipt/receipt-one-column.html:252
+#: ./app/pages/receipt/receipt-two-column.html:244
 #: ./app/pages/review/review-one-column.html:101
 #: ./app/pages/review/review-two-column.html:97
 msgid "Subtotal"
@@ -655,17 +685,17 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:181
 #: ./app/pages/cart/cart-two-column.html:177
-#: ./app/pages/invoice/invoice-one-column.html:209
-#: ./app/pages/invoice/invoice-two-column.html:139
-#: ./app/pages/receipt/receipt-one-column.html:258
-#: ./app/pages/receipt/receipt-two-column.html:252
+#: ./app/pages/invoice/invoice-one-column.html:197
+#: ./app/pages/invoice/invoice-two-column.html:127
+#: ./app/pages/receipt/receipt-one-column.html:276
+#: ./app/pages/receipt/receipt-two-column.html:268
 #: ./app/pages/review/review-one-column.html:125
 #: ./app/pages/review/review-two-column.html:121
 msgid "Tax"
 msgstr ""
 
-#: ./app/pages/receipt/receipt-one-column.html:282
-#: ./app/pages/receipt/receipt-two-column.html:276
+#: ./app/pages/receipt/receipt-one-column.html:300
+#: ./app/pages/receipt/receipt-two-column.html:292
 msgid "Thank you for your order"
 msgstr ""
 
@@ -727,10 +757,10 @@ msgstr ""
 msgid "This invoice is closed"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:623
-#: ./app/pages/cart/cart-two-column.html:619
-#: ./app/pages/invoice/invoice-one-column.html:372
-#: ./app/pages/invoice/invoice-two-column.html:366
+#: ./app/pages/cart/cart-one-column.html:619
+#: ./app/pages/cart/cart-two-column.html:617
+#: ./app/pages/invoice/invoice-one-column.html:360
+#: ./app/pages/invoice/invoice-two-column.html:354
 msgid "This is a secure 256-bit SSL encrypted payment."
 msgstr ""
 
@@ -741,10 +771,10 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:189
 #: ./app/pages/cart/cart-two-column.html:185
-#: ./app/pages/invoice/invoice-one-column.html:217
-#: ./app/pages/invoice/invoice-two-column.html:147
-#: ./app/pages/receipt/receipt-one-column.html:266
-#: ./app/pages/receipt/receipt-two-column.html:260
+#: ./app/pages/invoice/invoice-one-column.html:205
+#: ./app/pages/invoice/invoice-two-column.html:135
+#: ./app/pages/receipt/receipt-one-column.html:284
+#: ./app/pages/receipt/receipt-two-column.html:276
 #: ./app/pages/review/review-one-column.html:133
 #: ./app/pages/review/review-two-column.html:129
 msgid "Total"
@@ -752,8 +782,8 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:291
 #: ./app/pages/cart/cart-two-column.html:291
-#: ./app/pages/invoice/invoice-one-column.html:319
-#: ./app/pages/invoice/invoice-two-column.html:313
+#: ./app/pages/invoice/invoice-one-column.html:307
+#: ./app/pages/invoice/invoice-two-column.html:301
 #: ./app/pages/review/review-one-column.html:160
 #: ./app/pages/review/review-two-column.html:160
 msgid "Use another payment method"
@@ -770,10 +800,10 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:542
-#: ./app/pages/cart/cart-one-column.html:544
+#: ./app/pages/cart/cart-one-column.html:538
+#: ./app/pages/cart/cart-one-column.html:540
+#: ./app/pages/cart/cart-two-column.html:536
 #: ./app/pages/cart/cart-two-column.html:538
-#: ./app/pages/cart/cart-two-column.html:540
 #: ./app/pages/review/review-one-column.html:229
 #: ./app/pages/review/review-one-column.html:231
 #: ./app/pages/review/review-two-column.html:229
@@ -781,8 +811,8 @@ msgstr ""
 msgid "VAT Number"
 msgstr ""
 
-#: ./app/pages/cart/cart-one-column.html:654
-#: ./app/pages/cart/cart-two-column.html:650
+#: ./app/pages/cart/cart-one-column.html:650
+#: ./app/pages/cart/cart-two-column.html:648
 msgid "Year"
 msgstr ""
 
@@ -790,14 +820,11 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: ./app/pages/invoice/invoice-one-column.html:293
-msgid "Your Amazon account payment information is never shared wit"
-msgstr ""
-
 #: ./app/pages/cart/cart-one-column.html:265
 #: ./app/pages/cart/cart-two-column.html:265
-#: ./app/pages/invoice/invoice-two-column.html:287
-msgid "Your Amazon account payment information is never shared with"
+#: ./app/pages/invoice/invoice-one-column.html:281
+#: ./app/pages/invoice/invoice-two-column.html:275
+msgid "Your Amazon payment information is never shared with {{companyName}}."
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:26
@@ -807,9 +834,9 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:243
 #: ./app/pages/cart/cart-two-column.html:243
-#: ./app/pages/invoice/invoice-one-column.html:271
-#: ./app/pages/invoice/invoice-two-column.html:265
-msgid "Your PayPal account payment information is never shared with"
+#: ./app/pages/invoice/invoice-one-column.html:259
+#: ./app/pages/invoice/invoice-two-column.html:253
+msgid "Your PayPal payment information is never shared with {{companyName}}."
 msgstr ""
 
 #: ./app/pages/receipt/receipt-one-column.html:113
@@ -819,48 +846,29 @@ msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:197
 #: ./app/pages/cart/cart-two-column.html:193
-msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr ""
-
-#: ./app/pages/invoice/invoice-one-column.html:225
-#: ./app/pages/invoice/invoice-two-column.html:155
-msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr ""
-
-#: ./app/pages/receipt/receipt-one-column.html:274
-#: ./app/pages/receipt/receipt-two-column.html:268
-msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr ""
-
+#: ./app/pages/invoice/invoice-one-column.html:213
+#: ./app/pages/invoice/invoice-two-column.html:143
+#: ./app/pages/receipt/receipt-one-column.html:292
+#: ./app/pages/receipt/receipt-two-column.html:284
 #: ./app/pages/review/review-one-column.html:141
 #: ./app/pages/review/review-two-column.html:137
-msgid "Your total includes {{data.sale.formatted.tax}} tax"
+msgid "Your total includes {{tax}} tax"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:431
 #: ./app/pages/cart/cart-one-column.html:432
-#: ./app/pages/cart/cart-one-column.html:518
-#: ./app/pages/cart/cart-one-column.html:519
+#: ./app/pages/cart/cart-one-column.html:516
+#: ./app/pages/cart/cart-one-column.html:517
 #: ./app/pages/cart/cart-two-column.html:429
 #: ./app/pages/cart/cart-two-column.html:430
-#: ./app/pages/cart/cart-two-column.html:514
-#: ./app/pages/cart/cart-two-column.html:515
+#: ./app/pages/cart/cart-two-column.html:512
+#: ./app/pages/cart/cart-two-column.html:513
 msgid "Zip / Postal Code"
 msgstr ""
 
 #: ./app/pages/cart/cart-one-column.html:78
 #: ./app/pages/cart/cart-two-column.html:74
-msgid "{{data.cart.items.length}} item"
-msgid_plural "{{data.cart.items.length}} items"
+msgid "{{count}} item"
+msgid_plural "{{count}} items"
 msgstr[0] ""
 msgstr[1] ""
-
-#: ./app/pages/cart/cart-one-column.html:99
-#: ./app/pages/cart/cart-two-column.html:95
-msgid "{{data.cart.shipping_item.name}}"
-msgstr ""
-
-#: ./app/pages/review/review-one-column.html:80
-#: ./app/pages/review/review-two-column.html:76
-msgid "{{data.sale.shipping_item.name}}"
-msgstr ""
