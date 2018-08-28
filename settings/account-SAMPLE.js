@@ -1,4 +1,4 @@
-﻿// Make a copy of this file and name it account.js, then place custom values to customize the app's behavior.
+// Make a copy of this file and name it account.js, then place custom values to customize the app's behavior.
 // At runtime, the account settings will be automatically injected, providing the account info to the app.
 window.__settings = window.__settings || {}; window.__settings.account =
     {

@@ -49,6 +49,30 @@ gulp.task('dist', function (done) {
     });
 });
 
+gulp.task('copy-settings', function (done) {
+
+    gulp.src("./settings/account-SAMPLE.js").pipe(rename("account.js")).pipe(gulp.dest("./settings/"));
+    gulp.src("./settings/app-SAMPLE.js").pipe(rename("app.js")).pipe(gulp.dest("./settings/"));
+    gulp.src("./settings/style-SAMPLE.js").pipe(rename("style.js")).pipe(gulp.dest("./settings/"));
+    gulp.src("./settings/script-SAMPLE.js").pipe(rename("script.js")).pipe(gulp.dest("./settings/"));
+    gulp.src("./settings/style-SAMPLE.css").pipe(rename("style.css")).pipe(gulp.dest("./settings/"));
+
+    var account = fs.readFileSync("./settings/account.js", "utf8");
+    var accountJs = "var window = {}" + account;
+    accountJs = eval(accountJs);
+    accountJs.account_id = "KO0000";
+
+    fs.writeFile("./settings/account.js", accountJs, 'utf8', function (err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log("The file was saved!");
+    });
+
+
+});
+
 gulp.task('zip', function (done) {
 
     // Read the version number
