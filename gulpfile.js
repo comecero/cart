@@ -4,7 +4,6 @@ var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
 var rename = require("gulp-rename");
 var sass = require('gulp-sass');
-var zip = require('gulp-zip');
 var sequence = require("run-sequence");
 var fs = require("fs");
 var header = require('gulp-header');
@@ -90,14 +89,4 @@ gulp.task('copy-settings', function (done) {
     gulp.src("./settings/script-SAMPLE.js").pipe(rename("script.js")).pipe(gulp.dest("./settings/"));
     gulp.src("./settings/style-SAMPLE.css").pipe(rename("style.css")).pipe(gulp.dest("./settings/"));
 
-});
-
-gulp.task('zip', function (done) {
-
-    // Read the version number
-    var version = fs.readFileSync("./version.html", "utf8");
-
-    return gulp.src(["./**", "!./.git", "!./.vs", "!./.git/*", "!./settings/**", "!./settings/", "!./.gitattributes", "!./.gitignore", "!./*.sln", "!./Web.config", "!./Web.Debug.config"])
-    .pipe(zip("cart-" + version + ".zip"))
-    .pipe(gulp.dest("./"));
 });
