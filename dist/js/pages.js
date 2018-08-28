@@ -26,109 +26,6 @@ app.directive('customHtml', function () {
         }
     }
 });
-app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', 'SettingsService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, SettingsService, $document) {
-
-    // Define a place to hold your data
-    $scope.data = {};
-
-    // Load in the default payment method
-    $scope.options = { "payment_method": "credit_card" };
-
-    // Load in some helpers
-    $scope.geoService = GeoService;
-    $scope.helpers = HelperService;
-    $scope.settings = SettingsService.get();
-
-    // Set the invoice parameters
-    $scope.data.params = {};
-    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
-    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
-
-    // Set default values.
-    $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
-
-    // Build your payment method models
-    $scope.data.payment_method = { "type": "credit_card" };
-    $scope.data.amazon_pay = { "type": "amazon_pay" };
-    $scope.data.paypal = {
-        "type": "paypal",
-        data: {
-            // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
-            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/review/{{payment_id}}",
-            "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/invoice"
-        }
-    }
-
-    // Get the invoice
-    InvoiceService.get($scope.data.params).then(function (invoice) {
-
-        $scope.data.invoice = invoice;
-
-        // Only display images if all items in the invoice have images
-        $scope.showImages = false;
-        var hasImageCount = 0;
-        _.each(invoice.items, function (item) {
-            if (item.product != null) {
-                if (item.product.images.length > 0) {
-                    hasImageCount++;
-                }
-            }
-        });
-
-        if (hasImageCount == invoice.items.length) {
-            $scope.showImages = true;
-        }
-
-        // If there are payment methods, set the default onto the payment method object
-        var data = ((invoice.customer || {}).payment_methods || {}).data;
-        if (data) {
-            if (data.length > 0) {
-                $scope.data.payment_method = { payment_method_id: _.find(invoice.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
-            }
-        }
-
-    }, function (error) {
-        $scope.data.error = error;
-    });
-
-    // Handle a successful payment
-    $scope.onPaymentSuccess = function (payment) {
-
-        if (payment.payment_method.type == "paypal" && payment.status == "initiated") {
-            // If PayPal and status is initiated, redirect to PayPal for approval.
-            window.location = payment.response_data.redirect_url;
-        } else if (payment.payment_method.type == "amazon_pay") {
-            // If Amazon Pay, redirect for review
-            $location.path("/review/" + payment.payment_id);
-        } else {
-            // A successful card payment. Redirect to the receipt.
-            $location.path("/receipt/" + payment.payment_id);
-        }
-
-    }
-
-    $scope.setPaymentMethod = function (id, type) {
-
-        // Remove all data from the payment method
-        $scope.data.payment_method = {};
-
-        // If a payment_method_id or type is provided, set it.
-        if (id)
-            $scope.data.payment_method.payment_method_id = id;
-
-        if (type)
-            $scope.data.payment_method.type = type;
-
-    }
-
-    // Watch for error to be populated, and if so, scroll to it.
-    $scope.$watch("data.error", function (newVal, oldVal) {
-        if ($scope.data.error) {
-            $document.scrollTop(0, 500);
-        }
-    });
-
-}]);
 app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout) {
 
     // Define a place to hold your data and functions
@@ -333,6 +230,109 @@ app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$d
         });
 
     }]);
+app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', 'SettingsService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, SettingsService, $document) {
+
+    // Define a place to hold your data
+    $scope.data = {};
+
+    // Load in the default payment method
+    $scope.options = { "payment_method": "credit_card" };
+
+    // Load in some helpers
+    $scope.geoService = GeoService;
+    $scope.helpers = HelperService;
+    $scope.settings = SettingsService.get();
+
+    // Set the invoice parameters
+    $scope.data.params = {};
+    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+
+    // Set default values.
+    $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
+
+    // Build your payment method models
+    $scope.data.payment_method = { "type": "credit_card" };
+    $scope.data.amazon_pay = { "type": "amazon_pay" };
+    $scope.data.paypal = {
+        "type": "paypal",
+        data: {
+            // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
+            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/review/{{payment_id}}",
+            "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/invoice"
+        }
+    }
+
+    // Get the invoice
+    InvoiceService.get($scope.data.params).then(function (invoice) {
+
+        $scope.data.invoice = invoice;
+
+        // Only display images if all items in the invoice have images
+        $scope.showImages = false;
+        var hasImageCount = 0;
+        _.each(invoice.items, function (item) {
+            if (item.product != null) {
+                if (item.product.images.length > 0) {
+                    hasImageCount++;
+                }
+            }
+        });
+
+        if (hasImageCount == invoice.items.length) {
+            $scope.showImages = true;
+        }
+
+        // If there are payment methods, set the default onto the payment method object
+        var data = ((invoice.customer || {}).payment_methods || {}).data;
+        if (data) {
+            if (data.length > 0) {
+                $scope.data.payment_method = { payment_method_id: _.find(invoice.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
+            }
+        }
+
+    }, function (error) {
+        $scope.data.error = error;
+    });
+
+    // Handle a successful payment
+    $scope.onPaymentSuccess = function (payment) {
+
+        if (payment.payment_method.type == "paypal" && payment.status == "initiated") {
+            // If PayPal and status is initiated, redirect to PayPal for approval.
+            window.location = payment.response_data.redirect_url;
+        } else if (payment.payment_method.type == "amazon_pay") {
+            // If Amazon Pay, redirect for review
+            $location.path("/review/" + payment.payment_id);
+        } else {
+            // A successful card payment. Redirect to the receipt.
+            $location.path("/receipt/" + payment.payment_id);
+        }
+
+    }
+
+    $scope.setPaymentMethod = function (id, type) {
+
+        // Remove all data from the payment method
+        $scope.data.payment_method = {};
+
+        // If a payment_method_id or type is provided, set it.
+        if (id)
+            $scope.data.payment_method.payment_method_id = id;
+
+        if (type)
+            $scope.data.payment_method.type = type;
+
+    }
+
+    // Watch for error to be populated, and if so, scroll to it.
+    $scope.$watch("data.error", function (newVal, oldVal) {
+        if ($scope.data.error) {
+            $document.scrollTop(0, 500);
+        }
+    });
+
+}]);
 app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'OrderService', 'SettingsService', 'HelperService', '$document', function ($scope, $routeParams, PaymentService, OrderService, SettingsService, HelperService, $document) {
 
     // Define a place to hold your data
@@ -343,8 +343,8 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
     $scope.settings = SettingsService.get();
 
     $scope.data.params = {};
-    $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options";
-    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.items.type,order.items.license_pending,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.items.product.images.link_small,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
+    $scope.data.params.expand = "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription_terms,order.options,cart.options,invoice.options";
+    $scope.data.params.show = "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription_terms.description,order.items.type,order.items.license_pending,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.items.product.images.link_small,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields";
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.data.params.expand += ",order.items.download,order.items.license";

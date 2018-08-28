@@ -189,7 +189,7 @@
                                             <td colspan="3" ng-if="showImages" class="text-left has-product-icon visible-xs padding-b12"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                                         </tr>
                                         <tr>
-                                            <td ng-show="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                                            <td ng-show="showImages" class="text-left has-product-icon padding-b12 hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                                             <td>
                                                 <strong>{{item.name}}</strong>
                                                 <p>
@@ -200,11 +200,11 @@
                                                 <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.payment.order.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.payment.order.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}
                                             </td>
                                         </tr>
-                                        <tr ng-if="item.subscription.description">
-                                            <td colspan="3" class="text-light text-left padding-t12">{{item.subscription.description}}</td>
+                                        <tr ng-if="item.subscription_terms.description">
+                                            <td colspan="3" class="text-light text-left padding-b12">{{item.subscription_terms.description}}</td>
                                         </tr>
                                         <tr ng-if="item.download">
-                                            <td colspan="3" class="text-left">
+                                            <td colspan="3" class="text-left padding-b12">
                                                 <a class="btn btn-info" ng-href="{{item.download.link}}" translate>Download Now</a>
                                             </td>
                                         </tr>
