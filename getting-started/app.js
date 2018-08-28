@@ -10,16 +10,15 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
     hljs.initHighlightingOnLoad();
 
     // Set the favicon
+    var faviconUrl = "images/favicon.ico";
+    if (window.__settings.style.favicon_full) {
+        faviconUrl = window.__settings.style.favicon_full;
+    }
+
     var favicon = document.createElement("link");
     favicon.setAttribute("rel", "icon");
     favicon.setAttribute("type", "image/x-icon");
-
-    if (window.__settings.app.favicon_full) {
-        favicon.setAttribute("href", window.__settings.app.favicon_full);
-    } else {
-        favicon.setAttribute("href", "../images/default_favicon.png");
-    }
-
+    favicon.setAttribute("href", faviconUrl);
     document.head.appendChild(favicon);
 
 }]);

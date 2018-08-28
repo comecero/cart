@@ -3,6 +3,9 @@
     // Define a place to hold your data and functions
     $scope.data = {};
 
+    // Load in the default payment method
+    $scope.options = { "payment_method": "credit_card" };
+
     // Load in some helpers
     $scope.geoService = GeoService;
     $scope.settings = SettingsService.get();
@@ -23,7 +26,7 @@
         "type": "paypal",
         data: {
             // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
-            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/payment/review/{{payment_id}}",
+            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/review/{{payment_id}}",
             "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/cart"
         }
     }
@@ -116,7 +119,7 @@
             window.location = payment.response_data.redirect_url;
         } else if (payment.payment_method.type == "amazon_pay") {
             // If Amazon Pay, redirect for review
-            $location.path("/payment/review/" + payment.payment_id);
+            $location.path("/review/" + payment.payment_id);
         } else {
             // A successful card payment. Redirect to the receipt.
             $location.path("/receipt/" + payment.payment_id);
@@ -155,6 +158,36 @@
             }
         });
     }
+
+    $scope.showElectronicDelivery = function(cart, item) {
+
+        // If there's only one item in the cart and there's a shipping item, we'll show the delivery method, regardless of any other setting.
+        if (cart.items.length == 1 && cart.shipping_item) {
+            return false;
+        }
+
+        if (item.product.type == "digital") {
+            return true;
+        }
+
+        if (item.product.type == "service" && (item.product.has_file || item.product.has_license_service)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    $scope.showPhysicalDelivery = function (cart, item) {
+
+        // If a physical product and a shipping item, show.
+        if (item.product.type == "physical" && cart.shipping_item) {
+            return true;
+        }
+
+        return false;
+    }
+
 
     // Watch for error to be populated, and if so, scroll to it.
     $scope.$watch("data.error", function (newVal, oldVal) {

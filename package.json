@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/comecero/cart#readme",
   "devDependencies": {
-    "grunt-angular-gettext": "2.3.5",
+    "grunt-angular-gettext": "2.3.13",
     "gulp": "3.9.1",
     "gulp-batch": "1.0.5",
     "gulp-concat": "2.6.0",

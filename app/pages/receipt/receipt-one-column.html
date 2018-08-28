@@ -1,0 +1,338 @@
+﻿<div ng-controller="ReceiptController">
+
+    <!-- Custom Header, if supplied -->
+    <custom-html html="settings.style.header_html"></custom-html>
+
+    <nav class="navbar navbar-default" ng-cloak>
+        <div class="container">
+            <div class="brand">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img ng-src="{{settings.style.logo}}" ng-if="settings.style.logo">
+                        <span ng-if="!settings.style.logo" class="company-name">{{settings.app.company_name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-content">
+        <div class="row spacer-t12">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <h3 translate>Receipt</h3>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="dropdown pull-right" uib-dropdown ng-if="settings.app.enable_languages">
+                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                                <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
+                            </button>
+                            <ul class="dropdown-menu" language-select as-dropdown></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row spacer-t12" ng-if="data.error">
+            <div class="col-xs-12">
+                <div class="alert alert-danger">
+                    {{data.error.message}}
+                </div>
+            </div>
+        </div>
+        <div class="row spacer-t12">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="panel panel-default panel-content">
+                    <div class="panel-body">
+                        <div class="section">
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-8">
+                                        <h4><span translate>Order ID</span>: {{data.payment.order.order_id}}</h4>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 receipt-date">
+                                        <p><span translate>Date</span>: <span>{{data.payment.date_created  | date:'short'}}</span></p>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="data.payment.order">
+                                    <div class="col-xs-12">
+                                        <p translate>Thank you! Your order is complete.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" ng-if="data.payment && !data.payment.order">
+                            <div class="section-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="alert alert-info" translate>
+                                            Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" ng-show="helpers.isCustomerField('username', data.payment.cart.options)">
+                            <div class="section-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div create-account customer="data.payment.order.customer" options="options" error="data.error">
+
+                                            <div class="well clearfix supply-credentials">
+
+                                                <div class="spacer-b12" translate>To manage your order online, create an account.</div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-6" id="un">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="un" ng-show="settings.app.form_label_position == 'top'" translate>Username</label>
+                                                            <div class="inner-addon left-addon">
+                                                                <i class="fa fa-user"></i>
+                                                                <input class="form-control create-account-username" name="un" type="text" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Username' | translate }}" value="{{data.payment.order.customer.email}}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-md-6" id="pw">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="pw" ng-show="settings.app.form_label_position == 'top'" translate>Password</label>
+                                                            <div class="inner-addon left-addon">
+                                                                <i class="fa fa-lock"></i>
+                                                                <input class="form-control create-account-password" name="pw" hide-placeholder="settings.app.form_label_position != 'inside'" placeholder="{{ 'Password' | translate }}" type="password">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-12 text-right spacer-t12">
+                                                        <button type="submit" class="btn btn-info btn-sm submit-create-account" error="data.error" translate>Create Account</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="alert alert-success account-created">
+                                                <i class="fa fa-check-square-o fa-lg"></i> <span translate>Your account has been created.</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="section">
+                                    <div class="section-header">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h4 translate>Sold To</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section-body">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <span ng-if="data.payment.order.customer.company_name">{{data.payment.order.customer.company_name}}<br /></span>
+                                                <span ng-if="data.payment.order.customer.name">{{data.payment.order.customer.name}}<br /></span>
+                                                <span ng-if="data.payment.order.customer.billing_address.address_1">{{data.payment.order.customer.billing_address.address_1}}<br /></span>
+                                                <span ng-if="data.payment.order.customer.billing_address.address_2">{{data.payment.order.customer.billing_address.address_2}}<br /></span>
+                                                <span ng-if="data.payment.order.customer.billing_address.city">{{data.payment.order.customer.billing_address.city}}</span>
+                                                <span ng-if="data.payment.order.customer.billing_address.state_prov">{{data.payment.order.customer.billing_address.state_prov}}</span>
+                                                <span ng-if="data.payment.order.customer.billing_address.postal_code">{{data.payment.order.customer.billing_address.postal_code}}</span><br />
+                                                <span ng-if="data.payment.order.customer.billing_address.country">{{data.payment.order.customer.billing_address.formatted.country}}<br /></span>
+                                                <span ng-if="data.payment.order.customer.email">{{data.payment.order.customer.email}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="section">
+                                    <div class="section-header">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h4 translate>Payment Method</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section-body">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div ng-if="data.payment.payment_method.type == 'credit_card'">
+                                                    {{data.payment.payment_method.data.type}} {{data.payment.payment_method.data.mask}}<br />
+                                                    <span translate>Expires</span>: {{data.payment.payment_method.data.exp_month}}/{{data.payment.payment_method.data.exp_year}}
+                                                </div>
+                                                <div ng-if="data.payment.payment_method.type != 'credit_card'">
+                                                    {{data.payment.payment_method.formatted.type}}<br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="section" ng-if="settings.app.receipt_button_position == 'top'">
+                                <div class="section-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <a class="btn btn-primary btn-cta btn-block btn-lg" ng-href="{{getReceiptButtonUrl(settings.app.receipt_button_url)}}">
+                                                <span ng-show="settings.app.receipt_button_text == 'continue_shopping'" translate>Continue Shopping</span>
+                                                <span ng-show="settings.app.receipt_button_text == 'continue'" translate>Continue</span>
+                                                <span ng-show="settings.app.receipt_button_text == 'return'" translate>Return</span>
+                                                <span ng-show="settings.app.receipt_button_text == 'return_to_company_name'" translate translate-params-company-name="settings.app.company_name">Return to {{companyName}}</span>
+                                                <span ng-show="settings.app.receipt_button_text == 'finish'" translate>Finish</span>
+                                                <span ng-show="settings.app.receipt_button_text == 'custom'" translate>{{settings.app.receipt_button_text_custom}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body panel-top-border">
+                        <div class="section">
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h4 translate>Order Details</h4>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="data.awaitingLicense && settings.app.show_digital_delivery">
+                                    <div class="col-xs-12">
+                                        <!-- Show a spinner if the order is awaiting licenses -->
+                                        <div class="row text-center spacer-b20">
+                                            <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-body section-top-border" ng-repeat="item in data.payment.order.items">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" ng-if="showImages" class="text-left has-product-icon visible-xs padding-b12"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td ng-show="showImages" class="text-left has-product-icon hidden-xs padding-b12"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
+                                            <td>
+                                                <strong>{{item.name}}</strong>
+                                                <p>
+                                                    <span translate>Quantity</span>: <span>{{item.quantity}}</span>
+                                                </p>
+                                            </td>
+                                            <td class="text-right has-price">
+                                                <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.payment.order.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>{{data.payment.order.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="item.subscription_terms.description">
+                                            <td colspan="3" class="text-light text-left padding-b12">{{item.subscription_terms.description}}</td>
+                                        </tr>
+                                        <tr ng-if="item.download && settings.app.show_digital_delivery">
+                                            <td colspan="3" class="text-left padding-b12">
+                                                <a class="btn btn-info" ng-href="{{item.download.link}}" translate>Download Now</a>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="item.license && settings.app.show_digital_delivery">
+                                            <td colspan="3" class="text-left">
+                                                <div class="alert alert-info">
+                                                    <p><strong>{{item.license.label}}:</strong></p>
+                                                    <span ng-bind-html="item.license.html"></span>
+                                                    <p ng-show="item.license.instructions" class="spacer-t12">{{item.license.instructions}}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="section-body section-top-border">
+                                <div class="row" ng-if="!data.payment.order.tax_inclusive">
+                                    <div class="col-xs-6">
+                                        <span translate>Subtotal</span>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <span class="has-price">{{data.payment.order.formatted.subtotal}}</span>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="data.payment.order.shipping_item">
+                                    <div class="col-xs-6">
+                                        <span>{{data.payment.order.shipping_item.name}}</span>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <span ng-show="data.payment.order.shipping_item.price_original > data.payment.order.shipping_item.price"><del class="discount text-danger">{{data.payment.order.tax_inclusive ? data.payment.order.shipping_item.formatted.total_original : data.payment.order.shipping_item.formatted.subtotal_original}}</del>&nbsp;</span><span class="has-price">{{data.payment.order.tax_inclusive ? data.payment.order.shipping_item.formatted.total : data.payment.order.shipping_item.formatted.subtotal}}</span>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="data.payment.order.discount > 0">
+                                    <div class="col-xs-6">
+                                        <span translate>Discount</span>
+                                    </div>
+                                    <div class="col-xs-6 text-right text-danger">
+                                        <span class="has-price">-{{data.payment.order.formatted.discount}}</span>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="data.payment.order.tax > 0 && !data.payment.order.tax_inclusive">
+                                    <div class="col-xs-6">
+                                        <span translate>Tax</span>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <span class="has-price">{{data.payment.order.formatted.tax}}</span>
+                                    </div>
+                                </div>
+                                <div class="row spacer-t24">
+                                    <div class="col-xs-6">
+                                        <strong class="text-lg" translate>Total</strong>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <span class="text-lg has-price">{{data.payment.order.formatted.total}} {{data.payment.order.currency}}</span>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="data.payment.order.tax_inclusive">
+                                    <div class="col-xs-12 text-right text-sm">
+                                        <span class="text-sm" translate>Your total includes {{data.payment.order.formatted.tax}} tax</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="section-body">
+                                <div class="row">
+                                    <div class="col-xs-12 text-center"><em><h3 class="text-light" translate>Thank you for your order</h3></em></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" ng-if="settings.app.receipt_button_position == 'bottom'">
+                            <div class="section-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-primary btn-cta btn-block btn-lg" ng-href="{{getReceiptButtonUrl(settings.app.receipt_button_url)}}">
+                                            <span ng-show="settings.app.receipt_button_text == 'continue_shopping'" translate>Continue Shopping</span>
+                                            <span ng-show="settings.app.receipt_button_text == 'continue'" translate>Continue</span>
+                                            <span ng-show="settings.app.receipt_button_text == 'return'" translate>Return</span>
+                                            <span ng-show="settings.app.receipt_button_text == 'return_to_company_name'" translate translate-params-company-name="settings.app.company_name">Return to {{companyName}}</span>
+                                            <span ng-show="settings.app.receipt_button_text == 'finish'" translate>Finish</span>
+                                            <span ng-show="settings.app.receipt_button_text == 'custom'" translate>{{settings.app.receipt_button_text_custom}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="footer" ng-cloak>
+                    <p class="global-footer" ng-bind-html="settings.account.global_footer_html"></p>
+                    <p ng-bind-html="settings.app.footer_text"></p>
+                    <p translate>Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Footer, if supplied -->
+    <custom-html html="settings.style.footer_html"></custom-html>
+
+</div>

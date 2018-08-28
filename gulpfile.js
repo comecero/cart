@@ -10,7 +10,7 @@ var fs = require("fs");
 var header = require('gulp-header');
 
 gulp.task("concat-pages-js", function () {
-    return gulp.src(["./app/pages/**/*.js"])
+    return gulp.src(["./app/shared/**/*.js", "./app/pages/**/*.js"])
       .pipe(concat("pages.js"))
       .pipe(gulp.dest("./dist/js/"));
 });
