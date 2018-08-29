@@ -99,20 +99,21 @@
                                                         <span translate>Electronic Delivery</span><span ng-if="item.product.has_file">: <span translate>Immediate Download</span></span><span ng-if="item.product.has_license_service">: <span translate>Immediate Access</span></span>
                                                     </p>
                                                     <div class="has-input" ng-if="!settings.app.hide_quantity">
-                                                        <div class="quantity-stepper-wrapper">
+                                                        <div class="quantity-stepper-wrapper" show-errors>
                                                             <div class="input-group quantity-stepper">
                                                                 <span class="input-group-btn">
                                                                     <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '-')">
                                                                         <i class="fa fa-minus"></i>
                                                                     </button>
                                                                 </span>
-                                                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
+                                                                <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" maxlength="4" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
                                                                 <span class="input-group-btn">
                                                                     <button type="button" class="btn btn-default" ng-click="changeQuantity(item, '+')">
                                                                         <i class="fa fa-plus"></i>
                                                                     </button>
                                                                 </span>
                                                             </div>
+                                                            <p class="error-block hidden" translate>Please provide a valid quantity</p>
                                                         </div>
                                                     </div>
                                                 </td>
