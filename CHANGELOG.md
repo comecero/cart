@@ -1,4 +1,10 @@
-﻿<a name="1.2.1"></a>
+﻿<a name="2.0.0"></a>
+# 2.0.0
+
+- Redesigned from the ground up! A fresh new design, including the option for one-column and two-column layouts.
+- Integrate kit version 1.0.10 of kit. See kit release notes for details.
+
+<a name="1.2.1"></a>
 # 1.2.1
 
 - Integrate kit version 1.0.9 of kit. See kit release notes for details.
