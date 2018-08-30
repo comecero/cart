@@ -15,10 +15,17 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
         faviconUrl = window.__settings.style.favicon_full;
     }
 
+    // Set the favicon
     var favicon = document.createElement("link");
     favicon.setAttribute("rel", "icon");
     favicon.setAttribute("type", "image/x-icon");
-    favicon.setAttribute("href", faviconUrl);
+
+    if (window.__settings.style.favicon_full) {
+        favicon.setAttribute("href", window.__settings.style.favicon_full);
+    } else {
+        favicon.setAttribute("href", "../images/default_favicon.png");
+    }
+
     document.head.appendChild(favicon);
 
 }]);
