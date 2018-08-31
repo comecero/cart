@@ -17,7 +17,7 @@ window.__settings = window.__settings || {}; window.__settings.app =
         "show_digital_delivery": true,
         "enable_languages": true,
         "show_continue_shopping": true,
-        "receipt_button_position": "bottom",
+        "receipt_button_position": "end",
         "receipt_button_text": "continue_shopping",
         "receipt_button_text_custom": null,
         "receipt_button_url": "https://example.com?order_id={{order.order_id}}&payment_id={{payment.payment_id}}",

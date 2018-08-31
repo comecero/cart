@@ -151,18 +151,18 @@
     "name": "receipt_button_position",
     "type": "string",
     "label": "Receipt Button Position",
-    "description": "Indicate the position of the receipt button, which can direct the user back to your site upon completion of an order.",
+    "description": "Indicate the position of the receipt button, which can direct the user back to your site upon completion of an order. 'Inline' places the button in a more prominent position for higher visibility.",
     "section": "Features",
     "required": true,
     "default_value": "false",
     "options": [
       {
-        "display": "Top",
-        "value": "top"
+        "display": "Inline",
+        "value": "end"
       },
       {
-        "display": "Bottom",
-        "value": "bottom"
+        "display": "End",
+        "value": "end"
       },
       {
         "display": "Do not display the receipt button",
