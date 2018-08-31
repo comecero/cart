@@ -10,6 +10,21 @@
 
     $scope.data.test = false;
 
+    // Get an active product
+    ProductService.getList({ limit: 1, sort_by: "name" }).then(function (products) {
+
+        $scope.data.loaded = true;
+
+        // Set the product_id on the demo button URL
+        if (products.data.length > 0) {
+            $scope.data.product = products.data[0];
+            $scope.data.test = products.data[0].test;
+        }
+
+    }, function (error) {
+        $scope.data.error = error;
+    });
+
     // Get the payment options
     PaymentService.getOptions().then(function (options) {
         $scope.data.options = options;
