@@ -60,6 +60,11 @@
                                         <p translate>Thank you! Your order is complete.</p>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a class="pointer" download-receipt order-id="data.payment.order.order_id" order-url="data.payment.order.url"><i class="fa fa-print"></i> <span translate>Print receipt</span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="section" ng-if="data.payment && !data.payment.order">
@@ -163,6 +168,41 @@
                                                 </div>
                                                 <div ng-if="data.payment.payment_method.type != 'credit_card'">
                                                     {{data.payment.payment_method.formatted.type}}<br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="section" ng-show="data.payment.order.shipping_item">
+                                    <div class="section-header">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h4 translate>Shipping Address</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section-body">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div ng-show="!data.payment.order.customer.shipping_address.address_1">
+                                                    <span ng-if="data.payment.order.customer.name">{{data.payment.order.customer.name}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.billing_address.address_1">{{data.payment.order.customer.billing_address.address_1}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.billing_address.address_2">{{data.payment.order.customer.billing_address.address_2}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.billing_address.city">{{data.payment.order.customer.billing_address.city}}</span>
+                                                    <span ng-if="data.payment.order.customer.billing_address.state_prov">{{data.payment.order.customer.billing_address.state_prov}}</span>
+                                                    <span ng-if="data.payment.order.customer.billing_address.postal_code">{{data.payment.order.customer.billing_address.postal_code}}</span><br />
+                                                    <span ng-if="data.payment.order.customer.billing_address.country">{{data.payment.order.customer.billing_address.formatted.country}}<br /></span>
+                                                </div>
+                                                <div ng-show="data.payment.order.customer.shipping_address.address_1">
+                                                    <span ng-if="data.payment.order.customer.shipping_address.name">{{data.payment.order.customer.shipping_address.name}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.shipping_address.address_1">{{data.payment.order.customer.shipping_address.address_1}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.shipping_address.address_2">{{data.payment.order.customer.shipping_address.address_2}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.shipping_address.city || data.payment.order.customer.shipping_address.state_prov || data.payment.order.customer.shipping_address.postal_code">{{data.payment.order.customer.shipping_address.city}} {{data.payment.order.customer.shipping_address.state_prov}} {{data.payment.order.customer.shipping_address.postal_code}}<br /></span>
+                                                    <span ng-if="data.payment.order.customer.shipping_address.country">{{data.payment.order.customer.shipping_address.formatted.country}}<br /></span>
                                                 </div>
                                             </div>
                                         </div>
