@@ -1,18 +1,40 @@
 var app = angular.module("checkout", ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'gettext', 'duScroll']);
 
-app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 'cfpLoadingBarProvider', function ($httpProvider, $routeProvider, $locationProvider, $provide, cfpLoadingBarProvider) {
+app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 'cfpLoadingBarProvider', '$sceDelegateProvider', function ($httpProvider, $routeProvider, $locationProvider, $provide, cfpLoadingBarProvider, $sceDelegateProvider) {
 
     // Determine the layout
-    var layout = "two-column";
-    if (window.__settings && window.__settings.style && window.__settings.style.layout) {
-        layout = window.__settings.style.layout;
+    var appSettings = {};
+    var styleSettings = {};
+    if (window.__settings) {
+        if (window.__settings.app) {
+            styleSettings = window.__settings.app;
+        }
+        if (window.__settings.style) {
+            styleSettings = window.__settings.style;
+        }
+    }
+
+    var layout = styleSettings.layout || "two-column";
+
+    // Establish the whitelist for allowed origins for our templates.
+    var whitelist = $sceDelegateProvider.resourceUrlWhitelist();
+    function addToWhitelist(url) {
+        whitelist.push(url);
+        $sceDelegateProvider.resourceUrlWhitelist(whitelist);
     }
 
     // Define routes
     $routeProvider.when("/cart", { templateUrl: "app/pages/cart/cart-" + layout + ".html", reloadOnSearch: false });
     $routeProvider.when("/invoice", { templateUrl: "app/pages/invoice/invoice-" + layout + ".html", reloadOnSearch: false });
     $routeProvider.when("/review/:id", { templateUrl: "app/pages/review/review-" + layout + ".html" });
-    $routeProvider.when("/receipt/:id", { templateUrl: "app/pages/receipt/receipt-" + layout + ".html" });
+
+    if (styleSettings.receipt_template_url) {
+        addToWhitelist(styleSettings.receipt_template_url);
+        $routeProvider.when("/receipt/:id", { templateUrl: styleSettings.receipt_template_url });
+    } else {
+        $routeProvider.when("/receipt/:id", { templateUrl: "app/pages/receipt/receipt-" + layout + ".html" });
+    }
+
     $routeProvider.when("/", { templateUrl: "app/pages/products/products-" + layout + ".html" });
 
     // Non-handled routes.
