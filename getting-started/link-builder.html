@@ -9,7 +9,7 @@
 
 <form name="form" ng-controller="LinkBuilderController" novalidate>
 
-    <p><i>Fill in the form below to generate a link to the Shopping Cart to provide to a customer</i></p>
+    <p><i>Generate a link to the Shopping Cart to provide to a customer or add to your website</i></p>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -20,7 +20,7 @@
             <div class="col-xs-12">
 
                 <div class="form-group">
-                    <label for="name" class="control-label" translate>Product Search</label>
+                    <label for="name" class="control-label">Product Search</label>
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" ng-model="data.q" ng-change="functions.search()" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 750, blur: 0 } }">
                         <span class="input-group-btn">
@@ -29,69 +29,107 @@
                     </div>
                 </div>
 
-                <div class="section-header" ng-if="data.products">
-                    <span style="top:-10px">Search Results</span>
+                <div class="section" ng-if="products.data">
+                    <div class="section-header">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-7">
+                                <h4><span>Products</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-body section-top-border">
+                        <table ng-show="products.data">
+                            <thead>
+                                <tr>
+                                    <th style="padding-right:8px; width:8px;">&nbsp;</th>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th class="text-right">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-if="products.data.length == 0">
+                                <tr>
+                                    <td colspan="4" class="text-center"><i>No products found</i></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-repeat="product in products.data">
+                                <tr style="height:32px;">
+                                    <td style="padding-right:8px; width:8px;"><button class="btn btn-primary btn-xs" ng-click="functions.addProduct(product)">Add</button></td>
+                                    <td data-label="Name"><span class="faux-link" ng-click="functions.addProduct(product)">{{product.name}}</span></td>
+                                    <td data-label="ID">{{product.product_id}}</td>
+                                    <td class="text-right" data-label="Price">{{product.formatted.price}} {{product.currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="products.total_pages > 1">
+                            <ul class="pager">
+                                <li class="previous" ng-click="movePage('-')" ng-show="products.previous_page_offset !== null"><a><i class="fa fa-chevron-circle-left"></i> <span>Back</span></a></li>
+                                <li class="next" ng-click="movePage('+')" ng-show="products.next_page_offset !== null"><a><span>Next</span> <i class="fa fa-chevron-circle-right"></i></a></li>
+                            </ul>
+                            <p class="text-right text-sm" ng-if="products.data"><em>Showing page {{products.current_page}} of {{products.total_pages}}</em></p>
+                        </div>
+
+                    </div>
                 </div>
 
-                <table ng-show="data.products">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th class="text-right">Price</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-if="data.products.length == 0">
-                        <tr>
-                            <td colspan="3" class="text-center"><i>No products found</i></td>
-                        </tr>
-                    </tbody>
-                    <tbody ng-repeat="product in data.products" ng-if="data.products.length > 0">
-                        <tr>
-                            <td data-label="ID"><strong><span class="faux-link" ng-click="functions.addProduct(product)">{{product.product_id}}</span></strong></td>
-                            <td data-label="Name">{{product.name}}</td>
-                            <td class="text-right" data-label="Price">{{product.formatted.price}} {{product.currency}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="section-header" ng-if="data.addedProducts.length > 0">
-                    <span style="top:-10px">Added Products</span>
+                <div class="section" ng-show="data.addedProducts.length > 0">
+                    <div class="section-header">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-7">
+                                <h4><span>Shopping Cart</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-body section-top-border" ng-repeat="item in data.addedProducts">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3" ng-if="showImages" class="text-left has-product-icon visible-xs padding-b12"><img class="product-icon" ng-src="{{item.images[0].link_square}}" /></td>
+                                </tr>
+                                <tr>
+                                    <td ng-if="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{item.images[0].link_square}}" /></td>
+                                    <td>
+                                        <strong>{{item.name}}</strong>
+                                        <p class="text-light">
+                                            <span>Product ID: </span> <span>{{item.product_id}}</span>
+                                        </p>
+                                        <div class="has-input">
+                                            <div class="quantity-stepper-wrapper" show-errors>
+                                                <div class="input-group quantity-stepper">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="functions.changeQuantity(item, '-')">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+                                                    </span>
+                                                    <input type="tel" name="quantity" ng-model="item.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" maxlength="4" select-on-click ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" ng-change="changeQuantity(item, null, item.quantity)" />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="functions.changeQuantity(item, '+')">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <p class="error-block hidden">Please provide a valid quantity</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right has-price">
+                                        {{product.formatted.price}} {{product.currency}}
+                                        <span class="remove-button faux-link" ng-click="functions.changeQuantity(item, null, 0)" ng-class="settings.app.hide_quantity ? 'spacer-t6' : 'spacer-t36'"><i class="fa fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="section-body spacer-t36">
+                        <button class="btn btn-xs btn-info" ng-click="showAdvancedOptions = true" ng-show="!showAdvancedOptions">Show Advanced Options</button>
+                        <button class="btn btn-xs btn-info" ng-click="showAdvancedOptions = false" ng-show="showAdvancedOptions">Hide Advanced Options</button>
+                    </div>
                 </div>
-
-                <table class="cart" ng-show="data.addedProducts.length > 0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th class="text-center">Quantity</th>
-                            <th class="text-right">Price</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-repeat="product in data.addedProducts">
-                        <tr>
-                            <td data-label="Name"><strong>{{product.name}}</strong> <i class="fa fa-trash pointer" style="color: #808080;" ng-click="functions.changeQuantity(product, null, 0)" title="Remove"></i></td>
-                            <td class="has-input" data-label="Quantity">
-                                <div class="input-group quantity-stepper">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="functions.changeQuantity(product, '-')">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </span>
-                                    <input type="tel" name="quantity" ng-model="product.quantity" class="form-control quantity" is-valid-integer min="0" max="9999" select-on-click ng-change="funcdtions.changeQuantity(product, null, item.quantity)" />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="functions.changeQuantity(product, '+')">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="text-right" data-label="Price">{{product.formatted.price}} {{product.currency}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
             </div>
         </div>
+    </div>
+
+    <div class="panel panel-default" ng-show="showAdvancedOptions">
 
         <div class="panel-heading"><strong>Discounts</strong></div>
         <div class="panel-body">
@@ -127,12 +165,11 @@
         <div class="panel-heading"><strong>Custom Data</strong></div>
         <div class="panel-body">
 
-            <div class="col-xs-12" style="margin-bottom: -15px;">
+            <div class="col-xs-12 spacer-t12">
                 <p><i>Enter any custom values you would like to be recorded with the cart and order</i></p>
             </div>
 
             <div ng-repeat="item in meta">
-
                 <div class="col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="meta_name" class="control-label">Name</label>
@@ -142,17 +179,15 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-6 col-xs-12">
                     <div class="form-group">
                         <label for="meta_value" class="control-label">Value</label>
                         <input type="text" class="form-control" name="meta_value" ng-model="item.value">
                     </div>
                 </div>
-
             </div>
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 spacer-t12">
                 <btn class="btn btn-info btn-xs" ng-click="meta.push({name: '', value: ''})">Add Custom Data</btn>
             </div>
 
@@ -191,16 +226,19 @@
             </div>
 
         </div>
+    </div>
+
+    <div class="panel panel-default">
 
         <div class="panel-heading"><strong>Get the Link</strong></div>
         <div class="panel-body">
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 spacer-t12">
                 <btn class="btn btn-primary" ng-click="functions.getLink()">Generate Link</btn>
 
                 <div class="row"></div>
 
-                <div class="input-group spacer-t20" ng-show="url">
+                <div class="input-group spacer-t12" ng-show="url">
                     <input type="text" class="form-control" name="url" id="url" value="{{url}}" />
                     <span class="input-group-btn">
                         <button class="btn btn-info clipboard" data-clipboard-target="#url"><i class="fa fa-copy" aria-hidden="true"></i> Copy</button>
@@ -210,7 +248,7 @@
             </div>
 
         </div>
+        </div>
 
-    </div>
 
 </form>

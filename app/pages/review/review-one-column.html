@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section" ng-if="data.sale.customer.shipping_address.address_1">
+                            <div class="section" ng-show="data.sale.shipping_item">
                                 <div class="section-header">
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -198,11 +198,26 @@
                                     </div>
                                 </div>
                                 <div class="section-body">
-                                    <span ng-if="data.sale.customer.shipping_address.name">{{data.sale.customer.shipping_address.name}}<br /></span>
-                                    <span ng-if="data.sale.customer.shipping_address.address_1">{{data.sale.customer.shipping_address.address_1}}<br /></span>
-                                    <span ng-if="data.sale.customer.shipping_address.address_2">{{data.sale.customer.shipping_address.address_2}}<br /></span>
-                                    <span ng-if="data.sale.customer.shipping_address.city || data.sale.customer.shipping_address.state_prov || data.sale.customer.shipping_address.postal_code">{{data.sale.customer.shipping_address.city}} {{data.sale.customer.shipping_address.state_prov}} {{data.sale.customer.shipping_address.postal_code}}<br /></span>
-                                    <span ng-if="data.sale.customer.shipping_address.country">{{data.sale.customer.shipping_address.formatted.country}}<br /></span>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div ng-show="!data.sale.customer.shipping_address.address_1">
+                                                <span ng-if="data.sale.customer.name">{{data.sale.customer.name}}<br /></span>
+                                                <span ng-if="data.sale.customer.billing_address.address_1">{{data.sale.customer.billing_address.address_1}}<br /></span>
+                                                <span ng-if="data.sale.customer.billing_address.address_2">{{data.sale.customer.billing_address.address_2}}<br /></span>
+                                                <span ng-if="data.sale.customer.billing_address.city">{{data.sale.customer.billing_address.city}}</span>
+                                                <span ng-if="data.sale.customer.billing_address.state_prov">{{data.sale.customer.billing_address.state_prov}}</span>
+                                                <span ng-if="data.sale.customer.billing_address.postal_code">{{data.sale.customer.billing_address.postal_code}}</span><br />
+                                                <span ng-if="data.sale.customer.billing_address.country">{{data.sale.customer.billing_address.formatted.country}}<br /></span>
+                                            </div>
+                                            <div ng-show="data.sale.customer.shipping_address.address_1">
+                                                <span ng-if="data.sale.customer.shipping_address.name">{{data.sale.customer.shipping_address.name}}<br /></span>
+                                                <span ng-if="data.sale.customer.shipping_address.address_1">{{data.sale.customer.shipping_address.address_1}}<br /></span>
+                                                <span ng-if="data.sale.customer.shipping_address.address_2">{{data.sale.customer.shipping_address.address_2}}<br /></span>
+                                                <span ng-if="data.sale.customer.shipping_address.city || data.sale.customer.shipping_address.state_prov || data.sale.customer.shipping_address.postal_code">{{data.sale.customer.shipping_address.city}} {{data.sale.customer.shipping_address.state_prov}} {{data.sale.customer.shipping_address.postal_code}}<br /></span>
+                                                <span ng-if="data.sale.customer.shipping_address.country">{{data.sale.customer.shipping_address.formatted.country}}<br /></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="section" ng-if="options.isCartPayment">

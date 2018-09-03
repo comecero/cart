@@ -82,7 +82,7 @@
     "description": "Do you want to provide an option for a user to supply a promotion / discount code? If you don't use promo codes, it is recommended to not display this field.",
     "section": "Features",
     "required": true,
-    "default_value": false
+    "default_value": true
   },
   {
     "name": "promo_code_name",
@@ -145,24 +145,24 @@
     "description": "Indicates if you want to show a 'Continue Shopping' button on the cart summary.",
     "section": "Features",
     "required": false,
-    "default_value": false
+    "default_value": true
   },
   {
     "name": "receipt_button_position",
     "type": "string",
     "label": "Receipt Button Position",
-    "description": "Indicate the position of the receipt button, which can direct the user back to your site upon completion of an order.",
+    "description": "Indicate the position of the receipt button, which can direct the user back to your site upon completion of an order. 'Inline' places the button in a more prominent position for higher visibility.",
     "section": "Features",
     "required": true,
     "default_value": "false",
     "options": [
       {
-        "display": "Top",
-        "value": "top"
+        "display": "Inline",
+        "value": "end"
       },
       {
-        "display": "Bottom",
-        "value": "bottom"
+        "display": "End",
+        "value": "end"
       },
       {
         "display": "Do not display the receipt button",

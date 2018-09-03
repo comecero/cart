@@ -28,7 +28,7 @@
                         <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
                             <span class="pointer">{{currency}}</span> <i class="caret"></i>
                         </button>
-                        <ul class="dropdown-menu" currency-select as-dropdown cart="data.cart" error="data.error" params="data.params"></ul>
+                        <ul class="dropdown-menu" currency-select as-dropdown invoice="data.invoice" error="data.error" params="data.params"></ul>
                     </div>
                     <div class="dropdown pull-right spacer-r12" uib-dropdown ng-if="settings.app.enable_languages">
                         <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section" ng-if="data.invoice.customer.shipping_address.address_1">
+                            <div class="section" ng-show="data.invoice.shipping_item">
                                 <div class="section-header">
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -198,15 +198,25 @@
                                 <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <span ng-if="data.invoice.customer.company_name">{{data.invoice.customer.company_name}}<br /></span>
-                                            <span ng-if="data.invoice.customer.name">{{data.invoice.customer.shipping_address.name || data.invoice.customer.name}}<br /></span>
-                                            <span ng-if="data.invoice.customer.shipping_address.address_1">{{data.invoice.customer.shipping_address.address_1}}<br /></span>
-                                            <span ng-if="data.invoice.customer.shipping_address.address_2">{{data.invoice.customer.shipping_address.address_2}}<br /></span>
-                                            <span ng-if="data.invoice.customer.shipping_address.city">{{data.invoice.customer.shipping_address.city}}</span>
-                                            <span ng-if="data.invoice.customer.shipping_address.state_prov">{{data.invoice.customer.shipping_address.state_prov}}</span>
-                                            <span ng-if="data.invoice.customer.shipping_address.postal_code">{{data.invoice.customer.shipping_address.postal_code}}</span><br />
-                                            <span ng-if="data.invoice.customer.shipping_address.country">{{data.invoice.customer.shipping_address.formatted.country}}<br /></span>
-                                            <span ng-if="data.invoice.customer.email">{{data.invoice.customer.email}}</span>
+                                            <div ng-show="!data.invoice.customer.shipping_address.address_1">
+                                                <span ng-if="data.invoice.customer.name">{{data.invoice.customer.billing_address.name || data.invoice.customer.name}}<br /></span>
+                                                <span ng-if="data.invoice.customer.billing_address.address_1">{{data.invoice.customer.billing_address.address_1}}<br /></span>
+                                                <span ng-if="data.invoice.customer.billing_address.address_2">{{data.invoice.customer.billing_address.address_2}}<br /></span>
+                                                <span ng-if="data.invoice.customer.billing_address.city">{{data.invoice.customer.billing_address.city}}</span>
+                                                <span ng-if="data.invoice.customer.billing_address.state_prov">{{data.invoice.customer.billing_address.state_prov}}</span>
+                                                <span ng-if="data.invoice.customer.billing_address.postal_code">{{data.invoice.customer.billing_address.postal_code}}</span><br />
+                                                <span ng-if="data.invoice.customer.billing_address.country">{{data.invoice.customer.billing_address.formatted.country}}<br /></span>
+                                            </div>
+                                            <div ng-show="data.invoice.customer.shipping_address.address_1">
+                                                <span ng-if="data.invoice.customer.name">{{data.invoice.customer.shipping_address.name || data.invoice.customer.name}}<br /></span>
+                                                <span ng-if="data.invoice.customer.shipping_address.address_1">{{data.invoice.customer.shipping_address.address_1}}<br /></span>
+                                                <span ng-if="data.invoice.customer.shipping_address.address_2">{{data.invoice.customer.shipping_address.address_2}}<br /></span>
+                                                <span ng-if="data.invoice.customer.shipping_address.city">{{data.invoice.customer.shipping_address.city}}</span>
+                                                <span ng-if="data.invoice.customer.shipping_address.state_prov">{{data.invoice.customer.shipping_address.state_prov}}</span>
+                                                <span ng-if="data.invoice.customer.shipping_address.postal_code">{{data.invoice.customer.shipping_address.postal_code}}</span><br />
+                                                <span ng-if="data.invoice.customer.shipping_address.country">{{data.invoice.customer.shipping_address.formatted.country}}<br /></span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

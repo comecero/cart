@@ -7,10 +7,14 @@ code {
     background-color: #f3f1f8;
 }
 
-p {
-    margin-bottom: 25px;
+.panel-body {
+    padding: 0 0 14px;
 }
 
-.quantity-stepper {
-    padding-top: 2px;
+.pager {
+        margin: 10px 0 10px 0;
+}
+
+.pager .previous > a, .pager .next > a {
+    cursor: pointer;
 }
