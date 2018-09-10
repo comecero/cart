@@ -65,56 +65,56 @@
 
         <p>
             <strong>Add a product to the cart</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}</code><br />
         </p>
 
         <p>
             <strong>Add a product to the cart, specify the quantity</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001=2</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}=2</code><br />
         </p>
 
         <p>
             <strong>Add multiple products to the cart</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001&product_id:1002</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}&product_id:{{data.product_2.product_id || data.product_id_2}}</code><br />
             <span class="help">You can provide an unlimited number of products in a single URL</span>
         </p>
 
         <p>
             <strong>Add multiple products to the cart, specify the quantity for each</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001=1&product_id:1002=2</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}=1&product_id:{{data.product_2.product_id || data.product_id_2}}=2</code><br />
         </p>
 
         <p>
             <strong>Add a product to the cart, remove any existing items already in the cart</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001&empty_cart=true</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}&empty_cart=true</code><br />
         </p>
 
         <p>
             <strong>Specify a promotion code</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001&promotion_code=xxx</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}&promotion_code=xxx</code><br />
             <span class="help">You can create promotion codes in Store> Promotions</span>
         </p>
 
         <p>
             <strong>Provide customer details</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001&name=John%20Doe&email=john@example.com</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}&name=John%20Doe&email=john@example.com</code><br />
         </p>
 
         <p>
             <strong>Provide referrer data</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001&referrer=my-custom-value</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}&referrer=my-custom-value</code><br />
             <span class="help">Allows you to specify custom data that will help you know where the sale came from. The value you provide will be recorded with the cart and completed order.</span>
         </p>
 
         <p>
             <strong>Define the payment currency</strong><br />
-            <code>{{data.src}}/#/cart?currency=EUR&product_id:1001</code><br />
+            <code>{{data.src}}/#/cart?currency=EUR&product_id:{{data.product.product_id || data.product_id}}</code><br />
             <span class="help">Generally you don't need to specify the currency. If not supplied, the best currency for the customer will be automatically selected and the customer is able to change the currency in the cart.</span>
         </p>
 
         <p>
             <strong>Provide custom data</strong><br />
-            <code>{{data.src}}/#/cart?product_id:1001&this=that&more=stuff</code><br />
+            <code>{{data.src}}/#/cart?product_id:{{data.product.product_id || data.product_id}}&this=that&more=stuff</code><br />
             <span class="help">Any parameters you specify will be stored with the cart and completed order, for your reference. You can supply up to 2048 characters of custom data.</span>
         </p>
 
