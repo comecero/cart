@@ -3,6 +3,10 @@
     $scope.data = {};
     $scope.settings = SettingsService.get();
 
+    // Set a sample product_id if the account doesn't have a product yet.
+    $scope.data.product_id = "1001";
+    $scope.data.product_id_2 = "1002";
+
     // Set the app URL for the snippet example
     var path = window.location.pathname.substring(1);
     path = path.substring(0, path.indexOf("/"));
@@ -11,7 +15,7 @@
     $scope.data.test = false;
 
     // Get an active product
-    ProductService.getList({ limit: 1, sort_by: "name" }).then(function (products) {
+    ProductService.getList({ limit: 2, sort_by: "name" }).then(function (products) {
 
         $scope.data.loaded = true;
 
@@ -19,6 +23,10 @@
         if (products.data.length > 0) {
             $scope.data.product = products.data[0];
             $scope.data.test = products.data[0].test;
+        }
+
+        if (products.data.length > 1) {
+            $scope.data.product_2 = products.data[1];
         }
 
     }, function (error) {

@@ -3,6 +3,7 @@
 window.__settings = window.__settings || {}; window.__settings.account =
     {
         "development": true,
+        "api_host": "api.comecero.com",
         "account_id": "AA0000",
         "test": true,
         "allow_save_cards": true,
