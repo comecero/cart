@@ -5876,8 +5876,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   min-height: 64px; }
 
 .navbar.navbar-default {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e6e7e8; }
+  background-color: #0099E6;
+  border-bottom: 1px solid #066fa5; }
 
 .navbar .brand {
   line-height: 64px;
@@ -5886,7 +5886,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .navbar .brand .company-name {
   display: inline;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #686868;
+  color: #ffffff;
   font-weight: 500;
   height: 64px;
   line-height: 64px;

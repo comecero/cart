@@ -34,7 +34,7 @@
     "description": "The color of the company name in the header. Note that if you upload a company logo, then the company name text is not displayed.",
     "section": "Branding",
     "required": true,
-    "default_value": "#686868",
+    "default_value": "#ffffff",
     "min_length": 5,
     "max_length": 100
   },
@@ -88,7 +88,7 @@
     "description": "The background color for the header.",
     "section": "Header",
     "required": true,
-    "default_value": "#ffffff"
+    "default_value": "#0099E6"
   },
   {
     "name": "header-divider-bar-color",
@@ -97,7 +97,7 @@
     "description": "The color of the divider bar the separates the header and main page sections.",
     "section": "Header",
     "required": true,
-    "default_value": "#e6e7e8"
+    "default_value": "#066fa5"
   },
   {
     "name": "header-brand-align",
