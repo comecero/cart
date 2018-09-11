@@ -8,8 +8,7 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ./app/pages/cart/cart.html:186
-#: ./app/pages/cart/cart.html:261
+#: ./app/pages/simple/checkout.html:88
 msgid "Address"
 msgstr "Адрес"
 
@@ -18,7 +17,7 @@ msgstr "Адрес"
 msgid "Address 2"
 msgstr "Адрес 2"
 
-#: ./app/shared/services.js:467
+#: ./dist/js/kit.js:6312
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "Возникла ошибка при попытке обработки вашего запроса. Пожалуйста, отправьте ваш запрос еще раз. Если проблема не устранена, пожалуйста, обратитесь в службу поддержки."
 
@@ -42,7 +41,7 @@ msgstr "Купить сейчас"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ./app/pages/cart/cart.html:356
+#: ./app/pages/simple/checkout.html:146
 msgid "Card Number"
 msgstr "Номер карты"
 
@@ -50,17 +49,17 @@ msgstr "Номер карты"
 msgid "Choose a Payment Method"
 msgstr "Выбрать способ оплаты"
 
-#: ./app/pages/cart/cart.html:202
-#: ./app/pages/cart/cart.html:277
+#: ./app/pages/simple/checkout.html:96
 msgid "City"
 msgstr "Город"
 
-#: ./app/pages/cart/cart.html:154
-#: ./app/pages/payment/review.html:53
+#: ./app/pages/simple/checkout.html:78
+#: ./app/pages/simple/review.html:44
 msgid "Company Name"
 msgstr "Имя компании"
 
-#: ./app/pages/cart/cart.html:75
+#: ./app/pages/simple/checkout.html:302
+#: ./app/pages/simple/review.html:183
 msgid "Continue Shopping"
 msgstr "Продолжить делать покупки"
 
@@ -73,11 +72,12 @@ msgstr "Страна"
 msgid "Currency"
 msgstr "Валюта"
 
-#: ./app/pages/cart/cart.html:63
+#: ./app/pages/simple/checkout.html:274
+#: ./app/pages/simple/review.html:155
 msgid "Discount"
 msgstr "Скидка"
 
-#: ./app/pages/cart/cart.html:91
+#: ./app/pages/simple/checkout.html:216
 msgid "Discount applied."
 msgstr "Скидка действует."
 
@@ -114,11 +114,7 @@ msgstr "Если этот заказ сделан с целью ведения �
 msgid "Language"
 msgstr "Язык"
 
-#: ./app/pages/cart/cart.html:162
-#: ./app/pages/cart/cart.html:253
-#: ./app/pages/cart/cart.html:35
-#: ./app/pages/payment/review.html:92
-#: ./app/pages/receipt/receipt.html:51
+#: ./app/pages/simple/checkout.html:58
 msgid "Name"
 msgstr "Имя"
 
@@ -147,17 +143,17 @@ msgstr "Платежная информация"
 msgid "Payment Method"
 msgstr "Способ оплаты"
 
-#: ./app/pages/cart/cart.html:178
-#: ./app/pages/payment/review.html:61
+#: ./app/pages/simple/checkout.html:68
+#: ./app/pages/simple/review.html:55
 msgid "Phone"
 msgstr "Телефон"
 
-#: ./app/shared/directives.js:2826
+#: ./dist/js/kit.js:5339
 msgid "Please confirm"
 msgstr "Пожалуйста, подтвердите"
 
-#: ./app/shared/directives.js:2821
-#: ./app/shared/directives.js:2857
+#: ./dist/js/kit.js:5334
+#: ./dist/js/kit.js:5370
 msgid "Please make a selection"
 msgstr "Пожалуйста, сделайте выбор"
 
@@ -228,19 +224,19 @@ msgstr "Пожалуйста, укажите действительный поч
 msgid "Please provide an address"
 msgstr "Пожалуйста, укажите адрес"
 
-#: ./app/shared/directives.js:285
+#: ./dist/js/kit.js:2762
 msgid "Please provide an amount for your payment."
 msgstr "Пожалуйста, укажите сумму платежа"
 
-#: ./app/shared/directives.js:2866
+#: ./dist/js/kit.js:5379
 msgid "Please provide one of the available options"
 msgstr "Пожалуйста, укажите один из доступных вариантов"
 
-#: ./app/shared/directives.js:2849
+#: ./dist/js/kit.js:5362
 msgid "Please supply a number"
 msgstr "Пожалуйста, предоставьте номер"
 
-#: ./app/shared/directives.js:2842
+#: ./dist/js/kit.js:5355
 msgid "Please supply a number without decimals"
 msgstr "Пожалуйста, предоставьте номер с десятичными числами"
 
@@ -298,15 +294,15 @@ msgstr "Выйти"
 msgid "State / Province"
 msgstr "Область / Провинция"
 
-#: ./app/pages/cart/cart.html:36
-#: ./app/pages/payment/review.html:93
-#: ./app/pages/receipt/receipt.html:52
+#: ./app/pages/simple/checkout.html:179
+#: ./app/pages/simple/review.html:96
 msgid "Subtotal"
 msgstr "Промежуточный итог"
 
-#: ./app/pages/cart/cart.html:57
-#: ./app/pages/payment/review.html:113
-#: ./app/pages/receipt/receipt.html:72
+#: ./app/pages/simple/checkout.html:187
+#: ./app/pages/simple/checkout.html:282
+#: ./app/pages/simple/review.html:104
+#: ./app/pages/simple/review.html:163
 msgid "Tax"
 msgstr "Налог"
 
@@ -314,11 +310,11 @@ msgstr "Налог"
 msgid "Thank you! Your order is complete."
 msgstr "Спасибо! Ваш заказ завершен."
 
-#: ./app/shared/services.js:461
+#: ./dist/js/kit.js:6306
 msgid "The item you are trying to access could not be found."
 msgstr "Единица товара, которую вы хотите найти, недоступна."
 
-#: ./app/shared/directives.js:2892
+#: ./dist/js/kit.js:5405
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "Значение должно быть минимум один символ"
@@ -326,7 +322,7 @@ msgstr[1] "Значение должно быть минимум {{$count}} си
 msgstr[2] "Значение должно быть минимум {{$count}} символов"
 msgstr[3] "Значение должно быть минимум {{$count}} символов"
 
-#: ./app/shared/directives.js:2898
+#: ./dist/js/kit.js:5411
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "Значение должно быть менее одного символа"
@@ -334,7 +330,7 @@ msgstr[1] "Значение должно быть менее {{$count}} симв
 msgstr[2] "Значение должно быть менее {{$count}} символов"
 msgstr[3] "Значение должно быть менее {{$count}} символов"
 
-#: ./app/shared/directives.js:2875
+#: ./dist/js/kit.js:5388
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "Значение, которое вы указываете, должно быть более {{$count}}"
@@ -342,7 +338,7 @@ msgstr[1] "Значение, которое вы указываете, долж�
 msgstr[2] "Значение, которое вы указываете, должно быть более {{$count}}"
 msgstr[3] "Значение, которое вы указываете, должно быть более {{$count}}"
 
-#: ./app/shared/directives.js:2881
+#: ./dist/js/kit.js:5394
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "Значение, которое вы указали должно быть меньше {{$count}}"
@@ -354,15 +350,15 @@ msgstr[3] "Значение, которое вы указали должно б�
 msgid "There are no items in your cart"
 msgstr "В вашей корзине ничего нет"
 
-#: ./app/shared/directives.js:179
-#: ./app/shared/directives.js:273
-#: ./app/shared/directives.js:513
+#: ./dist/js/kit.js:2656
+#: ./dist/js/kit.js:2750
+#: ./dist/js/kit.js:3000
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "Существует проблема с определённой информацией, которую вы предоставили. Пожалуйста, проверьте её на ошибки и попробуйте снова."
 
-#: ./app/pages/cart/cart.html:68
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:78
+#: ./app/pages/simple/checkout.html:286
+#: ./app/pages/simple/review.html:108
+#: ./app/pages/simple/review.html:167
 msgid "Total"
 msgstr "Итого"
 
@@ -374,8 +370,8 @@ msgstr "Обновить корзину"
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: ./app/pages/cart/cart.html:320
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/simple/checkout.html:132
+#: ./app/pages/simple/review.html:69
 msgid "VAT Number"
 msgstr "Идентификационный номер плательщика НДС"
 
@@ -396,12 +392,15 @@ msgstr "Почтовый индекс"
 msgid "expiration"
 msgstr "Истечение срока"
 
-#: ./app/pages/invoice/invoice.html:52
+#: ./app/pages/invoice/invoice-one-column.html:88
+#: ./app/pages/invoice/invoice-two-column.html:170
 msgid "Billing Information"
 msgstr "Сведения об оплате"
 
-#: ./app/pages/cart/cart.html:531
-#: ./app/pages/payment/review.html:190
+#: ./app/pages/cart/cart-one-column.html:678
+#: ./app/pages/cart/cart-two-column.html:676
+#: ./app/pages/review/review-one-column.html:285
+#: ./app/pages/review/review-two-column.html:285
 msgid "Complete Order"
 msgstr "Выполнение заказа"
 
@@ -423,16 +422,18 @@ msgstr "Создать учетную запись"
 msgid "Date"
 msgstr "Дата"
 
-#: ./app/pages/invoice/invoice.html:104
-#: ./app/pages/receipt/receipt.html:124
+#: ./app/pages/receipt/receipt-one-column.html:274
+#: ./app/pages/receipt/receipt-two-column.html:260
 msgid "Download Now"
 msgstr "Скачать сейчас"
 
-#: ./app/pages/invoice/invoice.html:40
+#: ./app/pages/invoice/invoice-one-column.html:77
+#: ./app/pages/invoice/invoice-two-column.html:161
 msgid "Due Date"
 msgstr "Срок исполнения"
 
-#: ./app/pages/cart/cart.html:89
+#: ./app/pages/cart/cart-one-column.html:138
+#: ./app/pages/cart/cart-two-column.html:134
 msgid "Enter"
 msgstr "Войти"
 
@@ -440,11 +441,13 @@ msgstr "Войти"
 msgid "Full Name"
 msgstr "Полное имя"
 
-#: ./app/pages/invoice/invoice.html:23
+#: ./app/pages/invoice/invoice-one-column.html:26
+#: ./app/pages/invoice/invoice-two-column.html:24
 msgid "Invoice"
 msgstr "Счёт"
 
-#: ./app/pages/invoice/invoice.html:80
+#: ./app/pages/invoice/invoice-one-column.html:150
+#: ./app/pages/invoice/invoice-two-column.html:70
 msgid "Invoice Details"
 msgstr "Реквизиты"
 
@@ -459,8 +462,10 @@ msgstr "Описание счёта"
 msgid "Item"
 msgstr "Элемент"
 
-#: ./app/pages/payment/review.html:103
-#: ./app/pages/receipt/receipt.html:95
+#: ./app/pages/receipt/receipt-one-column.html:239
+#: ./app/pages/receipt/receipt-two-column.html:225
+#: ./app/pages/review/review-one-column.html:62
+#: ./app/pages/review/review-two-column.html:58
 msgid "Order Details"
 msgstr "Детали заказа"
 
@@ -468,7 +473,8 @@ msgstr "Детали заказа"
 msgid "Order Summary"
 msgstr "Сводка по заказу"
 
-#: ./app/pages/invoice/invoice.html:31
+#: ./app/pages/invoice/invoice-one-column.html:55
+#: ./app/pages/invoice/invoice-two-column.html:51
 msgid "Paid"
 msgstr "Оплачено"
 
@@ -490,24 +496,23 @@ msgstr "Пожалуйста, укажите телефон"
 msgid "Save this card to my account"
 msgstr "Сохранить эту карточку в личном кабинете"
 
-#: ./app/pages/pay/pay.html:75
-#: ./app/pages/pay/pay.html:76
-#: ./app/pages/receipt/receipt.html:127
-#: ./app/pages/receipt/receipt.html:128
-#: ./app/pages/review/review.html:118
-#: ./app/pages/review/review.html:119
+#: ./app/pages/simple/checkout.html:278
+#: ./app/pages/simple/review.html:159
 msgid "Shipping"
 msgstr "Доставка"
 
-#: ./app/pages/invoice/invoice.html:65
+#: ./app/pages/invoice/invoice-one-column.html:114
+#: ./app/pages/invoice/invoice-two-column.html:194
 msgid "Shipping Information"
 msgstr "Информация о доставке"
 
-#: ./app/pages/cart/cart.html:294
+#: ./app/pages/cart/cart-one-column.html:462
+#: ./app/pages/cart/cart-two-column.html:460
 msgid "Shipping is same as billing"
 msgstr "Биллинг при доставке"
 
-#: ./app/pages/receipt/receipt.html:69
+#: ./app/pages/receipt/receipt-one-column.html:132
+#: ./app/pages/receipt/receipt-two-column.html:126
 msgid "Sold To"
 msgstr "Продано"
 
@@ -515,23 +520,28 @@ msgstr "Продано"
 msgid "Thank you for your business"
 msgstr "Спасибо за вашу работу"
 
-#: ./app/pages/receipt/receipt.html:185
+#: ./app/pages/receipt/receipt-one-column.html:342
+#: ./app/pages/receipt/receipt-two-column.html:328
 msgid "Thank you for your order"
 msgstr "Спасибо за ваш заказ"
 
-#: ./app/pages/receipt/receipt.html:22
+#: ./app/pages/receipt/receipt-one-column.html:74
+#: ./app/pages/receipt/receipt-two-column.html:70
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
 msgstr "Спасибо! Ваш заказ находится на оформлении. Вскоре вы получите электронное письмо с дополнительной информацией относительно статуса вашего заказа."
 
-#: ./app/pages/invoice/invoice.html:35
+#: ./app/pages/invoice/invoice-one-column.html:62
+#: ./app/pages/invoice/invoice-two-column.html:58
 msgid "This invoice is closed"
 msgstr "Этот счёт на оплату закрыт"
 
-#: ./app/pages/receipt/receipt.html:35
+#: ./app/pages/receipt/receipt-one-column.html:89
+#: ./app/pages/receipt/receipt-two-column.html:85
 msgid "To manage your order online, create an account."
 msgstr "Для контроля ваших заказов онлайн, создайте учетную запись."
 
-#: ./app/pages/cart/cart.html:23
+#: ./app/pages/cart/cart-one-column.html:26
+#: ./app/pages/cart/cart-two-column.html:24
 msgid "Your Order"
 msgstr "Ваш заказ"
 
@@ -541,19 +551,19 @@ msgstr "Ваша учетная запись была создана."
 
 #: ./app/pages/cart/cart.html:435
 msgid "Your total includes {{data.cart.formatted.tax}} tax"
-msgstr "Ваш итог включает {{data.invoice.formatted.tax}} tax"
+msgstr "Ваш итог включает {{data.cart.formatted.tax}} налог"
 
 #: ./app/pages/invoice/invoice.html:155
 msgid "Your total includes {{data.invoice.formatted.tax}} tax"
-msgstr "Ваш итог включает {{data.invoice.formatted.tax}} tax"
+msgstr "Ваш итог включает {{data.invoice.formatted.tax}} налог"
 
 #: ./app/pages/receipt/receipt.html:176
 msgid "Your total includes {{data.payment.order.formatted.tax}} tax"
-msgstr "Ваш итог включает {{data.payment.order.formatted.tax}} tax"
+msgstr "Ваш итог включает {{data.payment.order.formatted.tax}} налог"
 
 #: ./app/pages/payment/review.html:181
 msgid "Your total includes {{data.sale.formatted.tax}} tax"
-msgstr "Ваш итог включает {{data.payment.order.formatted.tax}} tax"
+msgstr "Ваш итог включает {{data.sale.formatted.tax}} налог"
 
 #: ./app/pages/pay/pay.html:34
 #: ./app/pages/pay/pay.html:56
@@ -579,7 +589,7 @@ msgstr "Сделано"
 msgid "Make Another Payment"
 msgstr "Выполнить другую оплату"
 
-#: ./app/shared/directives.js:2816
+#: ./dist/js/kit.js:5329
 msgid "Please provide a value"
 msgstr "Пожалуйста, укажите значение"
 
@@ -688,13 +698,16 @@ msgstr "Спасибо за покупку!"
 msgid "Remove"
 msgstr "Удалить"
 
-#: ./app/shared/directives.js:328
+#: ./dist/js/kit.js:2805
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr "Установите флажок, чтобы дать согласие на сохранение вашего способа оплаты для будущих платежей."
 
-#: ./app/pages/cart/cart.html:128
-#: ./app/pages/invoice/invoice.html:198
-#: ./app/pages/payment/review.html:33
+#: ./app/pages/cart/cart-one-column.html:292
+#: ./app/pages/cart/cart-two-column.html:292
+#: ./app/pages/invoice/invoice-one-column.html:317
+#: ./app/pages/invoice/invoice-two-column.html:311
+#: ./app/pages/review/review-one-column.html:160
+#: ./app/pages/review/review-two-column.html:160
 msgid "Use another payment method"
 msgstr "Использовать другой способ оплаты"
 
@@ -706,7 +719,7 @@ msgstr "Укажите стоимость."
 msgid "Review &amp; Finish"
 msgstr "Обзор &amp; Конец"
 
-#: ./app/shared/services.js:76
+#: ./dist/js/kit.js:5921
 msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
 msgstr "Не удалось получить авторизацию для этого сеанса. Перезагрузите страницу, чтобы повторить запрос."
 
@@ -714,4 +727,159 @@ msgstr "Не удалось получить авторизацию для эт�
 #: ./app/pages/review/review.html:30
 msgid "Reference"
 msgstr "Справка"
+
+#: ./app/pages/cart/cart-one-column.html:260
+#: ./app/pages/cart/cart-two-column.html:260
+#: ./app/pages/invoice/invoice-one-column.html:285
+#: ./app/pages/invoice/invoice-two-column.html:279
+msgid "Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password."
+msgstr "Нажмите на кнопку ниже, чтобы совершить оплату с помощью Amazon Pay. Вам предложат в безопасном окне ввести ваше имя пользователя и пароль на Amazon."
+
+#: ./index.html:59
+#: ./index.html:76
+msgid "Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved."
+msgstr "Авторское право {{symbol}} {{year}} {{companyName}}. Все права защищены."
+
+#: ./app/pages/cart/cart-one-column.html:220
+#: ./app/pages/cart/cart-two-column.html:220
+#: ./app/pages/invoice/invoice-one-column.html:245
+#: ./app/pages/invoice/invoice-two-column.html:239
+msgid "Credit Card"
+msgstr "Кредитная карта"
+
+#: ./app/pages/cart/cart-one-column.html:96
+#: ./app/pages/cart/cart-two-column.html:92
+#: ./app/pages/review/review-one-column.html:77
+#: ./app/pages/review/review-two-column.html:73
+msgid "Delivery Method:"
+msgstr "Способ доставки:"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Electronic Delivery"
+msgstr "Электронная доставка"
+
+#: ./app/pages/cart/cart-one-column.html:639
+#: ./app/pages/cart/cart-two-column.html:637
+#: ./app/pages/invoice/invoice-one-column.html:391
+#: ./app/pages/invoice/invoice-two-column.html:385
+msgid "Exp Month (MM)"
+msgstr "Месяц ист. срока (ММ)"
+
+#: ./app/pages/cart/cart-one-column.html:649
+#: ./app/pages/cart/cart-two-column.html:647
+#: ./app/pages/invoice/invoice-one-column.html:400
+#: ./app/pages/invoice/invoice-two-column.html:394
+msgid "Exp Year (YY)"
+msgstr "Год ист. срока (ГГ)"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Access"
+msgstr "Немедленный доступ"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Download"
+msgstr "Немедленное скачивание"
+
+#: ./app/pages/invoice/invoice-one-column.html:74
+#: ./app/pages/invoice/invoice-two-column.html:158
+msgid "Invoice ID"
+msgstr "ID выставленного счета"
+
+#: ./app/pages/cart/cart-one-column.html:641
+#: ./app/pages/cart/cart-two-column.html:639
+msgid "Month"
+msgstr "Месяц"
+
+#: ./app/pages/receipt/receipt-one-column.html:52
+#: ./app/pages/receipt/receipt-two-column.html:48
+msgid "Order ID"
+msgstr "ID заказа"
+
+#: ./app/pages/cart/cart-one-column.html:209
+#: ./app/pages/cart/cart-two-column.html:209
+#: ./app/pages/invoice/invoice-one-column.html:234
+#: ./app/pages/invoice/invoice-two-column.html:228
+msgid "Payment Options"
+msgstr "Способы оплаты"
+
+#: ./app/pages/cart/cart-one-column.html:116
+#: ./app/pages/cart/cart-two-column.html:112
+msgid "Please provide a valid quantity"
+msgstr "Пожалуйста, укажите действительное количество"
+
+#: ./app/pages/receipt/receipt-one-column.html:223
+#: ./app/pages/receipt/receipt-one-column.html:354
+#: ./app/pages/receipt/receipt-two-column.html:207
+#: ./app/pages/receipt/receipt-two-column.html:340
+msgid "Return to {{companyName}}"
+msgstr "Вернуться к {{companyName}}"
+
+#: ./app/pages/cart/cart-one-column.html:620
+#: ./app/pages/cart/cart-two-column.html:618
+#: ./app/pages/invoice/invoice-one-column.html:370
+#: ./app/pages/invoice/invoice-two-column.html:364
+msgid "This is a secure 256-bit SSL encrypted payment."
+msgstr "Этот платеж защищен 256-битным SSL-шифрованием."
+
+#: ./app/pages/cart/cart-one-column.html:651
+#: ./app/pages/cart/cart-two-column.html:649
+msgid "Year"
+msgstr "Год"
+
+#: ./app/pages/cart/cart-one-column.html:266
+#: ./app/pages/cart/cart-two-column.html:266
+#: ./app/pages/invoice/invoice-one-column.html:291
+#: ./app/pages/invoice/invoice-two-column.html:285
+msgid "Your Amazon payment information is never shared with {{companyName}}."
+msgstr "Ваша платежная информация из аккаунта на Amazon не передается {{companyName}}."
+
+#: ./app/pages/cart/cart-one-column.html:244
+#: ./app/pages/cart/cart-two-column.html:244
+#: ./app/pages/invoice/invoice-one-column.html:269
+#: ./app/pages/invoice/invoice-two-column.html:263
+msgid "Your PayPal payment information is never shared with {{companyName}}."
+msgstr "Ваша платежная информация из счета в PayPal не передается {{companyName}}."
+
+#: ./app/pages/cart/cart-one-column.html:198
+#: ./app/pages/cart/cart-two-column.html:194
+#: ./app/pages/invoice/invoice-one-column.html:223
+#: ./app/pages/invoice/invoice-two-column.html:143
+#: ./app/pages/receipt/receipt-one-column.html:334
+#: ./app/pages/receipt/receipt-two-column.html:320
+#: ./app/pages/review/review-one-column.html:141
+#: ./app/pages/review/review-two-column.html:137
+msgid "Your total includes {{tax}} tax"
+msgstr "Общая сумма включает налог {{tax}}"
+
+#: ./app/pages/cart/cart-one-column.html:78
+#: ./app/pages/cart/cart-two-column.html:74
+msgid "{{count}} item"
+msgid_plural "{{count}} items"
+msgstr[0] "{{count}} товар"
+msgstr[1] "{{count}} товара"
+msgstr[2] "{{count}} товаров"
+msgstr[3] "{{count}} товаров"
+
+#: ./app/pages/receipt/receipt.html:70
+msgid "Paid By"
+msgstr "Оплачено"
+
+#: ./app/pages/pay/pay.html:338
+#: ./app/pages/review/review.html:87
+msgid "Review {{ampersandSymbol}} Finish"
+msgstr "Проверить и завершить"
+
+#: ./app/pages/simple/checkout.html:295
+#: ./app/pages/simple/review.html:176
+msgid "An email has been sent to {{email}}."
+msgstr "На адрес {{email}} отправлено письмо."
 

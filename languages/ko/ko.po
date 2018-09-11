@@ -8,8 +8,7 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ./app/pages/cart/cart.html:186
-#: ./app/pages/cart/cart.html:261
+#: ./app/pages/simple/checkout.html:88
 msgid "Address"
 msgstr "주소"
 
@@ -18,7 +17,7 @@ msgstr "주소"
 msgid "Address 2"
 msgstr "주소 2"
 
-#: ./app/shared/services.js:467
+#: ./dist/js/kit.js:6312
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "요청을 처리하는 중에 오류가 발생했습니다. 요청을 다시 시도하십시오. 문제가 지속되면 지원팀에 문의하십시오."
 
@@ -42,7 +41,7 @@ msgstr "지금 구매"
 msgid "Cancel"
 msgstr "취소"
 
-#: ./app/pages/cart/cart.html:356
+#: ./app/pages/simple/checkout.html:146
 msgid "Card Number"
 msgstr "카드 번호"
 
@@ -50,17 +49,17 @@ msgstr "카드 번호"
 msgid "Choose a Payment Method"
 msgstr "지불 방법 선택"
 
-#: ./app/pages/cart/cart.html:202
-#: ./app/pages/cart/cart.html:277
+#: ./app/pages/simple/checkout.html:96
 msgid "City"
 msgstr "도시"
 
-#: ./app/pages/cart/cart.html:154
-#: ./app/pages/payment/review.html:53
+#: ./app/pages/simple/checkout.html:78
+#: ./app/pages/simple/review.html:44
 msgid "Company Name"
 msgstr "회사명"
 
-#: ./app/pages/cart/cart.html:75
+#: ./app/pages/simple/checkout.html:302
+#: ./app/pages/simple/review.html:183
 msgid "Continue Shopping"
 msgstr "쇼핑 계속하기"
 
@@ -73,11 +72,12 @@ msgstr "국가"
 msgid "Currency"
 msgstr "통화"
 
-#: ./app/pages/cart/cart.html:63
+#: ./app/pages/simple/checkout.html:274
+#: ./app/pages/simple/review.html:155
 msgid "Discount"
 msgstr "할인"
 
-#: ./app/pages/cart/cart.html:91
+#: ./app/pages/simple/checkout.html:216
 msgid "Discount applied."
 msgstr "할인 적용."
 
@@ -114,11 +114,7 @@ msgstr "업체 주문 인 경우 VAT 번호를 입력하세요."
 msgid "Language"
 msgstr "언어"
 
-#: ./app/pages/cart/cart.html:162
-#: ./app/pages/cart/cart.html:253
-#: ./app/pages/cart/cart.html:35
-#: ./app/pages/payment/review.html:92
-#: ./app/pages/receipt/receipt.html:51
+#: ./app/pages/simple/checkout.html:58
 msgid "Name"
 msgstr "이름"
 
@@ -147,17 +143,17 @@ msgstr "지불 정보"
 msgid "Payment Method"
 msgstr "지불 방법"
 
-#: ./app/pages/cart/cart.html:178
-#: ./app/pages/payment/review.html:61
+#: ./app/pages/simple/checkout.html:68
+#: ./app/pages/simple/review.html:55
 msgid "Phone"
 msgstr "전화"
 
-#: ./app/shared/directives.js:2826
+#: ./dist/js/kit.js:5339
 msgid "Please confirm"
 msgstr "확인해 주세요"
 
-#: ./app/shared/directives.js:2821
-#: ./app/shared/directives.js:2857
+#: ./dist/js/kit.js:5334
+#: ./dist/js/kit.js:5370
 msgid "Please make a selection"
 msgstr "선택해 주세요"
 
@@ -228,19 +224,19 @@ msgstr "우편번호를 입력하세요"
 msgid "Please provide an address"
 msgstr "주소를 입력하세요"
 
-#: ./app/shared/directives.js:285
+#: ./dist/js/kit.js:2762
 msgid "Please provide an amount for your payment."
 msgstr "지불 금액을 입력하세요"
 
-#: ./app/shared/directives.js:2866
+#: ./dist/js/kit.js:5379
 msgid "Please provide one of the available options"
 msgstr "선택가능한 옵션 중 하나를 입력하세요"
 
-#: ./app/shared/directives.js:2849
+#: ./dist/js/kit.js:5362
 msgid "Please supply a number"
 msgstr "숫자를 입력하세요"
 
-#: ./app/shared/directives.js:2842
+#: ./dist/js/kit.js:5355
 msgid "Please supply a number without decimals"
 msgstr "소수점 없이 숫자를 입력하세요."
 
@@ -298,15 +294,15 @@ msgstr "로그아웃"
 msgid "State / Province"
 msgstr "주 / 도"
 
-#: ./app/pages/cart/cart.html:36
-#: ./app/pages/payment/review.html:93
-#: ./app/pages/receipt/receipt.html:52
+#: ./app/pages/simple/checkout.html:179
+#: ./app/pages/simple/review.html:96
 msgid "Subtotal"
 msgstr "소계"
 
-#: ./app/pages/cart/cart.html:57
-#: ./app/pages/payment/review.html:113
-#: ./app/pages/receipt/receipt.html:72
+#: ./app/pages/simple/checkout.html:187
+#: ./app/pages/simple/checkout.html:282
+#: ./app/pages/simple/review.html:104
+#: ./app/pages/simple/review.html:163
 msgid "Tax"
 msgstr "세금"
 
@@ -314,26 +310,26 @@ msgstr "세금"
 msgid "Thank you! Your order is complete."
 msgstr "감사합니다! 주문이 완료되었습니다."
 
-#: ./app/shared/services.js:461
+#: ./dist/js/kit.js:6306
 msgid "The item you are trying to access could not be found."
 msgstr "접근하려는 항목을 찾을 수 없습니다."
 
-#: ./app/shared/directives.js:2892
+#: ./dist/js/kit.js:5405
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "값은 적어도 하나의 문자여야 합니다"
 
-#: ./app/shared/directives.js:2898
+#: ./dist/js/kit.js:5411
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "값은 한 문자 미만이어야 합니다."
 
-#: ./app/shared/directives.js:2875
+#: ./dist/js/kit.js:5388
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "입력하신 값은 {{$ count}}보다 커야 합니다"
 
-#: ./app/shared/directives.js:2881
+#: ./dist/js/kit.js:5394
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "입력하신 값은 {{$ count}}보다 적어야 합니다."
@@ -342,15 +338,15 @@ msgstr[0] "입력하신 값은 {{$ count}}보다 적어야 합니다."
 msgid "There are no items in your cart"
 msgstr "장바구니에 상품이 없습니다."
 
-#: ./app/shared/directives.js:179
-#: ./app/shared/directives.js:273
-#: ./app/shared/directives.js:513
+#: ./dist/js/kit.js:2656
+#: ./dist/js/kit.js:2750
+#: ./dist/js/kit.js:3000
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "제공하신 정보 중 일부에 문제가 있습니다. 오류를 검토하고 다시 시도하십시오."
 
-#: ./app/pages/cart/cart.html:68
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:78
+#: ./app/pages/simple/checkout.html:286
+#: ./app/pages/simple/review.html:108
+#: ./app/pages/simple/review.html:167
 msgid "Total"
 msgstr "합계"
 
@@ -362,8 +358,8 @@ msgstr "장바구니 업데이트"
 msgid "Username"
 msgstr "사용자이름"
 
-#: ./app/pages/cart/cart.html:320
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/simple/checkout.html:132
+#: ./app/pages/simple/review.html:69
 msgid "VAT Number"
 msgstr "VAT 번호"
 
@@ -384,12 +380,15 @@ msgstr "우편번호"
 msgid "expiration"
 msgstr "만료"
 
-#: ./app/pages/invoice/invoice.html:52
+#: ./app/pages/invoice/invoice-one-column.html:88
+#: ./app/pages/invoice/invoice-two-column.html:170
 msgid "Billing Information"
 msgstr "주소 정보"
 
-#: ./app/pages/cart/cart.html:531
-#: ./app/pages/payment/review.html:190
+#: ./app/pages/cart/cart-one-column.html:678
+#: ./app/pages/cart/cart-two-column.html:676
+#: ./app/pages/review/review-one-column.html:285
+#: ./app/pages/review/review-two-column.html:285
 msgid "Complete Order"
 msgstr "주문 완료"
 
@@ -411,16 +410,18 @@ msgstr "계정 생성"
 msgid "Date"
 msgstr "날짜"
 
-#: ./app/pages/invoice/invoice.html:104
-#: ./app/pages/receipt/receipt.html:124
+#: ./app/pages/receipt/receipt-one-column.html:274
+#: ./app/pages/receipt/receipt-two-column.html:260
 msgid "Download Now"
 msgstr "지금 다운로드"
 
-#: ./app/pages/invoice/invoice.html:40
+#: ./app/pages/invoice/invoice-one-column.html:77
+#: ./app/pages/invoice/invoice-two-column.html:161
 msgid "Due Date"
 msgstr "기한"
 
-#: ./app/pages/cart/cart.html:89
+#: ./app/pages/cart/cart-one-column.html:138
+#: ./app/pages/cart/cart-two-column.html:134
 msgid "Enter"
 msgstr "입력"
 
@@ -428,11 +429,13 @@ msgstr "입력"
 msgid "Full Name"
 msgstr "성함"
 
-#: ./app/pages/invoice/invoice.html:23
+#: ./app/pages/invoice/invoice-one-column.html:26
+#: ./app/pages/invoice/invoice-two-column.html:24
 msgid "Invoice"
 msgstr "송장"
 
-#: ./app/pages/invoice/invoice.html:80
+#: ./app/pages/invoice/invoice-one-column.html:150
+#: ./app/pages/invoice/invoice-two-column.html:70
 msgid "Invoice Details"
 msgstr "송장 상세정보"
 
@@ -447,8 +450,10 @@ msgstr "송장 개요"
 msgid "Item"
 msgstr "상품"
 
-#: ./app/pages/payment/review.html:103
-#: ./app/pages/receipt/receipt.html:95
+#: ./app/pages/receipt/receipt-one-column.html:239
+#: ./app/pages/receipt/receipt-two-column.html:225
+#: ./app/pages/review/review-one-column.html:62
+#: ./app/pages/review/review-two-column.html:58
 msgid "Order Details"
 msgstr "주문 상세정보"
 
@@ -456,7 +461,8 @@ msgstr "주문 상세정보"
 msgid "Order Summary"
 msgstr "주문 개요"
 
-#: ./app/pages/invoice/invoice.html:31
+#: ./app/pages/invoice/invoice-one-column.html:55
+#: ./app/pages/invoice/invoice-two-column.html:51
 msgid "Paid"
 msgstr "지불됨"
 
@@ -478,24 +484,23 @@ msgstr "전화번호를 알려 주세요"
 msgid "Save this card to my account"
 msgstr "이 카드를 내 계정에 저장"
 
-#: ./app/pages/pay/pay.html:75
-#: ./app/pages/pay/pay.html:76
-#: ./app/pages/receipt/receipt.html:127
-#: ./app/pages/receipt/receipt.html:128
-#: ./app/pages/review/review.html:118
-#: ./app/pages/review/review.html:119
+#: ./app/pages/simple/checkout.html:278
+#: ./app/pages/simple/review.html:159
 msgid "Shipping"
 msgstr "배송"
 
-#: ./app/pages/invoice/invoice.html:65
+#: ./app/pages/invoice/invoice-one-column.html:114
+#: ./app/pages/invoice/invoice-two-column.html:194
 msgid "Shipping Information"
 msgstr "배송 정보"
 
-#: ./app/pages/cart/cart.html:294
+#: ./app/pages/cart/cart-one-column.html:462
+#: ./app/pages/cart/cart-two-column.html:460
 msgid "Shipping is same as billing"
 msgstr "배송 주소와 지불자 주소가 동일"
 
-#: ./app/pages/receipt/receipt.html:69
+#: ./app/pages/receipt/receipt-one-column.html:132
+#: ./app/pages/receipt/receipt-two-column.html:126
 msgid "Sold To"
 msgstr "판매됨"
 
@@ -503,24 +508,29 @@ msgstr "판매됨"
 msgid "Thank you for your business"
 msgstr "이용해주셔서 감사합니다"
 
-#: ./app/pages/receipt/receipt.html:185
+#: ./app/pages/receipt/receipt-one-column.html:342
+#: ./app/pages/receipt/receipt-two-column.html:328
 msgid "Thank you for your order"
 msgstr "구매해주셔서 감사합니다"
 
-#: ./app/pages/receipt/receipt.html:22
+#: ./app/pages/receipt/receipt-one-column.html:74
+#: ./app/pages/receipt/receipt-two-column.html:70
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
 msgstr "감사합니다! 주문이 완료되었습니다. 구매내역 관련 추가 정보가 잠시\n"
 " 후 이메일로 발송됩니다."
 
-#: ./app/pages/invoice/invoice.html:35
+#: ./app/pages/invoice/invoice-one-column.html:62
+#: ./app/pages/invoice/invoice-two-column.html:58
 msgid "This invoice is closed"
 msgstr "이 송장은 만료되었습니다"
 
-#: ./app/pages/receipt/receipt.html:35
+#: ./app/pages/receipt/receipt-one-column.html:89
+#: ./app/pages/receipt/receipt-two-column.html:85
 msgid "To manage your order online, create an account."
 msgstr "구매 내역을 온라인으로 관리하시려면 계정을 만드세요."
 
-#: ./app/pages/cart/cart.html:23
+#: ./app/pages/cart/cart-one-column.html:26
+#: ./app/pages/cart/cart-two-column.html:24
 msgid "Your Order"
 msgstr "내 구매"
 
@@ -568,7 +578,7 @@ msgstr "제조사"
 msgid "Make Another Payment"
 msgstr "또 주문하기"
 
-#: ./app/shared/directives.js:2816
+#: ./dist/js/kit.js:5329
 msgid "Please provide a value"
 msgstr "가격을 입력해 주세요"
 
@@ -677,13 +687,16 @@ msgstr "구매해주셔서 감사합니다!"
 msgid "Remove"
 msgstr "풀다"
 
-#: ./app/shared/directives.js:328
+#: ./dist/js/kit.js:2805
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr "추후 결제를 위해 결제 수단을 저장하려면, 박스에 표시해서 동의해 주십시오."
 
-#: ./app/pages/cart/cart.html:128
-#: ./app/pages/invoice/invoice.html:198
-#: ./app/pages/payment/review.html:33
+#: ./app/pages/cart/cart-one-column.html:292
+#: ./app/pages/cart/cart-two-column.html:292
+#: ./app/pages/invoice/invoice-one-column.html:317
+#: ./app/pages/invoice/invoice-two-column.html:311
+#: ./app/pages/review/review-one-column.html:160
+#: ./app/pages/review/review-two-column.html:160
 msgid "Use another payment method"
 msgstr "다른 결제 수단 이용하기"
 
@@ -695,7 +708,7 @@ msgstr "가치를 제공하십시오."
 msgid "Review &amp; Finish"
 msgstr "리뷰 &amp; 끝"
 
-#: ./app/shared/services.js:76
+#: ./dist/js/kit.js:5921
 msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
 msgstr "이 세션에 대한 승인을 얻는 중 문제가 발생했습니다. 요청을 다시 시도하려면 페이지를 새로 고침하십시오."
 
@@ -703,4 +716,156 @@ msgstr "이 세션에 대한 승인을 얻는 중 문제가 발생했습니다. 
 #: ./app/pages/review/review.html:30
 msgid "Reference"
 msgstr "참고"
+
+#: ./app/pages/cart/cart-one-column.html:260
+#: ./app/pages/cart/cart-two-column.html:260
+#: ./app/pages/invoice/invoice-one-column.html:285
+#: ./app/pages/invoice/invoice-two-column.html:279
+msgid "Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password."
+msgstr "아래 버튼을 누르고 아마존 페이를 이용하여 체크아웃 하세요. 귀하의 아마존 사용자명과 비밀번호로 안전하게 로그인하도록 안내 받을 것입니다."
+
+#: ./index.html:59
+#: ./index.html:76
+msgid "Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved."
+msgstr "저작권 {{symbol}} {{year}} {{companyName}}. 모든 권리는 보호받습니다."
+
+#: ./app/pages/cart/cart-one-column.html:220
+#: ./app/pages/cart/cart-two-column.html:220
+#: ./app/pages/invoice/invoice-one-column.html:245
+#: ./app/pages/invoice/invoice-two-column.html:239
+msgid "Credit Card"
+msgstr "신용카드"
+
+#: ./app/pages/cart/cart-one-column.html:96
+#: ./app/pages/cart/cart-two-column.html:92
+#: ./app/pages/review/review-one-column.html:77
+#: ./app/pages/review/review-two-column.html:73
+msgid "Delivery Method:"
+msgstr "배송 방법:"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Electronic Delivery"
+msgstr "전자 배송"
+
+#: ./app/pages/cart/cart-one-column.html:639
+#: ./app/pages/cart/cart-two-column.html:637
+#: ./app/pages/invoice/invoice-one-column.html:391
+#: ./app/pages/invoice/invoice-two-column.html:385
+msgid "Exp Month (MM)"
+msgstr "만료 월 (MM)"
+
+#: ./app/pages/cart/cart-one-column.html:649
+#: ./app/pages/cart/cart-two-column.html:647
+#: ./app/pages/invoice/invoice-one-column.html:400
+#: ./app/pages/invoice/invoice-two-column.html:394
+msgid "Exp Year (YY)"
+msgstr "만료 년도 (YY)"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Access"
+msgstr "즉시 이용"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Download"
+msgstr "즉시 다운로드"
+
+#: ./app/pages/invoice/invoice-one-column.html:74
+#: ./app/pages/invoice/invoice-two-column.html:158
+msgid "Invoice ID"
+msgstr "송장 ID"
+
+#: ./app/pages/cart/cart-one-column.html:641
+#: ./app/pages/cart/cart-two-column.html:639
+msgid "Month"
+msgstr "월"
+
+#: ./app/pages/receipt/receipt-one-column.html:52
+#: ./app/pages/receipt/receipt-two-column.html:48
+msgid "Order ID"
+msgstr "주문 ID"
+
+#: ./app/pages/cart/cart-one-column.html:209
+#: ./app/pages/cart/cart-two-column.html:209
+#: ./app/pages/invoice/invoice-one-column.html:234
+#: ./app/pages/invoice/invoice-two-column.html:228
+msgid "Payment Options"
+msgstr "결제 옵션"
+
+#: ./app/pages/cart/cart-one-column.html:116
+#: ./app/pages/cart/cart-two-column.html:112
+msgid "Please provide a valid quantity"
+msgstr "유효 수량을 제공해 주십시오"
+
+#: ./app/pages/receipt/receipt-one-column.html:223
+#: ./app/pages/receipt/receipt-one-column.html:354
+#: ./app/pages/receipt/receipt-two-column.html:207
+#: ./app/pages/receipt/receipt-two-column.html:340
+msgid "Return to {{companyName}}"
+msgstr "{{companyName}}로 반송"
+
+#: ./app/pages/cart/cart-one-column.html:620
+#: ./app/pages/cart/cart-two-column.html:618
+#: ./app/pages/invoice/invoice-one-column.html:370
+#: ./app/pages/invoice/invoice-two-column.html:364
+msgid "This is a secure 256-bit SSL encrypted payment."
+msgstr "이것은 안전한 256-bit SSL 암호화 결제 방식입니다."
+
+#: ./app/pages/cart/cart-one-column.html:651
+#: ./app/pages/cart/cart-two-column.html:649
+msgid "Year"
+msgstr "년도"
+
+#: ./app/pages/cart/cart-one-column.html:266
+#: ./app/pages/cart/cart-two-column.html:266
+#: ./app/pages/invoice/invoice-one-column.html:291
+#: ./app/pages/invoice/invoice-two-column.html:285
+msgid "Your Amazon payment information is never shared with {{companyName}}."
+msgstr "귀하의 아마존 결제 정보는 절대로 {{companyName}}와 공유되지 않습니다."
+
+#: ./app/pages/cart/cart-one-column.html:244
+#: ./app/pages/cart/cart-two-column.html:244
+#: ./app/pages/invoice/invoice-one-column.html:269
+#: ./app/pages/invoice/invoice-two-column.html:263
+msgid "Your PayPal payment information is never shared with {{companyName}}."
+msgstr "귀하의 페이팔 결제 정보는 절대로 {{companyName}}와 공유되지 않습니다."
+
+#: ./app/pages/cart/cart-one-column.html:198
+#: ./app/pages/cart/cart-two-column.html:194
+#: ./app/pages/invoice/invoice-one-column.html:223
+#: ./app/pages/invoice/invoice-two-column.html:143
+#: ./app/pages/receipt/receipt-one-column.html:334
+#: ./app/pages/receipt/receipt-two-column.html:320
+#: ./app/pages/review/review-one-column.html:141
+#: ./app/pages/review/review-two-column.html:137
+msgid "Your total includes {{tax}} tax"
+msgstr "총액에 {{tax}}의 세금이 포함됩니다."
+
+#: ./app/pages/cart/cart-one-column.html:78
+#: ./app/pages/cart/cart-two-column.html:74
+msgid "{{count}} item"
+msgid_plural "{{count}} items"
+msgstr[0] "{{count}} 항목"
+
+#: ./app/pages/receipt/receipt.html:70
+msgid "Paid By"
+msgstr "결제 완료"
+
+#: ./app/pages/pay/pay.html:338
+#: ./app/pages/review/review.html:87
+msgid "Review {{ampersandSymbol}} Finish"
+msgstr "검토 {{ampersandSymbol}} 마무리"
+
+#: ./app/pages/simple/checkout.html:295
+#: ./app/pages/simple/review.html:176
+msgid "An email has been sent to {{email}}."
+msgstr "{{email}}로 이메일을 전송했습니다."
 

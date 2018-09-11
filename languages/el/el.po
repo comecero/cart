@@ -8,8 +8,7 @@ msgstr ""
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ./app/pages/cart/cart.html:186
-#: ./app/pages/cart/cart.html:261
+#: ./app/pages/simple/checkout.html:88
 msgid "Address"
 msgstr "Διεύθυνση"
 
@@ -18,7 +17,7 @@ msgstr "Διεύθυνση"
 msgid "Address 2"
 msgstr "Διεύθυνση 2"
 
-#: ./app/shared/services.js:467
+#: ./dist/js/kit.js:6312
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "Παρουσιάστηκε σφάλμα κατά την προσπάθεια επεξεργασίας του αιτήματός σας. Δοκιμάστε ξανά το αίτημά σας. Αν το πρόβλημα παραμένει, παρακαλούμε επικοινωνήστε με την υποστήριξη."
 
@@ -42,7 +41,7 @@ msgstr "Αγορά Τώρα"
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: ./app/pages/cart/cart.html:356
+#: ./app/pages/simple/checkout.html:146
 msgid "Card Number"
 msgstr "Αριθμός Κάρτας"
 
@@ -50,17 +49,17 @@ msgstr "Αριθμός Κάρτας"
 msgid "Choose a Payment Method"
 msgstr "Επιλέξτε Μέθοδο Πληρωμής"
 
-#: ./app/pages/cart/cart.html:202
-#: ./app/pages/cart/cart.html:277
+#: ./app/pages/simple/checkout.html:96
 msgid "City"
 msgstr "Πόλη"
 
-#: ./app/pages/cart/cart.html:154
-#: ./app/pages/payment/review.html:53
+#: ./app/pages/simple/checkout.html:78
+#: ./app/pages/simple/review.html:44
 msgid "Company Name"
 msgstr "Ονομασία Εταιρείας"
 
-#: ./app/pages/cart/cart.html:75
+#: ./app/pages/simple/checkout.html:302
+#: ./app/pages/simple/review.html:183
 msgid "Continue Shopping"
 msgstr "Συνέχιση Αγορών"
 
@@ -73,11 +72,12 @@ msgstr "Χώρα"
 msgid "Currency"
 msgstr "Νόμισμα"
 
-#: ./app/pages/cart/cart.html:63
+#: ./app/pages/simple/checkout.html:274
+#: ./app/pages/simple/review.html:155
 msgid "Discount"
 msgstr "Έκπτωση"
 
-#: ./app/pages/cart/cart.html:91
+#: ./app/pages/simple/checkout.html:216
 msgid "Discount applied."
 msgstr "Η έκπτωση εφαρμόστηκε."
 
@@ -114,11 +114,7 @@ msgstr "Αν η παραγγελία αυτή είναι για επιχείρη
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: ./app/pages/cart/cart.html:162
-#: ./app/pages/cart/cart.html:253
-#: ./app/pages/cart/cart.html:35
-#: ./app/pages/payment/review.html:92
-#: ./app/pages/receipt/receipt.html:51
+#: ./app/pages/simple/checkout.html:58
 msgid "Name"
 msgstr "Όνομα"
 
@@ -147,17 +143,17 @@ msgstr "Στοιχεία Πληρωμής"
 msgid "Payment Method"
 msgstr "Μέθοδος Πληρωμής"
 
-#: ./app/pages/cart/cart.html:178
-#: ./app/pages/payment/review.html:61
+#: ./app/pages/simple/checkout.html:68
+#: ./app/pages/simple/review.html:55
 msgid "Phone"
 msgstr "Τηλέφωνο"
 
-#: ./app/shared/directives.js:2826
+#: ./dist/js/kit.js:5339
 msgid "Please confirm"
 msgstr "Παρακαλούμε επιβεβαιώστε"
 
-#: ./app/shared/directives.js:2821
-#: ./app/shared/directives.js:2857
+#: ./dist/js/kit.js:5334
+#: ./dist/js/kit.js:5370
 msgid "Please make a selection"
 msgstr "Παρακαλούμε επιλέξτε"
 
@@ -228,19 +224,19 @@ msgstr "Παρακαλούμε δώστε έναν ταχυδρομικό κώδ
 msgid "Please provide an address"
 msgstr "Παρακαλούμε δώστε διεύθυνση"
 
-#: ./app/shared/directives.js:285
+#: ./dist/js/kit.js:2762
 msgid "Please provide an amount for your payment."
 msgstr "Παρακαλούμε δώστε ένα ποσό για την πληρωμή σας."
 
-#: ./app/shared/directives.js:2866
+#: ./dist/js/kit.js:5379
 msgid "Please provide one of the available options"
 msgstr "Παρακαλούμε διαλέξτε μια από τις διαθέσιμες επιλογές"
 
-#: ./app/shared/directives.js:2849
+#: ./dist/js/kit.js:5362
 msgid "Please supply a number"
 msgstr "Παρακαλούμε δώστε έναν αριθμό"
 
-#: ./app/shared/directives.js:2842
+#: ./dist/js/kit.js:5355
 msgid "Please supply a number without decimals"
 msgstr "Παρακαλούμε δώστε έναν αριθμό χωρίς δεκαδικά ψηφία"
 
@@ -298,15 +294,15 @@ msgstr "Έξοδος"
 msgid "State / Province"
 msgstr "Νομός / Επαρχία"
 
-#: ./app/pages/cart/cart.html:36
-#: ./app/pages/payment/review.html:93
-#: ./app/pages/receipt/receipt.html:52
+#: ./app/pages/simple/checkout.html:179
+#: ./app/pages/simple/review.html:96
 msgid "Subtotal"
 msgstr "Μερικό Σύνολο"
 
-#: ./app/pages/cart/cart.html:57
-#: ./app/pages/payment/review.html:113
-#: ./app/pages/receipt/receipt.html:72
+#: ./app/pages/simple/checkout.html:187
+#: ./app/pages/simple/checkout.html:282
+#: ./app/pages/simple/review.html:104
+#: ./app/pages/simple/review.html:163
 msgid "Tax"
 msgstr "Φόρος"
 
@@ -314,29 +310,29 @@ msgstr "Φόρος"
 msgid "Thank you! Your order is complete."
 msgstr "Σας ευχαριστούμε! Η παραγγελία σας ολοκληρώθηκε."
 
-#: ./app/shared/services.js:461
+#: ./dist/js/kit.js:6306
 msgid "The item you are trying to access could not be found."
 msgstr "Δεν κατέστη δυνατή η εύρεση του είδος που προσπαθήσατε να βρείτε."
 
-#: ./app/shared/directives.js:2892
+#: ./dist/js/kit.js:5405
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "Η τιμή πρέπει να έχει μήκος τουλάχιστον ενός χαρακτήρα"
 msgstr[1] "Η τιμή πρέπει να έχει μήκος τουλάχιστον {{$count}} χαρακτήρων"
 
-#: ./app/shared/directives.js:2898
+#: ./dist/js/kit.js:5411
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "Η τιμή δεν μπορεί να έχει μήκος μικρότερο από ένα χαρακτήρα"
 msgstr[1] "Η τιμή πρέπει να έχει μήκος μικρότερο από {{$count}} χαρακτήρες"
 
-#: ./app/shared/directives.js:2875
+#: ./dist/js/kit.js:5388
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "Η τιμή που δίνετε πρέπει να είναι μεγαλύτερη από {{$count}}"
 msgstr[1] "Η τιμή που δίνετε πρέπει να είναι μεγαλύτερη από {{$count}}"
 
-#: ./app/shared/directives.js:2881
+#: ./dist/js/kit.js:5394
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "Η τιμή που δίνετε πρέπει να είναι μικρότερη από {{$count}}"
@@ -346,15 +342,15 @@ msgstr[1] "Η τιμή που δίνετε πρέπει να είναι μικρ
 msgid "There are no items in your cart"
 msgstr "Δεν υπάρχουν είδη στο καλάθι σας"
 
-#: ./app/shared/directives.js:179
-#: ./app/shared/directives.js:273
-#: ./app/shared/directives.js:513
+#: ./dist/js/kit.js:2656
+#: ./dist/js/kit.js:2750
+#: ./dist/js/kit.js:3000
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "Παρουσιάστηκε κάποιο πρόβλημα με μερικά από τα στοιχεία που δώσατε. Παρακαλούμε ελέγξτε για λάθη και δοκιμάστε πάλι."
 
-#: ./app/pages/cart/cart.html:68
-#: ./app/pages/payment/review.html:119
-#: ./app/pages/receipt/receipt.html:78
+#: ./app/pages/simple/checkout.html:286
+#: ./app/pages/simple/review.html:108
+#: ./app/pages/simple/review.html:167
 msgid "Total"
 msgstr "Σύνολο"
 
@@ -366,8 +362,8 @@ msgstr "Ενημέρωση Καλαθιού"
 msgid "Username"
 msgstr "Όνομα Χρήστη"
 
-#: ./app/pages/cart/cart.html:320
-#: ./app/pages/payment/review.html:69
+#: ./app/pages/simple/checkout.html:132
+#: ./app/pages/simple/review.html:69
 msgid "VAT Number"
 msgstr "Αριθμός Μητρώου ΦΠΑ"
 
@@ -388,12 +384,15 @@ msgstr "Ταχυδρομικός Κώδικας"
 msgid "expiration"
 msgstr "λήξη"
 
-#: ./app/pages/invoice/invoice.html:52
+#: ./app/pages/invoice/invoice-one-column.html:88
+#: ./app/pages/invoice/invoice-two-column.html:170
 msgid "Billing Information"
 msgstr "Στοιχεία Χρέωσης"
 
-#: ./app/pages/cart/cart.html:531
-#: ./app/pages/payment/review.html:190
+#: ./app/pages/cart/cart-one-column.html:678
+#: ./app/pages/cart/cart-two-column.html:676
+#: ./app/pages/review/review-one-column.html:285
+#: ./app/pages/review/review-two-column.html:285
 msgid "Complete Order"
 msgstr "Ολοκλήρωση Παραγγελίας"
 
@@ -415,16 +414,18 @@ msgstr "Δημιουργία Λογαριασμού"
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: ./app/pages/invoice/invoice.html:104
-#: ./app/pages/receipt/receipt.html:124
+#: ./app/pages/receipt/receipt-one-column.html:274
+#: ./app/pages/receipt/receipt-two-column.html:260
 msgid "Download Now"
 msgstr "Κατεβάστε Τώρα"
 
-#: ./app/pages/invoice/invoice.html:40
+#: ./app/pages/invoice/invoice-one-column.html:77
+#: ./app/pages/invoice/invoice-two-column.html:161
 msgid "Due Date"
 msgstr "Ημερομηνία Λήξης"
 
-#: ./app/pages/cart/cart.html:89
+#: ./app/pages/cart/cart-one-column.html:138
+#: ./app/pages/cart/cart-two-column.html:134
 msgid "Enter"
 msgstr "Γράψτε"
 
@@ -432,11 +433,13 @@ msgstr "Γράψτε"
 msgid "Full Name"
 msgstr "Πλήρες Όνομα"
 
-#: ./app/pages/invoice/invoice.html:23
+#: ./app/pages/invoice/invoice-one-column.html:26
+#: ./app/pages/invoice/invoice-two-column.html:24
 msgid "Invoice"
 msgstr "Τιμολόγιο"
 
-#: ./app/pages/invoice/invoice.html:80
+#: ./app/pages/invoice/invoice-one-column.html:150
+#: ./app/pages/invoice/invoice-two-column.html:70
 msgid "Invoice Details"
 msgstr "Στοιχεία Τιμολογίου"
 
@@ -451,8 +454,10 @@ msgstr "Σύνοψη Τιμολογίου"
 msgid "Item"
 msgstr "Είδος"
 
-#: ./app/pages/payment/review.html:103
-#: ./app/pages/receipt/receipt.html:95
+#: ./app/pages/receipt/receipt-one-column.html:239
+#: ./app/pages/receipt/receipt-two-column.html:225
+#: ./app/pages/review/review-one-column.html:62
+#: ./app/pages/review/review-two-column.html:58
 msgid "Order Details"
 msgstr "Στοιχεία Παραγγελίας"
 
@@ -460,7 +465,8 @@ msgstr "Στοιχεία Παραγγελίας"
 msgid "Order Summary"
 msgstr "Σύνοψη Παραγγελίας"
 
-#: ./app/pages/invoice/invoice.html:31
+#: ./app/pages/invoice/invoice-one-column.html:55
+#: ./app/pages/invoice/invoice-two-column.html:51
 msgid "Paid"
 msgstr "Πληρώθηκε"
 
@@ -482,24 +488,23 @@ msgstr "Παρακαλούμε δώστε ένα τηλέφωνο"
 msgid "Save this card to my account"
 msgstr "Αποθηκεύστε αυτήν την κάρτα στον λογαριασμό μου"
 
-#: ./app/pages/pay/pay.html:75
-#: ./app/pages/pay/pay.html:76
-#: ./app/pages/receipt/receipt.html:127
-#: ./app/pages/receipt/receipt.html:128
-#: ./app/pages/review/review.html:118
-#: ./app/pages/review/review.html:119
+#: ./app/pages/simple/checkout.html:278
+#: ./app/pages/simple/review.html:159
 msgid "Shipping"
 msgstr "Αποστολή"
 
-#: ./app/pages/invoice/invoice.html:65
+#: ./app/pages/invoice/invoice-one-column.html:114
+#: ./app/pages/invoice/invoice-two-column.html:194
 msgid "Shipping Information"
 msgstr "Στοιχεία Αποστολής"
 
-#: ./app/pages/cart/cart.html:294
+#: ./app/pages/cart/cart-one-column.html:462
+#: ./app/pages/cart/cart-two-column.html:460
 msgid "Shipping is same as billing"
 msgstr "Αποστολή ίδια με χρέωση"
 
-#: ./app/pages/receipt/receipt.html:69
+#: ./app/pages/receipt/receipt-one-column.html:132
+#: ./app/pages/receipt/receipt-two-column.html:126
 msgid "Sold To"
 msgstr "Πωλήθηκε Σε"
 
@@ -507,23 +512,28 @@ msgstr "Πωλήθηκε Σε"
 msgid "Thank you for your business"
 msgstr "Σας ευχαριστούμε για την προτίμηση"
 
-#: ./app/pages/receipt/receipt.html:185
+#: ./app/pages/receipt/receipt-one-column.html:342
+#: ./app/pages/receipt/receipt-two-column.html:328
 msgid "Thank you for your order"
 msgstr "Σας ευχαριστούμε για την παραγγελία σας"
 
-#: ./app/pages/receipt/receipt.html:22
+#: ./app/pages/receipt/receipt-one-column.html:74
+#: ./app/pages/receipt/receipt-two-column.html:70
 msgid "Thank you! Your order has been submitted for processing. You will receive an email soon with additional information regarding your order status."
 msgstr "Σας ευχαριστούμε! Η παραγγελία σας έχει υποβληθεί για επεξεργασία. Θα λάβετε σύντομα ένα email με πρόσθετες πληροφορίες σχετικά με την κατάσταση της παραγγελίας σας."
 
-#: ./app/pages/invoice/invoice.html:35
+#: ./app/pages/invoice/invoice-one-column.html:62
+#: ./app/pages/invoice/invoice-two-column.html:58
 msgid "This invoice is closed"
 msgstr "Το τιμολόγιο αυτό έχει κλείσει"
 
-#: ./app/pages/receipt/receipt.html:35
+#: ./app/pages/receipt/receipt-one-column.html:89
+#: ./app/pages/receipt/receipt-two-column.html:85
 msgid "To manage your order online, create an account."
 msgstr "Ανοίξτε έναν λογαριασμό για να διαχειρίζεστε online την παραγγελία σας."
 
-#: ./app/pages/cart/cart.html:23
+#: ./app/pages/cart/cart-one-column.html:26
+#: ./app/pages/cart/cart-two-column.html:24
 msgid "Your Order"
 msgstr "Η Παραγγελία σας"
 
@@ -571,7 +581,7 @@ msgstr "Κατασκευασμένο Από"
 msgid "Make Another Payment"
 msgstr "Κάντε Άλλη Μια Πληρωμή"
 
-#: ./app/shared/directives.js:2816
+#: ./dist/js/kit.js:5329
 msgid "Please provide a value"
 msgstr "Παρακαλούμε δώστε μια αξία"
 
@@ -680,13 +690,16 @@ msgstr "Σας ευχαριστούμε για την αγορά σας!"
 msgid "Remove"
 msgstr "Αφαιρώ"
 
-#: ./app/shared/directives.js:328
+#: ./dist/js/kit.js:2805
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr "Παρακαλούμε τσεκάρετε το κουτί για να συναινέσετε στην αποθήκευση του τρόπου πληρωμής για μελλοντικές πληρωμές."
 
-#: ./app/pages/cart/cart.html:128
-#: ./app/pages/invoice/invoice.html:198
-#: ./app/pages/payment/review.html:33
+#: ./app/pages/cart/cart-one-column.html:292
+#: ./app/pages/cart/cart-two-column.html:292
+#: ./app/pages/invoice/invoice-one-column.html:317
+#: ./app/pages/invoice/invoice-two-column.html:311
+#: ./app/pages/review/review-one-column.html:160
+#: ./app/pages/review/review-two-column.html:160
 msgid "Use another payment method"
 msgstr "Χρησιμοποιήστε διαφορετικό τρόπο πληρωμής"
 
@@ -698,7 +711,7 @@ msgstr "Προσθέστε μια τιμή."
 msgid "Review &amp; Finish"
 msgstr "Ανασκόπηση &amp; Φινίρισμα"
 
-#: ./app/shared/services.js:76
+#: ./dist/js/kit.js:5921
 msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
 msgstr "Παρουσιάστηκε πρόβλημα κατά τη λήψη εξουσιοδότησης για αυτή τη σύνοδο. Παρακαλούμε ξαναφορτώστε τη σελίδα για να δοκιμάσετε ξανά το αίτημά σας."
 
@@ -706,4 +719,157 @@ msgstr "Παρουσιάστηκε πρόβλημα κατά τη λήψη εξ�
 #: ./app/pages/review/review.html:30
 msgid "Reference"
 msgstr "Αναφορά"
+
+#: ./app/pages/cart/cart-one-column.html:260
+#: ./app/pages/cart/cart-two-column.html:260
+#: ./app/pages/invoice/invoice-one-column.html:285
+#: ./app/pages/invoice/invoice-two-column.html:279
+msgid "Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password."
+msgstr "Πατήστε το πιο κάτω κουμπί για πληρωμή αγορών με χρήση Amazon Pay. Θα λάβετε οδηγίες για ασφαλή σύνδεση με το όνομα χρήστη και τον κωδικό πρόσβασής σας στην Amazon."
+
+#: ./index.html:59
+#: ./index.html:76
+msgid "Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved."
+msgstr "Copyright {{symbol}} {{year}} {{companyName}}. Με την επιφύλαξη παντός δικαιώματος."
+
+#: ./app/pages/cart/cart-one-column.html:220
+#: ./app/pages/cart/cart-two-column.html:220
+#: ./app/pages/invoice/invoice-one-column.html:245
+#: ./app/pages/invoice/invoice-two-column.html:239
+msgid "Credit Card"
+msgstr "Πιστωτική Κάρτα"
+
+#: ./app/pages/cart/cart-one-column.html:96
+#: ./app/pages/cart/cart-two-column.html:92
+#: ./app/pages/review/review-one-column.html:77
+#: ./app/pages/review/review-two-column.html:73
+msgid "Delivery Method:"
+msgstr "Μέθοδος Αποστολής:"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Electronic Delivery"
+msgstr "Ηλεκτρονική Αποστολή"
+
+#: ./app/pages/cart/cart-one-column.html:639
+#: ./app/pages/cart/cart-two-column.html:637
+#: ./app/pages/invoice/invoice-one-column.html:391
+#: ./app/pages/invoice/invoice-two-column.html:385
+msgid "Exp Month (MM)"
+msgstr "Λήξη Μήνας (ΜΜ)"
+
+#: ./app/pages/cart/cart-one-column.html:649
+#: ./app/pages/cart/cart-two-column.html:647
+#: ./app/pages/invoice/invoice-one-column.html:400
+#: ./app/pages/invoice/invoice-two-column.html:394
+msgid "Exp Year (YY)"
+msgstr "Λήξη Έτος (ΕΕ)"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Access"
+msgstr "Άμεση Πρόσβαση"
+
+#: ./app/pages/cart/cart-one-column.html:99
+#: ./app/pages/cart/cart-two-column.html:95
+#: ./app/pages/review/review-one-column.html:80
+#: ./app/pages/review/review-two-column.html:76
+msgid "Immediate Download"
+msgstr "Άμεση Λήψη"
+
+#: ./app/pages/invoice/invoice-one-column.html:74
+#: ./app/pages/invoice/invoice-two-column.html:158
+msgid "Invoice ID"
+msgstr "Αναγνωριστικό Τιμολογίου"
+
+#: ./app/pages/cart/cart-one-column.html:641
+#: ./app/pages/cart/cart-two-column.html:639
+msgid "Month"
+msgstr "Μήνας"
+
+#: ./app/pages/receipt/receipt-one-column.html:52
+#: ./app/pages/receipt/receipt-two-column.html:48
+msgid "Order ID"
+msgstr "Αναγνωριστικό Παραγγελίας"
+
+#: ./app/pages/cart/cart-one-column.html:209
+#: ./app/pages/cart/cart-two-column.html:209
+#: ./app/pages/invoice/invoice-one-column.html:234
+#: ./app/pages/invoice/invoice-two-column.html:228
+msgid "Payment Options"
+msgstr "Επιλογές Πληρωμής"
+
+#: ./app/pages/cart/cart-one-column.html:116
+#: ./app/pages/cart/cart-two-column.html:112
+msgid "Please provide a valid quantity"
+msgstr "Παρακαλούμε πληκτρολογήστε μια έγκυρη ποσότητα"
+
+#: ./app/pages/receipt/receipt-one-column.html:223
+#: ./app/pages/receipt/receipt-one-column.html:354
+#: ./app/pages/receipt/receipt-two-column.html:207
+#: ./app/pages/receipt/receipt-two-column.html:340
+msgid "Return to {{companyName}}"
+msgstr "Επιστροφή σε {{companyName}}"
+
+#: ./app/pages/cart/cart-one-column.html:620
+#: ./app/pages/cart/cart-two-column.html:618
+#: ./app/pages/invoice/invoice-one-column.html:370
+#: ./app/pages/invoice/invoice-two-column.html:364
+msgid "This is a secure 256-bit SSL encrypted payment."
+msgstr "Αυτή είναι μια ασφαλής κρυπτογραφημένη πληρωμή με 256-bit SSL."
+
+#: ./app/pages/cart/cart-one-column.html:651
+#: ./app/pages/cart/cart-two-column.html:649
+msgid "Year"
+msgstr "Έτος"
+
+#: ./app/pages/cart/cart-one-column.html:266
+#: ./app/pages/cart/cart-two-column.html:266
+#: ./app/pages/invoice/invoice-one-column.html:291
+#: ./app/pages/invoice/invoice-two-column.html:285
+msgid "Your Amazon payment information is never shared with {{companyName}}."
+msgstr "Τα στοιχεία πληρωμής στην Amazon δεν θα κοινοποιηθούν ποτέ στην εταιρεία {{companyName}}."
+
+#: ./app/pages/cart/cart-one-column.html:244
+#: ./app/pages/cart/cart-two-column.html:244
+#: ./app/pages/invoice/invoice-one-column.html:269
+#: ./app/pages/invoice/invoice-two-column.html:263
+msgid "Your PayPal payment information is never shared with {{companyName}}."
+msgstr "Τα στοιχεία πληρωμής στο PayPal δεν θα κοινοποιηθούν ποτέ στην εταιρεία {{companyName}}."
+
+#: ./app/pages/cart/cart-one-column.html:198
+#: ./app/pages/cart/cart-two-column.html:194
+#: ./app/pages/invoice/invoice-one-column.html:223
+#: ./app/pages/invoice/invoice-two-column.html:143
+#: ./app/pages/receipt/receipt-one-column.html:334
+#: ./app/pages/receipt/receipt-two-column.html:320
+#: ./app/pages/review/review-one-column.html:141
+#: ./app/pages/review/review-two-column.html:137
+msgid "Your total includes {{tax}} tax"
+msgstr "Το συνολικό ποσό περιλαμβάνει φόρο {{tax}}"
+
+#: ./app/pages/cart/cart-one-column.html:78
+#: ./app/pages/cart/cart-two-column.html:74
+msgid "{{count}} item"
+msgid_plural "{{count}} items"
+msgstr[0] "{{count}} στοιχείο"
+msgstr[1] "{{count}} στοιχεία"
+
+#: ./app/pages/receipt/receipt.html:70
+msgid "Paid By"
+msgstr "Πληρωμή Με"
+
+#: ./app/pages/pay/pay.html:338
+#: ./app/pages/review/review.html:87
+msgid "Review {{ampersandSymbol}} Finish"
+msgstr "Επανεξέταση {{ampersandSymbol}} Ολοκλήρωση"
+
+#: ./app/pages/simple/checkout.html:295
+#: ./app/pages/simple/review.html:176
+msgid "An email has been sent to {{email}}."
+msgstr "Ένα μήνυμα ηλεκτρονικού ταχυδρομείου έχει σταλεί στο {{email}}"
 
