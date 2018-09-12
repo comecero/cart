@@ -883,3 +883,7 @@ msgstr "Проверить и завершить"
 msgid "An email has been sent to {{email}}."
 msgstr "На адрес {{email}} отправлено письмо."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Нажмите кнопку ниже, чтобы перенаправить на сайт PayPal, чтобы ввести данные о платеже. Вернувшись в {{companyName}}, вы можете выполнить свой заказ."
+

@@ -873,3 +873,7 @@ msgstr "Επανεξέταση {{ampersandSymbol}} Ολοκλήρωση"
 msgid "An email has been sent to {{email}}."
 msgstr "Ένα μήνυμα ηλεκτρονικού ταχυδρομείου έχει σταλεί στο {{email}}"
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Κάντε κλικ στο παρακάτω κουμπί για να ανακατευθυνθείτε στον ιστότοπο PayPal για να καταχωρίσετε τα στοιχεία πληρωμής σας. Αφού επιστρέψετε στο {{companyName}}, μπορείτε να ολοκληρώσετε την παραγγελία σας."
+

@@ -873,3 +873,7 @@ msgstr "Controle {{ampersandSymbol}} Afronding"
 msgid "An email has been sent to {{email}}."
 msgstr "Er is een e-mail verstuurd naar {{email}}."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Klik op de onderstaande knop om doorgestuurd te worden naar de PayPal-site om uw betalingsgegevens in te voeren. Nadat u bent teruggekeerd naar {{companyName}}, kunt u uw bestelling voltooien."
+

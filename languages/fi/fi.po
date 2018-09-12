@@ -873,3 +873,7 @@ msgstr "Arvioi {{ampersandSymbol}} Viimeistele"
 msgid "An email has been sent to {{email}}."
 msgstr "Sähköposti on lähetetty osoitteeseen {{email}}."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Klikkaa alla olevaa painiketta, jos haluat ohjata PayPalin sivustoon syöttämällä maksutietosi. Kun olet palannut {{companyName}}, voit suorittaa tilauksesi."
+

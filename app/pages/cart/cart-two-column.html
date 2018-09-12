@@ -237,7 +237,7 @@
                                 <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <p>Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{settings.app.company_name}}, you can complete your order.</p>
+                                            <p translate translate-params-company-name="settings.app.company_name">Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order.</p>
                                             <div class="payment-button">
                                                 <img submit-payment="data.paypal" class="pointer" cart="data.cart" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
                                             </div>

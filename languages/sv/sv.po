@@ -873,3 +873,7 @@ msgstr "Granska {{ampersandSymbol}} slutför"
 msgid "An email has been sent to {{email}}."
 msgstr "Ett mejl skickades till {{email}}."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Klicka på knappen nedan för att omdirigeras till PayPal-webbplatsen för att ange dina betalningsuppgifter. När du har återvänt till {{companyName}} kan du slutföra din beställning."
+

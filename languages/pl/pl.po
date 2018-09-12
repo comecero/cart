@@ -883,3 +883,7 @@ msgstr "Przegląd {{ampersandSymbol}} zakończenie"
 msgid "An email has been sent to {{email}}."
 msgstr "Wysłano wiadomość e-mail do {{email}}."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Kliknij przycisk poniżej, aby zostać przekierowanym na stronę PayPal, aby podać szczegóły płatności. Po powrocie do {{companyName}} możesz sfinalizować zamówienie."
+

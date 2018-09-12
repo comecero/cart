@@ -873,3 +873,7 @@ msgstr "Revisar {{ampersandSymbol}} finalizar"
 msgid "An email has been sent to {{email}}."
 msgstr "Se envió un correo electrónico a {{email}}."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Haga clic en el botón de abajo para ser redirigido al sitio de PayPal para ingresar sus detalles de pago. Después de regresar a {{companyName}}, puede completar su pedido."
+

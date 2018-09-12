@@ -872,3 +872,7 @@ msgstr "审核{{ampersandSymbol}}完成"
 msgid "An email has been sent to {{email}}."
 msgstr "电子邮件已发送至{{email}}。"
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "点击下面的按钮，重定向到PayPal网站，输入您的付款详细信息。返回{{companyName}}后，您可以完成订单。"
+

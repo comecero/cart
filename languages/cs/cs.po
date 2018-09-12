@@ -878,3 +878,7 @@ msgstr "Kontrola {{ampersandSymbol}} dokončení"
 msgid "An email has been sent to {{email}}."
 msgstr "E-mail byl odeslán na adresu {{email}}."
 
+#: 
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr "Kliknutím na tlačítko níže přesměrujete na stránku PayPal a zadejte své platební údaje. Po návratu do {{companyName}} můžete svou objednávku dokončit."
+
