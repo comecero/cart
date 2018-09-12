@@ -3,6 +3,9 @@
     // Define a place to hold your data
     $scope.data = {};
 
+    // Load in the default payment method
+    $scope.options = { "payment_method": "credit_card" };
+
     // Load in some helpers
     $scope.geoService = GeoService;
     $scope.helpers = HelperService;
@@ -23,7 +26,7 @@
         "type": "paypal",
         data: {
             // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
-            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/payment/review/{{payment_id}}",
+            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/review/{{payment_id}}",
             "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/invoice"
         }
     }
@@ -68,7 +71,7 @@
             window.location = payment.response_data.redirect_url;
         } else if (payment.payment_method.type == "amazon_pay") {
             // If Amazon Pay, redirect for review
-            $location.path("/payment/review/" + payment.payment_id);
+            $location.path("/review/" + payment.payment_id);
         } else {
             // A successful card payment. Redirect to the receipt.
             $location.path("/receipt/" + payment.payment_id);

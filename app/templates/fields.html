@@ -3,96 +3,96 @@
     <!-- Place a row if a new section -->
     <div class="row" ng-if="isNewSection(item, $index)"></div>
 
-    <div class="section-header" ng-show="isNewSection(item, $index)">
+    <div class="section-header spacer-t12" ng-show="isNewSection(item, $index)">
         <!-- Double wrap in span to make spacing consistent with other section headers that are marked for translation -->
-        <span><span>{{item.section}}</span></span>
+        <h4><span><span>{{item.section}}</span></span></h4>
     </div>
 
-    <div ng-if="item.type == 'string' && !item.options" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label" for="{{item.name}}" ng-bind-html="item.label">{{item.label}}</label>
-            <input type="text" class="form-control" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()">
-            <p class="error-block hidden" ng-show="error">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
-        </div>
-    </div>
-
-    <div ng-if="item.type == 'text' && !item.options" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label" for="{{item.name}}" ng-bind-html="item.label"></label>
-            <textarea class="form-control" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()"></textarea>
-            <p class="error-block hidden" ng-show="error">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
-        </div>
-    </div>
-
-    <div ng-if="item.type == 'integer' && !item.options" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label" for="{{item.name}}" ng-bind-html="item.label"></label>
-            <input type="tel" class="form-control" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()">
-            <p class="error-block hidden" ng-show="error">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
-        </div>
-    </div>
-
-    <div ng-if="item.type == 'decimal' && !item.options" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label" for="{{item.name}}" ng-bind-html="item.label"></label>
-            <input type="text" class="form-control" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()">
-            <p class="error-block hidden" ng-show="error">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
-        </div>
-    </div>
-
-    <div ng-if="item.type == 'boolean' && !item.options" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label radio-group-label" ng-required="item.required" ng-bind-html="item.label"></label>
-            <div class="radio-group inline">
-                <input type="radio" id="{{ item.name + '-1'}}" class="radio" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-value="true" ng-checked="{{sale.meta[item.name]}}" ng-required="item.required" validate-field="item" error="error" ng-change="record()">
-                <label for="{{ item.name + '-1'}}" class="radio-label" translate>Yes</label>
-                <input type="radio" id="{{ item.name + '-0'}}" class="radio" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-value="false" ng-checked="{{!sale.meta[item.name]}}" ng-required="item.required"  validate-field="item" error="error" ng-change="record()">
-                <label for="{{ item.name + '-0'}}" class="radio-label" translate>No</label>
+    <div class="row">
+        <div ng-if="item.type == 'string' && !item.options" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label" for="{{item.name}}" ng-show="appSettings.form_label_position == 'top'" ng-bind-html="item.label">{{item.label}}</label>
+                <input type="text" class="form-control" name="{{item.name}}" placeholder="{{appSettings.form_label_position == 'inside' ? item.label : ''}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()">
+                <p class="error-block hidden" ng-show="error">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
             </div>
-            <p class="error-block hidden" ng-show="error">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
         </div>
-    </div>
 
-    <div ng-if="item.type == 'toggle'" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <div class="checkbox-group inline">
-                <input type="checkbox" id="{{ item.name + '-1'}}" class="checkbox" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-value="true" ng-checked="{{sale.meta[item.name]}}" ng-required="item.required" validate-field="item" error="error" ng-click="record()">
-                <label for="{{ item.name + '-1'}}" class="control-label checkbox-label strong" ng-bind-html="item.label"></label>
+        <div ng-if="item.type == 'text' && !item.options" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label" for="{{item.name}}" ng-show="appSettings.form_label_position == 'top'" ng-bind-html="item.label"></label>
+                <textarea class="form-control" name="{{item.name}}" placeholder="{{appSettings.form_label_position == 'inside' ? item.label : ''}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()"></textarea>
+                <p class="error-block hidden" ng-show="error">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
             </div>
-            <p class="error-block hidden" ng-show="error">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
         </div>
-    </div>
 
-    <div ng-if="item.options && item.type != 'array'" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label" for="{{item.name}}" ng-bind-html="item.label"></label>
-            <select name="{{item.name}}" class="form-control" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-change="record()">
-                <option ng-repeat="option in item.options" value="{{option.value}}">{{option.display}}</option>
-            </select>
-            <p class="error-block hidden">{{error}}</p>
-            <p class="help-block" ng-bind-html="item.description"></p>
+        <div ng-if="item.type == 'integer' && !item.options" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label" for="{{item.name}}" ng-show="appSettings.form_label_position == 'top'" ng-bind-html="item.label"></label>
+                <input type="tel" class="form-control" name="{{item.name}}" placeholder="{{appSettings.form_label_position == 'inside' ? item.label : ''}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()">
+                <p class="error-block hidden" ng-show="error">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
+            </div>
         </div>
-    </div>
 
-    <div ng-if="item.type == 'array'" class="col-xs-12 col-md-6">
-        <div class="form-group" show-errors="fieldlist">
-            <label class="control-label" for="{{item.name}}" ng-bind-html="item.label" ng-class="{'required': item.required}"></label>
-            <div class="checkbox-group inline">
-                <div ng-repeat="option in item.options" class="spacer-b10">
-                    <input type="checkbox" id="{{ item.name + '-' + $index }}" class="checkbox" ng-click="pushToProperty(item.name, option.value, true)" ng-checked="isInProperty(item.name, option.value)">
-                    <label for="{{ item.name + '-' + $index }}" class="checkbox-label">{{option.display}}</label>
+        <div ng-if="item.type == 'decimal' && !item.options" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label" for="{{item.name}}" ng-show="appSettings.form_label_position == 'top'" ng-bind-html="item.label"></label>
+                <input type="text" class="form-control" name="{{item.name}}" placeholder="{{appSettings.form_label_position == 'inside' ? item.label : ''}}" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-blur="record()">
+                <p class="error-block hidden" ng-show="error">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
+            </div>
+        </div>
+
+        <div ng-if="item.type == 'boolean' && !item.options" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label radio-group-label" ng-required="item.required" ng-bind-html="item.label"></label>
+                <div class="radio-group inline">
+                    <input type="radio" id="{{ item.name + '-1'}}" class="radio" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-value="true" ng-checked="{{sale.meta[item.name]}}" ng-required="item.required" validate-field="item" error="error" ng-change="record()">
+                    <label for="{{ item.name + '-1'}}" class="radio-label" translate>Yes</label>
+                    <input type="radio" id="{{ item.name + '-0'}}" class="radio" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-value="false" ng-checked="{{!sale.meta[item.name]}}" ng-required="item.required" validate-field="item" error="error" ng-change="record()">
+                    <label for="{{ item.name + '-0'}}" class="radio-label" translate>No</label>
                 </div>
+                <p class="error-block hidden" ng-show="error">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
             </div>
-            <p class="help-block" ng-bind-html="item.description"></p>
+        </div>
+
+        <div ng-if="item.type == 'toggle'" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <div class="checkbox-group inline">
+                    <input type="checkbox" id="{{ item.name + '-1'}}" class="checkbox" name="{{item.name}}" ng-model="sale.meta[item.name]" ng-value="true" ng-checked="{{sale.meta[item.name]}}" ng-required="item.required" validate-field="item" error="error" ng-click="record()">
+                    <label for="{{ item.name + '-1'}}" class="control-label checkbox-label strong" ng-bind-html="item.label"></label>
+                </div>
+                <p class="error-block hidden" ng-show="error">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
+            </div>
+        </div>
+
+        <div ng-if="item.options && item.type != 'array'" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label" for="{{item.name}}" ng-bind-html="item.label"></label>
+                <select name="{{item.name}}" class="form-control" ng-model="sale.meta[item.name]" ng-required="item.required" validate-field="item" error="error" ng-change="record()">
+                    <option ng-repeat="option in item.options" value="{{option.value}}">{{option.display}}</option>
+                </select>
+                <p class="error-block hidden">{{error}}</p>
+                <p class="help-block" ng-bind-html="item.description"></p>
+            </div>
+        </div>
+
+        <div ng-if="item.type == 'array'" class="col-xs-12">
+            <div class="form-group" show-errors="fieldlist">
+                <label class="control-label" for="{{item.name}}" ng-bind-html="item.label" ng-class="{'required': item.required}"></label>
+                <div class="checkbox-group inline">
+                    <div ng-repeat="option in item.options" class="spacer-b10">
+                        <input type="checkbox" id="{{ item.name + '-' + $index }}" class="checkbox" ng-click="pushToProperty(item.name, option.value, true)" ng-checked="isInProperty(item.name, option.value)">
+                        <label for="{{ item.name + '-' + $index }}" class="checkbox-label">{{option.display}}</label>
+                    </div>
+                </div>
+                <p class="help-block" ng-bind-html="item.description"></p>
+            </div>
         </div>
     </div>
 
 </div>
-
-<div class="row"></div>

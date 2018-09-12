@@ -4,13 +4,12 @@ var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
 var rename = require("gulp-rename");
 var sass = require('gulp-sass');
-var zip = require('gulp-zip');
 var sequence = require("run-sequence");
 var fs = require("fs");
 var header = require('gulp-header');
 
 gulp.task("concat-pages-js", function () {
-    return gulp.src(["./app/pages/**/*.js"])
+    return gulp.src(["./app/shared/**/*.js", "./app/pages/**/*.js"])
       .pipe(concat("pages.js"))
       .pipe(gulp.dest("./dist/js/"));
 });
@@ -49,12 +48,45 @@ gulp.task('dist', function (done) {
     });
 });
 
-gulp.task('zip', function (done) {
+gulp.task('copy-settings', function (done) {
 
-    // Read the version number
-    var version = fs.readFileSync("./version.html", "utf8");
+    // Copy the settings files from the samples to valid files for testing. If you provide an account_id, it will update the files with the supplied account_id
+    // gulp copy-settings --account_id AA1111
 
-    return gulp.src(["./**", "!./.git", "!./.vs", "!./.git/*", "!./settings/**", "!./settings/", "!./.gitattributes", "!./.gitignore", "!./*.sln", "!./Web.config", "!./Web.Debug.config"])
-    .pipe(zip("cart-" + version + ".zip"))
-    .pipe(gulp.dest("./"));
+    // Get the account_id, if supplied.
+    var account_id = "AA0000", i = process.argv.indexOf("--account_id");
+    if (i > -1) {
+        account_id = process.argv[i + 1];
+    }
+
+    fs.readFile("./settings/account-SAMPLE.js", "utf-8", function (err, data) {
+        data = data.replace("AA0000", account_id);
+        fs.writeFile("./settings/account.js", data, 'utf8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
+    });
+
+    fs.readFile("./settings/app-SAMPLE.js", "utf-8", function (err, data) {
+        data = data.replace("AA0000", account_id);
+        fs.writeFile("./settings/app.js", data, 'utf8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
+    });
+
+    fs.readFile("./settings/style-SAMPLE.js", "utf-8", function (err, data) {
+        data = data.replace("AA0000", account_id);
+        fs.writeFile("./settings/style.js", data, 'utf8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
+    });
+
+    gulp.src("./settings/script-SAMPLE.js").pipe(rename("script.js")).pipe(gulp.dest("./settings/"));
+    gulp.src("./settings/style-SAMPLE.css").pipe(rename("style.css")).pipe(gulp.dest("./settings/"));
+
 });

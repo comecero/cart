@@ -1,10 +1,13 @@
 ﻿/* USER DEFINED */
 
 /* Main Colors */
-$brand-primary: #3181aa;
+$brand-primary: #0099E6;
 $brand-success: #36ab0c;
 $brand-info: #5bc0de;
 $brand-danger: #d9534f;
+
+/* Company Name Color */
+$company-name-color: #ffffff;
 
 /* Alert Colors */
 $state-success-text: #3c763d;
@@ -23,78 +26,71 @@ $btn-info-color: #ffffff;
 $btn-danger-color: #ffffff;
 
 /* Fonts */
-$font-family-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-company-name: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-footer: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-base: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+$font-family-company-name: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+$font-family-footer: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
 /* Main page */
-$body-bg: #f6f6f6;
+$body-bg: #f6f7f8;
 
-/* Defines the layout mode: full, boxed, hybrid */
-$layout: boxed;
+/* Defines if shadows on the main container */
+$main-shadows: false;
 
-/* Defines if shadows on the main container and navbar */
-$main-shadows: true;
+/* Panel */
+$panel-border-radius: 4px;
+$panel-border-color: #e6e7e8;
 
-/* Navbar */
-$navbar-size: medium;
-$navbar-brand-font-size: 22px;
-$navbar-fixed: false;
-$navbar-default-color: #ffffff;
-$navbar-brand-align: center;
+/* Header */
+$header-size: medium;
+$header-default-color: #ffffff;
+$header-bg: #0099E6;
+$header-divider-bar-color: #066fa5;
+$header-brand-align: left;
 
 /* Main content area background color */
 $main-content-color: #686868;
 $main-content-bg: #ffffff;
+$main-content-shaded-bg: #fbfbfb;
 $h-color: #686868;
-$link-color: #3181aa;
-
-/* Divider */
-$divider-bar-color: #eeeeee;
-$divider-bar-width: 1px;
-$divider-bar-text-color: #3181aa;
+$link-color: #00A8FF;
 
 /* Default button */
 $btn-default-color: #686868;
 $btn-default-bg: #ffffff;
 
 /* Footer */
-$footer-size: small;
-$footer-color: #5f5f5f;
-$footer-bg: #dfdfdf;
-$footer-link-color: #3181aa;
-$footer-link-color: #3181aa;
-
-/* Table header */
-$header-color: #818181;
-$header-bg: #f9f9f9;
-$header-link-color: #3181aa;
+$footer-size: medium;
+$footer-color: #686868;
+$footer-bg: #f6f7f8;
+$footer-link-color: #00A8FF;
 
 /* Form elements */
-$input-border-radius: 0;
+$input-border-radius: 2px;
 $input-bg: #ffffff;
 $input-color: #555555;
-$input-border: #cccccc;
+$input-border: #d6d7d8;
 $placeholder-color: #999999;
 
 /* Quantity stepper */
-$stepper-bg: #ffffff;
-$stepper-color: #3181aa;
+$stepper-bg: #fbfbfb;
+$stepper-color: #00A8FF;
 
 /* Product Image Borders */
-$product-icon-border-color: #ececec;
+$product-icon-border-color: #e6e7e8;
 
-/* Company Name Color */
-$company-name-color: #ffffff;
+/* Loading bar color */
+$loading-bar-bg-color: #95dafd;
 
 /* NOT USER DEFINED */
 
-$navbar-default-brand-hover-color: $navbar-default-color;
-$navbar-default-bg:  $brand-primary;
+$header-default-brand-hover-color: $header-default-color;
+$header-default-bg:  $brand-primary;
 
-$navbar-default-link-color: $navbar-default-color;
-$navbar-default-link-hover-color: lighten($navbar-default-link-color, 6.5%);
-$navbar-default-link-active-color: darken($navbar-default-link-color, 6.5%);
+$header-default-link-color: $header-default-color;
+$header-default-link-hover-color: lighten($header-default-link-color, 6.5%);
+$header-default-link-active-color: darken($header-default-link-color, 6.5%);
+
+$main-content-alt-color: lighten($main-content-color, 20%);
 
 $btn-default-border: darken($btn-default-bg, 5%);
 
@@ -105,19 +101,7 @@ $link-hover-color: darken($link-color, 10%);
 $link-hover-decoration: none;
 
 $footer-link-hover-color: darken($footer-link-color, 10%);
-$header-link-hover-color: darken($header-link-color, 10%);
 
-$navbar-border-radius: 0;
+/************************  Header is flush to top so no rounding  *************************/
+//$panel-header-border-radius: 0;
 $grid-gutter-width: 30px;
-
-/* Navbar vs. Boxed Layout */
-$container-tablet: (720px + $grid-gutter-width);
-$container-desktop: (720px + $grid-gutter-width);
-$container-large-desktop: (720px + $grid-gutter-width);
-
-/* Otherwise, hide the boxed elements */
-@if $layout == full {
-    $container-tablet: (720px + $grid-gutter-width);
-    $container-desktop: (940px + $grid-gutter-width);
-    $container-large-desktop: (940px + $grid-gutter-width);
-}
