@@ -56,7 +56,7 @@
                                 <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-6 spacer-t16 spacer-b16 text-center" ng-repeat="product in data.products.data">
-                                            <div class="spacer-b12" ng-if="product.images"><img class="product-icon" ng-src="{{settings.app.use_square_images ? product.images[0].link_square : product.images[0].link_small}}" /></div>
+                                            <div class="spacer-b12" ng-if="product.images"><img class="product-icon" ng-src="{{settings.app.use_square_images ? product.images[0].link_square : product.images[0].link_small}}" ng-if="product.images[0]" /></div>
                                             <div class="spacer-b12"><strong>{{product.name}}</strong></div>
                                             <div class="spacer-b12">{{product.formatted.price}}</div>
                                             <div class="spacer-b12" ng-bind-html="product.description"></div>
