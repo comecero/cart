@@ -50,8 +50,8 @@ gulp.task('dist', function (done) {
 
 gulp.task('copy-settings', function (done) {
 
-    // Copy the settings files from the samples to valid files for testing. If you provide an account_id, it will update the files with the supplied account_id
-    // gulp copy-settings --account_id AA1111
+    // Copy the settings files from the samples to valid files for testing. If you provide an account_id, it will update the files with the supplied account_id. You can also provide an api host if you are targeting a non-production API environment.
+    // gulp copy-settings --account_id AA1111 --api_host api-dev.comecero.com
 
     // Get the account_id, if supplied.
     var account_id = "AA0000", i = process.argv.indexOf("--account_id");
@@ -59,8 +59,14 @@ gulp.task('copy-settings', function (done) {
         account_id = process.argv[i + 1];
     }
 
+    var api_host = "api.comecero.com", i = process.argv.indexOf("--api_host");
+    if (i > -1) {
+        api_host = process.argv[i + 1];
+    }
+
     fs.readFile("./settings/account-SAMPLE.js", "utf-8", function (err, data) {
         data = data.replace("AA0000", account_id);
+        data = data.replace("api.comecero.com", api_host);
         fs.writeFile("./settings/account.js", data, 'utf8', function (err) {
             if (err) {
                 return console.log(err);
@@ -70,6 +76,7 @@ gulp.task('copy-settings', function (done) {
 
     fs.readFile("./settings/app-SAMPLE.js", "utf-8", function (err, data) {
         data = data.replace("AA0000", account_id);
+        data = data.replace("api.comecero.com", api_host);
         fs.writeFile("./settings/app.js", data, 'utf8', function (err) {
             if (err) {
                 return console.log(err);
@@ -79,6 +86,7 @@ gulp.task('copy-settings', function (done) {
 
     fs.readFile("./settings/style-SAMPLE.js", "utf-8", function (err, data) {
         data = data.replace("AA0000", account_id);
+        data = data.replace("api.comecero.com", api_host);
         fs.writeFile("./settings/style.js", data, 'utf8', function (err) {
             if (err) {
                 return console.log(err);
