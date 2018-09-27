@@ -248,7 +248,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-body section-top-border" ng-repeat="item in data.payment.order.items">
+                            <div class="section-body spacer-t24" ng-repeat="item in data.payment.order.items">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -287,8 +287,10 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    <div class="panel-body panel-top-border">
                         <div class="section">
-                            <div class="section-body section-top-border">
+                            <div class="section-body">
                                 <div class="row" ng-if="!data.payment.order.tax_inclusive">
                                     <div class="col-xs-6">
                                         <span translate>Subtotal</span>
@@ -336,6 +338,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="panel-body">
                         <div class="section">
                             <div class="section-body">
                                 <div class="row">

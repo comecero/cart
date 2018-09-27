@@ -148,6 +148,71 @@
     "default_value": true
   },
   {
+    "name": "cross_sell_position",
+    "type": "string",
+    "label": "Cross Sell Position",
+    "description": "Determines how cross-sell products appear. Inline places them under items in the cart.",
+    "section": "Features",
+    "required": true,
+    "default_value": "inline",
+    "options": [
+      {
+        "display": "Inline",
+        "value": "inline"
+      }
+    ]
+  },
+  {
+    "name": "cross_sell_heading",
+    "type": "string",
+    "label": "Cross Sell Heading",
+    "description": "The heading to display with your cross-sell products.",
+    "section": "Features",
+    "required": true,
+    "default_value": "Frequently Purchased Together",
+    "options": [
+      {
+        "display": "Frequently Purchased Together",
+        "value": "Frequently Purchased Together"
+      },
+      {
+        "display": "Customers Also Bought",
+        "value": "Customers Also Bought"
+      },
+      {
+        "display": "You Might Also Be Interested In",
+        "value": "You Might Also Be Interested In"
+      }
+    ]
+  },
+  {
+    "name": "cross_sell_items",
+    "type": "integer",
+    "label": "Cross Sell Items",
+    "description": "Choose the number of cross-sell products you want to display. This selection overrides the number of cross-sell products available for an item in the cart.",
+    "section": "Features",
+    "required": true,
+    "default_value": 1,
+    "options": [
+      {
+        "display": "0",
+        "value": 0
+      },
+      {
+        "display": "1",
+        "value": 1
+      },
+      {
+        "display": "2",
+        "value": 2
+      },
+      {
+        "display": "3",
+        "value": 3
+      }
+    ]
+  },
+  {
     "name": "receipt_button_position",
     "type": "string",
     "label": "Receipt Button Position",

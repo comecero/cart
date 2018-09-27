@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="section-body section-top-border" ng-repeat="item in data.invoice.items">
+                                <div class="section-body spacer-t24" ng-repeat="item in data.invoice.items">
                                     <table>
                                         <tbody>
                                             <tr>
@@ -96,8 +96,10 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="section" ng-show="options.payment_method == 'credit_card'">
-                                <div class="section-body section-top-border">
+                        </div>
+                        <div class="panel-body panel-top-border" ng-show="options.payment_method == 'credit_card'">
+                            <div class="section">
+                                <div class="section-body">
                                     <div class="row" ng-if="!data.invoice.tax_inclusive">
                                         <div class="col-xs-6">
                                             <span translate>Subtotal</span>
@@ -350,7 +352,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body panel-body-shaded" ng-show="data.invoice.open && options.payment_method == 'credit_card' && !data.payment_method.payment_method_id">
+                        <div class="panel-body panel-body-shaded panel-bottom-border" ng-show="data.invoice.open && options.payment_method == 'credit_card' && !data.payment_method.payment_method_id">
                             <div class="section">
                                 <div class="section-header">
                                     <div class="row">
