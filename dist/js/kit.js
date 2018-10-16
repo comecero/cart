@@ -1,7 +1,7 @@
 /*
 Comecero Kit version: ﻿1.0.11
-Build time: 2018-09-13T02:56:50.235Z
-Checksum (SHA256): 92beae2573886eb211603d40009a89393e651192b05c4291434b0145a2628ed3
+Build time: 2018-10-16T17:47:12.847Z
+Checksum (SHA256): 408aca5c50b9ffcd0068f4c9244a081b397d3a86aa8fe6b234c79acc822d7e05
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -5802,7 +5802,7 @@ app.directive('selectNumbers', ['GeoService', '$timeout', function (GeoService, 
                         elemNg[0].appendChild(document.createElement("option"));
                     }
 
-                    for (var i = newValues[0]; i < newValues[1]; i++) {
+                    for (var i = newValues[0]; i < newValues[1] + 1; i++) {
                         var display = i;
                         if (attrs.minLength && String(i).length < Number(attrs.minLength)) {
                             display = utils.right(("0" + i), 2);
