@@ -38,6 +38,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     border-color: #e6e7e8;
 }
 
+.btn-inverse, .btn-inverse:active, .btn-inverse:hover, .btn-inverse:focus {
+    border-color: $brand-primary;
+    color: $brand-primary;
+    background-color: $btn-primary-color;
+}
 
 /* Navbar */
 .navbar {
@@ -209,11 +214,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .panel-body.panel-body-shaded {
     background-color: $main-content-shaded-bg;
     border-top: 1px solid $panel-border-color;
-    border-bottom: 1px solid $panel-border-color;
 }
 
 .panel-top-border {
     border-top: 1px solid $panel-border-color;
+}
+
+.panel-bottom-border {
+    border-bottom: 1px solid $panel-border-color;
 }
 
 .section {
@@ -222,8 +230,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .section-top-border {
     border-top: 1px solid $panel-border-color;
-    padding-top: 24px;
-    margin-top: 8px;
 }
 
 /* Text */
@@ -397,6 +403,12 @@ a.btn-info {
 
 a.btn-danger {
     color: $btn-danger-color !important;
+}
+
+a.btn-inverse {
+    border-color: $brand-primary !important;
+    color: $brand-primary !important;
+    background-color: $btn-primary-color !important;
 }
 
 /*Set the placeholder color */
