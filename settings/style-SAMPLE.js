@@ -10,7 +10,6 @@ window.__settings = window.__settings || {}; window.__settings.style =
         "favicon": null,
         "header-size": "medium",
         "header-bg": "#ffffff",
-        "header-divider-bar-color": "#e6e7e8",
         "header-brand-align": "left",
         "main-shadows": false,
         "loading-bar-bg-color": "#95dafd",

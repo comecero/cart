@@ -44,7 +44,6 @@ $panel-border-color: #e6e7e8;
 $header-size: medium;
 $header-default-color: #ffffff;
 $header-bg: #0099E6;
-$header-divider-bar-color: #066fa5;
 $header-brand-align: left;
 
 /* Main content area background color */
@@ -79,12 +78,13 @@ $stepper-color: #00A8FF;
 $product-icon-border-color: #e6e7e8;
 
 /* Loading bar color */
-$loading-bar-bg-color: #95dafd;
+$loading-bar-bg-color: #a0defd;
 
 /* NOT USER DEFINED */
 
 $header-default-brand-hover-color: $header-default-color;
 $header-default-bg:  $brand-primary;
+$header-divider-bar-color: darken($header-bg, 10%);
 
 $header-default-link-color: $header-default-color;
 $header-default-link-hover-color: lighten($header-default-link-color, 6.5%);

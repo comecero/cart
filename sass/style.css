@@ -5882,7 +5882,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .navbar.navbar-default {
   background-color: #0099E6;
-  border-bottom: 1px solid #066fa5; }
+  border-bottom: 1px solid #0077b3; }
 
 .navbar .brand {
   line-height: 64px;
@@ -6145,7 +6145,7 @@ a.btn-inverse {
 
 /* Loading bar, top of page when ajax requests are processing / waiting */
 #loading-bar .bar {
-  background: #95dafd; }
+  background: #a0defd; }
 
 /* Radio buttons / groups */
 .radio-group-label,

@@ -91,15 +91,6 @@
     "default_value": "#0099E6"
   },
   {
-    "name": "header-divider-bar-color",
-    "type": "color",
-    "label": "Header Divider Bar Color",
-    "description": "The color of the divider bar the separates the header and main page sections.",
-    "section": "Header",
-    "required": true,
-    "default_value": "#066fa5"
-  },
-  {
     "name": "header-brand-align",
     "type": "string",
     "label": "Header Logo / Company Name Alignment",

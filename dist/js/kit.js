@@ -1,7 +1,7 @@
 /*
-Comecero Kit version: ﻿1.0.11
-Build time: 2018-10-16T18:00:55.393Z
-Checksum (SHA256): a98263950fe36f93378f887445c81c1dbdf69af31390f973bf4920f8aec85adf
+Comecero Kit version: ﻿1.0.12
+Build time: 2018-10-17T14:10:47.527Z
+Checksum (SHA256): 07ebcafd2d9c67f18a627f510ee47eb50df2b6e4766a22b54e63369263d73f99
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -5822,18 +5822,45 @@ app.directive('crossSell', ['CartService', function (CartService) {
     // Shared scope:
     // cart: The cart.
 
-    // NOTE that the cross-sell element should have exactly one of the following attributes (and not more than one)
+    // NOTE that the cross-sell element should have exactly one of the following attributes (and not more than one). See below for a couple of samples of usage.
     // add: A cross sell object to add to the queue of cross sells to be added to the cart at a later time.
-    // remove: A cross sell object to remove from the queue of cross sells that would be added to the cart at a later time. Note this does not remove a cross sell item that has already been removed from the cart.
+    // remove: A cross sell object to remove from the queue of cross sells that would be added to the cart at a later time. Note this does not remove a cross sell item that has already been added to the cart.
     // toggle: Add a cross-sell item if it is in the queue, remove a cross sell item if it's already in the queue.
-    // queue: An object that holds the items that have been placed in queue to be added to the cart (for example, if you are using checkboxes to select cross sell items to add to cart)
     // commit: Add a cross sell item to the cart. This only adds the item provided by commit and ignores any in queue.
     // commitQueued: Add the queue of cross sells to the cart. Provide the list of cross sells to add to the cart as the value
+
+    // The 'queue' parameter is used to pass the items that have been selected for addition to the cart. It is used in combination with some of the items above.
+    // queue: An object that holds the items that have been placed in queue to be added to the cart (for example, if you are using checkboxes to select cross sell items to add to cart)
 
     // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object when the cart API is called.
     // onSuccess: A function that will be called when adding the cross sell(s) to the cart is successful. The cart will be included as a parameter.
     // onError: A function that will be called when adding the cross sell(s) to the cart fails. The error will be included as a parameter.
     // error: The error object to communicate errors.
+
+    // A simple cross-sell "add to cart"
+    // <div class="row" ng-repeat="item in data.cart.cross_sells.data">
+    //     <div>{{item.name}}</div>
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" commit="item" params="data.params" error="data.error">Add to Cart</button>
+    // </div>
+
+    // Using checkboxes
+    // <div class="row" ng-repeat="item in data.cart.cross_sells.data">
+    //     <span>{{item.name}}</span>
+    //     <input type="checkbox" cross-sell cart="data.cart" queue="data.queue" toggle="item" params="data.params">
+    // </div>
+    // <div class="row">
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" commit-queued="data.queue" params="data.params" error="data.error">Add to Cart</button>
+    // </div>
+
+    // A horrible UI but shows another methodology that might be worked into a particular use case.
+    // <div class="row" ng-repeat="item in data.cart.cross_sells.data">
+    //     <div>{{item.name}}</div>
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" add="item" queue="data.queue" params="data.params">Place in Queue</button>
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" remove="item" queue="data.queue" params="data.params">Remove from Queue</button>
+    // </div>
+    // <div class="row">
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" commit-queued="data.queue" params="data.params" error="data.error">Commit Selections</button>
+    // </div>
 
     return {
         restrict: 'A',
