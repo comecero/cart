@@ -1,4 +1,10 @@
-﻿<a name="2.0.0"></a>
+﻿<a name="2.0.1"></a>
+# 2.0.1
+
+- Add support for cross-sells in the cart.
+- Integrate kit version 1.0.12 of kit. See kit release notes for details.
+
+<a name="2.0.0"></a>
 # 2.0.0
 
 - Redesigned from the ground up! A fresh new design, including the option for one-column and two-column layouts.
