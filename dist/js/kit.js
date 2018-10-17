@@ -1,7 +1,7 @@
 /*
 Comecero Kit version: ﻿1.0.11
-Build time: 2018-10-16T17:47:12.847Z
-Checksum (SHA256): 408aca5c50b9ffcd0068f4c9244a081b397d3a86aa8fe6b234c79acc822d7e05
+Build time: 2018-10-16T18:00:55.393Z
+Checksum (SHA256): a98263950fe36f93378f887445c81c1dbdf69af31390f973bf4920f8aec85adf
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -4944,7 +4944,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                                 });
                             }
                         }
-                    }, 250); // Timeout set to a value that prevents sending every value if user presses and holds down arrow on country select.
+                    }, 25); // Timeout set to a value that prevents sending every value if user presses and holds down arrow on country select.
                 });
             });
 

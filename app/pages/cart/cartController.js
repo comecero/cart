@@ -81,7 +81,8 @@
             if (direction == "+") {
                 item.quantity++;
             } else {
-                item.quantity--;
+                if (item.quantity > 0)
+                    item.quantity--;
             }
         } else if (quantity !== null) {
             item.quantity = quantity;
@@ -107,7 +108,7 @@
                 $scope.data.error = error;
             });
 
-        }, 500);
+        }, 200);
 
     }
 
