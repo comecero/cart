@@ -136,7 +136,10 @@
                                 <div class="section-header">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4>{{settings.app.cross_sell_heading}}</h4>
+                                            <h4 ng-if="settings.app.cross_sell_heading == 'you_might_also_be_interested_in'" translate>You Might Also Be Interested In</h4>
+                                            <h4 ng-if="settings.app.cross_sell_heading == 'recommended_products'" translate>Recommended Products</h4>
+                                            <h4 ng-if="settings.app.cross_sell_heading == 'related_products'" translate>Related Products</h4>
+                                            <h4 ng-if="settings.app.cross_sell_heading == 'customers_also_bought'" translate>Customers Also Bought</h4>
                                         </div>
                                     </div>
                                 </div>

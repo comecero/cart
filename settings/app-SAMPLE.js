@@ -18,7 +18,7 @@ window.__settings = window.__settings || {}; window.__settings.app =
         "enable_languages": true,
         "show_continue_shopping": true,
         "cross_sell_position": "inline",
-        "cross_sell_heading": "You Might Also Be Interested In",
+        "cross_sell_heading": "you_might_also_be_interested_in",
         "cross_sell_items": 1,
         "receipt_button_position": "end",
         "receipt_button_text": "continue_shopping",
