@@ -188,27 +188,27 @@
   {
     "name": "cross_sell_items",
     "type": "integer",
-    "label": "Cross Sell Items",
-    "description": "Choose the number of cross-sell products you want to display. This selection overrides the number of cross-sell products available for an item in the cart.",
+    "label": "Number of Cross Sells to Display",
+    "description": "Choose the number of cross-sell products you want to display on the cart checkout page.",
     "section": "Features",
     "required": true,
-    "default_value": 1,
+    "default_value": "1",
     "options": [
       {
-        "display": "0",
-        "value": 0
+        "display": "Do not show cross sells",
+        "value": "0"
       },
       {
         "display": "1",
-        "value": 1
+        "value": "1"
       },
       {
         "display": "2",
-        "value": 2
+        "value": "2"
       },
       {
         "display": "3",
-        "value": 3
+        "value": "3"
       }
     ]
   },
