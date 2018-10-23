@@ -131,89 +131,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body panel-body-shaded" ng-if="data.cart.cross_sells.data.length > 0 && settings.app.cross_sell_position == 'inline' && settings.app.cross_sell_items > 0">
-                            <div class="section">
-                                <div class="section-header">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <h4 ng-if="settings.app.cross_sell_heading == 'you_might_also_be_interested_in'" translate>You Might Also Be Interested In</h4>
-                                            <h4 ng-if="settings.app.cross_sell_heading == 'recommended_products'" translate>Recommended Products</h4>
-                                            <h4 ng-if="settings.app.cross_sell_heading == 'related_products'" translate>Related Products</h4>
-                                            <h4 ng-if="settings.app.cross_sell_heading == 'customers_also_bought'" translate>Customers Also Bought</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-body" ng-if="settings.app.cross_sell_items == 1 || data.cart.cross_sells.data.length == 1">
-                                    <div class="row">
-                                        <div class="col-xs-12 spacer-t16" ng-repeat="item in data.cart.cross_sells.data | limitTo: 1">
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="3" ng-if="showImages" class="text-left has-product-icon visible-xs padding-b12"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td ng-if="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
-                                                        <td>
-                                                            <strong>{{item.name}}</strong>
-                                                            <p class="text-light">{{item.product.description}}</p>
-                                                            <button class="btn btn-inverse spacer-t6" cross-sell cart="data.cart" commit="item" params="data.params" error="data.error"><span translate>Add to Cart</span></button>
-                                                        </td>
-                                                        <td class="text-right has-price">
-                                                            <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{item.formatted.price_original}}</del>&nbsp;</span>
-                                                            {{item.formatted.price}}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-body" ng-if="(settings.app.cross_sell_items == 2 && data.cart.cross_sells.data.length >= 2) || (settings.app.cross_sell_items == 3 && data.cart.cross_sells.data.length == 2)">
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-6 spacer-t16" ng-repeat="item in data.cart.cross_sells.data | limitTo: 2">
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td ng-if="showImages" class="text-left has-product-icon"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
-                                                        <td>
-                                                            <strong>{{item.name}}</strong>
-                                                            <p>
-                                                                <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{item.formatted.price_original}}</del>&nbsp;</span>
-                                                                {{item.formatted.price}}
-                                                            </p>
-                                                            <button class="btn btn-inverse spacer-t6" cross-sell cart="data.cart" commit="item" params="data.params" error="data.error"><span translate>Add to Cart</span></button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-body" ng-if="settings.app.cross_sell_items == 3 && data.cart.cross_sells.data.length == 3">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-4 spacer-t16" ng-repeat="item in data.cart.cross_sells.data">
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div ng-if="showImages" class="text-left has-product-icon"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></div>
-                                                            <div class="spacer-t12">
-                                                                <strong>{{item.name}}</strong>
-                                                                <p>
-                                                                    <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{item.formatted.price_original}}</del>&nbsp;</span>
-                                                                    {{item.formatted.price}}
-                                                                </p>
-                                                                <button class="btn btn-inverse spacer-t6" cross-sell cart="data.cart" commit="item" params="data.params" error="data.error"><span translate>Add to Cart</span></button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        <!-- Cross Sells -->
+                        <div ng-include src="'app/templates/cross-sell.html'"></div>
+
                         <div class="panel-body panel-top-border" ng-if="settings.app.show_promo_code">
                             <div class="section">
                                 <div class="section-body">
