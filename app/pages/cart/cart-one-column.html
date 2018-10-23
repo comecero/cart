@@ -133,7 +133,7 @@
                         </div>
 
                         <!-- Cross Sells -->
-                        <div ng-include src="'app/templates/cross-sell.html'"></div>
+                        <div ng-include src="'app/templates/cross-sell.html'" ng-if="settings.app.cross_sell_items > 0"></div>
 
                         <div class="panel-body panel-top-border" ng-if="settings.app.show_promo_code">
                             <div class="section">
