@@ -166,22 +166,30 @@
     "name": "cross_sell_heading",
     "type": "string",
     "label": "Cross Sell Heading",
-    "description": "The heading to display with your cross-sell products.",
+    "description": "The heading to display above your cross-sell products.",
     "section": "Features",
     "required": true,
-    "default_value": "Frequently Purchased Together",
+    "default_value": "you_might_also_be_interested_in",
     "options": [
       {
-        "display": "Frequently Purchased Together",
-        "value": "Frequently Purchased Together"
+        "display": "Customers Also Bought",
+        "value": "customers_also_bought"
       },
       {
-        "display": "Customers Also Bought",
-        "value": "Customers Also Bought"
+        "display": "Related Products",
+        "value": "related_products"
+      },
+      {
+        "display": "Frequently Purchased Together",
+        "value": "frequently_purchased_together"
+      },
+      {
+        "display": "Recommended Products",
+        "value": "recommended_products"
       },
       {
         "display": "You Might Also Be Interested In",
-        "value": "You Might Also Be Interested In"
+        "value": "you_might_also_be_interested_in"
       }
     ]
   },
