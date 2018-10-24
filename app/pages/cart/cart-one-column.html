@@ -133,7 +133,9 @@
                         </div>
 
                         <!-- Cross Sells -->
-                        <div ng-include src="'app/templates/cross-sell.html'" ng-if="settings.app.cross_sell_items > 0"></div>
+                        <div class="panel-body panel-body-shaded" ng-if="settings.app.cross_sell_position == 'inline_top' && data.cart.cross_sells.data.length > 0 && settings.app.cross_sell_items > 0">
+                            <div ng-include src="'app/templates/cross-sell.html'"></div>
+                        </div>
 
                         <div class="panel-body panel-top-border" ng-if="settings.app.show_promo_code">
                             <div class="section">
@@ -209,6 +211,12 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Cross Sells -->
+                        <div class="panel-body panel-body-shaded" ng-if="settings.app.cross_sell_position == 'inline_bottom' && data.cart.cross_sells.data.length > 0 && settings.app.cross_sell_items > 0">
+                            <div ng-include src="'app/templates/cross-sell.html'"></div>
+                        </div>
+
                         <div class="panel-body panel-top-border">
                             <div class="section" ng-show="!data.amazon_pay.data">
                                 <div class="section-header">
@@ -241,6 +249,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="section" ng-show="options.payment_method == 'paypal' && helpers.supportsPaymentMethod('paypal', data.cart.options)">
                                 <div class="section-body">
                                     <div class="row">

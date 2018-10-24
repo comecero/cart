@@ -157,8 +157,12 @@
     "default_value": "inline",
     "options": [
       {
-        "display": "Inline",
-        "value": "inline"
+        "display": "Inline - Top",
+        "value": "inline_top"
+      },
+      {
+        "display": "Inline - End",
+        "value": "inline_end"
       }
     ]
   },
@@ -231,7 +235,7 @@
     "options": [
       {
         "display": "Inline",
-        "value": "end"
+        "value": "inline"
       },
       {
         "display": "End",
