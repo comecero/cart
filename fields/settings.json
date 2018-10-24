@@ -151,18 +151,18 @@
     "name": "cross_sell_position",
     "type": "string",
     "label": "Cross Sell Position",
-    "description": "Determines how cross-sell products appear. Inline places them under items in the cart.",
+    "description": "Determines where cross-sell offers will appear. 'Inline - Top' places them with more prominence.",
     "section": "Features",
     "required": true,
-    "default_value": "inline",
+    "default_value": "inline_top",
     "options": [
       {
         "display": "Inline - Top",
         "value": "inline_top"
       },
       {
-        "display": "Inline - End",
-        "value": "inline_end"
+        "display": "Inline - Middle",
+        "value": "inline_middle"
       }
     ]
   },
