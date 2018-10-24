@@ -43,7 +43,7 @@
                         <tr>
                             <td ng-if="showImages" class="text-left has-product-icon"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                             <td>
-                                <strong>{{item.name}}</strong> <em class="text-danger" ng-if="item.discount_percent">Save {{item.formatted.discount_percent}}!</em>
+                                <strong>{{item.name}}</strong>
                                 <p>
                                     <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{item.formatted.price_original}}</del>&nbsp;</span>
                                     {{item.formatted.price}}
@@ -65,7 +65,7 @@
                             <td>
                                 <div ng-if="showImages" class="text-left has-product-icon"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></div>
                                 <div class="spacer-t12">
-                                    <strong>{{item.name}}</strong> <em class="text-danger" ng-if="item.discount_percent">Save {{item.formatted.discount_percent}}!</em>
+                                    <strong>{{item.name}}</strong>
                                     <p>
                                         <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{item.formatted.price_original}}</del>&nbsp;</span>
                                         {{item.formatted.price}}
