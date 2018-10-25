@@ -269,33 +269,6 @@
     "default_value": "#00A8FF"
   },
   {
-    "name": "footer-size",
-    "type": "string",
-    "label": "Footer Size",
-    "description": "The size of the page footer.",
-    "section": "Footer",
-    "required": true,
-    "default_value": "medium",
-    "options": [
-      {
-        "display": "Small",
-        "value": "small"
-      },
-      {
-        "display": "Medium",
-        "value": "medium"
-      },
-      {
-        "display": "Large",
-        "value": "large"
-      },
-      {
-        "display": "Remove / Hide (don't display the default footer)",
-        "value": "hide"
-      }
-    ]
-  },
-  {
     "name": "state-success-bg",
     "type": "color",
     "label": "Success Alert Background Color",

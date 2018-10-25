@@ -21,13 +21,14 @@
                         <tr>
                             <td ng-if="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                             <td>
-                                <strong>{{item.name}}</strong> <em class="text-danger" ng-if="item.discount_percent">Save {{item.formatted.discount_percent}}!</em>
+                                <strong>{{item.name}}</strong>
                                 <p class="text-light">{{item.product.headline}}</p>
                                 <button class="btn btn-inverse spacer-t6" cross-sell cart="data.cart" commit="item" params="data.params" error="data.error"><span translate>Add to Cart</span></button>
                             </td>
                             <td class="text-right has-price">
                                 <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{item.formatted.price_original}}</del>&nbsp;</span>
                                 {{item.formatted.price}}
+                                <p ng-if="item.discount_percent"><em class="text-success" translate translate-params-percent="item.formatted.discount_percent">Save {{percent}}!</em></p>
                             </td>
                         </tr>
                     </tbody>
