@@ -151,14 +151,18 @@
     "name": "cross_sell_position",
     "type": "string",
     "label": "Cross Sell Position",
-    "description": "Determines how cross-sell products appear. Inline places them under items in the cart.",
+    "description": "Determines where cross-sell offers will appear. 'Inline - Top' places them with more prominence.",
     "section": "Features",
     "required": true,
-    "default_value": "inline",
+    "default_value": "inline_top",
     "options": [
       {
-        "display": "Inline",
-        "value": "inline"
+        "display": "Inline - Top",
+        "value": "inline_top"
+      },
+      {
+        "display": "Inline - Middle",
+        "value": "inline_middle"
       }
     ]
   },
@@ -166,49 +170,57 @@
     "name": "cross_sell_heading",
     "type": "string",
     "label": "Cross Sell Heading",
-    "description": "The heading to display with your cross-sell products.",
+    "description": "The heading to display above your cross-sell products.",
     "section": "Features",
     "required": true,
-    "default_value": "Frequently Purchased Together",
+    "default_value": "you_might_also_be_interested_in",
     "options": [
       {
-        "display": "Frequently Purchased Together",
-        "value": "Frequently Purchased Together"
+        "display": "Customers Also Bought",
+        "value": "customers_also_bought"
       },
       {
-        "display": "Customers Also Bought",
-        "value": "Customers Also Bought"
+        "display": "Related Products",
+        "value": "related_products"
+      },
+      {
+        "display": "Frequently Purchased Together",
+        "value": "frequently_purchased_together"
+      },
+      {
+        "display": "Recommended Products",
+        "value": "recommended_products"
       },
       {
         "display": "You Might Also Be Interested In",
-        "value": "You Might Also Be Interested In"
+        "value": "you_might_also_be_interested_in"
       }
     ]
   },
   {
     "name": "cross_sell_items",
     "type": "integer",
-    "label": "Cross Sell Items",
-    "description": "Choose the number of cross-sell products you want to display. This selection overrides the number of cross-sell products available for an item in the cart.",
+    "label": "Number of Cross Sells to Display",
+    "description": "Choose the number of cross-sell products you want to display on the cart checkout page.",
     "section": "Features",
     "required": true,
-    "default_value": 1,
+    "default_value": "1",
     "options": [
       {
-        "display": "0",
-        "value": 0
+        "display": "Do not show cross sells",
+        "value": "0"
       },
       {
         "display": "1",
-        "value": 1
+        "value": "1"
       },
       {
         "display": "2",
-        "value": 2
+        "value": "2"
       },
       {
         "display": "3",
-        "value": 3
+        "value": "3"
       }
     ]
   },
@@ -223,7 +235,7 @@
     "options": [
       {
         "display": "Inline",
-        "value": "end"
+        "value": "inline"
       },
       {
         "display": "End",
