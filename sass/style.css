@@ -6130,8 +6130,7 @@ a.btn-inverse {
 
 /* Internet Explorer 10-11 */
 .hide-placeholder:-ms-input-placeholder {
-  color: transparent;
-  opacity: 0; }
+  color: transparent; }
 
 /* Microsoft Edge */
 .hide-placeholder::-ms-input-placeholder {

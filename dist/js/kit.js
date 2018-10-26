@@ -1,7 +1,7 @@
 /*
 Comecero Kit version: ﻿1.0.12
-Build time: 2018-10-17T14:10:47.527Z
-Checksum (SHA256): 07ebcafd2d9c67f18a627f510ee47eb50df2b6e4766a22b54e63369263d73f99
+Build time: 2018-10-26T01:17:13.688Z
+Checksum (SHA256): e31e88a121de6f114c8bf3eea9ea2dc40d697f7a76c21c25ea655ed5693aaec3
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -866,13 +866,13 @@ var amazonPay = (function () {
         var consentWidget = document.getElementById(consent_id);
 
         if (addressWidget)
-            addressWidget.style.display = null;
+            addressWidget.style.removeProperty("display");
 
         if (walletWidget)
-            walletWidget.style.display = null;
+            walletWidget.style.removeProperty("display");
 
         if (consentWidget && recurring)
-            consentWidget.style.display = null;
+            consentWidget.style.removeProperty("display");
     }
 
     function hideWidgets(address_id, wallet_id, consent_id) {
