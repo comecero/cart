@@ -1,5 +1,5 @@
-﻿<a name="2.0.1"></a>
-# 2.0.1
+﻿<a name="2.1.0"></a>
+# 2.1.0
 
 - Add support for cross-sells in the cart.
 - Integrate kit version 1.0.12 of kit. See kit release notes for details.
