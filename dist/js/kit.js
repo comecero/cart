@@ -1,7 +1,7 @@
 /*
-Comecero Kit version: ﻿1.0.10
-Build time: 2018-09-10T21:43:48.626Z
-Checksum (SHA256): aab51dfa8e5a4b5cb79db934f7dfb9bec7bb6289b97699848ac92c59e431ef58
+Comecero Kit version: ﻿1.0.12
+Build time: 2018-10-26T01:17:13.688Z
+Checksum (SHA256): e31e88a121de6f114c8bf3eea9ea2dc40d697f7a76c21c25ea655ed5693aaec3
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -866,13 +866,13 @@ var amazonPay = (function () {
         var consentWidget = document.getElementById(consent_id);
 
         if (addressWidget)
-            addressWidget.style.display = null;
+            addressWidget.style.removeProperty("display");
 
         if (walletWidget)
-            walletWidget.style.display = null;
+            walletWidget.style.removeProperty("display");
 
         if (consentWidget && recurring)
-            consentWidget.style.display = null;
+            consentWidget.style.removeProperty("display");
     }
 
     function hideWidgets(address_id, wallet_id, consent_id) {
@@ -2622,12 +2622,11 @@ app.directive('addToCart', ['CartService', 'gettextCatalog', function (CartServi
 
     // Shared scope:
     // addToCart: The product to add to the cart. Must include the product_id.
+    // quantity: The quantity of the item to add to teh cart.
     // error: The error object to communicate errors.
     // onSubmit: A function that will be called from scope when the function is triggered.
     // onSuccess: A function that will be called from scope when the item is successfully added. Will include the response item object as a parameter.
     // onError: A function that will be called from scope when the function fails. Will include the error object as a parameter.
-
-    // Attributes
     // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
 
     return {
@@ -3640,7 +3639,7 @@ app.directive('customerCountries', ['GeoService', '$timeout', function (GeoServi
         restrict: 'A',
         require: "ngModel",
         scope: {
-            customerCountries: '=?' 
+            customerCountries: '=?'
         },
         link: function (scope, elem, attrs, ctrl) {
 
@@ -4945,7 +4944,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                                 });
                             }
                         }
-                    }, 250); // Timeout set to a value that prevents sending every value if user presses and holds down arrow on country select.
+                    }, 25); // Timeout set to a value that prevents sending every value if user presses and holds down arrow on country select.
                 });
             });
 
@@ -5803,7 +5802,7 @@ app.directive('selectNumbers', ['GeoService', '$timeout', function (GeoService, 
                         elemNg[0].appendChild(document.createElement("option"));
                     }
 
-                    for (var i = newValues[0]; i < newValues[1]; i++) {
+                    for (var i = newValues[0]; i < newValues[1] + 1; i++) {
                         var display = i;
                         if (attrs.minLength && String(i).length < Number(attrs.minLength)) {
                             display = utils.right(("0" + i), 2);
@@ -5814,6 +5813,156 @@ app.directive('selectNumbers', ['GeoService', '$timeout', function (GeoService, 
                 }
 
             });
+        }
+    };
+}]);
+
+app.directive('crossSell', ['CartService', function (CartService) {
+
+    // Shared scope:
+    // cart: The cart.
+
+    // NOTE that the cross-sell element should have exactly one of the following attributes (and not more than one). See below for a couple of samples of usage.
+    // add: A cross sell object to add to the queue of cross sells to be added to the cart at a later time.
+    // remove: A cross sell object to remove from the queue of cross sells that would be added to the cart at a later time. Note this does not remove a cross sell item that has already been added to the cart.
+    // toggle: Add a cross-sell item if it is in the queue, remove a cross sell item if it's already in the queue.
+    // commit: Add a cross sell item to the cart. This only adds the item provided by commit and ignores any in queue.
+    // commitQueued: Add the queue of cross sells to the cart. Provide the list of cross sells to add to the cart as the value
+
+    // The 'queue' parameter is used to pass the items that have been selected for addition to the cart. It is used in combination with some of the items above.
+    // queue: An object that holds the items that have been placed in queue to be added to the cart (for example, if you are using checkboxes to select cross sell items to add to cart)
+
+    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object when the cart API is called.
+    // onSuccess: A function that will be called when adding the cross sell(s) to the cart is successful. The cart will be included as a parameter.
+    // onError: A function that will be called when adding the cross sell(s) to the cart fails. The error will be included as a parameter.
+    // error: The error object to communicate errors.
+
+    // A simple cross-sell "add to cart"
+    // <div class="row" ng-repeat="item in data.cart.cross_sells.data">
+    //     <div>{{item.name}}</div>
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" commit="item" params="data.params" error="data.error">Add to Cart</button>
+    // </div>
+
+    // Using checkboxes
+    // <div class="row" ng-repeat="item in data.cart.cross_sells.data">
+    //     <span>{{item.name}}</span>
+    //     <input type="checkbox" cross-sell cart="data.cart" queue="data.queue" toggle="item" params="data.params">
+    // </div>
+    // <div class="row">
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" commit-queued="data.queue" params="data.params" error="data.error">Add to Cart</button>
+    // </div>
+
+    // A horrible UI but shows another methodology that might be worked into a particular use case.
+    // <div class="row" ng-repeat="item in data.cart.cross_sells.data">
+    //     <div>{{item.name}}</div>
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" add="item" queue="data.queue" params="data.params">Place in Queue</button>
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" remove="item" queue="data.queue" params="data.params">Remove from Queue</button>
+    // </div>
+    // <div class="row">
+    //     <button class="btn btn-primary" cross-sell cart="data.cart" commit-queued="data.queue" params="data.params" error="data.error">Commit Selections</button>
+    // </div>
+
+    return {
+        restrict: 'A',
+        scope: {
+            cart: '=?',
+            add: '=?',
+            remove: '=?',
+            toggle: '=?',
+            commit: '=?',
+            commitQueued: '=?',
+            queue: '=?',
+            params: '=?',
+            onSuccess: '=?',
+            onError: '=?',
+            error: '=?',
+        },
+        link: function (scope, elem, attrs, ctrl) {
+
+            elem.bind("click", function () {
+
+                // Clear previous errors
+                scope.error = null;
+
+                // Set default value
+                scope.queue = scope.queue || [];
+
+                // Prep the params
+                var params = scope.params || attrs.params;
+                params = utils.mergeParams(params, null, null);
+
+                // Determine what action to take
+                if (attrs.add) {
+                    if (!isQueued(scope.add)) {
+                        scope.$apply(function () { scope.queue.push(scope.add); });
+                    }
+                    return;
+                }
+
+                if (attrs.remove) {
+                    scope.queue = _.reject(scope.queue, function (item) { item.product_id == scope.remove.product_id });
+                    for (var i = 0; i < scope.queue.length; i++) {
+                        if (scope.queue[i].product_id == scope.remove.product_id) {
+                            scope.$apply(function () {
+                                scope.queue.splice(i, 1);
+                            });
+                        }
+                    }
+                    return;
+                }
+
+                if (attrs.toggle) {
+                    if (!isQueued(scope.toggle)) {
+                        scope.$apply(function () { scope.queue.push(scope.toggle) });
+                    } else {
+                        for (var i = 0; i < scope.queue.length; i++) {
+                            if (scope.queue[i].product_id == scope.toggle.product_id) {
+                                scope.$apply(function () {
+                                    scope.queue.splice(i, 1);
+                                });
+                            }
+                        }
+                    }
+                    return;
+                }
+
+                if (attrs.commit || attrs.commitQueued) {
+
+                    var cartCopy = angular.copy(scope.cart);
+                    if (scope.commit) {
+                        cartCopy.items.push({ product_id: scope.commit.product_id, cross_sell_id: scope.commit.cross_sell_id });
+                    } else {
+
+                        if (scope.commitQueued.length == 0)
+                            return;
+
+                        _.each(scope.commitQueued, function (item) {
+                            cartCopy.items.push({ product_id: item.product_id, cross_sell_id: item.cross_sell_id });
+                        });
+                    }
+
+                    CartService.update(cartCopy, scope.params).then(function (cart) {
+                        scope.cart = cart;
+                        scope.commitQueued = [];
+                        if (scope.onSuccess)
+                            scope.onSuccess(cart);
+                    }, function (error) {
+                        scope.error = error;
+                        if (scope.onError)
+                            scope.onError(error);
+                    });
+                    return;
+                }
+
+                function isQueued(crossSell) {
+                    if (_.findWhere(scope.queue, { product_id: crossSell.product_id }) == null) {
+                        return false;
+                    }
+                    return true;
+                }
+
+            });
+
         }
     };
 }]);

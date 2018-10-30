@@ -13,7 +13,7 @@
 
     // Set the cart parameters
     $scope.data.params = {};
-    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options,cross_sells.product";
     $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
 
     // Set default values.
@@ -81,7 +81,8 @@
             if (direction == "+") {
                 item.quantity++;
             } else {
-                item.quantity--;
+                if (item.quantity > 0)
+                    item.quantity--;
             }
         } else if (quantity !== null) {
             item.quantity = quantity;
@@ -107,7 +108,7 @@
                 $scope.data.error = error;
             });
 
-        }, 500);
+        }, 200);
 
     }
 

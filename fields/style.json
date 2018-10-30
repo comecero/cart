@@ -91,15 +91,6 @@
     "default_value": "#0099E6"
   },
   {
-    "name": "header-divider-bar-color",
-    "type": "color",
-    "label": "Header Divider Bar Color",
-    "description": "The color of the divider bar the separates the header and main page sections.",
-    "section": "Header",
-    "required": true,
-    "default_value": "#066fa5"
-  },
-  {
     "name": "header-brand-align",
     "type": "string",
     "label": "Header Logo / Company Name Alignment",
@@ -276,33 +267,6 @@
     "section": "Footer",
     "required": true,
     "default_value": "#00A8FF"
-  },
-  {
-    "name": "footer-size",
-    "type": "string",
-    "label": "Footer Size",
-    "description": "The size of the page footer.",
-    "section": "Footer",
-    "required": true,
-    "default_value": "medium",
-    "options": [
-      {
-        "display": "Small",
-        "value": "small"
-      },
-      {
-        "display": "Medium",
-        "value": "medium"
-      },
-      {
-        "display": "Large",
-        "value": "large"
-      },
-      {
-        "display": "Remove / Hide (don't display the default footer)",
-        "value": "hide"
-      }
-    ]
   },
   {
     "name": "state-success-bg",
@@ -549,7 +513,7 @@
     "name": "footer_html",
     "type": "text",
     "label": "Custom Footer HTML",
-    "description": "Supply a section of HTML to be used as your global footer. If you supply custom HTML, you may want to remove / hide the default footer under the app's style settings (choose 'Remove' under Footer Size).",
+    "description": "Supply a section of HTML to be used as your global footer.",
     "section": "Custom HTML",
     "required": false
   },

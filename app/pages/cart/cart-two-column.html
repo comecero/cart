@@ -2,7 +2,7 @@
 
     <!-- Custom Header, if supplied -->
     <custom-html html="settings.style.header_html"></custom-html>
-    
+
     <nav class="navbar navbar-default" ng-cloak>
         <div class="container">
             <div class="brand">
@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="section-body section-top-border" ng-repeat="item in data.cart.items">
+                                <div class="section-body spacer-t24" ng-repeat="item in data.cart.items">
                                     <table>
                                         <tbody>
                                             <tr>
@@ -126,8 +126,16 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="section" ng-if="settings.app.show_promo_code">
-                                <div class="section-body section-top-border">
+                        </div>
+
+                        <!-- Cross Sells -->
+                        <div class="panel-body panel-body-shaded" ng-if="settings.app.cross_sell_position == 'inline_middle' && data.cart.cross_sells.data.length > 0 && settings.app.cross_sell_items > 0">
+                            <div ng-include src="'app/templates/cross-sell.html'"></div>
+                        </div>
+
+                        <div class="panel-body panel-top-border" ng-if="settings.app.show_promo_code">
+                            <div class="section">
+                                <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="promo-code" ng-cloak promo-code cart="data.cart" error="data.error" params="data.params">
@@ -144,8 +152,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section" ng-show="options.payment_method == 'credit_card'">
-                                <div class="section-body section-top-border">
+                        </div>
+                        <div class="panel-body panel-top-border" ng-show="options.payment_method == 'credit_card'">
+                            <div class="section">
+                                <div class="section-body">
                                     <div class="row" ng-if="!data.cart.tax_inclusive">
                                         <div class="col-xs-6">
                                             <span translate>Subtotal</span>
@@ -200,6 +210,14 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-md-pull-6">
+
+                    <!-- Cross Sells -->
+                    <div class="panel panel-default panel-content" ng-if="settings.app.cross_sell_position == 'inline_top' && data.cart.cross_sells.data.length > 0 && settings.app.cross_sell_items > 0">
+                        <div class="panel-body">
+                            <div ng-include src="'app/templates/cross-sell.html'"></div>
+                        </div>
+                    </div>
+
                     <div class="panel panel-default panel-content">
                         <div class="panel-body">
                             <div class="section" ng-show="!data.amazon_pay.data">
@@ -604,7 +622,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body panel-body-shaded" ng-show="!data.payment_method.payment_method_id && options.payment_method == 'credit_card'">
+                        <div class="panel-body panel-body-shaded panel-bottom-border" ng-show="!data.payment_method.payment_method_id && options.payment_method == 'credit_card'">
                             <div class="section">
                                 <div class="section-header">
                                     <div class="row">
