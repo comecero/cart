@@ -1,7 +1,7 @@
 /*
-Comecero Kit version: ﻿1.0.12
-Build time: 2018-10-26T01:17:13.688Z
-Checksum (SHA256): e31e88a121de6f114c8bf3eea9ea2dc40d697f7a76c21c25ea655ed5693aaec3
+Comecero Kit version: ﻿1.0.13
+Build time: 2018-11-14T20:45:13.265Z
+Checksum (SHA256): a7deb9e6571ac96774a83523806f58eacfd830160cc2d448876df43a926663e5
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -5500,7 +5500,7 @@ app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
             // Watch options and set Amazon Pay parameters if provided.
             scope.$watch("options", function (newValue, oldValue) {
 
-                if (newValue && newValue != oldValue) {
+                if (newValue) {
 
                     // Check if it has Amazon Pay
                     var ap = _.findWhere(newValue.payment_methods, { payment_method_type: "amazon_pay" });
@@ -5628,19 +5628,27 @@ app.directive('amazonPayReset', ['gettextCatalog', function (gettextCatalog) {
 
     // Shared scope:
     // paymentMethod: Provide the payment method object that will hold the Amazon Pay settings that are returned from the Amazon Pay button and widgets.
+    // onComplete: A function that is called after the reset is complete
 
     return {
         restrict: 'A',
         scope: {
-            paymentMethod: '=?'
-        },
+            paymentMethod: '=?',
+            onComplete: '=?',
+    },
         link: function (scope, elem, attrs, ctrl) {
 
             elem.bind("click", function () {
 
                 // Reset the payment method data
                 scope.$apply(function () {
+                    amazonPay.logout();
+
+                    if (scope.paymentMethod && scope.paymentMethod.data)
                     delete scope.paymentMethod.data;
+
+                    if (scope.onComplete)
+                        scope.onComplete();
                 });
 
                 // Hide the widgets
@@ -5749,8 +5757,8 @@ app.directive('hidePlaceholder', function () {
                 //  /* Mozilla Firefox 19+ */
                 //  .hide-placeholder::-moz-placeholder { color: transparent; opacity: 0; }
 
-                //  /* Internet Explorer 10-11 */
-                //  .hide-placeholder:-ms-input-placeholder { color: transparent; opacity: 0 }
+                //  /* Internet Explorer 10-11, don't include opacity with IE or it will hide input borders */
+                //  .hide-placeholder:-ms-input-placeholder { color: transparent; }
 
                 //  /* Microsoft Edge */
                 //  .hide-placeholder::-ms-input-placeholder { color: transparent; opacity: 0 }
