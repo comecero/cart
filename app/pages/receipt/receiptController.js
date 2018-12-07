@@ -97,7 +97,7 @@
                 }
             });
 
-            if (_.where($scope.data.payment.order.items, { type: "digital", license: null, download: null }).length == 0) {
+            if (_.where($scope.data.payment.order.items, { type: "digital", license: null }).length == 0) {
                 $scope.data.awaitingLicense = false;
                 return;
             }
