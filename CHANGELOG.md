@@ -1,4 +1,10 @@
-﻿<a name="2.1.0"></a>
+﻿<a name="2.1.1"></a>
+# 2.1.1
+
+- Bug fix in displaying license codes for digital products on receipt page
+- Integrate kit version ﻿1.0.13 of kit. See kit release notes for details.
+
+<a name="2.1.0"></a>
 # 2.1.0
 
 - Add support for cross-sells in the cart.
