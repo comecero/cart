@@ -441,7 +441,7 @@
                                 <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.payment_method" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span translate>Complete Payment</span> <span class="hidden-xs">&middot; {{data.invoice.formatted.total}} {{data.invoice.currency}}</span></button>
+                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.payment_method" invoice="data.invoice" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span translate>Complete Payment</span> <span class="hidden-xs">&middot; {{data.invoice.formatted.total_remaining}} {{data.invoice.currency}}</span></button>
                                         </div>
                                     </div>
                                 </div>
