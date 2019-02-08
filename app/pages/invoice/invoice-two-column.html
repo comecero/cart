@@ -132,7 +132,7 @@
                                             <span class="has-price">{{data.invoice.formatted.tax}}</span>
                                         </div>
                                     </div>
-                                    <div ng-if="data.invoice.total_payments">
+                                    <div ng-if="data.invoice.total_payments > 0">
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <span translate>Total</span>
@@ -155,6 +155,16 @@
                                             </div>
                                             <div class="col-xs-6 text-right">
                                                 <span class="text-lg has-price">{{data.invoice.formatted.total_remaining}} {{data.invoice.currency}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="data.invoice.total_payments === 0">
+                                             <div class="row spacer-t24">
+                                            <div class="col-xs-6">
+                                                <strong class="text-lg" translate>Total</strong>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <span class="text-lg has-price">{{data.invoice.formatted.total}} {{data.invoice.currency}}</span>
                                             </div>
                                         </div>
                                     </div>
