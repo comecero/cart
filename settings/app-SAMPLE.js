@@ -17,6 +17,7 @@ window.__settings = window.__settings || {}; window.__settings.app =
         "show_digital_delivery": true,
         "enable_languages": true,
         "show_continue_shopping": true,
+        "upsell_prompt": "order_submission",
         "cross_sell_position": "inline_top",
         "cross_sell_heading": "you_might_also_be_interested_in",
         "cross_sell_items": "1",

@@ -33,3 +33,51 @@ app.directive('downloadReceipt', ['ApiService', function (ApiService) {
         }
     };
 }]);
+
+app.directive('upsellstackedModal', ['$uibModal', function ($uibModal) {
+    return {
+        restrict: 'A',
+        scope: {
+            item: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+            elem.on("click", function () {
+
+                var upsellstackedModal = $uibModal.open({
+                    size: "md",
+                    templateUrl: "app/templates/upsell-stacked.html",
+                    scope: scope
+                });
+
+                scope.close = function () {
+                    upsellstackedModal.dismiss();
+                };
+
+            });
+        }
+    };
+}]);
+
+app.directive('upsellcompareModal', ['$uibModal', function ($uibModal) {
+    return {
+        restrict: 'A',
+        scope: {
+            item: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+            elem.on("click", function () {
+
+                var upsellcompareModal = $uibModal.open({
+                    size: "md",
+                    templateUrl: "app/templates/upsell-compare.html",
+                    scope: scope
+                });
+
+                scope.close = function () {
+                    upsellcompareModal.dismiss();
+                };
+
+            });
+        }
+    };
+}]);
