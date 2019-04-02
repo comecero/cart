@@ -148,6 +148,25 @@
     "default_value": true
   },
   {
+    "name": "upsell_prompt",
+    "type": "string",
+    "label": "Upsell Prompt",
+    "description": "Determines when an upsell offer will appear.",
+    "section": "Features",
+    "required": true,
+    "default_value": "order_submission",
+    "options": [
+      {
+        "display": "On Order Submission",
+        "value": "order_submission"
+      },
+      {
+        "display": "On Cart Load",
+        "value": "cart_load"
+      }
+    ]
+  },
+  {
     "name": "cross_sell_position",
     "type": "string",
     "label": "Cross Sell Position",

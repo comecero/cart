@@ -1,0 +1,33 @@
+<div class="modal-upsell upsell-compare">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6 col-xs-12 upsell-product">
+                <span class="modal-title" translate>Upgrade for $10.00 more</span>
+                <img src="https://d3gtme41rrvmrr.cloudfront.net/BE4696/0190321314002ImpCqulx9/sq_Reghunter_logo2x.png" />
+                <strong>SpyHunter Pro</strong>
+                <p class="text-light">SpyHunter's advanced proprietary anti-malware engine is designed to protect your system.</p>
+                <strong class="has-price spacer-b24"><span><del class="discount text-danger">$69.99</del>&nbsp;</span>$49.99</strong>
+                <button type="button" class="btn btn-primary btn-upsell-cta"><span translate>Upgrade</span></button>
+                <p class="helper text-light" translate>Replaces item on your order and charges your payment method.</p>
+            </div>
+            <div class="col-sm-6 col-sm-pull-6 col-xs-12 selected-product">
+                <span class="modal-title" translate>Your Order</span>
+                <img src="https://d3gtme41rrvmrr.cloudfront.net/BE4696/0190321314002ImpCqulx9/sq_Reghunter_logo2x.png" />
+                <strong>SpyHunter</strong>
+                <p class="text-light">SpyHunter's advanced proprietary anti-malware engine is designed to protect your system.</p>
+                <strong class="has-price spacer-b24">$39.99</strong>
+                <button type="button" class="btn btn-inverse"><span translate>Complete Order</span></button>
+                <p class="helper text-light" translate>No thanks</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+    Replace dynamic values
+
+    Add similar to price tag
+    <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>
+                                                    {{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}
+-->
