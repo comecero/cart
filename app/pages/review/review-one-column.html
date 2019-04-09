@@ -17,8 +17,14 @@
     </nav>
 
     <div class="container container-content">
+
+        <div class="row text-center spacer-b48 spacer-t48" ng-show="showLoader">
+            <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+            <p class="spacer-t36"><i translate>Please wait while your order is processed</i></p>
+        </div>
+
         <!-- Must be ng-form to prevent Amazon Pay button from generating wallet in new tab when clicked twice. Bug report filed with Amazon Pay team. -->
-        <ng-form name="form" customer-fields options="data.sale.options" items="data.sale.items" shipping-is-billing="true" novalidate>
+        <ng-form name="form" customer-fields options="data.sale.options" items="data.sale.items" shipping-is-billing="true" novalidate ng-show="!showLoader">
             <div class="row spacer-t12">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     <div class="row">
