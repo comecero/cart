@@ -47,158 +47,7 @@ app.directive('downloadReceipt', ['ApiService', function (ApiService) {
         }
     };
 }]);
-
-app.directive('upsellstackedModal', ['$uibModal', function ($uibModal) {
-    return {
-        restrict: 'A',
-        scope: {
-            item: '=?'
-        },
-        link: function (scope, elem, attrs, ctrl) {
-            elem.on("click", function () {
-
-                var upsellstackedModal = $uibModal.open({
-                    size: "md",
-                    templateUrl: "app/templates/upsell-stacked.html",
-                    scope: scope
-                });
-
-                scope.close = function () {
-                    upsellstackedModal.dismiss();
-                };
-
-            });
-        }
-    };
-}]);
-
-app.directive('upsellcompareModal', ['$uibModal', function ($uibModal) {
-    return {
-        restrict: 'A',
-        scope: {
-            item: '=?'
-        },
-        link: function (scope, elem, attrs, ctrl) {
-            elem.on("click", function () {
-
-                var upsellcompareModal = $uibModal.open({
-                    size: "md",
-                    templateUrl: "app/templates/upsell-compare.html",
-                    scope: scope
-                });
-
-                scope.close = function () {
-                    upsellcompareModal.dismiss();
-                };
-
-            });
-        }
-    };
-}]);
-app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', 'SettingsService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, SettingsService, $document) {
-
-    // Define a place to hold your data
-    $scope.data = {};
-
-    // Load in the default payment method
-    $scope.options = { "payment_method": "credit_card" };
-
-    // Load in some helpers
-    $scope.geoService = GeoService;
-    $scope.helpers = HelperService;
-    $scope.settings = SettingsService.get();
-
-    // Set the invoice parameters
-    $scope.data.params = {};
-    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
-    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
-
-    // Set default values.
-    $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
-
-    // Build your payment method models
-    $scope.data.payment_method = { "type": "credit_card" };
-    $scope.data.amazon_pay = { "type": "amazon_pay" };
-    $scope.data.paypal = {
-        "type": "paypal",
-        data: {
-            // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
-            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/review/{{payment_id}}",
-            "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/invoice"
-        }
-    }
-
-    // Get the invoice
-    InvoiceService.get($scope.data.params).then(function (invoice) {
-
-        $scope.data.invoice = invoice;
-
-        // Only display images if all items in the invoice have images
-        $scope.showImages = false;
-        var hasImageCount = 0;
-        _.each(invoice.items, function (item) {
-            if (item.product != null) {
-                if (item.product.images.length > 0) {
-                    hasImageCount++;
-                }
-            }
-        });
-
-        if (hasImageCount == invoice.items.length) {
-            $scope.showImages = true;
-        }
-
-        // If there are payment methods, set the default onto the payment method object
-        var data = ((invoice.customer || {}).payment_methods || {}).data;
-        if (data) {
-            if (data.length > 0) {
-                $scope.data.payment_method = { payment_method_id: _.find(invoice.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
-            }
-        }
-
-    }, function (error) {
-        $scope.data.error = error;
-    });
-
-    // Handle a successful payment
-    $scope.onPaymentSuccess = function (payment) {
-
-        if (payment.payment_method.type == "paypal" && payment.status == "initiated") {
-            // If PayPal and status is initiated, redirect to PayPal for approval.
-            window.location = payment.response_data.redirect_url;
-        } else if (payment.payment_method.type == "amazon_pay") {
-            // If Amazon Pay, redirect for review
-            $location.path("/review/" + payment.payment_id);
-        } else {
-            // A successful card payment. Redirect to the receipt.
-            $location.path("/receipt/" + payment.payment_id);
-        }
-
-    }
-
-    $scope.setPaymentMethod = function (id, type) {
-
-        // Remove all data from the payment method
-        $scope.data.payment_method = {};
-
-        // If a payment_method_id or type is provided, set it.
-        if (id)
-            $scope.data.payment_method.payment_method_id = id;
-
-        if (type)
-            $scope.data.payment_method.type = type;
-
-    }
-
-    // Watch for error to be populated, and if so, scroll to it.
-    $scope.$watch("data.error", function (newVal, oldVal) {
-        if ($scope.data.error) {
-            $document.scrollTop(0, 500);
-        }
-    });
-
-}]);
-app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout) {
+app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', '$uibModal', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout, $uibModal) {
 
     // Define a place to hold your data and functions
     $scope.data = {};
@@ -220,7 +69,7 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
     $scope.data.shipping_is_billing = true; // User can toggle.
 
     // Build your payment method models
-    $scope.data.payment_method = { "type": "credit_card" };
+    $scope.data.credit_card = { "type": "credit_card" };
     $scope.data.amazon_pay = { "type": "amazon_pay" };
     $scope.data.paypal = {
         "type": "paypal",
@@ -230,6 +79,9 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
             "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/cart"
         }
     }
+
+    // Set the default selected payment method.
+    $scope.data.payment_method = $scope.data.credit_card;
 
     // Get the current cart
     CartService.get().then(function (cart) {
@@ -255,6 +107,11 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
                 if (data.length > 0) {
                     $scope.data.payment_method = { payment_method_id: _.find(cart.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
                 }
+            }
+
+            // Open the upsell, if configured.
+            if ($scope.settings.app.upsell_trigger == "cart_load") {
+                openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger, $scope.settings.app.upsell_delay);
             }
 
         }, function (error) {
@@ -360,7 +217,7 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
         });
     }
 
-    $scope.showElectronicDelivery = function(cart, item) {
+    $scope.showElectronicDelivery = function (cart, item) {
 
         // If there's only one item in the cart and there's a shipping item, we'll show the delivery method, regardless of any other setting.
         if (cart.items.length == 1 && cart.shipping_item) {
@@ -389,6 +246,197 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
         return false;
     }
 
+    $scope.onPaymentValidationSuccess = function () {
+        if ($scope.settings.app.upsell_trigger == "payment_submit" && $scope.data.cart.up_sells && $scope.data.cart.up_sells.data && $scope.data.cart.up_sells.data.length) {
+            openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger);
+            return false; // Return false to tell the submit-payment directive to stop processing.
+        }
+    }
+
+    var upsellTimeout;
+    function openUpsell(type, trigger, delay) {
+
+        // Don't launch if disabled
+        if (!type) {
+            return;
+        }
+
+        if (!delay)
+            delay = 0;
+
+        delay = delay * 1000;
+
+        var templateUrl = "app/templates/upsell-" + type;
+        if (trigger == "cart_load") {
+            templateUrl += "-load";
+        }
+        templateUrl += ".html";
+
+        upsellTimeout = $timeout(function () {
+            $scope.upsellModal = $uibModal.open({
+                size: "md",
+                templateUrl: templateUrl,
+                scope: $scope
+            });
+        }, delay);
+
+    }
+
+    $scope.closeUpsell = function () {
+        if ($scope.upsellModal)
+            $scope.upsellModal.dismiss();
+    }
+
+    $scope.commitUpsellAndPay = function (upsell, elementId) {
+
+        if (elementId) {
+            var elem = document.getElementById(elementId);
+            if (elem)
+                elem.disabled = true;
+        }
+
+        var cartCopy = angular.copy($scope.data.cart);
+        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id });
+        CartService.pay(cartCopy, $scope.data.payment_method, null, $scope.data.params).then(function (payment) {
+            $scope.data.cart = cartCopy;
+            $scope.onPaymentSuccess(payment);
+            $scope.closeUpsell();
+        }, function (error) {
+            $scope.data.cart = cartCopy;
+            $scope.data.error = error;
+        });
+    }
+
+    $scope.commitUpsell = function (upsell) {
+        var cartCopy = angular.copy($scope.data.cart);
+        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id });
+        CartService.update(cartCopy, $scope.data.params).then(function (cart) {
+            $scope.data.cart = cart;
+            $scope.closeUpsell();
+        }, function (error) {
+            $scope.data.error = error;
+        });
+    }
+
+    // Watch for error to be populated, and if so, scroll to it.
+    $scope.$watch("data.error", function (newVal, oldVal) {
+        if ($scope.data.error) {
+            $scope.closeUpsell();
+            $document.scrollTop(0, 500);
+        }
+    });
+
+    // Watch for the payment method to switch, and set the payment method data accordingly.
+    $scope.$watch("options.payment_method", function (newVal, oldVal) {
+        if (newVal) {
+            $scope.data.payment_method = $scope.data[newVal];
+        }
+    });
+
+    // Clear any pending timeouts, otherwise they may trigger when you change pages
+    $scope.$on("$destroy", function () {
+        if (angular.isDefined(updateBuffer))
+            $timeout.cancel(updateBuffer);
+
+        if (angular.isDefined(upsellTimeout))
+            $timeout.cancel(upsellTimeout);
+    });
+
+}]);
+app.controller("InvoiceController", ['$scope', '$location', 'InvoiceService', 'GeoService', 'CurrencyService', 'HelperService', 'SettingsService', '$document', function ($scope, $location, InvoiceService, GeoService, CurrencyService, HelperService, SettingsService, $document) {
+
+    // Define a place to hold your data
+    $scope.data = {};
+
+    // Load in the default payment method
+    $scope.options = { "payment_method": "credit_card" };
+
+    // Load in some helpers
+    $scope.geoService = GeoService;
+    $scope.helpers = HelperService;
+    $scope.settings = SettingsService.get();
+
+    // Set the invoice parameters
+    $scope.data.params = {};
+    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+
+    // Set default values.
+    $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
+
+    // Build your payment method models
+    $scope.data.payment_method = { "type": "credit_card" };
+    $scope.data.amazon_pay = { "type": "amazon_pay" };
+    $scope.data.paypal = {
+        "type": "paypal",
+        data: {
+            // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
+            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/review/{{payment_id}}",
+            "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/invoice"
+        }
+    }
+
+    // Get the invoice
+    InvoiceService.get($scope.data.params).then(function (invoice) {
+
+        $scope.data.invoice = invoice;
+
+        // Only display images if all items in the invoice have images
+        $scope.showImages = false;
+        var hasImageCount = 0;
+        _.each(invoice.items, function (item) {
+            if (item.product != null) {
+                if (item.product.images.length > 0) {
+                    hasImageCount++;
+                }
+            }
+        });
+
+        if (hasImageCount == invoice.items.length) {
+            $scope.showImages = true;
+        }
+
+        // If there are payment methods, set the default onto the payment method object
+        var data = ((invoice.customer || {}).payment_methods || {}).data;
+        if (data) {
+            if (data.length > 0) {
+                $scope.data.payment_method = { payment_method_id: _.find(invoice.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
+            }
+        }
+
+    }, function (error) {
+        $scope.data.error = error;
+    });
+
+    // Handle a successful payment
+    $scope.onPaymentSuccess = function (payment) {
+
+        if (payment.payment_method.type == "paypal" && payment.status == "initiated") {
+            // If PayPal and status is initiated, redirect to PayPal for approval.
+            window.location = payment.response_data.redirect_url;
+        } else if (payment.payment_method.type == "amazon_pay") {
+            // If Amazon Pay, redirect for review
+            $location.path("/review/" + payment.payment_id);
+        } else {
+            // A successful card payment. Redirect to the receipt.
+            $location.path("/receipt/" + payment.payment_id);
+        }
+
+    }
+
+    $scope.setPaymentMethod = function (id, type) {
+
+        // Remove all data from the payment method
+        $scope.data.payment_method = {};
+
+        // If a payment_method_id or type is provided, set it.
+        if (id)
+            $scope.data.payment_method.payment_method_id = id;
+
+        if (type)
+            $scope.data.payment_method.type = type;
+
+    }
 
     // Watch for error to be populated, and if so, scroll to it.
     $scope.$watch("data.error", function (newVal, oldVal) {
@@ -398,6 +446,41 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
     });
 
 }]);
+app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
+        
+        // Define a place to hold your data
+        $scope.data = {};
+        
+        // Load the geo service for countries, states, provinces (used for dropdowns).
+        $scope.geo = GeoService.getData();
+        $scope.settings = SettingsService.get();
+        
+        $scope.data.params = {};
+        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
+        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
+        $scope.data.params.currency = CurrencyService.getCurrency();
+        $scope.data.params.formatted = true;
+        $scope.data.params.limit = 50;
+        
+        // Load the products
+        ProductService.getList($scope.data.params).then(function (products) {
+            $scope.data.products = products;
+        }, function (error) {
+            $scope.data.error = error;
+        });
+        
+        $scope.onAddToCart = function (item) {
+            $location.path("/cart");
+        }
+        
+        // Watch for error to be populated, and if so, scroll to it.
+        $scope.$watch("data.error", function (newVal, oldVal) {
+            if ($scope.data.error) {
+                $document.scrollTop(0, 500);
+            }
+        });
+
+    }]);
 app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService', 'OrderService', 'SettingsService', 'HelperService', '$document', '$interpolate', function ($scope, $routeParams, PaymentService, OrderService, SettingsService, HelperService, $document, $interpolate) {
 
     // Define a place to hold your data
@@ -539,41 +622,6 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
     });
 
 }]);
-app.controller("ProductsController", ['$scope', '$routeParams', '$location', '$document', 'ProductService', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', function ($scope, $routeParams, $location, $document, ProductService, CartService, GeoService, CurrencyService, SettingsService) {
-        
-        // Define a place to hold your data
-        $scope.data = {};
-        
-        // Load the geo service for countries, states, provinces (used for dropdowns).
-        $scope.geo = GeoService.getData();
-        $scope.settings = SettingsService.get();
-        
-        $scope.data.params = {};
-        $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods";
-        $scope.data.params.show = "product_id,name,price,currency,description,images.*";
-        $scope.data.params.currency = CurrencyService.getCurrency();
-        $scope.data.params.formatted = true;
-        $scope.data.params.limit = 50;
-        
-        // Load the products
-        ProductService.getList($scope.data.params).then(function (products) {
-            $scope.data.products = products;
-        }, function (error) {
-            $scope.data.error = error;
-        });
-        
-        $scope.onAddToCart = function (item) {
-            $location.path("/cart");
-        }
-        
-        // Watch for error to be populated, and if so, scroll to it.
-        $scope.$watch("data.error", function (newVal, oldVal) {
-            if ($scope.data.error) {
-                $document.scrollTop(0, 500);
-            }
-        });
-
-    }]);
 app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'CartService', 'PaymentService', 'SettingsService', 'HelperService', 'GeoService', '$document', function ($scope, $location, $routeParams, CartService, PaymentService, SettingsService, HelperService, GeoService, $document) {
 
     // Define a place to hold your data

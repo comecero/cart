@@ -273,20 +273,20 @@ img.product-icon {
     border-radius: 2px;
 }
 
-/* Upsell Stacked */
-.modal-upsell.upsell-stacked .modal-header {
+/* Upsell Standard */
+.modal-upsell.upsell-standard .modal-header {
     background-color: $brand-primary;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
-.modal-upsell.upsell-stacked .modal-header .close {
+.modal-upsell.upsell-standard .modal-header .close {
     color: $btn-primary-color;
     opacity: 1;
 }
-.modal-upsell.upsell-stacked .modal-header .close:hover {
+.modal-upsell.upsell-standard .modal-header .close:hover {
     cursor: pointer;
 }
-.modal-upsell.upsell-stacked .modal-title {
+.modal-upsell.upsell-standard .modal-title {
     text-align: center;
     color: $btn-primary-color;
     padding: 0 40px;
@@ -294,24 +294,24 @@ img.product-icon {
     font-weight: 500;
     display: block;
 }
-.modal-upsell.upsell-stacked .modal-body {
+.modal-upsell.upsell-standard .modal-body {
     text-align: center;
 }
-.modal-upsell.upsell-stacked .modal-body > img, .modal-upsell.upsell-stacked .modal-body > strong {
+.modal-upsell.upsell-standard .modal-body > img, .modal-upsell.upsell-standard .modal-body > strong {
     display: block;
 }
-.modal-upsell.upsell-stacked .modal-body > strong {
+.modal-upsell.upsell-standard .modal-body > strong {
     color: #686868;
 }
-.modal-upsell.upsell-stacked .modal-body > img {
+.modal-upsell.upsell-standard .modal-body > img {
     max-height: 88px;
     margin: 24px auto;
 }
-.modal-upsell.upsell-stacked .modal-body > p {
+.modal-upsell.upsell-standard .modal-body > p {
     max-width: 420px;
     margin: 6px auto 12px
 }
-.modal-upsell.upsell-stacked .modal-body > .btn {
+.modal-upsell.upsell-standard .modal-body > .btn {
     min-width: 160px;
     font-weight: 500;
     padding: 8px 12px;

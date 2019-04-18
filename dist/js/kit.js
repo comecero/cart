@@ -1,7 +1,7 @@
 /*
 Comecero Kit version: ﻿1.0.14
-Build time: 2019-04-09T15:24:08.446Z
-Checksum (SHA256): 1045e473ca810c9a5dd7de2a67168f379d01596d754cd2af74d62f05c61c608a
+Build time: 2019-04-18T21:41:22.118Z
+Checksum (SHA256): 6646bb11c39b9d9783b952940f918c598149ef9220a500ccbbd5ac23966d9868
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -2702,9 +2702,12 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
     // invoice: Provide the invoice that will be paid for. The invoice will automatically be updated through the API before the payment for the payment is submitted (i.e. a currency change). Cart or invoice can be supplied, but not both.
     // payment: Provide the payment object for a direct, stand-alone payment (no cart or invoice). If payment is provided cart and invoice should NOT be provided.
     // error: The error object to communicate errors.
-    // onSubmit: A function that will be called from scope when a payment is submitted.
+    // onSubmit: A function that will be called from scope when a payment is submitted. If the function that is called returns false, then the directive will stop processing and return.
     // onSuccess: A function that will be called from scope when the payment is successfully completed. Will include the response payment object as a parameter.
     // onError: A function that will be called from scope when the payment fails. Will include the (failed) response payment object as a parameter.
+    // onValidationSuccess: A function that will be called from scope when the validation is successful. If the function that is called returns false, then the directive will stop processing and return.
+    // onValidationError: A function that will be called from scope when the validation fails. The error object will be returned as a parameter.
+    // loading: This value is true while the submit payment is processing, false when done processing.
 
     // Shared scope that are specific to different payment methods:
 
@@ -2715,7 +2718,8 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
     // getConsentStatus: Pass in a function that allows you get the status of the Amazon Pay consent checkbox. This function you pass in is provided by the amazonPayButton directive.
 
     // Attributes
-    // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
+    // params: An object that supplies a list of parameters to send to the api for the payment, such as show, hide, formatted, etc. Used to customize the response object.
+    // cartParams: When a payment is submitted, a cart may be created or updated. An object that supplies a list of parameters to send to the api for the cart, such as show, hide, formatted, etc. Used to customize the response object.
 
     return {
         restrict: 'A',
@@ -2726,20 +2730,30 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
             invoice: '=?',
             payment: '=?',
             params: '=?',
+            cartParams: '=?',
             error: '=?',
             onSubmit: '=?',
             onSuccess: '=?',
+            onValidationSuccess: '=?',
+            onValidationError: '=?',
             onError: '=?',
             shippingIsBilling: '=?',
-            getConsentStatus: '=?'
+            getConsentStatus: '=?',
+            loading: '=?'
         },
         link: function (scope, elem, attrs, ctrl) {
 
             elem.bind("click", function () {
 
+                scope.loading = true;
+
                 // Fire the submit event
                 if (scope.onSubmit) {
-                    scope.onSubmit();
+                    var result = scope.onSubmit();
+                    if (result === false) {
+                        scope.loading = false;
+                        return;
+                    }
                 }
 
                 // Validation functions. 
@@ -2751,6 +2765,10 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         error = { type: "bad_request", reference: "kI1ETNz", code: "invalid_input", message: gettextCatalog.getString("There was a problem with some of the information you supplied. Please review for errors and try again."), status: 400 };
                     }
 
+                    if (scope.onValidationError)
+                        scope.onValidationError(error);
+
+                    scope.loading = false;
                     return error;
 
                 }
@@ -2763,6 +2781,10 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         error = { type: "bad_request", reference: "eiptRbg", code: "invalid_input", message: gettextCatalog.getString("Please provide an amount for your payment."), status: 400 };
                     }
 
+                    if (scope.onValidationError)
+                        scope.onValidationError(error);
+
+                    scope.loading = false;
                     return error;
 
                 }
@@ -2780,6 +2802,11 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                             scope.$apply(function () {
                                 scope.error = error;
                             });
+
+                            if (scope.onValidationError)
+                                scope.onValidationError(error);
+
+                            scope.loading = false;
                             return;
                         }
 
@@ -2795,7 +2822,12 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         if (error) {
                             scope.$apply(function () {
                                 scope.error = error;
+
+                                if (scope.onValidationError)
+                                    scope.onValidationError(error);
+
                             });
+                            scope.loading = false;
                             return;
                         }
 
@@ -2814,12 +2846,25 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         if (error) {
                             scope.$apply(function () {
                                 scope.error = error;
+
+                                if (scope.onValidationError)
+                                    scope.onValidationError(error);
+
                             });
+                            scope.loading = false;
                             return;
                         }
 
                         break;
 
+                }
+
+                if (scope.onValidationSuccess) {
+                    var result = scope.onValidationSuccess();
+                    if (result === false) {
+                        scope.loading = false;
+                        return;
+                    }
                 }
 
                 // For direct payments, amounts are provided by form input. If supplied, make sure the values are numbers and not strings. This ensures that the JSON sent to the API will be in numeric format and not string, which the API will reject as invalid.
@@ -2854,7 +2899,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         delete scope.cart.customer.shipping_address;
                     }
 
-                    CartService.pay(scope.cart, scope.paymentMethod, params).then(function (payment) {
+                    CartService.pay(scope.cart, scope.paymentMethod, params, scope.cartParams).then(function (payment) {
 
                         // Fire the success event
                         if (scope.onSuccess) {
@@ -2867,6 +2912,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         }
 
                         // Remove the disabled attribute
+                        scope.loading = false;
                         elem.prop("disabled", null);
 
                     }, function (error) {
@@ -2879,6 +2925,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         }
 
                         // Remove the disabled attribute
+                        scope.loading = false;
                         elem.prop("disabled", null);
 
                     });
@@ -2886,7 +2933,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
 
                 if (scope.invoice) {
 
-                    InvoiceService.pay(scope.invoice, scope.paymentMethod, params).then(function (payment) {
+                    InvoiceService.pay(scope.invoice, scope.paymentMethod, params, saleParams).then(function (payment) {
 
                         // Fire the success event
                         if (scope.onSuccess) {
@@ -2899,6 +2946,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         }
 
                         // Remove the disabled attribute
+                        scope.loading = false;
                         elem.prop("disabled", null);
 
                     }, function (error) {
@@ -2911,6 +2959,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         }
 
                         // Remove the disabled attribute
+                        scope.loading = false;
                         elem.prop("disabled", null);
 
                     });
@@ -2933,6 +2982,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         }
 
                         // Remove the disabled attribute
+                        scope.loading = false;
                         elem.prop("disabled", null);
 
                     }, function (error) {
@@ -2945,6 +2995,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
                         }
 
                         // Remove the disabled attribute
+                        scope.loading = false;
                         elem.prop("disabled", null);
 
                     });
@@ -6809,7 +6860,7 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
 
     }
 
-    function pay(cart, payment_method, parameters, quiet) {
+    function pay(cart, payment_method, parameters, cartParameters, quiet) {
 
         var deferred = $q.defer();
         parameters = setDefaultParameters(parameters);
@@ -6835,18 +6886,28 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
             });
         };
 
+        var copyObject = function (cart, newCart) {
+            for (var property in newCart) {
+                if (newCart.hasOwnProperty(property)) {
+                    cart[property] = newCart[property];
+                }
+            }
+        }
+
         // If there currently is no cart, create it. Otherwise, update the existing cart.
-        if (cart.cart_id == null) {
-            create(cart, parameters, quiet).then(function (cart) {
+        if (!cart || cart.cart_id == null) {
+            create(cart, cartParameters, quiet).then(function (data) {
+                copyObject(cart, data);
                 sendPayment(cart.cart_id, payment_method);
             }, function (error) {
                 deferred.reject(error);
             });
-
         } else {
-            update(cart, parameters, quiet).then(function (cart) {
+            update(cart, cartParameters, quiet).then(function (data) {
+                copyObject(cart, data);
                 sendPayment(cart.cart_id, payment_method);
             }, function (error) {
+                copyObject(cart, data);
                 deferred.reject(error);
             });
         }

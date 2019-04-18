@@ -8,8 +8,8 @@
                     <strong>{{data.cart.up_sells.data[0].name}}</strong>
                     <p class="text-light">{{data.cart.up_sells.data[0].product.headline}}</p>
                     <strong class="has-price spacer-b24"><span><del class="discount text-danger" ng-if="data.cart.up_sells.data[0].discount">{{data.cart.up_sells.data[0].formatted.price_original}}</del>&nbsp;</span>{{data.cart.up_sells.data[0].formatted.price}}</strong>
-                    <button type="button" id="upsell_commit" class="btn btn-primary btn-upsell-cta" ng-click="commitUpsellAndPay(data.cart.up_sells.data[0], 'upsell_commit')"><span translate>Upgrade</span></button>
-                    <p class="helper text-light" translate>Upgrade my selection and complete my order</p>
+                    <button type="button" id="upsell_commit" class="btn btn-primary btn-upsell-cta" ng-click="commitUpsell(data.cart.up_sells.data[0])"><span translate>Upgrade</span></button>
+                    <p class="helper text-light" translate>Replace my selection</p>
                 </div>
                 <div class="col-sm-6 col-sm-pull-6 col-xs-12 selected-product">
                     <span class="modal-title" translate>Your Order</span>
@@ -17,8 +17,8 @@
                     <strong>{{data.cart.up_sells.data[0].up_sell_from_product.name}}</strong>
                     <p class="text-light">{{data.cart.up_sells.data[0].up_sell_from_product.headline}}</p>
                     <strong class="has-price spacer-b24">{{data.cart.up_sells.data[0].up_sell_from_product.formatted.price}}</strong>
-                    <button type="button" class="btn btn-inverse" submit-payment="data.payment_method" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" cart-params="data.params" error="data.error" translate>No, Don't Upgrade</button>
-                    <p class="helper text-light" translate>Keep my selection and complete my order</p>
+                    <button type="button" class="btn btn-inverse" ng-click="closeUpsell()" translate>No Thanks</button>
+                    <p class="helper text-light" translate>Keep my selection</p>
                 </div>
             </div>
         </div>
