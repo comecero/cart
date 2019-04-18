@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿2.1.1
+Comecero Cart version: ﻿2.2.0
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -258,6 +258,12 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
 
         // Don't launch if disabled
         if (!type) {
+            return;
+        }
+
+        // Don't launch if no upsell is available
+        if (!$scope.cart.up_sells || !$scope.cart.up_sells.total_items)
+        {
             return;
         }
 

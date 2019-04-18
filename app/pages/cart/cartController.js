@@ -212,6 +212,12 @@
             return;
         }
 
+        // Don't launch if no upsell is available
+        if (!$scope.cart.up_sells || !$scope.cart.up_sells.total_items)
+        {
+            return;
+        }
+
         if (!delay)
             delay = 0;
 
