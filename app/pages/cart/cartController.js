@@ -13,7 +13,16 @@
 
     // Set the cart parameters
     $scope.data.params = {};
-    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options,cross_sells.product,up_sells.product,up_sells.up_sell_from_product";
+    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+
+    if ($scope.settings.app.cross_sell_items && Number($scope.settings.app.cross_sell_items)) {
+        $scope.data.params.expand += ",cross_sells.product";
+    }
+
+    if ($scope.settings.app.upsell_trigger) {
+        $scope.data.params.expand += ",up_sells.product,up_sells.up_sell_from_product";
+    }
+
     $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
 
     // Set default values.
@@ -213,7 +222,7 @@
         }
 
         // Don't launch if no upsell is available
-        if (!$scope.cart.up_sells || !$scope.cart.up_sells.total_items)
+        if (!$scope.data.cart.up_sells || !$scope.data.cart.up_sells.total_items)
         {
             return;
         }
