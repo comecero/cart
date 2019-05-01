@@ -19,7 +19,7 @@
         $scope.data.params.expand += ",cross_sells.product";
     }
 
-    if ($scope.settings.app.upsell_trigger) {
+    if ($scope.settings.app.upsell_trigger && $scope.settings.app.upsell_trigger != "disable") {
         $scope.data.params.expand += ",up_sells.product,up_sells.up_sell_from_product";
     }
 

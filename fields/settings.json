@@ -166,7 +166,7 @@
       },
       {
         "display": "Disable up sell offers",
-        "value": null
+        "value": "disable"
       }
     ]
   },
