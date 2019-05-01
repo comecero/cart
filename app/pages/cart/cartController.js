@@ -262,7 +262,8 @@
         }
 
         var cartCopy = angular.copy($scope.data.cart);
-        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id });
+        var triggerItem = _.find($scope.data.cart.items, function (i) { return i.item_id == upsell.up_sell_from_product.product_id });
+        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id, quantity: triggerItem.quantity });
         CartService.pay(cartCopy, $scope.data.payment_method, null, $scope.data.params).then(function (payment) {
             $scope.data.cart = cartCopy;
             $scope.onPaymentSuccess(payment);
@@ -275,7 +276,8 @@
 
     $scope.commitUpsell = function (upsell) {
         var cartCopy = angular.copy($scope.data.cart);
-        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id });
+        var triggerItem = _.find($scope.data.cart.items, function (i) { return i.item_id == upsell.up_sell_from_product.product_id });
+        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id, quantity: triggerItem.quantity });
         CartService.update(cartCopy, $scope.data.params).then(function (cart) {
             $scope.data.cart = cart;
             $scope.closeUpsell();
