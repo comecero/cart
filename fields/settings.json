@@ -151,7 +151,7 @@
     "name": "upsell_trigger",
     "type": "string",
     "label": "Up Sell Trigger",
-    "description": "Determines when an upsell offer will appear.",
+    "description": "Determines when an up sell offer will appear.",
     "section": "Promotions",
     "required": false,
     "default_value": "cart_load",
