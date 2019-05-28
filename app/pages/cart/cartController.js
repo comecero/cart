@@ -261,9 +261,18 @@
                 elem.disabled = true;
         }
 
+        // Make a copy of the cart
         var cartCopy = angular.copy($scope.data.cart);
+
+        // Define the item that triggered the upsell offer.
         var triggerItem = _.find($scope.data.cart.items, function (i) { return i.item_id == upsell.up_sell_from_product.product_id });
+
+        // Add the upsell item to the cart, using the quantity from the trigger item. Add the upsell ID to get the discount.
         cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id, quantity: triggerItem.quantity });
+
+        // Remove the trigger item from the cart.
+        cartCopy.items = _.reject(cartCopy.items, function (item) { return item.product_id == triggerItem.product_id });
+
         CartService.pay(cartCopy, $scope.data.payment_method, null, $scope.data.params).then(function (payment) {
             $scope.data.cart = cartCopy;
             $scope.onPaymentSuccess(payment);
@@ -275,9 +284,19 @@
     }
 
     $scope.commitUpsell = function (upsell) {
+
+        // Make a copy of the cart
         var cartCopy = angular.copy($scope.data.cart);
+
+        // Define the item that triggered the upsell offer.
         var triggerItem = _.find($scope.data.cart.items, function (i) { return i.item_id == upsell.up_sell_from_product.product_id });
+
+        // Add the upsell item to the cart, using the quantity from the trigger item. Add the upsell ID to get the discount.
         cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id, quantity: triggerItem.quantity });
+
+        // Remove the trigger item from the cart.
+        cartCopy.items = _.reject(cartCopy.items, function (item) { return item.product_id == triggerItem.product_id });
+
         CartService.update(cartCopy, $scope.data.params).then(function (cart) {
             $scope.data.cart = cart;
             $scope.closeUpsell();
