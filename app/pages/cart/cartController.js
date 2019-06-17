@@ -207,7 +207,7 @@
     }
 
     $scope.onPaymentValidationSuccess = function () {
-        if ($scope.settings.app.upsell_trigger == "payment_submit" && $scope.data.cart.up_sells && $scope.data.cart.up_sells.data && $scope.data.cart.up_sells.data.length) {
+        if ($scope.settings.app.upsell_trigger == "payment_submit" && $scope.data.cart.up_sells && $scope.data.cart.up_sells.data && $scope.data.cart.up_sells.data.length && utils.getCookie("upsell-" + $scope.data.cart.cart_id) == null) {
             openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger);
             return false; // Return false to tell the submit-payment directive to stop processing.
         }
@@ -226,6 +226,14 @@
         {
             return;
         }
+
+        // Don't show if we've already displayed an upsell for this cart recently.
+        if (utils.getCookie("upsell-" + $scope.data.cart.cart_id) != null) {
+            return;
+        }
+
+        // Set a cookie so we don't show it again for a while.
+        utils.setCookie("upsell-" + $scope.data.cart.cart_id, true, 60);
 
         if (!delay)
             delay = 0;
