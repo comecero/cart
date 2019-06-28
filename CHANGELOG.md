@@ -1,25 +1,32 @@
-﻿<a name="2.1.1"></a>
+﻿<a name="2.2.0"></a>
+# 2.2.0
+
+- Support for up sells in cart, on load or on payment submit
+- PayPal and Amazon Pay review screens will be skipped if there is no additional action is review is required by the customer (order total did not change, no shipping methods to select, no required data to provide)
+- Integrate Kit version 1.0.14
+
+<a name="2.1.1"></a>
 # 2.1.1
 
 - Bug fix in displaying license codes for digital products on receipt page
-- Integrate kit version ﻿1.0.13 of kit. See kit release notes for details.
+- Integrate Kit version ﻿1.0.13. See Kit release notes for details.
 
 <a name="2.1.0"></a>
 # 2.1.0
 
 - Add support for cross-sells in the cart.
-- Integrate kit version 1.0.12 of kit. See kit release notes for details.
+- Integrate Kit version 1.0.12. See Kit release notes for details.
 
 <a name="2.0.0"></a>
 # 2.0.0
 
 - Redesigned from the ground up! A fresh new design, including the option for one-column and two-column layouts.
-- Integrate kit version 1.0.10 of kit. See kit release notes for details.
+- Integrate Kit version 1.0.10. See Kit release notes for details.
 
 <a name="1.2.1"></a>
 # 1.2.1
 
-- Integrate kit version 1.0.9 of kit. See kit release notes for details.
+- Integrate Kit version 1.0.9. See Kit release notes for details.
 
 <a name="1.2.0"></a>
 # 1.2.0
@@ -27,7 +34,7 @@
 - Add support for Amazon Pay
 - Add support for Chinese (simplified) language
 - Ouput license code instructions if provided with the license
-- Integrate kit version 1.0.8 of kit. See kit release notes for details.
+- Integrate Kit version 1.0.8. See Kit release notes for details.
 
 <a name="1.1.1"></a>
 # 1.1.1
@@ -95,7 +102,7 @@
 <a name="1.0.1"></a>
 # 1.0.1
 
-- Integration of the latest kit release (1.0.1) which includes bug fixes
+- Integration of the latest Kit release (1.0.1) which includes bug fixes
 - A new option (under app settings) that allows you to indicate if you want a Continue Shopping button to appear below the cart summary.
 - Removal of double global footer
 

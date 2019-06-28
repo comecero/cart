@@ -71,7 +71,7 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
             },
             {
                 code: "de",
-                name: "Deutsche"
+                name: "Deutsch"
             },
             {
                 code: "el",

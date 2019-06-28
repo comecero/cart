@@ -1,7 +1,7 @@
 /*
 Comecero Kit version: ﻿1.0.14
-Build time: 2019-04-18T21:41:22.118Z
-Checksum (SHA256): 6646bb11c39b9d9783b952940f918c598149ef9220a500ccbbd5ac23966d9868
+Build time: 2019-06-26T16:53:14.439Z
+Checksum (SHA256): 28c008d98a1749d69f2c3b21a3bedea5615e052e3cbc4fd07dfd71471d299d38
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -4898,6 +4898,7 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
     // Shared scope:
     // cart: The updated cart to save. If an existing cart does not exist, one will be created and returned.
     // error: The error object to communicate errors.
+    // onSuccess: A function that will be called from scope when the save is successfully completed. Includes the cart as a parameter.
 
     // Attributes
     // params: An object that supplies a list of parameters to send to the api, such as show, hide, formatted, etc. Used to customize the response object.
@@ -4909,8 +4910,9 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
             cart: '=customerBackgroundSave',
             shippingIsBilling: '=?',
             params: '=?',
-            error: '=?'
-        },
+            error: '=?',
+            onSuccess: '=?',
+    },
         link: function (scope, elem, attrs, ctrl) {
 
             // Find all inputs that have the attribute of customer-field
@@ -4991,6 +4993,11 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
 
                                     // Sync the scope to the response.
                                     scope.cart = cart;
+
+                                    // Fire the success event
+                                    if (scope.onSuccess) {
+                                        scope.onSuccess(cart);
+                                    }
 
                                 }, function (error) {
                                     scope.error = error;
@@ -5991,14 +5998,14 @@ app.directive('crossSell', ['CartService', function (CartService) {
 
                     var cartCopy = angular.copy(scope.cart);
                     if (scope.commit) {
-                        cartCopy.items.push({ product_id: scope.commit.product_id, cross_sell_id: scope.commit.cross_sell_id });
+                        cartCopy.items.push({ product_id: scope.commit.product_id, cross_sell_id: scope.commit.cross_sell_id, quantity: scope.commit.quantity || 1 });
                     } else {
 
                         if (scope.commitQueued.length == 0)
                             return;
 
                         _.each(scope.commitQueued, function (item) {
-                            cartCopy.items.push({ product_id: item.product_id, cross_sell_id: item.cross_sell_id });
+                            cartCopy.items.push({ product_id: item.product_id, cross_sell_id: item.cross_sell_id, quantity: item.quantity || 1 });
                         });
                     }
 
@@ -6101,7 +6108,14 @@ app.service("ApiService", ['$http', '$q', 'SettingsService', 'HelperService', 'S
 
         // Pass in the user's language selection.
         parameters.user_locale = LanguageService.getLocale();
+
+        // Pass in the account_id, which is required when asking for a token.
         parameters.account_id = settings.account.account_id;
+
+        // If this is a test app, send a test flag to request a test token.
+        if (settings.account.test) {
+            parameters.test = true;
+        }
 
         // Prepare the url
         var endpoint = buildUrl("/auths/limited", settings);
@@ -6128,7 +6142,15 @@ app.service("ApiService", ['$http', '$q', 'SettingsService', 'HelperService', 'S
 
             deferred.resolve(response.data.token);
         }, function (error) {
-            deferred.reject({ type: "internal_server_error", reference: "6lnOOW1", code: "unspecified_error", message: gettextCatalog.getString("There was a problem obtaining authorization for this session. Please reload the page to try your request again."), status: error.status });
+
+            var msg = gettextCatalog.getString("There was a problem obtaining authorization for this session. Please reload the page to try your request again.");
+
+            // If this is a 403 error and you are in test mode, add a note to the error message about test orders.
+            if (settings.account.test && error.data.error.status == 403 && error.data.error.code == "insufficient_permissions") {
+                msg = "This app is installed in test mode and can only be run by authorized test users. To run this app, launch it from within your account while in test mode. If you would like to allow unauthenticated users to run apps in test mode, sign into your account, and enable 'Allow Public Test Orders' under Settings> Technical.";
+            }
+
+            deferred.reject({ type: "internal_server_error", reference: "6lnOOW1", code: "unspecified_error", message: msg, status: error.status });
         });
 
         return deferred.promise;
@@ -7778,6 +7800,10 @@ app.service("LanguageService", ['$q', '$rootScope', 'SettingsService', 'StorageS
         }
 
         StorageService.set("language", language);
+
+        var languages = getLanguages();
+        $rootScope.language = _.find(languages, function (l) { return l.code == language });
+
         gettextCatalog.setCurrentLanguage(language);
 
         // Emit the change
