@@ -265,7 +265,7 @@
                                                 <div class="alert alert-info">
                                                     <p><strong>{{item.license.label}}:</strong></p>
                                                     <span ng-bind-html="item.license.html"></span>
-                                                    <p ng-show="item.license.instructions" class="spacer-t12">{{item.license.instructions}}</p>
+                                                    <p ng-show="item.license.instructions" ng-bind-html="item.license.instructions" class="spacer-t12"></p>
                                                 </div>
                                             </td>
                                         </tr>

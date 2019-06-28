@@ -1,4 +1,4 @@
-﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout) {
+﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', '$uibModal', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout, $uibModal) {
 
     // Define a place to hold your data and functions
     $scope.data = {};
@@ -13,14 +13,23 @@
 
     // Set the cart parameters
     $scope.data.params = {};
-    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options,cross_sells.product";
+    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+
+    if ($scope.settings.app.cross_sell_items && Number($scope.settings.app.cross_sell_items)) {
+        $scope.data.params.expand += ",cross_sells.product";
+    }
+
+    if ($scope.settings.app.upsell_trigger && $scope.settings.app.upsell_trigger != "disable") {
+        $scope.data.params.expand += ",up_sells.product,up_sells.up_sell_from_product";
+    }
+
     $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
 
     // Set default values.
     $scope.data.shipping_is_billing = true; // User can toggle.
 
     // Build your payment method models
-    $scope.data.payment_method = { "type": "credit_card" };
+    $scope.data.credit_card = { "type": "credit_card" };
     $scope.data.amazon_pay = { "type": "amazon_pay" };
     $scope.data.paypal = {
         "type": "paypal",
@@ -30,6 +39,9 @@
             "cancel_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/cart"
         }
     }
+
+    // Set the default selected payment method.
+    $scope.data.payment_method = $scope.data.credit_card;
 
     // Get the current cart
     CartService.get().then(function (cart) {
@@ -55,6 +67,11 @@
                 if (data.length > 0) {
                     $scope.data.payment_method = { payment_method_id: _.find(cart.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
                 }
+            }
+
+            // Open the upsell, if configured.
+            if ($scope.settings.app.upsell_trigger == "cart_load") {
+                openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger, $scope.settings.app.upsell_delay);
             }
 
         }, function (error) {
@@ -160,7 +177,7 @@
         });
     }
 
-    $scope.showElectronicDelivery = function(cart, item) {
+    $scope.showElectronicDelivery = function (cart, item) {
 
         // If there's only one item in the cart and there's a shipping item, we'll show the delivery method, regardless of any other setting.
         if (cart.items.length == 1 && cart.shipping_item) {
@@ -189,12 +206,142 @@
         return false;
     }
 
+    $scope.onPaymentValidationSuccess = function () {
+        if ($scope.settings.app.upsell_trigger == "payment_submit" && $scope.data.cart.up_sells && $scope.data.cart.up_sells.data && $scope.data.cart.up_sells.data.length && utils.getCookie("upsell-" + $scope.data.cart.cart_id) == null) {
+            openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger);
+            return false; // Return false to tell the submit-payment directive to stop processing.
+        }
+    }
+
+    var upsellTimeout;
+    function openUpsell(type, trigger, delay) {
+
+        // Don't launch if disabled
+        if (!type) {
+            return;
+        }
+
+        // Don't launch if no upsell is available
+        if (!$scope.data.cart.up_sells || !$scope.data.cart.up_sells.total_items)
+        {
+            return;
+        }
+
+        // Don't show if we've already displayed an upsell for this cart recently.
+        if (utils.getCookie("upsell-" + $scope.data.cart.cart_id) != null) {
+            return;
+        }
+
+        // Set a cookie so we don't show it again for a while.
+        utils.setCookie("upsell-" + $scope.data.cart.cart_id, true, 60);
+
+        if (!delay)
+            delay = 0;
+
+        delay = delay * 1000;
+
+        var templateUrl = "app/templates/upsell-" + type;
+        if (trigger == "cart_load") {
+            templateUrl += "-load";
+        }
+        templateUrl += ".html";
+
+        upsellTimeout = $timeout(function () {
+            $scope.upsellModal = $uibModal.open({
+                size: "md",
+                templateUrl: templateUrl,
+                scope: $scope
+            });
+        }, delay);
+
+    }
+
+    $scope.closeUpsell = function () {
+        if ($scope.upsellModal)
+            $scope.upsellModal.dismiss();
+    }
+
+    $scope.commitUpsellAndPay = function (upsell, elementId) {
+
+        if (elementId) {
+            var elem = document.getElementById(elementId);
+            if (elem)
+                elem.disabled = true;
+        }
+
+        // Make a copy of the cart
+        var cartCopy = angular.copy($scope.data.cart);
+
+        // Define the item that triggered the upsell offer.
+        var triggerItem = _.find($scope.data.cart.items, function (i) { return i.item_id == upsell.up_sell_from_product.product_id });
+
+        // Add the upsell item to the cart, using the quantity from the trigger item. Add the upsell ID to get the discount.
+        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id, quantity: triggerItem.quantity });
+
+        // Remove the trigger item from the cart.
+        cartCopy.items = _.reject(cartCopy.items, function (item) { return item.product_id == triggerItem.product_id });
+
+        CartService.pay(cartCopy, $scope.data.payment_method, null, $scope.data.params).then(function (payment) {
+            $scope.data.cart = cartCopy;
+            $scope.onPaymentSuccess(payment);
+            $scope.closeUpsell();
+        }, function (error) {
+            $scope.data.cart = cartCopy;
+            $scope.data.error = error;
+        });
+    }
+
+    $scope.commitUpsell = function (upsell) {
+
+        // Make a copy of the cart
+        var cartCopy = angular.copy($scope.data.cart);
+
+        // Define the item that triggered the upsell offer.
+        var triggerItem = _.find($scope.data.cart.items, function (i) { return i.item_id == upsell.up_sell_from_product.product_id });
+
+        // Add the upsell item to the cart, using the quantity from the trigger item. Add the upsell ID to get the discount.
+        cartCopy.items.push({ product_id: upsell.product_id, up_sell_id: upsell.up_sell_id, quantity: triggerItem.quantity });
+
+        // Remove the trigger item from the cart.
+        cartCopy.items = _.reject(cartCopy.items, function (item) { return item.product_id == triggerItem.product_id });
+
+        CartService.update(cartCopy, $scope.data.params).then(function (cart) {
+            $scope.data.cart = cart;
+            $scope.closeUpsell();
+        }, function (error) {
+            $scope.data.error = error;
+        });
+    }
 
     // Watch for error to be populated, and if so, scroll to it.
     $scope.$watch("data.error", function (newVal, oldVal) {
         if ($scope.data.error) {
+            $scope.closeUpsell();
             $document.scrollTop(0, 500);
         }
+    });
+
+    // Keep the customer billing address name in sync with the customer name. We only ask for the customer name, so this makes sure the two are 
+    $scope.$watch("data.cart.customer.name", function (newVal, oldVal) {
+        if ($scope.data.cart && $scope.data.cart.customer) {
+            $scope.data.cart.customer.billing_address.name = newVal;
+        }
+    });
+
+    // Watch for the payment method to switch, and set the payment method data accordingly.
+    $scope.$watch("options.payment_method", function (newVal, oldVal) {
+        if (newVal) {
+            $scope.data.payment_method = $scope.data[newVal];
+        }
+    });
+
+    // Clear any pending timeouts, otherwise they may trigger when you change pages
+    $scope.$on("$destroy", function () {
+        if (angular.isDefined(updateBuffer))
+            $timeout.cancel(updateBuffer);
+
+        if (angular.isDefined(upsellTimeout))
+            $timeout.cancel(upsellTimeout);
     });
 
 }]);

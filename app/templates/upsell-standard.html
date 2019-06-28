@@ -1,0 +1,17 @@
+<form>
+    <div class="modal-upsell upsell-standard">
+        <div class="modal-header">
+            <span class="modal-title" translate translate-params-name="data.cart.up_sells.data[0].name" translate-params-amount="data.cart.up_sells.data[0].formatted.additional_amount">Upgrade to {{name}} for {{amount}} more.</span>
+        </div>
+        <div class="modal-body">
+            <img ng-src="{{data.cart.up_sells.data[0].product.images[0].link_square}}" />
+            <strong>{{data.cart.up_sells.data[0].name}}</strong>
+            <p class="text-light">{{data.cart.up_sells.data[0].product.headline}}</p>
+            <strong class="has-price"><span><del class="discount text-danger" ng-if="data.cart.up_sells.data[0].discount">{{data.cart.up_sells.data[0].formatted.price_original}}</del>&nbsp;</span>{{data.cart.up_sells.data[0].formatted.price}}</strong>
+            <i ng-if="data.cart.up_sells.data[0].discount" translate translate-params-percent="data.cart.up_sells.data[0].formatted.discount_percent">Upgrade now and save {{percent}}!</i>
+            <div class="row spacer-b24"></div>
+            <button type="button" id="upsell_commit" class="btn btn-primary btn-upsell-cta" ng-click="commitUpsellAndPay(data.cart.up_sells.data[0], 'upsell_commit')"><span translate>Upgrade</span></button>
+            <div class="faux-link spacer-t16 spacer-b16" submit-payment="data.payment_method" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" cart-params="data.params" error="data.error" loading="options.loading" ng-disabled="options.loading" translate>No thanks, complete my order</div>
+        </div>
+    </div>
+</form>

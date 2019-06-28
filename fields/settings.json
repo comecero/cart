@@ -148,11 +148,64 @@
     "default_value": true
   },
   {
+    "name": "upsell_trigger",
+    "type": "string",
+    "label": "Up Sell Trigger",
+    "description": "Determines when an up sell offer will appear.",
+    "section": "Promotions",
+    "required": false,
+    "default_value": "cart_load",
+    "options": [
+      {
+        "display": "When the customer submits their payment",
+        "value": "payment_submit"
+      },
+      {
+        "display": "When the cart is loaded",
+        "value": "cart_load"
+      },
+      {
+        "display": "Disable up sell offers",
+        "value": "disable"
+      }
+    ]
+  },
+  {
+    "name": "upsell_type",
+    "type": "string",
+    "label": "Up Sell Type",
+    "description": "Determines the style of the up sell offer. 'Compare' shows the selected item next to the up sell offer, 'Standard' shows the up sell offer on its own.",
+    "section": "Promotions",
+    "required": true,
+    "default_value": "compare",
+    "options": [
+      {
+        "display": "Compare",
+        "value": "compare"
+      },
+      {
+        "display": "Standard",
+        "value": "standard"
+      }
+    ]
+  },
+  {
+    "name": "upsell_delay",
+    "type": "decimal",
+    "label": "Up Sell Delay",
+    "description": "When the up sell is configured to display when the cart is loaded, this indicates the delay before the offer is displayed, in seconds. Values between 0 - 10 are permitted, including decimals.",
+    "section": "Promotions",
+    "required": false,
+    "default_value": 1.5,
+    "min_value": 0,
+    "max_value": 10
+  },
+  {
     "name": "cross_sell_position",
     "type": "string",
     "label": "Cross Sell Position",
     "description": "Determines where cross-sell offers will appear. 'Inline - Top' places them with more prominence.",
-    "section": "Features",
+    "section": "Promotions",
     "required": true,
     "default_value": "inline_top",
     "options": [
@@ -171,7 +224,7 @@
     "type": "string",
     "label": "Cross Sell Heading",
     "description": "The heading to display above your cross-sell products.",
-    "section": "Features",
+    "section": "Promotions",
     "required": true,
     "default_value": "you_might_also_be_interested_in",
     "options": [
@@ -202,7 +255,7 @@
     "type": "integer",
     "label": "Number of Cross Sells to Display",
     "description": "Choose the number of cross-sell products you want to display on the cart checkout page.",
-    "section": "Features",
+    "section": "Promotions",
     "required": true,
     "default_value": "1",
     "options": [

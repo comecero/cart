@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body panel-top-border" ng-show="options.payment_method == 'credit_card'">
+                        <div class="panel-body panel-top-border">
                             <div class="section">
                                 <div class="section-body">
                                     <div class="row" ng-if="!data.cart.tax_inclusive">
@@ -260,7 +260,7 @@
                                         <div class="col-xs-12">
                                             <p translate translate-params-company-name="settings.app.company_name">Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order.</p>
                                             <div class="payment-button">
-                                                <img submit-payment="data.paypal" class="pointer" cart="data.cart" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
+                                                <img submit-payment="data.payment_method" class="pointer" cart="data.cart" on-success="onPaymentSuccess" on-validation-success="onPaymentValidationSuccess" cart-params="data.params" error="data.error" src="images/paypal_checkout.png" />
                                             </div>
                                             <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></p>
                                         </div>
@@ -280,7 +280,7 @@
                                         <div class="col-xs-12">
                                             <p translate>Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password.</p>
                                             <div class="payment-button">
-                                                <a id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
+                                                <a id="amazon_pay_button" amazon-pay-button payment-method="data.payment_method" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
                                                     <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
                                                 </a>
                                             </div>
@@ -305,12 +305,12 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12 spacer-t24">
-                                                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.amazon_pay" cart="data.cart" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
+                                                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.payment_method" cart="data.cart" get-consent-status="getConsentStatus" cart-params="data.params" on-success="onPaymentSuccess" on-validation-success="onPaymentValidationSuccess" error="data.error" translate>Continue</button>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12 text-center spacer-t12">
-                                                        <div class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" translate>Use another payment method</div>
+                                                        <div class="faux-link" amazon-pay-reset payment-method="data.payment_method" translate>Use another payment method</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -696,7 +696,7 @@
                                 <div class="section-body">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.payment_method" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span translate>Complete Order</span> <span class="hidden-xs">&middot; {{data.cart.formatted.total}} {{data.cart.currency}}</span></button>
+                                            <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.payment_method" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" on-validation-success="onPaymentValidationSuccess" cart-params="data.params" error="data.error"><i class="fa fa-lock"></i> <span translate>Complete Order</span> <span class="hidden-xs">&middot; {{data.cart.formatted.total}} {{data.cart.currency}}</span> </button>
                                         </div>
                                     </div>
                                 </div>
