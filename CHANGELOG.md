@@ -1,4 +1,9 @@
 ﻿<a name="2.2.0"></a>
+# 2.2.1
+
+- Integrate Kit version 1.0.15
+
+<a name="2.2.0"></a>
 # 2.2.0
 
 - Support for up sells in cart, on load or on payment submit
