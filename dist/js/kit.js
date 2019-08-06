@@ -1,7 +1,7 @@
 /*
-Comecero Kit version: ﻿1.0.14
-Build time: 2019-06-26T16:53:14.439Z
-Checksum (SHA256): 28c008d98a1749d69f2c3b21a3bedea5615e052e3cbc4fd07dfd71471d299d38
+Comecero Kit version: ﻿1.0.15
+Build time: 2019-08-06T22:05:15.033Z
+Checksum (SHA256): f0a039e256eb423ba444beea9cb8d4b496e059bcb5c4dbde7cb34111b3e321dc
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -2933,7 +2933,7 @@ app.directive('submitPayment', ['CartService', 'InvoiceService', 'PaymentService
 
                 if (scope.invoice) {
 
-                    InvoiceService.pay(scope.invoice, scope.paymentMethod, params, saleParams).then(function (payment) {
+                    InvoiceService.pay(scope.invoice, scope.paymentMethod, params).then(function (payment) {
 
                         // Fire the success event
                         if (scope.onSuccess) {
@@ -6929,7 +6929,6 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
                 copyObject(cart, data);
                 sendPayment(cart.cart_id, payment_method);
             }, function (error) {
-                copyObject(cart, data);
                 deferred.reject(error);
             });
         }
