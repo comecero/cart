@@ -134,7 +134,7 @@
 
     function autoCommit(payment) {
 
-        var sale = payment.cart || payemnt.invoice;
+        var sale = payment.cart || payment.invoice;
 
         // If the payment total is less than the cart total, that means the cart total is now greater than the initiated total (due to customer data injection which added tax, shipping, etc.) so allow the customer the option to review.
         if (payment.total < sale.total) {
