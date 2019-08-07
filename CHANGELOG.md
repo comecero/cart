@@ -1,4 +1,9 @@
-﻿<a name="2.2.0"></a>
+﻿<a name="2.2.2"></a>
+# 2.2.2
+
+- Bug fix on review screen for PayPal, Amazon Pay payments for invoice payments when determining if the payment can be automatically completed
+
+<a name="2.2.1"></a>
 # 2.2.1
 
 - Integrate Kit version 1.0.15
