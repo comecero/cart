@@ -49,35 +49,54 @@
         // Build up any items from the query string, if provided. This loads in products, quantities and other data (such as customer name, email address) that may have been supplied through the query string. If nothing is provided in the query string, then no values are supplied to the cart.
         cart = CartService.fromParams(cart, $location);
 
-        // Update the cart. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
-        CartService.update(cart, $scope.data.params, false, true).then(function (cart) {
+        // Define the updateCart function. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
+        var updateCart = function (cart) {
 
-            // Set the scope on the cart.
-            $scope.data.cart = cart;
+            CartService.update(cart, $scope.data.params, false, true).then(function (cart) {
 
-            // Only display images if all items in the cart have images
-            setShowImages($scope.data.cart);
+                // Set the scope on the cart.
+                $scope.data.cart = cart;
 
-            // If there is a shipping address line 1, set shipping_is_billing to false so the user will see what's provided in the shipping address.
-            $scope.data.shipping_is_billing = !HelperService.hasShippingAddress(cart.customer);
+                // Only display images if all items in the cart have images
+                setShowImages($scope.data.cart);
 
-            // If there are payment methods, set the default onto the payment method object
-            var data = ((cart.customer || {}).payment_methods || {}).data;
-            if (data) {
-                if (data.length > 0) {
-                    $scope.data.payment_method = { payment_method_id: _.find(cart.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
+                // If there is a shipping address line 1, set shipping_is_billing to false so the user will see what's provided in the shipping address.
+                $scope.data.shipping_is_billing = !HelperService.hasShippingAddress(cart.customer);
+
+                // If there are payment methods, set the default onto the payment method object
+                var data = ((cart.customer || {}).payment_methods || {}).data;
+                if (data) {
+                    if (data.length > 0) {
+                        $scope.data.payment_method = { payment_method_id: _.find(cart.customer.payment_methods.data, function (payment_method) { return payment_method.is_default == true }).payment_method_id };
+                    }
                 }
-            }
 
-            // Open the upsell, if configured.
-            if ($scope.settings.app.upsell_trigger == "cart_load") {
-                openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger, $scope.settings.app.upsell_delay);
-            }
+                // Open the upsell, if configured.
+                if ($scope.settings.app.upsell_trigger == "cart_load") {
+                    openUpsell($scope.settings.app.upsell_type, $scope.settings.app.upsell_trigger, $scope.settings.app.upsell_delay);
+                }
 
-        }, function (error) {
-            // Error updating the cart
-            $scope.data.error = error;
-        });
+            }, function (error) {
+                // Error updating the cart
+                $scope.data.error = error;
+
+                // If you get an invalid inventory response, show an error and re-run the request with an adjustment.
+                if (error.code == "insufficient_inventory") {
+                    var item = _.find(cart.items, function (item) { return item.product_id == error.meta.product_id });
+                    item.quantity = error.meta.max_quantity;
+                    updateCart(cart);
+                }
+
+                if (error.code == "unavailable_inventory") {
+                    cart.items = _.reject(cart.items, function (item) { return item.product_id == error.meta.product_id });
+                    updateCart(cart);
+                }
+
+            });
+        }
+
+        // Run the function
+        updateCart(cart);
 
     }, function (error) {
         // Error getting the cart
@@ -117,15 +136,35 @@
 
         updateBuffer = $timeout(function () {
 
-            CartService.update($scope.data.cart, $scope.data.params).then(function (cart) {
-                $scope.data.cart = cart;
-                setShowImages($scope.data.cart);
-            }, function (error) {
-                // Error updating the cart
-                $scope.data.error = error;
-            });
+            var updateCart = function (cart, quantityErrorReplay) {
+                CartService.update($scope.data.cart, $scope.data.params).then(function (cart) {
+                    $scope.data.cart = cart;
+                    setShowImages($scope.data.cart);
+                    if (!quantityErrorReplay) {
+                        $scope.data.error = null;
+                    }
+                }, function (error) {
+                    // Error updating the cart
+                    $scope.data.error = error;
 
-        }, 200);
+                    // If you get an invalid inventory response, show an error and re-run the request with an adjustment.
+                    if (error.code == "insufficient_inventory") {
+                        var item = _.find(cart.items, function (item) { return item.product_id == error.meta.product_id });
+                        item.quantity = error.meta.max_quantity;
+                        updateCart(cart, true);
+                    }
+
+                    if (error.code == "unavailable_inventory") {
+                        cart.items = _.reject(cart.items, function (item) { return item.product_id == error.meta.product_id });
+                        updateCart(cart, true);
+                    }
+
+                });
+            }
+
+            updateCart($scope.data.cart);
+
+        }, 0);
 
     }
 
