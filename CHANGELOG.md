@@ -1,4 +1,9 @@
-﻿<a name="2.2.2"></a>
+﻿<a name="2.2.3"></a>
+# 2.2.3
+
+- Add support for graceful handling of inventory controls
+
+<a name="2.2.2"></a>
 # 2.2.2
 
 - Bug fix on review screen for PayPal, Amazon Pay payments for invoice payments when determining if the payment can be automatically completed
