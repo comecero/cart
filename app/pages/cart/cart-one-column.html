@@ -128,6 +128,7 @@
                                                 </td>
                                                 <td class="text-right has-price">
                                                     <span ng-show="item.price_original > item.price"><del class="discount text-danger">{{data.cart.tax_inclusive ? item.formatted.total_original : item.formatted.subtotal_original}}</del>&nbsp;</span>
+                                                    <span ng-show="item.product.compare_at_price && item.price_original == item.price"><del class="discount text-danger">{{item.product.formatted.compare_at_price}}</del>&nbsp;</span>
                                                     {{data.cart.tax_inclusive ? item.formatted.total : item.formatted.subtotal}}
                                                     <span class="remove-button faux-link" ng-click="changeQuantity(item, null, 0)" ng-class="settings.app.hide_quantity ? 'spacer-t6' : 'spacer-t36'"><i class="fa fa-trash"></i></span>
                                                 </td>

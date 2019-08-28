@@ -1,5 +1,5 @@
 /*
-Comecero Cart version: ﻿2.2.2
+Comecero Cart version: ﻿2.2.3
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -72,7 +72,7 @@ app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoServ
         $scope.data.params.expand += ",up_sells.product,up_sells.up_sell_from_product";
     }
 
-    $scope.data.params.hide = "items.product.formatted,items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
+    $scope.data.params.hide = "items.product.prices,items.product.url,items.product.description,items.product.images.link_medium,items.product.images.link_large,items.product.images.link,items.product.images.filename,items.product.images.formatted,items.product.images.url,items.product.images.date_created,items.product.images.date_modified";
 
     // Set default values.
     $scope.data.shipping_is_billing = true; // User can toggle.
