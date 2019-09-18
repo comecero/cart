@@ -358,6 +358,17 @@
     "max_length": 512
   },
   {
+    "name": "receipt_redirect_url",
+    "type": "string",
+    "label": "Receipt Redirect URL",
+    "description": "Provide a URL if you would like to redirect the user to an external URL upon completion of a payment instead of showing the receipt. You can use the following dynamic values in your URL: order, payment. For example, https://example.com?order_id={{order.order_id}}&payment_id={{payment.payment_id}}",
+    "section": "Features",
+    "required": false,
+    "default_value": null,
+    "min_length": 2,
+    "max_length": 512
+  },
+  {
     "name": "main_shopping_url",
     "type": "string",
     "label": "Main Shopping URL",

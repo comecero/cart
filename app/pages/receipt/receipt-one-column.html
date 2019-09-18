@@ -1,4 +1,4 @@
-﻿<div ng-controller="ReceiptController">
+﻿<div ng-controller="ReceiptController" ng-show="data.payment">
 
     <!-- Custom Header, if supplied -->
     <custom-html html="settings.style.header_html"></custom-html>
@@ -216,7 +216,7 @@
                                     <div class="section-body">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <a class="btn btn-primary btn-cta btn-block btn-lg" ng-href="{{getReceiptButtonUrl(settings.app.receipt_button_url)}}">
+                                                <a class="btn btn-primary btn-cta btn-block btn-lg" ng-href="{{getReceiptButtonUrl(settings.app.receipt_button_url, data.payment)}}">
                                                     <span ng-show="settings.app.receipt_button_text == 'continue_shopping'" translate>Continue Shopping</span>
                                                     <span ng-show="settings.app.receipt_button_text == 'continue'" translate>Continue</span>
                                                     <span ng-show="settings.app.receipt_button_text == 'return'" translate>Return</span>
@@ -351,7 +351,7 @@
                             <div class="section-body">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <a class="btn btn-primary btn-cta btn-block btn-lg" ng-href="{{getReceiptButtonUrl(settings.app.receipt_button_url)}}">
+                                        <a class="btn btn-primary btn-cta btn-block btn-lg" ng-href="{{getReceiptButtonUrl(settings.app.receipt_button_url, data.payment)}}">
                                             <span ng-show="settings.app.receipt_button_text == 'continue_shopping'" translate>Continue Shopping</span>
                                             <span ng-show="settings.app.receipt_button_text == 'continue'" translate>Continue</span>
                                             <span ng-show="settings.app.receipt_button_text == 'return'" translate>Return</span>

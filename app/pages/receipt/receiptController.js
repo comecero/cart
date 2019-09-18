@@ -26,6 +26,13 @@
     // Get the payment, if any.
     PaymentService.get($routeParams.id, $scope.data.params).then(function (payment) {
 
+        if (payment.order && $scope.settings.app.receipt_redirect_url) {
+            var url = compileUrl($scope.settings.app.receipt_redirect_url, payment);
+            if (url) {
+                window.location.replace(url, payment);
+            }
+        }
+
         // Only display images if all items in the sale have images
         $scope.showImages = false;
         var hasImageCount = 0;
@@ -111,24 +118,29 @@
         });
     }
 
-    $scope.getReceiptButtonUrl = function(url) {
+    function compileUrl(urlTemplate, payment) {
 
-        if ($scope.data && $scope.data.payment) {
+        if (payment) {
 
             var scp = {
-                payment: $scope.data.payment,
-                order: $scope.data.payment.order
+                payment: payment,
+                order: payment.order
             }
 
-            if (url) {
-                return $interpolate(url)(scp);
-            } else {
-                // Return the main shopping URL or the main app URL, if not present.
-                return $scope.settings.app.main_shopping_url || window.location.href.substring(0, window.location.href.indexOf("#")) + "#/";
-            }
-
+            return $interpolate(urlTemplate)(scp);
         }
 
+        return null;
+
+    }
+
+    $scope.getReceiptButtonUrl = function (url, payment) {
+        if (url) {
+            return compileUrl(url, payment);
+        } else {
+            // Return the main shopping URL or the main app URL, if not present.
+            return $scope.settings.app.main_shopping_url || window.location.href.substring(0, window.location.href.indexOf("#")) + "#/";
+        }
     }
 
     // Watch for error to be populated, and if so, scroll to it.
