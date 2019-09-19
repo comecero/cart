@@ -599,47 +599,49 @@ app.controller("ReceiptController", ['$scope', '$routeParams', 'PaymentService',
     // Get the payment, if any.
     PaymentService.get($routeParams.id, $scope.data.params).then(function (payment) {
 
+        var redirectUrl;
         if (payment.order && $scope.settings.app.receipt_redirect_url) {
-            var url = compileUrl($scope.settings.app.receipt_redirect_url, payment);
-            if (url) {
-                window.location.replace(url, payment);
-            }
+            redirectUrl = compileUrl($scope.settings.app.receipt_redirect_url, payment);
         }
 
-        // Only display images if all items in the sale have images
-        $scope.showImages = false;
-        var hasImageCount = 0;
-        _.each(payment.order.items, function (item) {
-            if (item.product != null) {
-                if (item.product.images.length > 0) {
-                    hasImageCount++;
-                }
-            }
-        });
-
-        if (hasImageCount == payment.order.items.length) {
-            $scope.showImages = true;
-        }
-
-        // Set the options to determine if you ask for the customer to create an account
-        if (payment.cart) {
-            $scope.options = payment.cart.options;
+        if (redirectUrl) {
+            window.location.replace(redirectUrl);
         } else {
-            $scope.options = payment.invoice.options;
+            // Only display images if all items in the sale have images
+            $scope.showImages = false;
+            var hasImageCount = 0;
+            _.each(payment.order.items, function (item) {
+                if (item.product != null) {
+                    if (item.product.images.length > 0) {
+                        hasImageCount++;
+                    }
+                }
+            });
+
+            if (hasImageCount == payment.order.items.length) {
+                $scope.showImages = true;
+            }
+
+            // Set the options to determine if you ask for the customer to create an account
+            if (payment.cart) {
+                $scope.options = payment.cart.options;
+            } else {
+                $scope.options = payment.invoice.options;
+            }
+
+            // Make the payment available to the view.
+            $scope.data.payment = payment;
+
+            // Invoke the conversion. If the user reloads the receipt page the conversion code will prevent the conversion from being recorded multiple times.
+            if (window.__conversion && window.__conversion.recordConversion) {
+                window.__conversion.recordConversion(payment.order.order_id);
+            }
+
+            // Load unpopulated licenses as necessary.
+            setTimeout(function () {
+                getLicenses(payment.order.order_id);
+            }, 1000);
         }
-
-        // Make the payment available to the view.
-        $scope.data.payment = payment;
-
-        // Invoke the conversion. If the user reloads the receipt page the conversion code will prevent the conversion from being recorded multiple times.
-        if (window.__conversion && window.__conversion.recordConversion) {
-            window.__conversion.recordConversion(payment.order.order_id);
-        }
-
-        // Load unpopulated licenses as necessary.
-        setTimeout(function () {
-            getLicenses(payment.order.order_id);
-        }, 1000);
 
     }, function (error) {
         $scope.exception = error;
