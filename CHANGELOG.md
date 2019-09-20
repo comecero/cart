@@ -1,4 +1,10 @@
-﻿<a name="2.2.3"></a>
+﻿<a name="2.2.4"></a>
+# 2.2.4
+
+- Add option to redirect receipt page to external URL
+- Show strike-through pricing based on "compare at" product pricing
+
+<a name="2.2.3"></a>
 # 2.2.3
 
 - Add support for graceful handling of inventory controls
