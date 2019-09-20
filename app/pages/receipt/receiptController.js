@@ -26,40 +26,51 @@
     // Get the payment, if any.
     PaymentService.get($routeParams.id, $scope.data.params).then(function (payment) {
 
-        // Only display images if all items in the sale have images
-        $scope.showImages = false;
-        var hasImageCount = 0;
-        _.each(payment.order.items, function (item) {
-            if (item.product != null) {
-                if (item.product.images.length > 0) {
-                    hasImageCount++;
-                }
-            }
-        });
-
-        if (hasImageCount == payment.order.items.length) {
-            $scope.showImages = true;
+        var redirectUrl;
+        if (payment.order && $scope.settings.app.receipt_redirect_url) {
+            redirectUrl = compileUrl($scope.settings.app.receipt_redirect_url, payment);
         }
 
-        // Set the options to determine if you ask for the customer to create an account
-        if (payment.cart) {
-            $scope.options = payment.cart.options;
+        if (redirectUrl) {
+            window.location.replace(redirectUrl);
         } else {
-            $scope.options = payment.invoice.options;
+
+            // Only display images if all items in the sale have images
+            $scope.showImages = false;
+            var hasImageCount = 0;
+            _.each(payment.order.items, function (item) {
+                if (item.product != null) {
+                    if (item.product.images.length > 0) {
+                        hasImageCount++;
+                    }
+                }
+            });
+
+            if (hasImageCount == payment.order.items.length) {
+                $scope.showImages = true;
+            }
+
+            // Set the options to determine if you ask for the customer to create an account
+            if (payment.cart) {
+                $scope.options = payment.cart.options;
+            } else {
+                $scope.options = payment.invoice.options;
+            }
+
+            // Make the payment available to the view.
+            $scope.data.payment = payment;
+
+            // Invoke the conversion. If the user reloads the receipt page the conversion code will prevent the conversion from being recorded multiple times.
+            if (window.__conversion && window.__conversion.recordConversion) {
+                window.__conversion.recordConversion(payment.order.order_id);
+            }
+
+            // Load unpopulated licenses as necessary.
+            setTimeout(function () {
+                getLicenses(payment.order.order_id);
+            }, 1000);
+
         }
-
-        // Make the payment available to the view.
-        $scope.data.payment = payment;
-
-        // Invoke the conversion. If the user reloads the receipt page the conversion code will prevent the conversion from being recorded multiple times.
-        if (window.__conversion && window.__conversion.recordConversion) {
-            window.__conversion.recordConversion(payment.order.order_id);
-        }
-
-        // Load unpopulated licenses as necessary.
-        setTimeout(function () {
-            getLicenses(payment.order.order_id);
-        }, 1000);
 
     }, function (error) {
         $scope.exception = error;
@@ -111,24 +122,29 @@
         });
     }
 
-    $scope.getReceiptButtonUrl = function(url) {
+    function compileUrl(urlTemplate, payment) {
 
-        if ($scope.data && $scope.data.payment) {
+        if (payment) {
 
             var scp = {
-                payment: $scope.data.payment,
-                order: $scope.data.payment.order
+                payment: payment,
+                order: payment.order
             }
 
-            if (url) {
-                return $interpolate(url)(scp);
-            } else {
-                // Return the main shopping URL or the main app URL, if not present.
-                return $scope.settings.app.main_shopping_url || window.location.href.substring(0, window.location.href.indexOf("#")) + "#/";
-            }
-
+            return $interpolate(urlTemplate)(scp);
         }
 
+        return null;
+
+    }
+
+    $scope.getReceiptButtonUrl = function (url, payment) {
+        if (url) {
+            return compileUrl(url, payment);
+        } else {
+            // Return the main shopping URL or the main app URL, if not present.
+            return $scope.settings.app.main_shopping_url || window.location.href.substring(0, window.location.href.indexOf("#")) + "#/";
+        }
     }
 
     // Watch for error to be populated, and if so, scroll to it.
