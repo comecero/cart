@@ -1,7 +1,8 @@
 /*
-Comecero Kit version: ﻿1.0.15
-Build time: 2019-08-06T22:14:11.391Z
-Checksum (SHA256): d2adbbb07dcbd90a3ec1be6933d6294be4362efc5c3bd6190a08c48299302bff
+Comecero Kit version: ﻿1.0.16
+
+Build time: 2020-03-07T00:12:56.033Z
+Checksum (SHA256): 8e9646d56a4358127074406c2a930b3cbf4e13a32c5cb1089cf6b63b277954f7
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -5513,6 +5514,126 @@ app.directive('cleanPrice', [function () {
     };
 }]);
 
+app.directive('webPaymentRequestButton', ['ApiService', '$location', function (ApiService, $location) {
+
+    // Shared scope:
+    // payment_method_type:  Required. payment method type that we are working with.  Currently ApplePay, but can be expanded later for GooglePay, etc.
+    // options: Required. The cart, invoice, or payment options.
+    // onPaymentSuccess: Optional. Runs this method when payment is successful.
+    var payClicked = function(scope) {
+        var payOption = scope.options.payment_methods.filter(function(option) {return option.payment_method_type == scope.paymentMethodType;});
+        if (!payOption || payOption.length <= 0) return;
+        var payMethod = payOption[0].user_agent_payment_request;
+        if (!payMethod || Object.keys(payMethod).length <= 0) return;
+
+        var paymentRequest = new PaymentRequest(payMethod.methodData, payMethod.details, payMethod.paymentOptions);
+
+        if (payMethod.merchant_validation_url) {
+          paymentRequest.onmerchantvalidation = function(event) {
+            event.complete(new Promise(function(resolve, reject) {
+              var validation_url = payMethod.merchant_validation_url;
+              var payload = {validation_url: event.validationURL, initiative_context: $location.host()};
+              ApiService.update(payload, validation_url)
+                  .then(function(response) {
+                    resolve(response.data.data);
+                  }, function(error) {
+                    paymentRequest.abort();
+                  });
+            }));
+          };
+        }
+
+        paymentRequest.onshippingaddresschange = function(event) {
+          event.updateWith(new Promise(function(resolve, reject) {
+            var payload = {shippingAddress: paymentRequest.shippingAddress};
+            var update_url = payMethod.url;
+
+            ApiService.update(payload, update_url).then(
+              function(response) {
+                resolve(response.data.details);
+              },
+              function(error) {
+                reject(error);
+              }
+            );
+          }));
+        };
+
+        paymentRequest.onshippingoptionchange = function(event) {
+          event.updateWith(new Promise(function(resolve, reject) {
+            if (!paymentRequest.shippingOption) {
+              resolve(payMethod.details);
+              return;
+            }
+
+            var payload = {shippingOption: paymentRequest.shippingOption};
+
+            var update_url = payMethod.url;
+
+            ApiService.update(payload, update_url).then(
+              function(response) {
+                resolve(response.data.details);
+              },
+              function(error) {
+                reject(error);
+              }
+            );
+
+          }));
+        };
+
+        if (payMethod.methodData.length > 1) {
+          paymentRequest.onpaymentmethodchange = function(event) {
+            event.updateWith(
+              new Promise(function(resolve,reject) {
+                resolve(payMethod.details);
+              })
+            );
+          };
+        }
+
+        // This starts the payment sheet(s).
+        paymentRequest.show().then(function(response) {
+            var payment_url = payMethod.payment_url;
+
+            var payment_payload = {
+              "payment_method": {
+                "type": scope.paymentMethodType,
+                "data": {
+                  "initiative_context": $location.host(),
+                  "details": response.details
+                }
+              }
+            };
+
+            ApiService.update(payment_payload, payment_url)
+            .then(function(result) {
+                var payment = result.data;
+                var status = payment && (payment.status == "completed" || payment.status == "pending") ? "success" : "fail";
+                response.complete(status);
+                if (status == "success" && angular.isFunction(scope.onPaymentSuccess)) {
+                    scope.onPaymentSuccess(payment);
+                }
+            }, function(result) {
+              response.complete("fail");
+            });
+
+        }, function() {});
+    };
+
+    return {
+        restrict: 'A',
+        scope: {
+            paymentMethodType: '=',
+            options: '=',
+            onPaymentSuccess: '=?'
+        },
+        link: function (scope, elem, attrs, ctrl) {
+            elem[0].addEventListener("click", function() { return payClicked(scope) } );
+        }
+    };
+}]);
+
 app.directive('amazonPayButton', ['gettextCatalog', function (gettextCatalog) {
 
     // Shared scope:
@@ -8182,6 +8303,10 @@ app.service("HelperService", ['SettingsService', 'StorageService', '$location', 
             return false;
         }
 
+        if (type == 'apple_pay') {
+          if (!window.PaymentRequest || !window.ApplePaySession || !ApplePaySession.canMakePayments()) return false;
+        }
+
         if (_.find(options.payment_methods, function (item) { return item.payment_method_type == type; }) != null) {
             return true;
         }
@@ -8238,4 +8363,5 @@ app.service("StorageService", ['appCache', function (appCache) {
     }
 
 }]);
+
 //# sourceMappingURL=kit.js.map
