@@ -161,6 +161,7 @@
                                                 <td ng-show="showImages" class="text-left has-product-icon hidden-xs"><img class="product-icon" ng-src="{{settings.app.use_square_images ? item.product.images[0].link_square : item.product.images[0].link_small}}" /></td>
                                                 <td>
                                                     <strong>{{item.name}}</strong>
+                                                    <p class="text-light" ng-show="item.product.headline"><em>{{item.product.headline}}</em></p>
                                                     <p>
                                                         <span translate>Quantity</span>: <span>{{item.quantity}}</span>
                                                     </p>
