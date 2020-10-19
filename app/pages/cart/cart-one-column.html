@@ -249,6 +249,16 @@
                                                         <input type="radio" id="payment_method_amazon_pay" class="radio" name="payment_methods" ng-model="options.payment_method" value="amazon_pay" required>
                                                         <label for="payment_method_amazon_pay" class="radio-label"><img src="images/amazonpay_logo.png" alt="Amazon Pay" /></label>
                                                     </li>
+                                                    <li ng-show="helpers.supportsPaymentMethod('apple_pay', data.cart.options)">
+                                                        <input type="radio" id="payment_method_apple_pay" class="radio" name="payment_methods" ng-model="options.payment_method" value="apple_pay" required>
+                                                        <label for="payment_method_apple_pay" class="radio-label">
+                                                            <!--
+                                                              https://developer.apple.com/documentation/apple_pay_on_the_web/displaying_apple_pay_buttons
+                                                            -->
+                                                            <a style="-webkit-appearance: -apple-pay-button; -apple-pay-button-type: plain; -apple-pay-button-style: white;"></a>
+                                                        </label>
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -265,6 +275,22 @@
                                                 <img submit-payment="data.payment_method" class="pointer" cart="data.cart" on-success="onPaymentSuccess" on-validation-success="onPaymentValidationSuccess" cart-params="data.params" error="data.error" src="images/paypal_checkout.png" />
                                             </div>
                                             <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section" ng-show="options.payment_method == 'apple_pay' && helpers.supportsPaymentMethod('apple_pay', data.cart.options)">
+                                <div class="section-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <p translate>Click the button below to checkout using Apple Pay.</p>
+                                            <div class="payment-button">
+                                                <!--
+                                                    https://developer.apple.com/documentation/apple_pay_on_the_web/displaying_apple_pay_buttons
+                                                -->
+                                                <a web-payment-request-button options="data.cart.options" payment-method-type="'apple_pay'" on-payment-success="onPaymentSuccess"
+                                                   style="-webkit-appearance: -apple-pay-button; -apple-pay-button-type: check-out; -apple-pay-button-style: white-outline;"></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
