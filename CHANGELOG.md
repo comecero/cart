@@ -1,4 +1,9 @@
-﻿<a name="2.2.4"></a>
+﻿<a name="2.2.5"></a>
+# 2.2.5
+
+- Add product headline to cart, invoice, review and receipt pages
+
+<a name="2.2.4"></a>
 # 2.2.4
 
 - Add option to redirect receipt page to external URL
