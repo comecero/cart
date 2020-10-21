@@ -4,36 +4,40 @@ var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
 var rename = require("gulp-rename");
 var sass = require('gulp-sass');
-var sequence = require("run-sequence");
+var sequence = require("gulp4-run-sequence");
 var fs = require("fs");
 var header = require('gulp-header');
 
-gulp.task("concat-pages-js", function () {
+gulp.task("concat-pages-js", function (done) {
     return gulp.src(["./app/shared/**/*.js", "./app/pages/**/*.js"])
       .pipe(concat("pages.js"))
       .pipe(gulp.dest("./dist/js/"));
+    done();
 });
 
-gulp.task("compress", function () {
+gulp.task("compress", function (done) {
     return gulp.src(["./dist/js/*.js", "!./dist/js/*.min.js", "!./dist/js/kit.js"])
     .pipe(uglify())
      .pipe(rename({
-        extname: ".min.js"
-    }))
+         extname: ".min.js"
+     }))
     .pipe(gulp.dest("./dist/js/"));
+    done();
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', function (done) {
     gulp.src('./sass/style.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./sass/'));
+    done();
 });
 
-gulp.task("sourcemap", function () {
+gulp.task("sourcemap", function (done) {
     return gulp.src(["./dist/js/pages.js"])
     .pipe(sourcemaps.init())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest("./dist/js/"));
+    done();
 });
 
 gulp.task('dist', function (done) {

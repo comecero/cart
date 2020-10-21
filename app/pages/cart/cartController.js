@@ -1,4 +1,4 @@
-﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$document', '$timeout', '$uibModal', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, $document, $timeout, $uibModal) {
+﻿app.controller("CartController", ['$scope', '$location', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'StorageService', '$document', '$timeout', '$uibModal', function ($scope, $location, CartService, GeoService, CurrencyService, SettingsService, HelperService, StorageService, $document, $timeout, $uibModal) {
 
     // Define a place to hold your data and functions
     $scope.data = {};
@@ -13,7 +13,7 @@
 
     // Set the cart parameters
     $scope.data.params = {};
-    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options";
+    $scope.data.params.expand = "items.product,items.subscription_terms,customer.payment_methods,options,options.user_agent_payment_request";
 
     if ($scope.settings.app.cross_sell_items && Number($scope.settings.app.cross_sell_items)) {
         $scope.data.params.expand += ",cross_sells.product";
@@ -180,6 +180,7 @@
         } else {
             // A successful card payment. Redirect to the receipt.
             $location.path("/receipt/" + payment.payment_id);
+            StorageService.remove("cart_id");
         }
 
     }
